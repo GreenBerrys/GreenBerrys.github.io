@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Github index</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <style>
+
+
+        body{
+            background-color: #495056;
+            color: lightgray;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            margin-top: 4.3rem;
+        }
+        header{
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #495056;
+            z-index: 2;
+        }
+        .head{
+            display: flex;
+            width: 100%;
+            height:  2rem;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .project{
+            display: flex;
+        }
+        a {
+            color: lightgray;
+            text-decoration: none;
+            font-size: larger;
+            font-weight: bold;
+        }
+
+        .text{
+            flex: 1 1;
+        }
+
+/* --------------------------------------------- */
+
+
+        * {box-sizing: border-box}
+        .mySlides1, .mySlides2, .mySlides3 {display: none}
+        img {vertical-align: middle;}
+    
+       
+        /* Slideshow container */
+        .slideshow-container {
+          max-width: 600px;
+          min-width: 295px;
+          position: relative;
+          margin: 20px;
+          flex: 2 2;
+        }
+        
+        .slide img{
+            width: 100%; 
+            box-shadow: 1px 3px 7px 3px black;   
+        }
+
+
+        /* Next & previous buttons */
+        .prev, .next {
+          cursor: pointer;
+          position: absolute;
+          top: 50%;
+          width: auto;
+          padding: 16px;
+          margin-top: -22px;
+          color: rgb(218, 0, 0);
+          font-weight: bold;
+          font-size: 18px;
+          transition: 0.6s ease;
+          border-radius: 0 3px 3px 0;
+          user-select: none;
+        }
+        
+        /* Position the "next button" to the right */
+        .next {
+          right: 0;
+          border-radius: 3px 0 0 3px;
+          z-index: 1;
+        }
+        
+        /* On hover, add a grey background color */
+        .prev:hover, .next:hover {
+          background-color: #f1f1f1;
+          /* color: black; */
+        }
+
+        #noJs{
+            position: fixed;
+            top: 250px;
+            left: 10vw;
+            z-index: -1;
+            color: red;
+        }
+    </style>
+</head>
+    <body>
+
+            <header>
+                <div class="head">        
+                    <!-- <div><img src="logo.png" alt="Greenberrys" id="logo"></div> -->
+                    <div><h2>&nbsp;Greenberrys</h2></div>
+                </div>
+                <hr>
+            </header>
+    
+
+
+            <h1 style="text-align:left; margin-left: 20px;">&Uuml;bungen</h1>
+            
+            <div class="project">
+
+                <div class="slideshow-container">
+                    <a href='https://github.com/GreenBerrys/GreenBerrys.github.io/tree/master/mp4streamer'>
+                        <div class="mySlides1 slide">
+                            <img src="images/mp4streamer-1.png" alt="screenshot">
+                        </div>
+                    
+                        <div class="mySlides1 slide">
+                            <img src="images/mp4streamer-2.png" alt="screenshot">
+                        </div>
+                    
+                        <div class="mySlides1 slide">
+                            <img src="images/mp4streamer-3.png" alt="screenshot">
+                        </div>
+                    </a>
+                    <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
+                </div>
+                <div class="text">
+                    <h2><a href='https://github.com/GreenBerrys/GreenBerrys.github.io/tree/master/mp4streamer' style="color: rgb(230, 224, 224);">mp4streamer</a></h2>
+                    <a href='https://github.com/GreenBerrys/GreenBerrys.github.io/tree/master/mp4streamer.7z'>als Archiv runterladen</a>
+                    <p>Sammeln &amp; streamen von MP4-Videos</p>
+                </div>
+
+            </div>
+            
+            <div class="project">
+                <div class="slideshow-container">
+                    <a href='https://github.com/GreenBerrys/GreenBerrys.github.io/tree/master/rezeptor-neu'>
+                        <div class="mySlides2 slide">
+                            <img src="images/rezeptor-1.png" alt="screenshot">
+                        </div>
+                        
+                        <div class="mySlides2 slide">
+                            <img src="images/rezeptor-2.png" alt="screenshot">
+                        </div>
+                        
+                        <div class="mySlides2 slide">
+                            <img src="images/rezeptor-3.png" alt="screenshot">
+                        </div>
+                    </a>
+                    <a class="prev" onclick="plusSlides(-1, 1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1, 1)">&#10095;</a>
+                </div>
+                <div class="text">
+                    <h2><a href='https://github.com/GreenBerrys/GreenBerrys.github.io/tree/master/rezeptor-neu' style="color: rgb(230, 224, 224);">Rezeptor</a></h2>
+                    <a href='https://github.com/GreenBerrys/GreenBerrys.github.io/tree/master/rezeptor-neu.7z'>als Archiv runterladen</a>
+                    <p>Webseite zum Austausch von Kochrezepten</p>
+                </div>
+            </div>
+            
+            <div class="project">
+                <div class="slideshow-container">
+                    <a href='https://github.com/GreenBerrys/GreenBerrys.github.io/tree/master/todoApp/'>
+                        <div class="mySlides3 slide">
+                            <img src="images/todo-1.png" alt="screenshot">
+                        </div>
+                        
+                        <div class="mySlides3 slide">
+                            <img src="images/todo-2.png" alt="screenshot">
+                        </div>
+                        
+                        <div class="mySlides3 slide">
+                            <img src="images/todo-3.png" alt="screenshot">
+                        </div>
+                    </a>
+                    <a class="prev" onclick="plusSlides(-1, 2)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1, 2)">&#10095;</a>
+                </div>
+                <div class="text">
+                    <h2><a href='https://github.com/GreenBerrys/GreenBerrys.github.io/tree/master/todoApp/' style="color: rgb(230, 224, 224);">Todo-App</a></h2>
+                    <a href='https://github.com/GreenBerrys/GreenBerrys.github.io/tree/master/todoApp.7z'>als Archiv runterladen</a>
+                    <p>Mini Todo-App</p>
+                </div>
+            </div>
+
+            <br><br><br>
+            <p  style="margin-left: 20px; font-size: 1.5rem; font-weight: bold;">
+                <a href='http://greenberrys.ddns.net'><img src="images/raspberry.svg" alt="raspberry" width="60px" style="float: left; margin-right: 10px;"> Test-Server (Pi 4)</a>
+                <span style="font-size: 1rem; font-weight: normal;"> - auf Anfrage</span>
+                <span style="font-size: 1rem; font-weight: normal;"><br> Raspbian 64-Bit (Debian 11 'bullseye'), nginx, Node.js&nbsp;18, MongoDB&nbsp;5</span>
+            </p>
+            <p>
+            <br><br><br>    
+            <span style="margin-left: 20px; font-size: 1.5rem; font-weight: bold;">CSRF-Test:&nbsp;</span>
+            Local auf Portadr.
+            <a href='http://localhost:3000/'> 3000</a>,
+            <a href='http://localhost:3100/'> 3100</a>,    
+            <a href='http://localhost:3345/'> 3345</a>    
+            <br><br><br>
+            </p>    
+            <script>
+            let slideIndex = [1,1,1];
+            let slideId = ["mySlides1", "mySlides2", "mySlides3"]
+            showSlides(1, 0);
+            showSlides(1, 1);
+            showSlides(1, 2);
+            
+            function plusSlides(n, no) {
+              showSlides(slideIndex[no] += n, no);
+            }
+            
+            function showSlides(n, no) {
+                let i;
+                let x = document.getElementsByClassName(slideId[no]);
+
+                if (n > x.length) { slideIndex[no] = 1 }
+                if (n < 1) { slideIndex[no] = x.length }
+
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.display = "none";
+                }
+                x[slideIndex[no]-1].style.display = "block";
+                } 
+            </script>
+
+            <noscript>
+                <h2 id="noJs">Zur Anzeige der Bilder<br> wird Javascript ben&ouml;tigt..</h2>
+            </noscript>
+    </body>
+    
+</html>
