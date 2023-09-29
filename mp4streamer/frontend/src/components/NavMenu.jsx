@@ -61,7 +61,7 @@ function NavMenu() {
                         value={ search.searchIn }
                 >
                         <option value="title" readOnly>Titel</option>
-                        <option value="plot" readOnly>Plot</option>
+                        <option value="plot" readOnly>Handlung</option>
                         <option value="director" readOnly>Regisseur</option>
                         <option value="genre" readOnly>Genre</option>
                         <option value="year" readOnly>Jahr</option>
