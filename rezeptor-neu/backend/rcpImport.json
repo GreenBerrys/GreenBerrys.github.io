@@ -1,0 +1,2489 @@
+[
+    {
+        "name": "Käse-Zucchini-Quiche",
+        "description": "",
+        "country": {
+            "_id": null,
+            "name": ""
+        },
+        "category": {
+            "_id": null,
+            "name": ""
+        },
+        "time": {
+            "prepare": 40,
+            "cook": 50
+        },
+        "portions": 4,
+        "ingredients": [
+            {
+                "name": "Für den Teig:",
+                "quantity": -1,
+                "unit": "",
+                "note": "TITLE"
+            },
+            {
+                "name": "Butter",
+                "quantity": 60,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Ei(er)",
+                "quantity": 2,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Mehl",
+                "quantity": 130,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Parmesan",
+                "quantity": 20,
+                "unit": "g",
+                "note": "gerieben"
+            },
+            {
+                "name": "Salz",
+                "quantity": 0.6,
+                "unit": "TL",
+                "note": ""
+            },
+            {
+                "name": "Kräuter der Provence",
+                "quantity": 0.0,
+                "unit": "n.B.",
+                "note": ""
+            },
+            {
+                "name": "Für den Belag:",
+                "quantity": -1,
+                "unit": "",
+                "note": "TITLE"
+            },
+            {
+                "name": "Sonnenblumenkerne",
+                "quantity": 40,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Parmesan",
+                "quantity": 20,
+                "unit": "g",
+                "note": "gerieben"
+            },
+            {
+                "name": "Schafskäse",
+                "quantity": 150,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "saure Sahne",
+                "quantity": 70,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Zucchini (ca. 300 g)",
+                "quantity": 1,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Ei(er)",
+                "quantity": 2,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Öl",
+                "quantity": 0.0,
+                "unit": "etwas",
+                "note": ""
+            }
+        ],
+        "instruction": "Für den Teig alle Zutaten miteinander verkneten, eine Kugel formen, in Frischhaltefolie wickeln und ca. 30 Minuten im Kühlschrank ruhen lassen. In der Zwischenzeit die Zucchini längs vierteln und in Scheiben schneiden, diese in etwas Öl in einer Pfanne anbraten, abkühlen lassen. \n\nDen Teig etwas größer als die Springform ausrollen und in die Springform legen, einen Rand formen, diesen gut am Springformrand fest drücken (fetten der Form ist nicht notwendig). Im vorgeheizten Ofen bei 170°C (Umluft) ca. 20 Minuten backen, bis der Boden schön gebräunt ist. \n\nIn der Zwischenzeit die Eier trennen, die Eiweiße steif schlagen. Den Schafskäse in kleine Würfel schneiden und mit Eigelben, saurer Sahne, Parmesan und Sonnenblumenkernen verrühren. Mit Salz, Pfeffer und Kräutern der Provence würzen. Zum Schluss die Zucchinischeiben und den Eischnee unterheben. \n\nDie Springform aus dem Ofen holen und die Schafskäsemasse gleichmäßig darauf verteilen. Weitere 20 Minuten bei 170 °C (Umluft) backen, bis das Ei gestockt ist und die Oberfläche eine schöne braune Farbe angenommen hat.",
+        "picture": "http://localhost:3100/recipe/picture/schafskaese-zucchini-quiche.jpg"
+    },
+    {
+        "_id": null,
+        "name": "Nudelauflauf mit Tomaten und Mozzarella",
+        "description": "ein vegetarisches Gericht, das einfach glücklich macht",
+        "country": {
+            "_id": null,
+            "name": ""
+        },
+        "category": {
+            "_id": null,
+            "name": ""
+        },
+        "time": {
+            "prepare": 30,
+            "cook": 30
+        },
+        "portions": 4,
+        "ingredients": [
+            {
+                "name": "Knoblauch",
+                "quantity": 3,
+                "unit": "Zehe/n",
+                "note": ""
+            },
+            {
+                "name": "Chilischote(n)",
+                "quantity": 1,
+                "unit": "",
+                "note": "frisch"
+            },
+            {
+                "name": "Zwiebel(n)",
+                "quantity": 1,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Cherrytomate(n)",
+                "quantity": 450,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Mozzarella",
+                "quantity": 150,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Parmesan",
+                "quantity": 50,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Basilikum",
+                "quantity": 1,
+                "unit": "Bund",
+                "note": "frisch"
+            },
+            {
+                "name": "Rigatoni oder Penne",
+                "quantity": 400,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Tomaten",
+                "quantity": 500,
+                "unit": "g",
+                "note": "passierte"
+            },
+            {
+                "name": "Sahne",
+                "quantity": 1,
+                "unit": "Becher",
+                "note": ""
+            },
+            {
+                "name": "Olivenöl",
+                "quantity": 0.0,
+                "unit": "etwas",
+                "note": ""
+            },
+            {
+                "name": "Salz und Pfeffer",
+                "quantity": 0.0,
+                "unit": "n.B.",
+                "note": "schwarzer"
+            },
+            {
+                "name": "Zucker",
+                "quantity": 0.0,
+                "unit": "n.B.",
+                "note": ""
+            }
+        ],
+        "instruction": "Den Ofen auf 200 °C Ober-/Unterhitze (Umluft 180 °C) vorheizen. \n\nDie Zwiebel und den Knoblauch sehr fein schneiden. Die Chilischote entkernen und ebenso fein hacken. Die Kirschtomaten waschen und halbieren. Den Parmesan reiben und den Mozzarella grob würfeln. Die Basilikumblätter abzupfen, waschen und trocken tupfen.\n\nIn einem großen Topf Salzwasser zum Kochen bringen und die Nudeln darin laut Packungsangabe al dente garen.\n\nWährenddessen in einer großen Pfanne Olivenöl erhitzen und Zwiebel, Knoblauch und Chilischote darin anschwitzen. Die passierten Tomaten hinzufügen und die Sauce ein paar Minuten leicht köcheln lassen. Dann die Sahne und den geriebenen Parmesan unterrühren und die Sauce mit Salz, Pfeffer und einer ordentlichen Prise Zucker abschmecken. \n\nWenn die Nudeln soweit sind, diese abgießen und in die Pfanne zur Sauce geben. Die Pfanne von der Hitze nehmen und die halbierten Kirschtomaten und die Hälfte der Mozzarellawürfel unterheben. Die Basilikumblätter in Streifen schneiden und ebenfalls unterheben. \n\nAlles zusammen in eine Auflaufform geben, mit dem restlichen Mozzarella bestreuen und ca. 20 Minuten auf der mittleren Schiene im heißen Backofen gratinieren. \n\nDazu passt zum Beispiel ein grüner Salat und Knoblauchbaguette.",
+        "picture": "http://localhost:3100/recipe/picture/cremiger-nudelauflauf-mit-tomaten-und-mozzarella.jpg"
+    },
+    {
+        "_id": null,
+        "name": "Kirchweihnudeln",
+        "description": "ein Muss an Kirchweih - erst a Ganserl und dann a Nudel",
+        "country": {
+            "_id": null,
+            "name": ""
+        },
+        "category": {
+            "_id": null,
+            "name": ""
+        },
+        "time": {
+            "prepare": 60,
+            "cook": 60
+        },
+        "portions": 4,
+        "ingredients": [
+            {
+                "name": "Milch",
+                "quantity": 250,
+                "unit": "ml",
+                "note": ""
+            },
+            {
+                "name": "Butter",
+                "quantity": 50,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Mehl",
+                "quantity": 500,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Hefe",
+                "quantity": 30,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Ei(er)",
+                "quantity": 2,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Zucker",
+                "quantity": 50,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Zitrone(n)",
+                "quantity": 1,
+                "unit": "",
+                "note": "unbehandelt, den Abrieb davon"
+            },
+            {
+                "name": "Fett zum Frittieren",
+                "quantity": 0.0,
+                "unit": "n.B.",
+                "note": ""
+            },
+            {
+                "name": "Zucker",
+                "quantity": 0.0,
+                "unit": "etwas",
+                "note": ""
+            },
+            {
+                "name": "Zimt",
+                "quantity": 0.0,
+                "unit": "etwas",
+                "note": ""
+            },
+            {
+                "name": "Puderzucker ",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            }
+        ],
+        "instruction": "Aus Mehl und Hefe einen Vorteig machen, etwas gehen lassen, lauwarme Milch und die restlichen Zutaten hinzufügen und einen glatten Teig daraus kneten, etwas gehen lassen. Auf einem Backbrett auswellen (0,5 - 1 cm dick), mit einem Glas Kreise von etwa 8 cm Durchmesser ausstechen und erneut gehen lassen.\n\nDie Teiglinge in der Mitte dünn ausziehen, ohne dass ein Loch entsteht und außen ein 2 cm breiter Rand bleibt. Man gibt sie schwimmend in heißes Ausbackfett, gießt mit einem EL heißes Fett über die Mitte, damit sie nicht einfallen, und backt sie goldgelb. Auf einem Küchentuch abtropfen lassen. Noch warm mit Puderzucker oder Zimtzucker bestreuen.\n\nFrüher wurden die Teiglinge zum Ausformen über das Knie gezogen, damit sie in der Mitte dünn werden.",
+        "picture": "http://localhost:3100/recipe/picture/auszogne-kirchweihnudeln.jpg"
+    },
+    {
+        "_id": null,
+        "name": "Leckerer Hefezopf",
+        "description": "",
+        "country": {
+            "_id": null,
+            "name": ""
+        },
+        "category": {
+            "_id": null,
+            "name": ""
+        },
+        "time": {
+            "prepare": 150,
+            "cook": 45
+        },
+        "portions": 1,
+        "ingredients": [
+            {
+                "name": "Milch",
+                "quantity": 500,
+                "unit": "ml",
+                "note": "lauwarm"
+            },
+            {
+                "name": "Zucker",
+                "quantity": 80,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Weizenmehl Type 405",
+                "quantity": 1,
+                "unit": "kg",
+                "note": "gutes"
+            },
+            {
+                "name": "Frischhefe (1 Würfel)",
+                "quantity": 42,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Ei(er)",
+                "quantity": 3,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Butter",
+                "quantity": 150,
+                "unit": "g",
+                "note": "weiche"
+            },
+            {
+                "name": "Salz",
+                "quantity": 2,
+                "unit": "TL",
+                "note": ""
+            },
+            {
+                "name": "Zitronenabrieb",
+                "quantity": 1,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Hagelzucker",
+                "quantity": 2,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Ei(er) zum Bestreichen",
+                "quantity": 1,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Fett für die Form",
+                "quantity": 0.0,
+                "unit": "evtl.",
+                "note": ""
+            }
+        ],
+        "instruction": "Für einen Zopf von 500 g einfach die Mengenangaben halbieren.\n\nMehl in eine große Schüssel sieben. Milch leicht erwärmen und in einen Rührbecher gießen. Zucker und zerbröckelte Hefe dazu und alles zusammen so gut verrühren, bis sich die Hefe weitgehend aufgelöst hat. Zitronenschale, oder Bittermandelöl und Eier dazugeben und alles zusammen gut verquirlen. Am besten kurz mit einem Zauberstab, ansonsten mit dem Handmixer. \nDiese Flüssigkeit in einem Schwung zum Mehl gießen, weiche Butter und Salz dazu und sofort alles zusammen kräftig verkneten. \nEin Vorteig ist nicht notwendig und auch nicht wünschenswert. So lange kneten, bis der Teig elastisch und glatt ist. Von Hand etwa 10 Min., mit der Küchenmaschine entsprechend weniger. Wer möchte, kann natürlich noch Rosinen dazugeben. Mit einem feuchten Küchentuch (damit der Teig oben nicht antrocknet) abdecken und um das Doppelte aufgehen lassen. (Kann 2 Stunden dauern.) \n\nDer Teig lässt sich auch sehr gut im BBA, Programm 'Teig kneten', herstellen. Das dauert etwa 1 Stunde und 20 Minuten und verringert natürlich die Gehzeit erheblich. Allerdings geht das nur mit der Hälfte der Zutaten. \n\nEine Backunterlage mit Mehl bestreuen und den gegangenen Hefeteig darauf geben und diesen von Hand nochmals durchkneten. \n\nNun kommt das Formen. \nMan kann den Zopf aus drei Strängen flechten, oder so: \nDen Teig in zwei Hälften teilen. Daraus möglichst lange, an den Enden zugespitzte Rollen formen. Beide Rollen spiralenförmig umeinander schlingen. Am besten in der Mitte beginnen und zu den Enden hinarbeiten. Ziemlich straff drehen. Nun hat man einen spiralenförmigen Strang. Diesen an beiden Enden halten und so gedreht wie er ist, nochmals spiralenförmig fest umeinander schlingen. Der Zopf hat sich nun optisch sehr verkleinert und sieht an einem Ende viel schmaler aus. Das ist gewünscht und richtig. Durch diese einfache Form des Wickelns sieht er aus wie ein schön geflochtener Zopf (Achtung, erfordert etwas Übung) und er wird bombastisch aufgehen. \n\nDen Zopf diagonal auf das gefettete, oder mit Backpapier ausgelegte Backblech legen. Nun ein ganzes Ei sehr gut verquirlen, am besten mit Hilfe des Mixers, und eine Prise Zucker und Salz zugeben. Das ist sehr wichtig, weil der mit Ei bestrichene Zopf dann nicht schwarz wird beim Backen. Nach Wunsch schön dick mit Hagelzucker bestreuen. \nJetzt sollte er nochmals 30 Min. gehen. \n\nZwischenzeitlich den Backofen auf 160 °C Heißluft vorheizen. Manche empfehlen Ober- und Unterhitze, da der Zopf bei Heißluft schneller trocken werden kann, weil er zu schnell aufgeht und dadurch zu viel Luft in den Teig kommt. In diesem Fall den Backofen auf 180 °C vorheizen, weil der Zopf bei Ober-/Unterhitze eine höhere Temperatur braucht.\n\nAuf die mittlere Schiene des Ofens schieben und etwa 30 - 35 Minuten backen. Der Zopf sollte eine karamellfarbene Bräunung haben. Ob er wirklich durchgebacken ist, lässt sich leicht feststellen. Einfach mit dem gekrümmten Finger gegen die Unterseite klopfen. Klingt es hohl, ist er fertig.",
+        "picture": "http://localhost:3100/recipe/picture/friedas-genialer-hefezopf.jpg"
+    },
+    {
+        "name": "Hamburger Kartoffelsuppe",
+        "description": "Eintopf wie bei Oma",
+        "country": null,
+        "category": null,
+        "time": {
+            "prepare": 20,
+            "cook": 30
+        },
+        "portions": 10,
+        "ingredients": [
+            {
+                "name": "Katenschinken oder magerer Speck",
+                "quantity": 200,
+                "unit": "g",
+                "note": "gewürfelt"
+            },
+            {
+                "name": "Zwiebel(n)",
+                "quantity": 3,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Kartoffeln",
+                "quantity": 2.5,
+                "unit": "kg",
+                "note": "mehligkochend"
+            },
+            {
+                "name": "Margarine",
+                "quantity": 1,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Suppengemüse",
+                "quantity": 1,
+                "unit": "kg",
+                "note": "TK"
+            },
+            {
+                "name": "Lorbeerblätter",
+                "quantity": 2,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Pimentkörner",
+                "quantity": 4,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Gemüsebrühepulver oder klare Brühe",
+                "quantity": 2.5,
+                "unit": "EL",
+                "note": "instant"
+            },
+            {
+                "name": "Salz und Pfeffer ",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Würstchen",
+                "quantity": 1,
+                "unit": "kg",
+                "note": ""
+            },
+            {
+                "name": "Petersilie",
+                "quantity": 1,
+                "unit": "Paket",
+                "note": ""
+            }
+        ],
+        "instruction": "Die Kartoffeln schälen, klein schneiden, knapp mit Wasser bedecken, salzen und zum Kochen bringen.\n\nIn einem zweiten großen Topf die Margarine zerlassen und den Katenschinken oder Speck scharf darin anbraten. Die Zwiebeln schälen, in grobe Stückchen schneiden und dazugeben, aber nur glasig werden lassen. Sie sollen keine Farbe nehmen. Das TK-Gemüse dazugeben, mit ca. 0,5 Liter Wasser ablöschen und aufkochen lassen. Gemüsebrühepulver, Lorbeerblätter, Piment und ca. 1 TL Pfeffer dazugeben, gut umrühren und auf kleiner Flamme köcheln lassen, bis die Kartoffeln im anderen Topf gar sind.\n\nDann das Kartoffelwasser zum Gemüse gießen (nicht wegschütten!). Die Kartoffeln stampfen und den Kartoffelstampf auch zum Gemüse geben. So viel Wasser dazugeben, dass es insgesamt etwa 5 Liter Flüssigkeit ergibt. Die Kartoffelsuppe soll aber schön dick sein, nicht zu wässerig. Aufkochen lassen und noch ein paar Minuten auf kleiner Flamme köcheln lassen.\n\nInzwischen die Würstchen in ca. 1 cm dicke Scheiben schneiden und mit in den Topf geben. Zum Schluss noch die Petersilie unterrühren und mit Salz und Pfeffer abschmecken.\n\nAm besten schmeckt die Suppe, wie alle Eintöpfe, erst am zweiten Tag. Reste lassen sich gut einfrieren!",
+        "picture": "http://localhost:3100/recipe/picture/berliner-kartoffelsuppe.jpg"
+    },
+    {
+        "name": "Hackfleischauflauf mit Gemüse",
+        "description": "Hackfleisch Gratin",
+        "country": null,
+        "category": null,
+        "time": {
+            "prepare": 0,
+            "cook": 30
+        },
+        "portions": 3,
+        "ingredients": [
+            {
+                "name": "Kartoffelnudeln (= 500 g)",
+                "quantity": 1,
+                "unit": "Pck.",
+                "note": ""
+            },
+            {
+                "name": "Zwiebel(n)",
+                "quantity": 1,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Zucchini",
+                "quantity": 1,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Kirschtomate(n)",
+                "quantity": 300,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Lauch",
+                "quantity": 1,
+                "unit": "Stange/n",
+                "note": "(Porree)"
+            },
+            {
+                "name": "Pflanzenöl",
+                "quantity": 2.5,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Hackfleisch",
+                "quantity": 450,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Tomate(n)",
+                "quantity": 1,
+                "unit": "Pck.",
+                "note": "passierte (= 500 g)"
+            },
+            {
+                "name": "Salz ",
+                "quantity": 0.0,
+                "unit": "",
+                "note": "etwas"
+            },
+            {
+                "name": "Cayennepfeffer ",
+                "quantity": 0.0,
+                "unit": "",
+                "note": "etwas"
+            },
+            {
+                "name": "Käse",
+                "quantity": 150,
+                "unit": "g",
+                "note": "geriebener  (z.B. Emmentaler)"
+            }
+        ],
+        "instruction": "Zubereitung:\nBackofen auf 180°C vorheizen. Zwiebel abziehen und in Würfel schneiden. Lauch putzen, waschen und in halbe Ringe schneiden. Zucchini und Tomaten waschen, halbieren und Zucchini zusätzlich in Scheiben schneiden. \nÖl in einer Pfanne erhitzen und Zwiebelwürfel darin anbraten. Hackfleisch dazugeben und kräftig anbraten. Lauch und Zucchini hinzufügen und mitdünsten. Passierte Tomaten angießen, Kirschtomaten unterheben, mit Salz und Cayennepfeffer abschmecken.\nKartoffelnudeln in Portionsauflaufformen geben und mit der Sauce übergießen.\nAufläufe mit Käse bestreuen und im vorgeheizten Backofen 15-20 Minuten backen (Gas: Stufe 3, Umluft 160°C).\n\nZubereitungszeit: 30 Minuten\nBackzeit: 15-20 Minuten\nPro Portion (bei 3 Portionen):\nkJ/kcal: 3647/871\nEW: 46,5 g\nF: 47,0 g\nKH: 66,0 g\nBE: 5,0",
+        "picture": "http://localhost:3100/recipe/picture/schupfnudel-hackfleisch-auflauf-mit-gemuese.jpg"
+    },
+    {
+        "name": "Speed Pizza",
+        "description": "Teig, Sauce und Belag fertig in 25 Minuten, Pizza ohne Hefe, ergibt 4 Portionen",
+        "country": null,
+        "category": null,
+        "time": {
+            "prepare": 30,
+            "cook": 7
+        },
+        "portions": 1,
+        "ingredients": [
+            {
+                "name": "Für den Teig:",
+                "quantity": -1,
+                "unit": "",
+                "note": "TITLE"
+            },
+            {
+                "name": "Olivenöl",
+                "quantity": 3,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Backpulver",
+                "quantity": 2,
+                "unit": "TL",
+                "note": ""
+            },
+            {
+                "name": "Mehl",
+                "quantity": 450,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Wasser",
+                "quantity": 250,
+                "unit": "ml",
+                "note": "warm, bis 280 ml"
+            },
+            {
+                "name": "Salz",
+                "quantity": 1,
+                "unit": "TL",
+                "note": ""
+            },
+            {
+                "name": "Für die Tomatensauce:",
+                "quantity": -1,
+                "unit": "",
+                "note": "TITLE"
+            },
+            {
+                "name": "Tomaten",
+                "quantity": 400,
+                "unit": "g",
+                "note": "passierte"
+            },
+            {
+                "name": "Knoblauchzehe(n)",
+                "quantity": 2,
+                "unit": "",
+                "note": "gehackt"
+            },
+            {
+                "name": "Oregano",
+                "quantity": 1,
+                "unit": "TL",
+                "note": "getrocknet"
+            },
+            {
+                "name": "Basilikumblätter",
+                "quantity": 3,
+                "unit": "",
+                "note": "frisch"
+            },
+            {
+                "name": "Olivenöl",
+                "quantity": 2,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Salz und Pfeffer ",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Zum Belegen: (nach Belieben)",
+                "quantity": -1,
+                "unit": "",
+                "note": "TITLE"
+            },
+            {
+                "name": "Mozzarella ",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Tomate(n), frisch",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Käse, gerieben ",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Champignons ",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Schinken",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Thunfisch ",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            }
+        ],
+        "instruction": "Als erstes sollte der Ofen auf 220 °C Ober-/Unterhitze vorgeheizt werden. Das Backblech sollte sich dabei ohne Backpapier im Ofen befinden, damit es ebenfalls ordentlich aufheizen kann.\n\nFür den Teig wird das Mehl mit dem Backpulver und dem Salz verrührt und im Anschluss mit dem Wasser, dem Olivenöl und dem Backpulver zu einem geschmeidigen Teig verknetet. Der Teig wird anschließend in vier gleich große Portionen geteilt und zu Kugeln geformt. Die Kugeln sollten dann erstmal fünf Minuten ruhen, damit sich der Teig besser ausrollen lässt.\n\nDiese fünf Minuten Ruhezeit sind der perfekte Zeitpunkt, um die Tomatensauce zuzubereiten. Dazu werden die passierten Tomaten mit den übrigen Zutaten verrührt und schon ist die Sauce fertig. Der Knoblauch und die Basilikumblätter können natürlich auch im Ganzen zu der Sauce gegeben und püriert werden. Das funktioniert auch.\n\nSobald die Tomatensauce fertig ist, hat der Teig lange genug geruht und kann dünn ausgerollt werden. Bis zu zwei Teigfladen können je nach Größe auf ein heißes Backblech gegeben und belegt werden. Am besten wird zunächst die Sauce darauf verteilt, dann der Käse und erst dann die übrigen Zutaten.\n\nNach ca. sieben Minuten im vorgeheizten Ofen ist die Blitz Pizza dann auch schon fertig. Die Backzeit variiert ganz leicht von Ofen zu Ofen, also am besten immer mal wieder nachschauen, damit die Pizza nicht verbrennt.",
+        "picture": "http://localhost:3100/recipe/picture/blitz-pizza.jpg"
+    },
+    {
+        "name": "Gulasch mit Tofu und Pilzen",
+        "description": "",
+        "country": null,
+        "category": null,
+        "time": {
+            "prepare": 30,
+            "cook": 35
+        },
+        "portions": 2,
+        "ingredients": [
+            {
+                "name": "Paprikaschote(n)",
+                "quantity": 1,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Pilze",
+                "quantity": 200,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Tofu",
+                "quantity": 600,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Möhre(n)",
+                "quantity": 2,
+                "unit": "große",
+                "note": ""
+            },
+            {
+                "name": "Zwiebel(n)",
+                "quantity": 2,
+                "unit": "m.-große",
+                "note": ""
+            },
+            {
+                "name": "Knoblauch",
+                "quantity": 3,
+                "unit": "Zehe/n",
+                "note": "n. B. auch mehr"
+            },
+            {
+                "name": "Gemüsebrühe",
+                "quantity": 500,
+                "unit": "ml",
+                "note": ""
+            },
+            {
+                "name": "Rotwein",
+                "quantity": 150,
+                "unit": "ml",
+                "note": ""
+            },
+            {
+                "name": "Sojasauce",
+                "quantity": 1,
+                "unit": "Schuss",
+                "note": ""
+            },
+            {
+                "name": "Thymian ",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Paprikapulver ",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Chilischote(n)",
+                "quantity": 1,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Tomatenmark",
+                "quantity": 4,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Olivenöl",
+                "quantity": 1,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Salz und Pfeffer ",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Lorbeerblätter",
+                "quantity": 2,
+                "unit": "",
+                "note": ""
+            }
+        ],
+        "instruction": "Zwiebeln, Knoblauch und Tofu in kleine Stücke schneiden und in Olivenöl anbraten. Einen Schuss Sojasoße dazugeben. Möhren schneiden und in den Topf werfen und mit Wein sowie der Brühe ablöschen. Tomatenmark, Lorbeerblätter und Paprikapulver hinzugeben. Alles gut 30 Minuten köcheln lassen.\n\nPaprika und Pilze schneiden. In den Topf geben und die restlichen Gewürze dazugeben. Nochmals 5 Minuten kochen lassen und abschmecken. Lorbeerblätter entnehmen. \n\nDazu passen z. B. Rotkohl oder Spätzle.",
+        "picture": "http://localhost:3100/recipe/picture/vegetarisches-gulasch-mit-tofu-und-pilzen.jpg"
+    },
+    {
+        "name": "Bratäpfel",
+        "description": "",
+        "country": null,
+        "category": null,
+        "time": {
+            "prepare": 40,
+            "cook": 35
+        },
+        "portions": 4,
+        "ingredients": [
+            {
+                "name": "Äpfel",
+                "quantity": 5,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Rosinen",
+                "quantity": 50,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Aprikosenkonfitüre oder Honig",
+                "quantity": 4,
+                "unit": "TL",
+                "note": ""
+            },
+            {
+                "name": "Mandelsplitter",
+                "quantity": 50,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Zimt",
+                "quantity": 1,
+                "unit": "Prise(n)",
+                "note": ""
+            },
+            {
+                "name": "Margarine",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Speisestärke",
+                "quantity": 1,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Milch",
+                "quantity": 0.5,
+                "unit": "Liter",
+                "note": ""
+            },
+            {
+                "name": "Zucker",
+                "quantity": 10,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Eigelb",
+                "quantity": 1,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Vanillezucker",
+                "quantity": 1,
+                "unit": "TL",
+                "note": ""
+            }
+        ],
+        "instruction": "Die Äpfel waschen und das Kerngehäuse herausstechen. Mandeln, Rosinen, Konfitüre und Zimt vermischen und mit einem Teelöffel in die Öffnung der Äpfel geben und mit einem Kochlöffelstiel hineindrücken.\n\nDie Äpfel in eine gefettete Auflaufform setzen und auf jeden Apfel ein Margarineflöckchen geben. Im vorgeheizten Backofen bei 200 °C (Gas: Stufe 3 , Umluft 175 °C) ca. 25 Min. backen.\n\nFür die Soße Speisestärke und Eigelb in 2 EL kalter Milch anrühren. Die restliche Milch mit Zucker und Vanillezucker zum Kochen bringen. Die angerührte Speisestärke unter Rühren hineingießen und kurz kochen lassen.\n\nWarm oder kalt zu den heißen Äpfeln servieren.",
+        "picture": "http://localhost:3100/recipe/picture/brataepfel.jpg"
+    },
+    {
+        "name": "Bratäpfel im Mantel",
+        "description": "besonders lecker: heiß auf Eis",
+        "country": null,
+        "category": null,
+        "time": {
+            "prepare": 0,
+            "cook": 20
+        },
+        "portions": 5,
+        "ingredients": [
+            {
+                "name": "Äpfel",
+                "quantity": 5,
+                "unit": "",
+                "note": "à ca. 150 g"
+            },
+            {
+                "name": "Zucker",
+                "quantity": 75,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Nüsse",
+                "quantity": 50,
+                "unit": "g",
+                "note": "gemahlene"
+            },
+            {
+                "name": "Butter",
+                "quantity": 70,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Zimt",
+                "quantity": 0.5,
+                "unit": "TL",
+                "note": ""
+            },
+            {
+                "name": "Zimt, ganz",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            }
+        ],
+        "instruction": "Die Äpfel schälen und aus der Mitte mit einem Kernausstecher das Kerngehäuse ausstechen.  \nDie Butter zerlassen und die Äpfel mehrmals darin wenden. \nZucker mit Nüssen und Zimt mischen und die Äpfel in der Mischung wenden, bis sie vollständig damit bedeckt sind. In eine Auflaufform setzen. \nDie übrige Nussmischung in zur übrig gebliebenen Butter geben und verrühren. \ndie Masse in die Löcher in der Mitte der Äpfel verteilen. \nJe 1/2 bis eine ganze Zimtstange einstecken und bei 180°C etwa 45-50 min garen, bis eine schöne goldgelbe Kruste entstanden ist. \n\nAm besten schmecken die Bratäpfel heiß mit Vanille-, Walnuss- oder auch Karamelleis. \nDie In der Auflaufform entstandene Sauce kann man prima noch übers Eis geben.",
+        "picture": "http://localhost:3100/recipe/picture/brataepfel-im-nussmantel.jpg"
+    },
+    {
+        "name": "Thai Satay Noodles",
+        "description": "",
+        "country": null,
+        "category": null,
+        "time": {
+            "prepare": 25,
+            "cook": 10
+        },
+        "portions": 4,
+        "ingredients": [
+            {
+                "name": "Kokosmilch",
+                "quantity": 100,
+                "unit": "ml",
+                "note": "dicke"
+            },
+            {
+                "name": "Gemüsebrühe",
+                "quantity": 120,
+                "unit": "ml",
+                "note": ""
+            },
+            {
+                "name": "Erdnussbutter",
+                "quantity": 3,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Sesamöl",
+                "quantity": 2,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Ingwerwurzel",
+                "quantity": 5,
+                "unit": "cm",
+                "note": "frisch, gerieben"
+            },
+            {
+                "name": "Chilisauce",
+                "quantity": 3,
+                "unit": "EL",
+                "note": "süße"
+            },
+            {
+                "name": "Sojasauce",
+                "quantity": 2,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "chinesische Eiernudeln",
+                "quantity": 350,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Paprikaschote(n)",
+                "quantity": 1,
+                "unit": "kleine",
+                "note": "rot, in Scheiben"
+            },
+            {
+                "name": "Maiskölbchen",
+                "quantity": 85,
+                "unit": "g",
+                "note": "längs halbiert"
+            },
+            {
+                "name": "Brokkoli",
+                "quantity": 140,
+                "unit": "g",
+                "note": "in Röschen"
+            },
+            {
+                "name": "Zuckererbsen )",
+                "quantity": 50,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Knoblauch",
+                "quantity": 3,
+                "unit": "Zehe/n",
+                "note": "gehackt"
+            },
+            {
+                "name": "Basilikum",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Erdnüsse",
+                "quantity": 20,
+                "unit": "g",
+                "note": "geröstet, grob gehackt"
+            }
+        ],
+        "instruction": "Erdnussbutter, Chilisauce, Kokosmilch, Brühe und Sojasauce zu einer glatten Sataysauce vermischen. \n\nNudeln in kochendem Wasser weich werden lassen. \n\nDas Öl in einem Wok erhitzen und Ingwer, Brokkoli, Paprika und Maiskölbchen unter Rühren kurz anbraten. Erbsen und Knoblauch dazugeben und kurz weiter braten. Die Sauce darüber gießen, und aufkochen lassen. \n\nDie abgegossenen Nudeln in den Wok geben, durchrühren und für 1 - 2 Minuten bei starker Hitze braten. Auf Tellern anrichten und mit Basilikumblättern und den Erdnüssen garnieren.",
+        "picture": "http://localhost:3100/recipe/picture/thai-satay-noodles.jpg"
+    },
+    {
+        "name": "Wirsingeintopf",
+        "description": "Rezept meiner Oma - super lecker, auch für Anfänger",
+        "country": null,
+        "category": null,
+        "time": {
+            "prepare": 20,
+            "cook": 40
+        },
+        "portions": 4,
+        "ingredients": [
+            {
+                "name": "Kartoffel(n)",
+                "quantity": 6,
+                "unit": "große",
+                "note": ""
+            },
+            {
+                "name": "Hackfleisch",
+                "quantity": 400,
+                "unit": "g",
+                "note": "gemischt"
+            },
+            {
+                "name": "Wirsing",
+                "quantity": 1,
+                "unit": "kg",
+                "note": ""
+            },
+            {
+                "name": "Brühe",
+                "quantity": 1,
+                "unit": "Liter",
+                "note": "fette"
+            },
+            {
+                "name": "Zwiebel(n)",
+                "quantity": 1,
+                "unit": "m.-große",
+                "note": ""
+            },
+            {
+                "name": "Kümmel",
+                "quantity": 0.0,
+                "unit": "",
+                "note": "etwas"
+            },
+            {
+                "name": "Muskat",
+                "quantity": 0.0,
+                "unit": "",
+                "note": "ein wenig"
+            },
+            {
+                "name": "Öl",
+                "quantity": 0.0,
+                "unit": "",
+                "note": "etwas"
+            },
+            {
+                "name": "Salz und Pfeffer, aus der Mühle",
+                "quantity": 0.0,
+                "unit": "",
+                "note": "etwas"
+            }
+        ],
+        "instruction": "Die Zwiebel in kleine Würfel schneiden und in einem Topf mit etwas Öl glasig dünsten. Das Hackfleisch dazugeben, mit Salz und Pfeffer etwas würzen und krümelig braten. Wenn das Hackfleisch durchgebraten ist, den geschnittenen und gewaschenen Wirsing darauf geben, den Herd etwas runterstellen und mit Deckel dünsten (nicht umrühren).\n\nDie Kartoffeln schälen und würfeln. \n\nJetzt den Wirsing und das Hack umrühren und die Hitze wieder etwas hoch stellen. Die Kartoffeln drauf geben und wieder zudecken. Ca. 5 Minuten so köcheln lassen, dann die Kartoffeln unterrühren und den Liter Brühe nach und nach unterrühren. Etwas Muskatnuss und Kümmel dazugeben und so lange kochen lassen, bis die Kartoffeln und der Wirsing gar sind. Dann nochmal mit Kümmel, Salz und Pfeffer abschmecken.\n\nWir geben auf dem Teller noch ein Löffelchen Schmand darauf. Schmeckt aber auch wunderbar ohne.",
+        "picture": "http://localhost:3100/recipe/picture/wirsingeintopf.jpg"
+    },
+    {
+        "name": "Hokkaido - Ofenkürbis",
+        "description": "für alle, die dem Kürbis bis jetzt noch nichts abgewinnen konnten!",
+        "country": null,
+        "category": null,
+        "time": {
+            "prepare": 25,
+            "cook": 25
+        },
+        "portions": 6,
+        "ingredients": [
+            {
+                "name": "Hokkaidokürbis(se)",
+                "quantity": 1.2,
+                "unit": "kg",
+                "note": ""
+            },
+            {
+                "name": "Olivenöl",
+                "quantity": 160,
+                "unit": "ml",
+                "note": ""
+            },
+            {
+                "name": "Kreuzkümmel",
+                "quantity": 3,
+                "unit": "TL",
+                "note": ""
+            },
+            {
+                "name": "Knoblauchzehe(n)",
+                "quantity": 3,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Paprikapulver rosenscharf",
+                "quantity": 2,
+                "unit": "TL",
+                "note": ""
+            },
+            {
+                "name": "Majoran",
+                "quantity": 2,
+                "unit": "TL",
+                "note": ""
+            },
+            {
+                "name": "Currypaste",
+                "quantity": 1,
+                "unit": "EL",
+                "note": "gelbe"
+            },
+            {
+                "name": "Salz",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Für den Dip:",
+                "quantity": -1,
+                "unit": "",
+                "note": "TITLE"
+            },
+            {
+                "name": "Olivenöl",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Joghurt",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Minze",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Salz und Pfeffer",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            }
+        ],
+        "instruction": "Da der Hokkaido mit Schale gegessen wird, muss er zunächst gründlich gereinigt werden. Der Stiel wird großzügig abgetrennt. Der Kürbis wird nun längs halbiert, entkernt und anschließend in 2 - 3 cm dicke Spalten geschnitten, welche gesalzen werden. Den Knoblauch grob zerkleinern und mit den anderen Zutaten in das Öl gegeben. Gut durchmischen! \n\nDie Marinade in einer Schüssel über den Kürbis geben und ordentlich durchschwenken. Wer möchte, kann den Kürbis auch über Nacht ziehen lassen, eignet sich also gut zum Vorbereiten. \n\nZum Garen wird der Kürbis in eine Auflaufform gegeben, mit der Marinade übergossen und im Backofen bei 200 °C etwa 25 Minuten gebacken. \n\nDazu passt gut einen Joghurt-Minze Dip. Joghurt mit Salz und Pfeffer würzen, etwas Olivenöl und geschnittene frische Minze unterrühren.",
+        "picture": "http://localhost:3100/recipe/picture/ofenkuerbis-wuerziger-hokkaido.jpg"
+    },
+    {
+        "name": "Spinat-Gemüse-Lasagne mit Tomatensoße",
+        "description": "",
+        "country": null,
+        "category": null,
+        "time": {
+            "prepare": 35,
+            "cook": 45
+        },
+        "portions": 3,
+        "ingredients": [
+            {
+                "name": "Karotte(n)",
+                "quantity": 2,
+                "unit": "große",
+                "note": ""
+            },
+            {
+                "name": "Champignons",
+                "quantity": 7,
+                "unit": "m.-große",
+                "note": ""
+            },
+            {
+                "name": "Blattspinat",
+                "quantity": 650,
+                "unit": "g",
+                "note": "mit Rahm"
+            },
+            {
+                "name": "Milch",
+                "quantity": 5,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Zwiebel(n)",
+                "quantity": 1,
+                "unit": "große",
+                "note": ""
+            },
+            {
+                "name": "Kräuterfrischkäse",
+                "quantity": 0.5,
+                "unit": "Pck.",
+                "note": "ca. 100 g"
+            },
+            {
+                "name": "Gemüsebrühepulver",
+                "quantity": 1,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Tomaten",
+                "quantity": 600,
+                "unit": "ml",
+                "note": "passierte"
+            },
+            {
+                "name": "Knoblauchzehe(n)",
+                "quantity": 2,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Butter",
+                "quantity": 3,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Mehl",
+                "quantity": 2,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Lasagneplatte(n)",
+                "quantity": 1,
+                "unit": "Paket",
+                "note": ""
+            },
+            {
+                "name": "süße Sahne",
+                "quantity": 150,
+                "unit": "ml",
+                "note": ""
+            },
+            {
+                "name": "Käse",
+                "quantity": 250,
+                "unit": "g",
+                "note": "gerieben"
+            },
+            {
+                "name": "Salz und Pfeffer",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Chilipulver",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            }
+        ],
+        "instruction": "Karotten, Champignons und Zwiebel schälen, schneiden und zuerst die Zwiebelwürfel in einer Pfanne anbraten, bis sie glasig sind. Danach das restliche Gemüse dazugeben und kurz mitbraten. 5 EL Milch dazugeben und den Rahmspinat darin erhitzen, bis die Blätter nicht mehr gefroren sind und die Rahmsoße leicht eingedickt ist. Jetzt den Frischkäse sowie das Gemüsebrühpulver dazugeben und gut verrühren. Fünf Minuten köcheln lassen, bis die Soße schön eingedickt ist. Zum Schluss die Knoblauchzehe dazu pressen und mit Salz, Pfeffer und Chili abschmecken. Das Spinatgemisch darf ruhig gut würzig sein, da der Spinat beim Backen relativ viel Salz \"schluckt\".\n\nIn einem separaten Topf die Butter erhitzen, bis sie vollständig zerlaufen ist. Das Mehl unter Rühren hinzugeben und zu einer glatten Masse verrühren. Unter stetem Rühren nun die passierten Tomaten dazugeben, danach direkt die Sahne dazugießen und alles kurz aufkochen. Die Knoblauchzehe dazupressen und mit Salz und Pfeffer abschmecken. Auch hier muss nicht am Salz gespart werden.\n\nMit der Tomatensoße und dem Spinat dünn den Boden einer Auflaufform bedecken und jetzt abwechselnd Lasagneplatten, Spinatgemisch und Tomatensoße darin schichten. Mit der Soße abschließen und lückenlos mit Reibekäse bestreuen. \n\nBei 180 Grad Umluft ca. 30 Minuten backen. Nach dem Backen noch fünf bis zehn Minuten im ausgeschalteten Backofen stehen lassen, dann bleibt die Lasagne perfekt in Form und zerläuft nicht. \n\nTipp:\nSehr lecker ist es auch, auf eine Schicht fein geschnittene Fetascheiben zu legen, bevor die nächste Lasagneplattenschicht kommt.",
+        "picture": "http://localhost:3100/recipe/picture/vegetarische-spinat-gemuese-lasagne-mit-tomatensosse.jpg"
+    },
+    {
+        "name": "Spaghetti Carbonara",
+        "description": "oder Tortellini Carbonara",
+        "country": null,
+        "category": null,
+        "time": {
+            "prepare": 5,
+            "cook": 15
+        },
+        "portions": 4,
+        "ingredients": [
+            {
+                "name": "Spaghetti bzw. Tortellini",
+                "quantity": 450,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Butter",
+                "quantity": 50,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Schinken",
+                "quantity": 250,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Eigelb",
+                "quantity": 4,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Muskat",
+                "quantity": 1,
+                "unit": "Prise(n)",
+                "note": ""
+            },
+            {
+                "name": "Salz und Pfeffer",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Parmesan",
+                "quantity": 0.0,
+                "unit": "n.B.",
+                "note": ""
+            }
+        ],
+        "instruction": "Die Pasta in reichlich Salzwasser bissfest kochen. Den Schinken in Würfel schneiden und in wenig Butter anbraten. \n\nEigelb in einer großen Schüssel mit Salz, Pfeffer und Muskat verquirlen. Die Butter schaumig rühren und gut unter das Eigelb mischen. Die Schinkenwürfel und den geriebenen Käse gründlich unterrühren.\n\nWenn die Nudeln gar sind, abgießen, sofort zu der Mischung in die Schüssel geben, nochmal alles gründlich durchmischen, dann sogleich servieren.",
+        "picture": "http://localhost:3100/recipe/picture/spaghetti-carbonara.jpg"
+    },
+    {
+        "name": "Hühnerfrikassee",
+        "description": "nach Mamas Art",
+        "country": null,
+        "category": null,
+        "time": {
+            "prepare": 30,
+            "cook": 60
+        },
+        "portions": 4,
+        "ingredients": [
+            {
+                "name": "Brathähnchen",
+                "quantity": 1,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Zwiebel(n)",
+                "quantity": 2,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Tomate(n)",
+                "quantity": 3,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Spargel",
+                "quantity": 1,
+                "unit": "Dose",
+                "note": "gestückelt"
+            },
+            {
+                "name": "Champignons",
+                "quantity": 1,
+                "unit": "Glas",
+                "note": ""
+            },
+            {
+                "name": "Erbsen und Möhren",
+                "quantity": 1,
+                "unit": "Dose",
+                "note": ""
+            },
+            {
+                "name": "Eigelb",
+                "quantity": 2,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Sahne",
+                "quantity": 0.5,
+                "unit": "Becher",
+                "note": ""
+            },
+            {
+                "name": "Salz und Pfeffer",
+                "quantity": 2,
+                "unit": "TL",
+                "note": ""
+            },
+            {
+                "name": "Zitronensaft",
+                "quantity": 1,
+                "unit": "Spritzer",
+                "note": ""
+            },
+            {
+                "name": "Mehl",
+                "quantity": 0.0,
+                "unit": "etwas",
+                "note": ""
+            },
+            {
+                "name": "Margarine",
+                "quantity": 0.0,
+                "unit": "n.B.",
+                "note": ""
+            }
+        ],
+        "instruction": "Das Hähnchen salzen und in einen Topf geben. Diesen dann bis zu 3/4 mit Wasser füllen. Die Zwiebel schälen und vierteln. Die Tomaten waschen und klein schneiden. Zwiebeln und Tomaten dazugeben. Zwei TL Salz und Pfeffer in das Wasser geben. Zum Kochen bringen und köcheln lassen, bis das Fleisch gar ist, das dauert ca. 40 - 60 Minuten bei einem Brathähnchen und mindestens 2 Stunden bei einem Suppenhuhn. Ob das Huhn gar ist, kannst du prüfen, indem du an einem Schenkel ziehst, er muss sich dann leicht lösen.\n\nWenn das Hähnchen gar gekocht ist, aus dem Topf nehmen und abkühlen lassen. Die entstandene Brühe durch ein Sieb gießen. Das Hähnchenfleisch von den Knochen lösen.\n\nMargarine in den Topf geben und erhitzen, das Mehl wird nun unter schnellem Rühren hinzugefügt. Nun die Geflügelbrühe in die Mehlschwitze geben. Erst ein bisschen - um die Brühe mit der Schwitze zu verbinden und um Klümpchen zu vermeiden - dann die restliche Brühe hineingießen. Die Brühe wird darauf etwas dickflüssig. Ca. 10 Minuten unter häufigem Rühren köcheln lassen und mit Salz, Zitronensaft und Pfeffer abschmecken.\n\nZwei Eigelb mit der Sahne verrühren und zugeben. Nun das Hähnchenfleisch mit den Champignons, den Erbsen und Möhren sowie dem Spargel hinzufügen und alles nur noch heiß werden lassen. Heiß servieren.\n\nTipp: Anstatt eines kompletten Hähnchens kann man auch Hühnerschenkel für das Frikassee nehmen.",
+        "picture": "http://localhost:3100/recipe/picture/huehnerfrikassee.jpg"
+    },
+    {
+        "name": "Hackfleisch-Tacos",
+        "description": "",
+        "country": null,
+        "category": null,
+        "time": {
+            "prepare": 30,
+            "cook": 20
+        },
+        "portions": 4,
+        "ingredients": [
+            {
+                "name": "Rinderhackfleisch",
+                "quantity": 450,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Tomatenmark",
+                "quantity": 2,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Öl",
+                "quantity": 1,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Zwiebel(n)",
+                "quantity": 1,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Knoblauchzehe(n)",
+                "quantity": 2,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Paprikapulver",
+                "quantity": 1,
+                "unit": "TL",
+                "note": ""
+            },
+            {
+                "name": "Chilipulver",
+                "quantity": 0.5,
+                "unit": "TL",
+                "note": ""
+            },
+            {
+                "name": "Kreuzkümmelpulver",
+                "quantity": 1,
+                "unit": "TL",
+                "note": ""
+            },
+            {
+                "name": "Korianderpulver",
+                "quantity": 1,
+                "unit": "TL",
+                "note": ""
+            },
+            {
+                "name": "Oregano",
+                "quantity": 0.5,
+                "unit": "TL",
+                "note": ""
+            },
+            {
+                "name": "Salz",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Zucker",
+                "quantity": 1,
+                "unit": "TL",
+                "note": ""
+            },
+            {
+                "name": "Eisbergsalat",
+                "quantity": 4,
+                "unit": "Blätter",
+                "note": "(große Blätter), zerkleinerte"
+            },
+            {
+                "name": "Tacos",
+                "quantity": 12,
+                "unit": "kleine",
+                "note": "(Schalen)"
+            },
+            {
+                "name": "Cheddarkäse",
+                "quantity": 200,
+                "unit": "g",
+                "note": "geriebener"
+            },
+            {
+                "name": "Salsa (Tomatensalsa)",
+                "quantity": 100,
+                "unit": "g",
+                "note": ""
+            }
+        ],
+        "instruction": "Backofen auf 180 Grad vorheizen. Öl in einer großen Pfanne erhitzen. Zwiebel bei geringer Hitze weich, aber nicht braun werden lassen. Knoblauch zugeben, 1 Minute mitbraten. Tomatenmark, Chilipulver, Paprikapulver, Kreuzkümmel, Koriander, Oregano, Zucker und 1 TL Salz einrühren. Bei mittlerer Hitze 3-4 Minuten dünsten. Auf höchste Stufe schalten, Fleisch zugeben und bräunen. Ca. 3 EL Wasser zugeben, die Pfanne sollte so heiß sein, dass die meiste Flüssigkeit verdunstet. Mischung 5-10 Minuten ständig rühren. Wenn das Fleisch anhaftet, etwas mehr Wasser zugeben. \n\nTacoschalen 5 Minuten im Ofen erwärmen. Fleisch mit den Schalen, Eisbergsalat, Cheddar und Tomatensalsa auf den Tisch stellen, so dass jeder seine Tacoschale selbst füllen kann.",
+        "picture": "http://localhost:3100/recipe/picture/hackfleisch-tacos.jpg"
+    },
+    {
+        "name": "Shakshuka",
+        "description": "tunesiches und israelisches Gericht aus Tomaten, Paprika, Zwiebeln und Eiern",
+        "country": null,
+        "category": null,
+        "time": {
+            "prepare": 15,
+            "cook": 15
+        },
+        "portions": 4,
+        "ingredients": [
+            {
+                "name": "Zwiebel(n)",
+                "quantity": 1,
+                "unit": "m.-große",
+                "note": "gehackt"
+            },
+            {
+                "name": "Paprikaschote(n)",
+                "quantity": 1,
+                "unit": "",
+                "note": "gewürfelt"
+            },
+            {
+                "name": "Knoblauch",
+                "quantity": 1,
+                "unit": "Zehe/n",
+                "note": "gehackt, nach Belieben"
+            },
+            {
+                "name": "Tomate(n)",
+                "quantity": 6,
+                "unit": "",
+                "note": "reife, gewürfelt"
+            },
+            {
+                "name": "Ei(er)",
+                "quantity": 5,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Olivenöl",
+                "quantity": 3,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Tomatenmark",
+                "quantity": 2,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Paprikapulver",
+                "quantity": 1,
+                "unit": "TL",
+                "note": "edelsüß"
+            },
+            {
+                "name": "Kreuzkümmel",
+                "quantity": 1,
+                "unit": "TL",
+                "note": ""
+            },
+            {
+                "name": "Salz",
+                "quantity": 1,
+                "unit": "TL,gestr.",
+                "note": ""
+            },
+            {
+                "name": "Chilipulver, Cayennepfeffer oder Pfeffer nach Geschmack",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Koriandergrün oder glatte Petersilie",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            }
+        ],
+        "instruction": "Olivenöl in einer Pfanne erhitzen. Zwiebel, Knoblauch und Paprika unter Rühren ca. 5 Minuten glasig dünsten. Tomaten, Tomatenmark und Gewürze zugeben und ca. 10 Minuten offen köcheln lassen. \n\nJetzt mit einem Esslöffel 4 Mulden für die Eier in die Tomatenmasse drücken und jeweils ein Ei hineinschlagen. Deckel auflegen und ca. 5 Minuten weiter köcheln lassen. Das Ei soll innen noch leicht flüssig sein. Kräuter nach Geschmack darüber streuen und servieren. \n\nDazu passt Weißbrot oder Pita um die leckere Soße aufzusaugen. \n\nMit einem israelischen oder grünem Salat wird aus dem Snack ein leichtes Gericht. Nach Geschmack Chorizo, Tofu oder Feta dazugeben.\n\nTipp: Man kann die Tomatensoße auch in 4 feuerfeste Förmchen geben, dann je ein Ei dazugeben und im Ofen backen, bis das Ei gestockt ist.",
+        "picture": "http://localhost:3100/recipe/picture/shakshuka.jpg"
+    },
+    {
+        "name": "Spaghetti",
+        "description": "Pilzpfanne mit Spaghetti und Walnüssen",
+        "country": null,
+        "category": null,
+        "time": {
+            "prepare": 15,
+            "cook": 15
+        },
+        "portions": 4,
+        "ingredients": [
+            {
+                "name": "Spaghetti",
+                "quantity": 500,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Walnüsse",
+                "quantity": 2,
+                "unit": "Handvoll",
+                "note": ""
+            },
+            {
+                "name": "Champignons",
+                "quantity": 500,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Fett zum Braten",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Sahne",
+                "quantity": 1,
+                "unit": "Becher",
+                "note": ""
+            },
+            {
+                "name": "Petersilie",
+                "quantity": 1,
+                "unit": "Bund",
+                "note": ""
+            },
+            {
+                "name": "Salz und Pfeffer",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            }
+        ],
+        "instruction": "Die Spaghetti nach Packungsanweisung in reichlich Salzwasser kochen und anschließend in einem Sieb abschütten. Nebenbei die Walnüsse klein hacken, die Pilze in Scheiben schneiden. Die Petersilie hacken.\n\nIn einer Pfanne etwas Fett erhitzen, darin die gehackten Walnüsse rösten, bis sie etwas Farbe bekommen. Dann die Champignonscheiben in die heiße Pfanne geben und kurz scharf anbraten.\n\nJetzt die fertig gekochten Spaghetti dazugeben und alles gut mischen. Alles kurz anbraten, dann mit Sahne ablöschen und mit Salz und Pfeffer abschmecken. Kurz vor dem Servieren die gehackte Petersilie untermischen.",
+        "picture": "http://localhost:3100/recipe/picture/herbstliche-spaghetti.jpg"
+    },
+    {
+        "name": "Hackfleischauflauf mit Nudeln",
+        "description": "",
+        "country": null,
+        "category": null,
+        "time": {
+            "prepare": 0,
+            "cook": 25
+        },
+        "portions": 3,
+        "ingredients": [
+            {
+                "name": "Hackfleisch",
+                "quantity": 300,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Frischkäse mit Kräutern",
+                "quantity": 250,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Nudeln",
+                "quantity": 250,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Käse",
+                "quantity": 150,
+                "unit": "g",
+                "note": "gerieben"
+            },
+            {
+                "name": "süße Sahne",
+                "quantity": 1,
+                "unit": "Becher",
+                "note": ""
+            },
+            {
+                "name": "Zwiebel(n)",
+                "quantity": 1,
+                "unit": "große",
+                "note": ""
+            },
+            {
+                "name": "Tomatenmark",
+                "quantity": 0.5,
+                "unit": "Tube/n",
+                "note": ""
+            },
+            {
+                "name": "Fleischbrühe oder Gemüsebrühe",
+                "quantity": 0.25,
+                "unit": "Liter",
+                "note": ""
+            },
+            {
+                "name": "Saucenbinder",
+                "quantity": 3,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Paprikapulver",
+                "quantity": 0.0,
+                "unit": "",
+                "note": "etwas"
+            },
+            {
+                "name": "Salz und Pfeffer",
+                "quantity": 0.0,
+                "unit": "",
+                "note": "etwas"
+            },
+            {
+                "name": "Öl",
+                "quantity": 0.0,
+                "unit": "",
+                "note": "n.B."
+            }
+        ],
+        "instruction": "Die Zwiebel in Würfel schneiden und in etwas Öl anbraten. Das Hackfleisch dazu geben und scharf anbraten. Mit Tomatenmark, Salz, Pfeffer und Paprika würzen.\n\nDie Nudeln in Salzwasser gar kochen und abtropfen lassen. Unter das Hackfleisch mischen und alles in eine Auflaufform füllen.\n\nDie Fleischbrühe aufkochen lassen, den Frischkäse einrühren und schmelzen lassen. Die Sahne dazu geben und die Sauce mit Salz und Pfeffer abschmecken. Mit Saucenbinder andicken. Die Sauce über die Nudeln gießen und alles mit Käse bestreuen.\n\n20 - 30 Minuten bei 200° backen, bis der Käse zerlaufen ist und sich eine leichte Kruste bildet.",
+        "picture": "http://localhost:3100/recipe/picture/nudel-hackfleisch-auflauf.jpg"
+    },
+    {
+        "name": "Blumenkohlsuppe mit Brokoli",
+        "description": "Puten- oder Hähnchenbrust (oder vegetarisch mit Tofu)",
+        "country": null,
+        "category": null,
+        "time": {
+            "prepare": 10,
+            "cook": 10
+        },
+        "portions": 2,
+        "ingredients": [
+            {
+                "name": "Blumenkohl",
+                "quantity": 150,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Brokkoli",
+                "quantity": 150,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Putenbrust oder Hähnchenbrust",
+                "quantity": 150,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Tomatenmark",
+                "quantity": 25,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Gemüsebrühe",
+                "quantity": 500,
+                "unit": "ml",
+                "note": ""
+            },
+            {
+                "name": "Senf",
+                "quantity": 10,
+                "unit": "g",
+                "note": "mittelscharf"
+            },
+            {
+                "name": "Olivenöl",
+                "quantity": 10,
+                "unit": "ml",
+                "note": ""
+            },
+            {
+                "name": "Weinessig",
+                "quantity": 10,
+                "unit": "ml",
+                "note": ""
+            }
+        ],
+        "instruction": "Die Hähnchen- bzw. Putenbrust oder den Tofu in dünne Streifen schneiden und in Öl anbraten. Mit Salz und Pfeffer würzen. Erst mit Essig ablöschen. Wenn der verkocht ist, mit Brühe aufgießen. Senf und Tomatenmark hinzugeben.\n\nAnschließend den zerkleinerten Brokkoli und Blumenkohl in die heiße Suppe geben und ziehen lassen. Am besten den Herd schon aus- bzw. runterschalten. Nicht zu lange warten, damit das Gemüse schön knackig bleibt und seine Farbe behält.\n\nNährwerte pro Person: ca. 230 kcal, 7,5 g Fett, 7 g KH, 31 g Eiweiß.",
+        "picture": "http://localhost:3100/recipe/picture/leichte-suppe-mit-brokoli-und-blumenkohl.jpg"
+    },
+    {
+        "name": "Honig-Hähnchen mit Brokkoli",
+        "description": "",
+        "country": null,
+        "category": null,
+        "time": {
+            "prepare": 740,
+            "cook": 20
+        },
+        "portions": 4,
+        "ingredients": [
+            {
+                "name": "Für das Hauptgericht:",
+                "quantity": -1,
+                "unit": "",
+                "note": "TITLE"
+            },
+            {
+                "name": "Hähnchenbrustfilet(s)",
+                "quantity": 450,
+                "unit": "g",
+                "note": "Streifen"
+            },
+            {
+                "name": "Sambal Oelek",
+                "quantity": 2,
+                "unit": "TL",
+                "note": ""
+            },
+            {
+                "name": "Ingwer",
+                "quantity": 1,
+                "unit": "TL",
+                "note": "geriebener"
+            },
+            {
+                "name": "Öl",
+                "quantity": 3,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Sojasauce",
+                "quantity": 2,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Knoblauchzehe(n)",
+                "quantity": 1,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Brokkoliröschen",
+                "quantity": 500,
+                "unit": "g",
+                "note": "feine"
+            },
+            {
+                "name": "Gemüsebrühe",
+                "quantity": 150,
+                "unit": "ml",
+                "note": ""
+            },
+            {
+                "name": "Speisestärke",
+                "quantity": 2,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Cremefine zum Kochen",
+                "quantity": 50,
+                "unit": "ml",
+                "note": ""
+            },
+            {
+                "name": "Salz und Pfeffer",
+                "quantity": 0.0,
+                "unit": "",
+                "note": "etwas"
+            },
+            {
+                "name": "Akazienhonig",
+                "quantity": 2,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Sesam",
+                "quantity": 2,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Für die Beilage:",
+                "quantity": -1,
+                "unit": "",
+                "note": "TITLE"
+            },
+            {
+                "name": "Basmati",
+                "quantity": 450,
+                "unit": "g",
+                "note": ""
+            }
+        ],
+        "instruction": "Das Hähnchenbrustfilet mit 1 TL Sambal, Sojasauce und Ingwer vermischen und über Nacht im Kühlschrank marinieren. \n\n1 EL Öl im Wok erhitzen, die Hähnchenbruststreifen mit Speisestärke vermischen und darin anbraten. Dann aus dem Wok nehmen und beiseite stellen. \n\nDen Knoblauch fein hacken und im Bratensatz mit einem EL Öl zusammen mit dem Brokkoli andünsten. Mit der Brühe ablöschen und die Cremefine dazugeben. Abschmecken mit Salz und Pfeffer, bei geschlossenem Decken 5 Min garen, dann herausnehmen. \n\nRestliches Öl in den Wok geben. Restliches Sambal darin kurz anrösten und Honig und Sesam zugeben. Sobald der Honig zu schäumen beginnt, Hähnchenstreifen und Brokkoli vorsichtig unterheben, nochmals abschmecken.\n\nMit dem inzwischen nach Packungsanweisung gegarten Basmatireis servieren.\n\nMit diesem Rezept habe ich einen Rezeptwettbewerb einer großen deutschen Supermarktkette gewonnen.",
+        "picture": "http://localhost:3100/recipe/picture/brokkoli-honig-haehnchen.jpg"
+    },
+    {
+        "name": "Kartoffel-Gratin mit Brokkoli und Schinken",
+        "description": "",
+        "country": null,
+        "category": null,
+        "time": {
+            "prepare": 30,
+            "cook": 35
+        },
+        "portions": 4,
+        "ingredients": [
+            {
+                "name": "Kochschinken",
+                "quantity": 150,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Kartoffeln",
+                "quantity": 800,
+                "unit": "g",
+                "note": "festkochend"
+            },
+            {
+                "name": "Brokkoli",
+                "quantity": 400,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Milch",
+                "quantity": 200,
+                "unit": "ml",
+                "note": ""
+            },
+            {
+                "name": "Sahne",
+                "quantity": 200,
+                "unit": "ml",
+                "note": ""
+            },
+            {
+                "name": "Mehl",
+                "quantity": 1,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Zwiebel(n)",
+                "quantity": 1,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Käse",
+                "quantity": 100,
+                "unit": "g",
+                "note": "gerieben"
+            },
+            {
+                "name": "Salz und Pfeffer",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Muskat",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Öl für die Form",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            }
+        ],
+        "instruction": "Kartoffeln waschen, schälen, in Scheiben schneiden und in Salzwasser 10 min garen.\n\nDen Brokkoli waschen, schälen, in Röschen teilen und in kochendem Salzwasser in 8 min bissfest garen, in kaltem Wasser kurz abschrecken und in einem Sieb abtropfen lassen. damit er nicht weiter gart.\n\nIn der Zwischenzeit die Zwiebel und den Schinken klein schneiden und in einem Topf oder einer Pfanne in etwas Öl anschwitzen. Dann 1 schwach gehäuften EL Mehl dazugeben, umrühren und die Sahne sowie die Milch dazugießen. Weiter umrühren, aufkochen lassen und mit Salz, Pfeffer und Muskat abschmecken. Wenn die Soße zu dickflüssig wird, noch etwas Brokkolisud  dazugeben (oder auch Gemüsebrühe oder Wasser).\n\nBackofen auf 180 bis 200 °C Ober-/Unterhitze vorheizen.\n\nKartoffeln und Brokkoli in eine mit Öl ausgepinselte Auflaufform geben, die Schinken-Zwiebel-Sahne-Soße darüber gießen und den geriebenen Käse darauf verteilen. \n\nIm heißen Backofen ca. 20 min überbacken.",
+        "picture": "http://localhost:3100/recipe/picture/brokkoli-kartoffel-gratin-mit-schinken.jpg"
+    },
+    {
+        "name": "Hähnchen in Basilikum-Sahnesauce",
+        "description": "",
+        "country": null,
+        "category": null,
+        "time": {
+            "prepare": 20,
+            "cook": 30
+        },
+        "portions": 4,
+        "ingredients": [
+            {
+                "name": "Cocktailtomaten",
+                "quantity": 250,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Hühnerbrustfilet(s)",
+                "quantity": 4,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Sahne",
+                "quantity": 200,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Sahne-Schmelzkäse",
+                "quantity": 100,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Öl",
+                "quantity": 1,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Basilikum",
+                "quantity": 0.5,
+                "unit": "Topf",
+                "note": ""
+            },
+            {
+                "name": "Fett für die Form",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Mozzarella",
+                "quantity": 125,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Parmesan",
+                "quantity": 0.0,
+                "unit": "n.B.",
+                "note": "optional"
+            },
+            {
+                "name": "Salz und Pfeffer",
+                "quantity": 0.0,
+                "unit": "",
+                "note": "n.B."
+            },
+            {
+                "name": "Kräuterbutter",
+                "quantity": 1,
+                "unit": "EL",
+                "note": ""
+            }
+        ],
+        "instruction": "Fleisch waschen und trocken tupfen. Mit Salz und Pfeffer würzen. Öl in einer Pfanne erhitzen. Filets darin von allen Seiten ca. 5 Min. kräftig anbraten. \n\nTomaten waschen und halbieren. Basilikumblätter abzupfen, waschen und fein hacken.\n\nSahne in einem Topf aufkochen lassen. Schmelzkäse hineinrühren und schmelzen lassen. Mit Salz und Pfeffer würzen. 2/3 vom Basilikum unterrühren. \n\nFleisch und Tomaten in eine gefettete Auflaufform geben. Sauce darüber gießen. Mozzarella in kleine Stückchen schneiden und auf dem Fleisch verteilen. Wer mag, kann noch geriebenen Parmesan und 1 EL Kräuterbutter in kleine Flöckchen darauf verteilen. \n\nIm vorgeheizten Ofen bei 200 °C Ober-/Unterhitze bzw. 175 °C Umluft ca. 30 Min. backen. Herausnehmen und mit restlichem Basilikum bestreuen. \n\nDazu schmecken Kroketten oder Reis.",
+        "picture": "http://localhost:3100/recipe/picture/mozzarella-haehnchen-in-basilikum-sahnesauce.jpg"
+    },
+    {
+        "name": "Butter Chicken aus dem Ofen",
+        "description": "",
+        "country": null,
+        "category": null,
+        "time": {
+            "prepare": 90,
+            "cook": 30
+        },
+        "portions": 2,
+        "ingredients": [
+            {
+                "name": "Hähnchenbrust",
+                "quantity": 600,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Für die Marinade:",
+                "quantity": -1,
+                "unit": "",
+                "note": "TITLE"
+            },
+            {
+                "name": "Joghurt",
+                "quantity": 150,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Paprikapulver",
+                "quantity": 1,
+                "unit": "TL",
+                "note": ""
+            },
+            {
+                "name": "Cayennepfeffer",
+                "quantity": 1,
+                "unit": "TL",
+                "note": ""
+            },
+            {
+                "name": "Garam Masala",
+                "quantity": 1,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Zitronensaft",
+                "quantity": 1,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Salz",
+                "quantity": 1,
+                "unit": "TL",
+                "note": ""
+            },
+            {
+                "name": "Knoblauch",
+                "quantity": 1,
+                "unit": "Zehe/n",
+                "note": ""
+            },
+            {
+                "name": "Ingwer",
+                "quantity": 1,
+                "unit": "Stück(e)",
+                "note": "daumengroß"
+            },
+            {
+                "name": "Zusätzlich:",
+                "quantity": -1,
+                "unit": "",
+                "note": "TITLE"
+            },
+            {
+                "name": "Zwiebel(n)",
+                "quantity": 2,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Tomaten",
+                "quantity": 500,
+                "unit": "g",
+                "note": "passierte"
+            },
+            {
+                "name": "Butter",
+                "quantity": 4,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Cayennepfeffer",
+                "quantity": 2,
+                "unit": "TL",
+                "note": ""
+            },
+            {
+                "name": "Ingwer",
+                "quantity": 1,
+                "unit": "Stück(e)",
+                "note": "daumengroß"
+            },
+            {
+                "name": "Knoblauch",
+                "quantity": 1,
+                "unit": "Zehe/n",
+                "note": ""
+            },
+            {
+                "name": "Zimt",
+                "quantity": 1,
+                "unit": "TL",
+                "note": ""
+            },
+            {
+                "name": "Salz",
+                "quantity": 1,
+                "unit": "TL",
+                "note": ""
+            },
+            {
+                "name": "Sahne",
+                "quantity": 150,
+                "unit": "ml",
+                "note": ""
+            },
+            {
+                "name": "Honig",
+                "quantity": 1,
+                "unit": "EL",
+                "note": ""
+            },
+            {
+                "name": "Korianderblätter",
+                "quantity": 0.0,
+                "unit": "einige",
+                "note": "optional"
+            }
+        ],
+        "instruction": "Die Hähnchenbrust in Stücke schneiden. Aus 1 TL Paprikapulver, 1 EL Limonen- bzw. Zitronensaft, 1 TL Salz, 1 Becher Joghurt, 1 TL Cayennepfeffer, 1 EL Garam Masala Pulver, 1 Stück Ingwer und 1 Knoblauchzehe eine Marinade herstellen. Das Fleisch mit der Marinade mischen.\n\nMindestens eine Stunde einziehen lassen. Besser ist es, das Fleisch bereits am Vortag zu marinieren und über Nacht in den Kühlschrank zu stellen.\n\nDen Ofen auf 200 °C Ober-/Unterhitze vorheizen dann das Fleisch in einer Auflaufform für 25 Minuten garen.\n\nDie Zwiebel klein hacken und in 2 EL Butter glasig anschwitzen. Die passierten Tomaten, den Zimt, 1 TL Salz, 2 TL Cayennepfeffer, 1 Stück Ingwer und 1 Knoblauchzehe hinzugeben. Alles 20 Minuten mit Deckel und bei niedriger Temperatur köcheln lassen. Gelegentlich umrühren. Nun die restlichen 2 EL  Butter, den Honig und die Sahne hinzufügen, weitere 3 Minuten köcheln. Das Fleisch aus der Marinade nehmen, in die Soße geben, kurz umrühren und 2 Minuten mitköcheln lassen.\n\nDazu passt Reis oder Naan.\n\nWer gerne Koriandergrün mag, der kann ganz am Ende noch ein paar frisch gehackte Blätter hinzufügen.",
+        "picture": "http://localhost:3100/recipe/picture/indisches-butter-chicken-aus-dem-ofen.jpg"
+    },
+    {
+        "name": "Arepa con huevo",
+        "description": "ausgebackener Maisteig mit Ei - Hackfleisch - Füllung, aus Kolumbien",
+        "country": null,
+        "category": null,
+        "time": {
+            "prepare": 0,
+            "cook": 30
+        },
+        "portions": 4,
+        "ingredients": [
+            {
+                "name": "Wasser oder dünne Gemüsebrühe",
+                "quantity": 0.0,
+                "unit": "",
+                "note": "warm"
+            },
+            {
+                "name": "Maismehl",
+                "quantity": 200,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Für die Füllung:",
+                "quantity": -1,
+                "unit": "",
+                "note": "TITLE"
+            },
+            {
+                "name": "Ei(er)",
+                "quantity": 4,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Wasser",
+                "quantity": 0.5,
+                "unit": "Glas",
+                "note": "vermengt mit"
+            },
+            {
+                "name": "Hackfleisch",
+                "quantity": 100,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Zwiebel(n)",
+                "quantity": 0.5,
+                "unit": "",
+                "note": "fein gehackt"
+            },
+            {
+                "name": "Salz",
+                "quantity": 0.5,
+                "unit": "TL",
+                "note": ""
+            },
+            {
+                "name": "Tabasco",
+                "quantity": 0.0,
+                "unit": "",
+                "note": "etwas"
+            },
+            {
+                "name": "Paprikapulver",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Salz und Pfeffer",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Öl",
+                "quantity": 2,
+                "unit": "Tasse/n",
+                "note": ""
+            }
+        ],
+        "instruction": "Wichtig: zur Zubereitung dieses sündhaft leckeren Gerichts, welches man in z. B. Cartagena de Indias, Kolumbien an jeder Ecke als Snack auf die Hand bekommt, benötigt man spezielles Maismehl (Bezugsquelle Internet oder sehr gut sortierter China- oder Asiasupermarkt): gelbes vorgekochtes Maismehl (farina de maiz amarillo precocido). Wenn es nicht vorgekocht ist, funktioniert das Rezept nicht!\n\nFür die Arepas das Maismehl mit 1 Prise Salz und so viel warmem Wasser vermengen, bis ein fester, geschmeidiger aber nicht matschiger Teig entstanden ist (lieber erst etwas weniger Wasser, kneten und evtl. nachgießen. Ich mache es immer nach Augenmaß). Ca. 10-15 Minuten stehen lassen, danach evtl. etwas Wasser zugießen.\n\nFür die Füllung das Hackfleisch krümelig anbraten, mit Salz, Pfeffer, Tabasco und evtl. Zwiebel würzen und etwas erkalten lassen. Hier kann jeder nach seinem Geschmack entscheiden, welches Hack er nimmt; mir schmecken sie am besten mit Rinderhack.\n\nNun aus dem Teig Fladen von ca. 12 cm Durchmesser und 1 cm Dicke formen. Hierbei dürfen die Ränder nicht krümeln oder reißen, dann ist zu wenig Wasser drin. \n\nIn einer kleinen, hohen Pfanne das Öl erhitzen und einen Arepa ausbacken, ersollte im Öl schwimmen. Nun sollte sich eine Blase im Teig bilden und sich über die ganze Fläche ausdehnen (nach ca. 30 Sekunden, Vorsicht, reißt sehr schnell). Auf dem Foto erkennt man, dass die Blase sehr dünn ist. Den Arepa auf einen Teller mit Küchenpapier herausheben, kurz auskühlen lassen. Jetzt mit einem scharfen, spitzen Messer einen ca. 4 cm langen Schlitz am Rand in die Blase schneiden, ich sage jetzt der Einfachheit halber als Veranschaulichung von 10 bis 2 auf einem Ziffernblatt), den Arepa hochkant mit der Öffnung nach oben stellen, 1 TL von der Wasser-Salz-Mischung hineingeben, mit einem Esslöffel etwas vom Hack hinterher und zum Schluss ein rohes Ei hinein schlagen. Für die Geübten geht das ja mit einer Hand, sonst einfach in ein Gefäß mit Ausgießer schlagen und hinein kippen. Nun den Arepa schnell wieder in die Pfanne geben und fertig backen, dabei oft wenden und mit einem Schöpflöffel immer wieder Öl darüber schöpfen. Nicht ärgern, wenn etwas Ei heraus läuft. Mit dem Rest des Teigs genauso verfahren. \n\nDazu passt meine fruchtig-scharfe Salsa, ebenfalls dort abgeschaut. Während dem Essen einfach hin und wieder einen TL hineingeben. Salat dazu reichen. \n\nIst sehr mächtig, aber auch mächtig lecker. \n\nBitte nicht verzweifeln, wenn es beim ersten oder zweiten Mal nicht klappt (hat es bei mir auch nicht), es lohnt sich, zu üben!",
+        "picture": "http://localhost:3100/recipe/picture/arepa-con-huevo.jpg"
+    },
+    {
+        "name": "American Cheeseburger",
+        "description": "es wird ein verschließbarer Grill benötigt",
+        "country": null,
+        "category": null,
+        "time": {
+            "prepare": 30,
+            "cook": 10
+        },
+        "portions": 4,
+        "ingredients": [
+            {
+                "name": "Käse",
+                "quantity": 400,
+                "unit": "g",
+                "note": "(Cheddar), gerieben"
+            },
+            {
+                "name": "Tomate(n)",
+                "quantity": 2,
+                "unit": "große",
+                "note": ""
+            },
+            {
+                "name": "Zwiebel(n)",
+                "quantity": 2,
+                "unit": "",
+                "note": "rote"
+            },
+            {
+                "name": "Salat",
+                "quantity": 1,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Senf",
+                "quantity": 0.0,
+                "unit": "",
+                "note": "etwas"
+            },
+            {
+                "name": "Ketchup",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Barbecue Sauce",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Brötchen",
+                "quantity": 4,
+                "unit": "",
+                "note": "(Burger Buns)"
+            },
+            {
+                "name": "Rindfleisch",
+                "quantity": 700,
+                "unit": "g",
+                "note": "aus der Oberschale"
+            },
+            {
+                "name": "Bacon",
+                "quantity": 200,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Salz und Pfeffer",
+                "quantity": 0.0,
+                "unit": "",
+                "note": ""
+            }
+        ],
+        "instruction": "Den Grill auf ca. 240 Grad vorheizen. Zwiebeln in Ringe schneiden, Käse reiben und bereitstellen. Tomaten in Scheiben schneiden, Salat waschen. Aus Ketchup, Senf und BBQ-Sauce zu gleichen Teilen eine Burgersauce herstellen. \n\nAus dem Rindfleisch selbst Hackfleisch drehen oder gekauftes Rinderhack verwenden. Mit Salz und Pfeffer würzen und gut vermengen. Daraus ca. 200 g schwere Kugeln formen und dabei ein wenig kneten. Hände oder Hackfleischpresse mit ein wenig Wasser befeuchten und daraus flache Patties formen, in der Mitte mit dem Handballen eine flache Kuhle eindrücken.  \n\nJetzt die erste Burgerseite ca. 4 Minuten grillen, die zweite Seite ca. 2 Min grillen. Das fertig gegrillte Fleisch beiseite legen, darauf die Zwiebelringe geben und mit dem Käse bestreuen, damit dieser leicht schmilzt. Den Bacon jetzt auf den Grill legen, die Brötchen mit der Schnittseite auf den Warmhaltebereich des Grills legen und kurz rösten. \n\nJetzt die Böden der Burgerbrötchen mit der Burgersauce bestreichen. Dann mit Salat und Tomaten belegen und darauf das Fleisch setzen. Abschließend den Bacon auflegen und darauf den Deckel setzen.",
+        "picture": "http://localhost:3100/recipe/picture/american-cheeseburger.jpg"
+    },
+    {
+        "name": "Empanada de chorizo con queso",
+        "description": "Blätterteigmöndchen mit Chorizo-Käse-Füllung (spanische Tapas)",
+        "country": null,
+        "category": null,
+        "time": {
+            "prepare": 0,
+            "cook": 30
+        },
+        "portions": 8,
+        "ingredients": [
+            {
+                "name": "Käse",
+                "quantity": 80,
+                "unit": "g",
+                "note": "Cheddar oder Emmentaler"
+            },
+            {
+                "name": "Wurst (Chorizo)",
+                "quantity": 125,
+                "unit": "g",
+                "note": "luftgetrocknet"
+            },
+            {
+                "name": "Blätterteig",
+                "quantity": 250,
+                "unit": "g",
+                "note": ""
+            },
+            {
+                "name": "Ei(er)",
+                "quantity": 2,
+                "unit": "",
+                "note": ""
+            },
+            {
+                "name": "Paprikapulver",
+                "quantity": 1,
+                "unit": "TL",
+                "note": "(Rosen)"
+            }
+        ],
+        "instruction": "Die Chorizo in kleine Würfel schneiden, den Käse reiben; in einer Schüssel beides locker miteinander vermischen. Den Blätterteig auf einer leicht bemehlten Fläche dünn ausrollen. Mit einem runden Förmchen (Durchmesser ca. 7,5 cm) möglichst viele Teigkreise ausstechen. Die Reste noch einmal zusammennehmen und erneut ausrollen, bis aller Teig verbraucht ist. Es sollten pro Person mindestens zwei Teigkreise vorhanden sein.  \nEinen Teigkreis in die Handinnenfläche legen und in die Mitte etwas von der Chorizo-Mischung geben. Mit der anderen Hand die Ränder des Täschchens gut festdrücken wie für eine kleine Pastete. \nDas Ei verquirlen und die Empanadas von oben und unten leicht bestreichen. \nDie Mini-Mönchen mit ausreichend Abstand auf ein Backblech mit Backpapier geben, damit sie während des Backens noch aufgehen können. Die Oberseite mit Paprika bestäuben. Im auf 220 °C (Gas Stufe 7) vorgeheizten Backofen 10-12 Minuten backen, bis die Pastetchen goldbraun aufgegangen sind. Auf einem Küchengitter 5 Minuten abkühlen lassen, warm mit dem restlichen Paprika bestäubt servieren. Chorizo-Empanadas kann man gut vorbereiten, da man sie unglasiert im Kühlschrank in einer Frischhaltedose gut 1-2 Tage aufheben kann. \nVor dem Backen dann aber auf Zimmertemperatur erwärmen lassen.",
+        "picture": "http://localhost:3100/recipe/picture/empanada-de-chorizo-con-queso.jpg"
+    }
+]

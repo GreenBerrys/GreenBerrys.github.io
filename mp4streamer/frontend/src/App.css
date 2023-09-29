@@ -1,0 +1,15 @@
+body{
+    margin: 0;
+    box-sizing: border-box;
+    background-color: #495056;
+    color: lightgray;
+    text-align: center;
+    font-family: 'Arial', 'Helvetica', 'Verdane', sans-serif; 
+}
+.content{
+    /* Header margin (nav-menu) - offset content*/
+    margin-top: 5rem;
+    /* Move Footer always to the bottom */
+    min-height: calc( 100vh - 5rem - 50px ); 
+    /* min-height: calc( 100vh ); */
+}

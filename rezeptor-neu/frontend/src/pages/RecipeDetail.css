@@ -1,0 +1,42 @@
+.recipeDetail {
+    margin: 0px 10px 0px 10px;
+}
+.recipeDetail .imgButton{
+    position: fixed;
+    width: 100px;
+    color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+    transition: transform .3s;
+    
+}
+.recipeDetail .imgButton div{
+    font-weight: bold;
+    font-size: 1rem;
+}
+.recipeDetail .imgButton img{
+    width: 100px;
+}
+.recipeDetail .imgButton:hover{
+    color: black;
+    text-shadow: 2px 2px white;
+}
+.recipeDetail .imgButton:active{
+    transform: scale(0.8);
+}
+.recipeDetail .editButton{
+    top: 5rem;
+    left: 1px;
+}
+.recipeDetail .showButton{
+    top: 6rem;
+    left: 1px;
+}
+.recipeDetail .saveButton{
+    top: 14rem;
+    left: 1px;
+}
+.recipeDetail .delButton{
+    top: 5rem;
+    right: 5px;
+}
+

@@ -1,0 +1,57 @@
+.login{
+    display: block; 
+    width: 30em;
+    max-width: 40em;
+    position: relative;    
+    margin: 0px auto 20px auto;
+    top: 20px;
+    padding: 10px 0 20px 0;
+    background-color: blanchedalmond;
+    box-shadow: 1px 3px 7px 1px #7b6e60;
+    border-radius: 5px;
+}
+.login h3{
+    text-align: left;
+    margin: 0px 0px 10px 147px; 
+}
+.login form input{
+    margin: 0 0 1em 15%;
+    padding: .2em .5em;
+    width: 50%;    
+}
+.login form label { 
+    text-align: right;
+    line-height: 1.5;
+    width: 30%;
+    position: absolute;
+    left: 0;
+}
+.login form .okButton{
+    margin-left: 70px;
+    height: 2rem;
+    /* width: 5.5rem; */
+    background-color: rgb(15, 128, 173);
+    color: rgb(207, 203, 203);
+    font-weight: bold;
+    border-radius: 7px;
+}
+.login form .showButton{
+    margin-left: 45px;
+    height: 2rem;
+    background-color: #3a4147;
+    color: lightgray;
+    font-size: small;
+}
+.login form p{
+    margin: 0px 0px 0px 0px;
+}
+.login form input:required + label::before {
+    position: absolute;
+    left: 265%;
+    content: "★";
+    color: red;
+}
+.login form input:required:valid + label::before {
+    content: "✔";
+    color: green;
+}

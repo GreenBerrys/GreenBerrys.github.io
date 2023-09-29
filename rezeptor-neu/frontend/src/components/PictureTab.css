@@ -1,0 +1,46 @@
+.pictureTab {
+    display: flex;
+    width: 75%;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding: 0;
+    margin: auto;
+    box-shadow: 1px 25px 30px 5px #7b6e60;
+
+}
+.pictureTab li{
+    height: 20vh;
+    flex-grow: 1;
+    overflow: hidden; 
+}
+.pictureTab li img{
+    max-height: 100%;
+    min-width: 100%; 
+    object-fit: cover;
+    vertical-align: bottom;
+    margin: 5px;
+}
+/* 
+320px — 480px: Mobile devices
+481px — 768px: iPads, Tablets
+769px — 1024px: Small screens, laptops
+1025px — 1200px: Desktops, large screens
+1201px and more —  Extra large screens, TV
+ */
+
+@media screen and (max-width: 480px) {
+    .pictureTab li{
+        height: 5vh;
+    }
+}
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .pictureTab li{
+        height: 10vh;
+    }
+}
+@media screen and (min-width: 769px) and (max-width: 1024px){
+    .pictureTab li{
+        height: 15vh;
+    }
+}
+  

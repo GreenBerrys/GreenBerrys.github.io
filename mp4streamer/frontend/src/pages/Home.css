@@ -1,0 +1,25 @@
+#bvid{
+    position: fixed;
+    top: 60px;
+    left: 0;
+    min-width: 100%; 
+    min-height: 90%;
+    z-index: -1; 
+    }
+    
+#welcome1{
+    font-size: 3rem;
+    font-weight: bolder;
+    /* font-style: oblique; */
+    text-shadow: 5px 5px 5px black;
+    color: rgb(250, 209, 158);
+    padding-top: 15vh;
+}    
+#welcome2{
+    font-size: 2rem;
+    font-weight: bolder;
+    font-style: oblique;
+    text-shadow: 5px 5px 5px black;
+    color: rgb(250, 209, 158);
+    margin-top: 50px;
+}    

@@ -1,0 +1,133 @@
+#episodes #background{
+    position: fixed;
+    top: 30px;
+    left: 0;
+    z-index: -1;
+}
+#episodes #background img{
+    width: 100vw;
+    height: 100vh;
+    opacity: 25%;
+    object-fit: cover;
+
+}
+@media  (max-width: 850px) {
+
+    #episodes #episodesContainer{
+        display: grid; 
+        grid: "title  title  title"    auto
+              "thumb  thumb  thumb" 1fr
+              "plot   plot   plot"   auto
+              "epis   epis   epis"   auto
+              "player player player" 1fr
+              / 1fr   3fr  2fr; 
+        gap: 1rem 1rem;
+        margin: 0px 30px 20px 30px;
+    }
+    #episodes #player{
+        align-self: self-start;
+    }
+    #episodes #thumb{
+        justify-self: center;
+    }
+}
+@media  (min-width: 851px) {
+
+    #episodes #episodesContainer{
+        display: grid; 
+        grid: "title  title  thumb"  auto
+              "epis   epis   plot"   1fr
+              "epis   epis   plot"   1fr
+              "epis epis   player"   auto
+              / 1fr   1fr  2fr; 
+        gap: 1rem 1rem;
+        margin: 0px 30px 20px 30px;
+    }
+    #episodes #player{
+        align-self: center; 
+    }
+    #episodes #thumb{
+        justify-self: center;
+    }
+
+}
+#episodes #title{
+    grid-area: title;
+}
+#episodes #title .title{
+    padding-top: 10px;
+    font-weight: bold;
+    font-size: 3rem;
+    color: beige;
+}
+#episodes #title .titleText{
+    display: block;
+    text-align: center; 
+    white-space: pre-wrap;
+    font-size: 1.5rem;
+}
+#episodes #title .oneTitle{
+    padding-top: 10px;
+    font-weight: bold;
+    font-size: 3rem;
+    color: beige;
+}
+
+#episodes #thumb{
+    grid-area: thumb;
+    max-width: 450px;
+    max-height: 65vh;
+}
+#episodes #plot{
+    grid-area: plot;
+    white-space: pre-wrap;
+    text-align: left;
+    font-size: 1.4rem;
+    padding: 10px;
+    overflow-y: auto;
+    background-color: #495056;
+    max-height: 45vh;
+}
+#episodes #epis {
+    grid-area: epis;
+    text-align: left;
+    font-size: 1.3rem;
+    padding: 10px;
+    line-height: 2rem;
+    background-color:  #495056;
+    max-height: 55vh;
+    overflow: hidden;
+    overflow-y: auto;
+}
+#episodes #epis .active{
+    background-color: rgb(57, 97, 99);
+}
+#episodes #epis th{
+    text-align: right;
+    padding-right: 10px;
+    width: 50px;
+    font-weight: normal;
+}
+#episodes #epis tr{
+    vertical-align: top;
+}
+#episodes #epis:hover{
+    cursor: pointer;
+}
+
+#episodes #player{
+    grid-area: player;
+}
+#episodes #player button{
+    min-width: 200px;
+    width: 90%;
+    height: 55px;
+    font-size: 2rem;
+    background-color: black;
+    border-color: orange;
+    color: rgb(160, 156, 156);
+
+}  
+#episodes #player button{
+    cursor: pointer;
+}  

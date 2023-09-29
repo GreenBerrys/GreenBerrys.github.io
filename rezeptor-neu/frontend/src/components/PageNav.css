@@ -1,0 +1,37 @@
+/* ==== Container */
+.pageNav div{
+    display: flex;
+    width: 90%;
+    height: 30px;
+    margin: 20px auto 20px;
+    cursor: pointer;
+    line-height: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.pageNav button{
+    font-size: 1.5rem;
+    /* font-weight: bold; */
+    margin: 0px 2px 0px 2px;
+    background-color: blanchedalmond;
+    cursor: pointer;
+    border: none;
+}
+.pageNav .activePageButton{
+
+    font-weight: bold;
+    background-color:rgb(235, 190, 134);
+}
+.pageNav .pageNavButton{
+
+    font-weight: bold;
+    font-size: 2rem;
+    border: 1px solid lightblue;
+    /* margin: 0px 15px 0px 15px; */
+}
+.pageNav button:disabled{
+    border: none;
+    cursor: default;
+    
+}

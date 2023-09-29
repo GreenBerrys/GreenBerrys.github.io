@@ -1,0 +1,16 @@
+body{
+    box-sizing: border-box;
+    background: linear-gradient(90deg, rgba(251,240,183,1) 0%, rgba(255,231,201,1) 30%, rgba(251,255,228,1) 75%, rgba(226,233,192,1) 90%);
+    color: black;
+    text-align: center;
+    font-family: 'Arial', 'Helvetica', 'Verdane', sans-serif; 
+
+}
+.content{
+    /* Header margin (nav-menu) - offset content*/
+    margin-top: 5rem;
+    /* Move Footer always to the bottom */
+    min-height: calc( 100vh - 5rem - 50px ); 
+
+}
+

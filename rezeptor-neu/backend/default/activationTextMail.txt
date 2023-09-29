@@ -1,0 +1,5 @@
+Hi #USER#,
+
+please click on the link below to activate your #APP#-account on #SERVER#
+
+#LINK# 

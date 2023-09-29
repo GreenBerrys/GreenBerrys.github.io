@@ -1,0 +1,19 @@
+.swiper {
+    height: 40vh;  
+}
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+  }
+/* -------------------------- */
+.mySwiper{
+    width: 50vw;
+    height: 32vw;
+}
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+
+}

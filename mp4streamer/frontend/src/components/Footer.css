@@ -1,0 +1,26 @@
+
+.Footer{
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 50px;
+    background-color: #495056; 
+    /* background-color: rgb(99, 2, 2);  */
+    box-shadow: 0 0 16px 0 rgb(0 0 0 / 20%);
+}
+.Footer .p {
+    font-size: .9em;
+    width: fit-content;
+    margin: 0 auto;
+    line-height: 50px;
+}
+.Footer span {
+    padding-left: 10px;
+    color:teal; 
+}
+.Footer a {
+    padding-left: 10px;
+    text-decoration: none;
+    color: darkgrey;
+}
+  

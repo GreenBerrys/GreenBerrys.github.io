@@ -1,0 +1,40 @@
+.card{
+    display: block;
+    position:relative;
+    margin: 0.2rem 0 0 0;
+    padding-top: 10px;
+    background: none;
+    width: 18rem;
+    height: 25rem;
+    overflow: hidden;
+}
+.card a{
+    text-decoration: none;
+    color: lightgray;
+}
+
+.card .text{
+    display: block;
+    text-align: center; 
+    white-space: pre-wrap;
+}
+
+.card .title{
+    padding-top: 10px;
+    font-weight: bold;
+    font-size: larger;
+}
+.card .oneTitle{
+    font-weight: bold;
+    font-size: larger;
+}
+
+
+.card img{
+    object-fit: cover;
+    max-width: 17rem;
+    height: 18rem;
+    box-shadow: 1px 3px 7px 3px #7b6e60;
+    box-shadow: 1px 3px 7px 3px black;
+
+}

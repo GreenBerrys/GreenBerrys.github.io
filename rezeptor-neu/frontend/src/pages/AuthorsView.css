@@ -1,0 +1,17 @@
+.authorsView{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 1rem;
+    justify-content: center;
+}
+.authorsView .author img{
+    height: 200px;
+    width: 200px;
+    object-fit:contain;
+}
+.authorsView a,
+.authorsView a:visited{
+    text-decoration: none;
+    color: black;
+    font-size: 1.3rem;
+}

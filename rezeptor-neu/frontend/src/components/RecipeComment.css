@@ -1,0 +1,50 @@
+/* ==== Container */
+.recipeComment{
+    display: flex;
+    margin: auto;
+    text-align: left;   
+    padding: 0px 10px 0px 10px; 
+}
+/* ==== Container left column*/
+.recipeComment div:nth-child(1) {
+    width: 100px;
+    align-self: center;
+    padding: 0px 2px 0px 2px;
+    margin-right: 4px;
+}
+/* ==== Userimage */
+.recipeComment div img {
+    max-width: 95px; 
+}
+/* ==== Username */
+.recipeComment div:nth-child(1) p {
+    font-size: small;
+    font-weight: bold;
+    text-align: center;
+}
+/* ==== Date & Time */
+.recipeComment div:nth-child(2)  p:nth-child(1) {
+    font-size: small;
+    font-weight: bold;
+}
+.recipeComment div:nth-child(2)  p:nth-child(1) button{
+    /* float: right; */
+    margin-left: 50px;
+    font-size: 1rem;
+}
+
+/* ==== */
+.recipeComment div:nth-child(2) {
+    overflow: hidden;
+    width: 100%;
+}
+/* ==== Comment text */
+.recipeComment div:nth-child(2)  span {
+    white-space: pre-wrap; 
+}
+/* ==== Usermotto */
+.recipeComment div:nth-child(2)  p:nth-child(3) {
+    font-size: small;
+    font-style: italic;
+    text-align: right;
+}

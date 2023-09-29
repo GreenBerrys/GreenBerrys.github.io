@@ -1,0 +1,55 @@
+.rating{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: smaller;
+    height: 28px;
+    cursor: pointer;
+}
+.rating:hover,
+.rating:active{
+    transform: scale(1.3);
+    transition: 0.3s;
+}
+.rating span:first-child{
+    color: darkorange;
+    font-size: 20px;
+}
+.rating span:last-child{
+    color: lightgray;
+    font-size: 20px;
+}
+/* ================== */
+.ratingIn{
+    display: block;
+    width: 220px; 
+    margin: auto;
+    color: black;
+    font-size: 0.5rem;
+    background-color: antiquewhite;
+    box-shadow: 1px 5px 7px 3px #7b6e60;
+    transform: scale(2);
+    z-index: 1;
+}
+.ratingIn div:nth-child(1) {
+    padding-top: 5px;
+}
+.ratingIn button {
+    font-size: 30px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+.ratingIn .starOn {
+    color: darkorange;
+  }
+.ratingIn .starOff {
+    color: lightgray;
+  }
+.ratingIn .rateBusy{
+    width: 220px;
+    height: 43px;
+    font-size: larger;
+  }
+  

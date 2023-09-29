@@ -1,0 +1,15 @@
+.ratingstars{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: smaller;
+    height: 28px;
+}
+.ratingstars span:first-child{
+    color: darkorange;
+    font-size: 20px;
+}
+.ratingstars span:last-child{
+    color: lightgray;
+    font-size: 20px;
+}

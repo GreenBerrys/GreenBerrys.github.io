@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+docker compose up -d
+# mongodb-compass
+echo Compass connect mit:  mongodb://root:docker@localhost:27018
+
+
+

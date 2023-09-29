@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Todo-Liste</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link type="text/css" rel="stylesheet" href="./todo.css"> 
+
+<script language="javascript" type="text/javascript" src="./todo.js"> </script>
+<noscript>
+    Bitte aktiviere JavaScript!
+</noscript>       
+       
+</head>
+<body>
+    <header>
+        <nav id='mainMenu'>
+                <button type="button" id="new">
+                    <img src="./images/new.svg">
+                    <span class="menuTxt">Neu</span>
+                </button>
+                <button type="button" id="load">
+                    <img src="./images/load.svg">
+                    <span class="menuTxt">Laden</span>
+                </button>
+                <button type="button" id="save">
+                    <img src="./images/save.svg">
+                    <span class="menuTxt">Speichern</span>
+                </button>
+                <button type="button" id="sort">
+                    <img src="./images/sort.svg">
+                    <span class="menuTxt">Sortierung</span>
+                </button>
+                <button type="button" id="view">
+                    <img src="./images/view0.svg">
+                    <span class="menuTxt">Ansicht</span>
+                </button>
+
+        </nav>
+    </header>
+
+    <section id="todos"></section> 
+
+    <div id="modLayer" class="disable"></div>
+
+    <section id="dialogs">
+
+        <form class="dialog disable" id="todoInput">
+            <label for="title">Titel:</label><br>
+            <input type="text" name="title" id="title" style="width: 98%">
+            <p>
+              <label for="text">Beschreibung:</label><br>
+              <textarea name="text" id="text" cols="40" rows="8"></textarea>
+            </p>
+            <label for="date">Deadline:</label> 
+            <input type="date" name="date"  id="date"><br><br>
+            <label for="prior">Priorität: </label>
+            <input type="number" min="1" max="9" step="1" value="1" name="prior" id="prior">
+            <p id="dialogButtons" style="float: right;">
+                <button type="button" id="ok">Ok</button>
+                <button type="button" id="cancel">Abbruch</button>
+            </p>
+        </form>
+
+        <form class="dialog disable" id="sortDialog">
+            <br>Sortiert nach:</br>
+            <fieldset>
+                <input type="radio" id="date" name="sort" value="date">
+                <label for="date"> Datum</label><br> 
+                <input type="radio" id="prio" name="sort" value="prio">
+                <label for="prio"> Priorität</label><br>
+                <input type="radio" id="state" name="sort" value="state">
+                <label for="state"> Status</label> 
+              </fieldset>
+              <br>Richtung:<br>
+              <fieldset>
+                <input type="radio" id="up" name="dir" value="up">
+                <label for="dir"> aufsteigend</label><br> 
+                <input type="radio" id="down" name="dir" value="down">
+                <label for="dir"> absteigend</label><br>
+              </fieldset>
+            <p id="dialogButtons" style="float: right;">
+                <button type="button" id="ok">Ok</button>
+                <button type="button" id="cancel">Abbruch</button>
+            </p>
+        </form>
+
+        <form class="dialog disable" id="stopDelete">
+            <img width="50%" src="images/stop.svg"> 
+            <h2> Erst die Aufgabe erledigen!</h2>
+            <p id="dialogButtons" style="float: right;">
+                <button type="button" id="ok">Ok</button>
+            </p>
+        </form>
+
+
+    </section>
+   
+    
+    <footer>
+    </footer>
+</body>
+</html>

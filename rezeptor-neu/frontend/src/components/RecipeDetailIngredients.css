@@ -1,0 +1,254 @@
+.recipeDetailIngredients {
+    margin: 10px auto 10px auto;
+    padding: 5px 10px 5px 10px; 
+    background-color: blanchedalmond;
+    box-shadow: 1px 3px 7px 1px #7b6e60;
+    border-radius: 5px;
+    max-width: 1100px;
+}
+.recipeDetailIngredients h2 {
+
+    display: flex;
+    max-width: 1000px;
+    margin: 15px auto 15px auto;
+
+}
+.recipeDetailIngredients h2 button{
+
+    width: 50px;
+    font-size: larger;
+    line-height: 1.4rem;
+    max-height: 30px;
+}
+.recipeDetailIngredients h2 button:hover{
+
+    cursor: pointer;
+    width: 50px;
+    font-size: larger;
+    line-height: 1rem;
+}
+.recipeDetailIngredients h2 span{
+
+    flex-grow: 1;
+    text-align: center;
+}
+/* --------------------------------------*/
+.recipeDetailIngredients ul  {
+
+    max-width: 1000px;
+    margin: auto;
+    list-style: none;
+    line-height: 1.5rem;
+    padding: 0 0 0 0; 
+    margin-bottom: 20px;
+}
+.recipeDetailIngredients ul li{
+
+    display: block;
+    text-align: left;
+    overflow: hidden;
+}
+.recipeDetailIngredients ul li h3{
+
+    margin: 25px 0 10px 0;
+}
+.recipeDetailIngredients ul li div{
+
+    display: flex; 
+    align-items: flex-end;
+    justify-content: left;
+    max-width: 1000px;
+    border-bottom: 1px solid rgba(244, 165, 96, 0.397);
+}
+.recipeDetailIngredients ul li div span:nth-child(1) {
+
+    width: 200px;
+    min-width: 180px; 
+    max-width: 500px;
+    flex-grow: 1;
+    margin-right: 10px;
+    overflow: hidden;
+}
+.recipeDetailIngredients ul li div span:nth-child(2) {
+
+    min-width: 50px; 
+    max-width: 100px; 
+}
+.recipeDetailIngredients ul li div span:nth-child(3) {
+
+    min-width: 80px;
+}
+.recipeDetailIngredients ul li div span:nth-child(4) {
+
+    width: 300px;
+    min-width: 200px;
+    max-width: 500px;
+    flex-grow: 1;
+}
+/* ============================================ EDITMODE =========== */
+.recipeDetailIngredientsEdit {
+    margin: 10px auto 10px auto;
+    padding: 5px 10px 5px 10px; 
+    background-color: blanchedalmond;
+    box-shadow: 1px 3px 7px 1px #7b6e60;
+    border-radius: 5px;
+    max-width: 1100px;
+}
+.recipeDetailIngredientsEdit h2 {
+
+    display: flex;
+    max-width: 1000px;
+    margin: 15px auto 15px auto;
+
+}
+.recipeDetailIngredientsEdit h2 button{
+
+    width: 50px;
+    font-size: larger;
+    line-height: 1.4rem;
+    max-height: 30px;
+}
+.recipeDetailIngredientsEdit h2 button:hover{
+
+    cursor: pointer;
+    width: 50px;
+    font-size: larger;
+    line-height: 1rem;
+}
+.recipeDetailIngredientsEdit h2 span{
+
+    flex-grow: 1;
+    text-align: center;
+}
+/* --------------------------------------*/
+.recipeDetailIngredientsEdit ul  {
+
+    max-width: 1000px;
+    margin: auto;
+    list-style: none;
+    line-height: 1.5rem;
+    padding: 0 0 0 0; 
+    margin-bottom: 20px;
+}
+.recipeDetailIngredientsEdit ul li{
+
+    display: block;
+    text-align: left;
+    overflow: hidden;
+
+    cursor: grab;
+    transition: all 0.2s; 
+}
+/* ------------------------------------*/
+.recipeDetailIngredientsEdit ul li h3{
+
+    margin: 0px 0 0px 0; 
+}
+.recipeDetailIngredientsEdit ul li div{
+
+    display: flex; 
+    align-items: flex-end;
+    justify-content: left;
+    max-width: 1000px;
+    border-bottom: 1px solid sandybrown;
+}
+.recipeDetailIngredientsEdit ul li div span:nth-child(1) {
+
+    width: 200px;
+    min-width: 180px; 
+    max-width: 500px;
+    flex-grow: 1;
+    margin-right: 10px;
+    overflow: hidden;
+}
+.recipeDetailIngredientsEdit ul li div span:nth-child(2) {
+
+    min-width: 60px; 
+    max-width: 100px; 
+}
+.recipeDetailIngredientsEdit ul li div span:nth-child(3) {
+
+    min-width: 80px;
+}
+.recipeDetailIngredientsEdit ul li div span:nth-child(4) {
+
+    width: 300px;
+    min-width: 200px;
+    max-width: 500px;
+    flex-grow: 1;
+}
+/* ------------------------------------- */
+.recipeDetailIngredientsEdit li .buttonContainer {
+    content: "\00a0";
+    display: flex;
+    position: absolute; 
+    right: 0;
+    text-align: right;
+    margin-top: -30px;
+    border-bottom: none;
+}
+.recipeDetailIngredientsEdit li .buttonContainer Button{
+    font-size: 1.5rem;
+    width: 30px;
+    height: 30px;
+    margin: 2px 2px 0px 0px;
+    border-radius: 5px;
+    line-height: 1rem;
+    visibility: hidden;
+}
+.recipeDetailIngredientsEdit .IngredientLine:hover .buttonContainer button,
+.recipeDetailIngredientsEdit .IngredientLine:active .buttonContainer button{
+    visibility: visible;
+    cursor: pointer;
+}
+
+
+/* ------------------------------------- */
+.recipeDetailIngredientsEdit .ingEditLine {
+
+    display: flex;
+    font-size: 1rem;
+}
+
+.recipeDetailIngredientsEdit .ingEditLine input{
+
+    font-size: 1rem;
+}
+ 
+.recipeDetailIngredientsEdit ul li div input:nth-child(1) {
+
+    min-width: 180px; 
+    max-width: 380px;
+    flex-grow: 1.2;
+}
+.recipeDetailIngredientsEdit ul li div input:nth-child(2) {
+
+    width: 60px;
+}
+.recipeDetailIngredientsEdit ul li div input:nth-child(3) {
+
+    width: 60px;
+
+}
+.recipeDetailIngredientsEdit ul li div input:nth-child(4) {
+
+    width: 290px;
+    min-width: 75px;
+    max-width: 550px;
+    flex-grow: 1;
+}
+.recipeDetailIngredientsEdit ul li div .saveIngButton {
+
+    font-size: 1.5rem;
+    height: 25px; 
+    margin: 2px 2px 0px 0px;
+    border-radius: 5px;
+    line-height: 1rem;
+    border: 2px solid red;
+    cursor: pointer;
+}
+.recipeDetailIngredientsEdit .addFirstIngredient{
+    font-size: 1rem;
+    cursor: pointer;
+}
+

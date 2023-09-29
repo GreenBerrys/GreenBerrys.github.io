@@ -1,0 +1,23 @@
+version: '3.1'
+
+services:
+
+  mongo:
+    # source:
+    # https://hub.docker.com/_/mongo
+    image: mongo:5.0.11
+
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: docker
+
+    volumes:
+      - ~/.mongodb/database:/data/db:rw
+
+    #restart: always
+
+    # for development purposes: make it available to the outside
+    ports:
+      - "27018:27017"
+
+

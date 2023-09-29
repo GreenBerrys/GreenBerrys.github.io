@@ -1,0 +1,164 @@
+body{
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-image: linear-gradient(150deg,#77828f, #f6f6f6);
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    margin-top: 90px;
+}
+header{
+    background-color: rgb(23, 123, 253);
+    position: fixed;
+    top: 0;
+    Left: 0;
+    width: 100%;
+    border-bottom: 5px solid rgb(110, 114, 114);
+}
+/* ================================================================ */
+#mainMenu{
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0 10px 0;
+    color: rgb(251, 253, 253);
+}
+#mainMenu>button{
+    flex: auto;
+    margin-Left: 10px;
+    margin-Right: 10px;
+    background-color: rgba(90, 218, 241, 0.37);
+    border-radius: 4px;
+    border-top: 1px solid rgb(105, 105, 110);
+    border-Left: 1px solid rgb(105, 105, 110);
+    border-Right: 1px solid black;
+    border-bottom: 1px solid  black;
+    line-height: 80%;
+}  
+#mainMenu>button:active{
+    border-Right: 1px solid rgb(105, 105, 110);
+    border-bottom: 1px solid rgb(105, 105, 110);
+    border-top: 1px solid black;
+    border-Left: 1px solid  black;
+}    
+#mainMenu>button:focus{
+    outline: none;
+    box-shadow: none;
+}  
+#mainMenu>button:hover{
+    cursor: pointer;
+}
+.menuTxt{
+    display:inherit; 
+    font-size: small;
+    text-align: center;
+}
+/* ================================================================ */
+#todos{
+    width: 100%;
+}
+.todo{
+    display: flex;
+    width: 95%;
+    background-color: rgb(123, 179, 235);
+    margin-Left: auto;
+    margin-Right: auto;
+    margin-bottom: 4px;
+    border-radius: 8px;
+    border-bottom: 6px solid rgb(148, 150, 153);    
+    border-Right: 6px solid rgb(148, 150, 153);   
+ 
+}
+
+/* ====== Spalte 1 */
+.todoLeftCol{
+    flex: 0 0 80px;
+    text-align: center; 
+    justify-content: center;
+    margin: 5px;
+    align-items: baseline;
+}
+.todoLeftCol>.todoDate{
+    font-weight: bold;
+    font-size: larger;
+}
+.todoLeftCol>.todoPrio{
+    border: 1px solid blue;
+}
+/* ====== Spalte 2 */
+.todoMiddleCol{
+    flex: 1 1 70%; 
+    overflow: hidden;
+    margin: 5px;
+}
+.todoMiddleCol>.todoTitle{
+    font-weight: bold;
+    font-size: larger;
+}
+
+/* ====== Spalte 3 */
+.todoRightCol{
+    flex: 0 0 40px;
+    align-self:center;
+    padding-Right: 10px;
+    margin: 5px;
+}
+.todoRightCol img{
+    width: 50px;
+}
+.todoState{
+    cursor: pointer;
+}
+/* ====== Buttons */
+.todoFunc{
+    display: flex;
+    height: calc(100% - 40px);
+    align-items: flex-end;
+}
+.todoDel{
+    margin-right: 20px;
+}
+.todoEdit,
+.todoDel{
+    cursor: pointer;
+    background-color: rgba(90, 218, 241, 0.37);
+    border-radius: 4px;
+
+}
+/* =========== Umschalten Kartenansicht ======= */
+.cardView{
+    flex: 0 0 25em;  
+    margin: 2px 0px 2px 4px;
+}
+.cardWrap{
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: stretch;
+} 
+
+/* ================================= */
+/* =========== Dialoge */
+form{
+    position: fixed;
+    padding: 10px;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 101;
+    background-color: rgb(250, 210, 176);
+    border-bottom: 6px solid rgb(148, 150, 153);    
+    border-Right: 6px solid rgb(148, 150, 153);  
+    border-radius: 8px;
+}
+.disable{
+    display: none;
+}
+#modLayer{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.5);
+}

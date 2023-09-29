@@ -1,0 +1,17 @@
+.cardView{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 1rem;
+    justify-content: center;
+}
+.nextPage{
+    display: block;
+    width: 80%;
+    height: 30px;
+    margin: 20px auto 20px;
+    cursor: pointer;
+    background-color: lightgray;
+    border-radius: 5px;
+    box-shadow: 1px 5px 7px 3px #7b6e60;
+    line-height: 2rem;
+}

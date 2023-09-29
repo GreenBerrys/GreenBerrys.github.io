@@ -1,0 +1,121 @@
+.profile > button{
+
+    font-size: 1.1rem;
+    margin: 0px 5% 20px 5%;
+    width: 40%;
+    height: 40px;
+    max-width: 300px;
+}
+.profile > button:nth-child(4){
+
+    font-weight: bold;
+    color: red;
+    font-size: 1rem;
+}
+
+.profile form{
+    display: flex; 
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto 20px auto;
+    text-align: left;
+    /* background-color: blanchedalmond; */
+    box-shadow: 1px 3px 7px 1px #7b6e60; 
+    /* border-radius: 5px; */
+    align-items: center;
+}
+.profile form div img{
+    max-width: 190px;
+    padding: 10px 0px 10px 10px;
+}
+.profile form div img:hover{
+    cursor: pointer;
+}
+.profile form > div:nth-child(2){
+    align-self: center;
+    padding: 10px;
+    flex-grow: 1;
+    margin-right: 10px;
+} 
+.profile form div div label{
+    display: inline-block;
+    margin-top: 10px;
+    width: 3.5rem;
+}
+.profile form div div input,
+.profile form div div button{
+
+    font-size: 0.9rem;
+    width: 70%;
+}
+.profile form div div button{
+    margin-top: 15px;
+    height: 1.7rem;
+}
+
+/* ============================================================ */
+.pwchange{
+    display: block; 
+    width: 30em;
+    max-width: 40em;
+    position: relative;    
+    margin: 100px auto 20px auto;
+    padding: 10px 0 20px 0;
+    background-color: blanchedalmond;
+    box-shadow: 1px 3px 7px 1px #7b6e60;
+    border-radius: 5px;
+}
+.pwchange h3{
+    text-align: left;
+    margin: 0px 0px 10px 147px; 
+}
+.pwchange form input{
+    margin: 0 0 1em 15%;
+    padding: .2em .5em;
+    width: 50%;    
+}
+.pwchange form label { 
+    text-align: right;
+    line-height: 1.5;
+    width: 30%;
+    position: absolute;
+    left: 0;
+}
+.pwchange form .okButton{
+    margin-left: 10px;
+    height: 2rem;
+    /* width: 5.5rem; */
+    background-color: rgb(15, 128, 173);
+    color: rgb(207, 203, 203);
+    font-weight: bold;
+    border-radius: 7px;
+}
+.cancelButton{
+    margin-left: 20px;
+    height: 2rem;
+    /* width: 5.5rem; */
+    background-color: rgb(15, 128, 173);
+    color: rgb(207, 203, 203);
+    font-weight: bold;
+    border-radius: 7px;
+}
+.pwchange form .showButton{
+    margin-left: 25px;
+    height: 2rem;
+    background-color: #3a4147;
+    color: lightgray;
+    font-size: small;
+}
+.pwchange form p{
+    margin: 0px 0px 0px 0px;
+}
+.pwchange form input:required + label::before {
+    position: absolute;
+    left: 265%;
+    content: "★";
+    color: red;
+}
+.pwchange form input:required:valid + label::before {
+    content: "✔";
+    color: green;
+}
