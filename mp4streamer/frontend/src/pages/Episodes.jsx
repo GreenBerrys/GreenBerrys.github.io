@@ -19,7 +19,7 @@ useEffect( () => {
     setInit( () => true );
 },[]);
 
-let { recno, title } = useParams( null, null, null );           
+let { recno, title } = useParams( null, null );           
 const busy = useRef( true );
 
 const [init, setInit] = useState(false);    // Flag for component initialized

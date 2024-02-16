@@ -75,6 +75,11 @@ const trans = ( txt ) => {
 
     return txt.replaceAll( '&quot;', '"' ).replaceAll( "&#x0A;", "\n" ).replaceAll( '&apos;', "'" ).replaceAll( "&#x0D;", "\n" );
 }
+const titleURLtrans = ( txt ) => {
+
+    return txt.replaceAll( '/', '%2F' ).replaceAll( ':', '%3A' ).replaceAll( '"', '%22' )
+              .replaceAll( '&', '%26' ).replaceAll( '+', '%2B' ).replaceAll( '?', '%3F' );
+}
 
 if( !busy.current ){
     return (
@@ -121,7 +126,7 @@ if( !busy.current ){
                                 <button className="play">ansehen</button>
                             </Link>
                          :
-                            <Link  id="player" to={ { pathname: `/episodes/${video.result[0].recno}/${video.result[0].title}` } }>
+                            <Link  id="player" to={ { pathname: `/episodes/${video.result[0].recno}/${ titleURLtrans(video.result[0].title ) }` } }>
                                 <button className="play">Episoden</button>
                             </Link>
                             }
