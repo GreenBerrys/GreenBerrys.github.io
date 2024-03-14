@@ -2,9 +2,9 @@ import mongoose from "mongoose";
 import database from "./database/mongodb.js";
 import fs from "fs";
 import dotenv from "dotenv";
-import { json } from "express";
-import { time } from "console";
 import bcrypt from "bcrypt";
+import * as p from './utils/path.js'
+
 
 dotenv.config( { path: "./server.env" } );
 const ENCRYPT = `${process.env.s_PWENCRYPT}` === 'true' ? true : false;
@@ -250,7 +250,19 @@ const pwEncrypt = async ( password ) => await bcrypt.hash( password, 5 );
     }
 
     // ** create new users-collection
-    const userpic =  fs.readFileSync( './default/userDefault.png' );
+    //const userpic =  fs.readFileSync( './default/userDefault.png' );
+    const beatepic =  fs.readFileSync( './pictures/userpic/beate.png' );
+    const frankpic =  fs.readFileSync( './pictures/userpic/frank.png' );
+    const heikepic =  fs.readFileSync( './pictures/userpic/heike.png' );
+    const alicepic =  fs.readFileSync( './pictures/userpic/alice.png' );
+    const clairepic =  fs.readFileSync( './pictures/userpic/claire.png' );
+    const mariapic =  fs.readFileSync( './pictures/userpic/maria.png' );
+    const dianapic =  fs.readFileSync( './pictures/userpic/diana.png' );
+    const halimepic =  fs.readFileSync( './pictures/userpic/halime.png' );
+    const ginapic =  fs.readFileSync( './pictures/userpic/gina.png' );
+    const okanpic =  fs.readFileSync( './pictures/userpic/okan.png' );
+    const andipic =  fs.readFileSync( './pictures/userpic/andi.png' );
+    const rebekkapic =  fs.readFileSync( './pictures/userpic/rebekka.png' );
 
     let password = "12345678";
     
@@ -263,29 +275,29 @@ const pwEncrypt = async ( password ) => await bcrypt.hash( password, 5 );
     const timestamp = '.' + Date.now();
 
     users.push( await (new User( { name: "Beate", description: "Ich koche alles kalt", email: "beate@mail.com", role: "user", password: password, verified: Date.now(),
-                                picTime: timestamp, picture: { contentType: "image/png", data: userpic } } ) ).save() );
-    users.push( await (new User( { name: "Robert", description: "Rabaarber Rabaarber", email: "robert@mail.com", role: "user", password: password, verified: Date.now(),
-                                picTime: timestamp, picture: { contentType: "image/png", data: userpic } } )).save() );
+                                picTime: timestamp, picture: { contentType: "image/png", data: beatepic } } ) ).save() );
+    users.push( await (new User( { name: "Frank", description: "Rabaarber Rabaarber", email: "frank@mail.com", role: "user", password: password, verified: Date.now(),
+                                picTime: timestamp, picture: { contentType: "image/png", data: frankpic } } )).save() );
     users.push( await (new User( { name: "Heike", description: "Ich koche alles kalt", email: "heike@mail.com", role: "user", password: password, verified: Date.now(),
-                                picTime: timestamp, picture: { contentType: "image/png", data: userpic } } )).save() );
-    users.push( await (new User( { name: "Dieter", description: "Rabaarber", email: "dieter@mail.com", role: "user", password: password, verified: Date.now(),
-                                picTime: timestamp, picture: { contentType: "image/png", data: userpic } } )).save() );
-    users.push( await (new User( { name: "August", description: "Chefkoch", email: "august@mail.com", role: "user", password: password, verified: Date.now(),
-                                picTime: timestamp, picture: { contentType: "image/png", data: userpic } } ) ).save() );
+                                picTime: timestamp, picture: { contentType: "image/png", data: heikepic } } )).save() );
+    users.push( await (new User( { name: "Alice", description: "Rabaarber", email: "alice.com", role: "user", password: password, verified: Date.now(),
+                                picTime: timestamp, picture: { contentType: "image/png", data: alicepic } } )).save() );
+    users.push( await (new User( { name: "Claire", description: "Chefkoch", email: "claire@mail.com", role: "user", password: password, verified: Date.now(),
+                                picTime: timestamp, picture: { contentType: "image/png", data: clairepic } } ) ).save() );
     users.push( await (new User( { name: "Maria", description: "Huhu", email: "maria@mail.com", role: "user", password: password, verified: Date.now(),
-                                picTime: timestamp, picture: { contentType: "image/png", data: userpic } } )).save() );
-    users.push( await (new User( { name: "Jörg", description: "", email: "joerg@mail.com", role: "user", password: password, verified: Date.now(),
-                                picTime: timestamp, picture: { contentType: "image/png", data: userpic } } )).save() );
+                                picTime: timestamp, picture: { contentType: "image/png", data: mariapic } } )).save() );
+    users.push( await (new User( { name: "Diana", description: "", email: "diana@mail.com", role: "user", password: password, verified: Date.now(),
+                                picTime: timestamp, picture: { contentType: "image/png", data: dianapic } } )).save() );
     users.push( await (new User( { name: "Halime", description: "", email: "halime@mail.com", role: "user", password: password, verified: Date.now(),
-                                picTime: timestamp, picture: { contentType: "image/png", data: userpic } } )).save() );
+                                picTime: timestamp, picture: { contentType: "image/png", data: halimepic } } )).save() );
     users.push( await (new User( { name: "Gina", description: "", email: "gina@mail.com", role: "user", password: password, verified: Date.now(),
-                                picTime: timestamp, picture: { contentType: "image/png", data: userpic } } ) ).save() );
+                                picTime: timestamp, picture: { contentType: "image/png", data: ginapic } } ) ).save() );
     users.push( await (new User( { name: "Okan", description: "", email: "okan@mail.com", role: "user", password: password, verified: Date.now(),
-                                picTime: timestamp, picture: { contentType: "image/png", data: userpic } } )).save() );
+                                picTime: timestamp, picture: { contentType: "image/png", data: okanpic } } )).save() );
     users.push( await (new User( { name: "Andi", description: "", email: "andi@mail.com", role: "user", password: password, verified: Date.now(),
-                                picTime: timestamp, picture: { contentType: "image/png", data: userpic } } )).save() );
+                                picTime: timestamp, picture: { contentType: "image/png", data: andipic } } )).save() );
     users.push( await (new User( { name: "Rebekka", description: "", email: "rebekka@mail.com", role: "user", password: password, verified: Date.now(),
-                                picTime: timestamp, picture: { contentType: "image/png", data: userpic } } )).save() );
+                                picTime: timestamp, picture: { contentType: "image/png", data: rebekkapic } } )).save() );
     // -----------------------------------------------------------------------------------------------------------------------
     // ** Comments
     const comments = ["Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate",
@@ -304,7 +316,7 @@ const pwEncrypt = async ( password ) => await bcrypt.hash( password, 5 );
     // Import JSON-File 
     // ===========================================================================================
 
-    const jsonFilePath = "./rcpImport.json";
+    const jsonFilePath = p.homePath() + "./rcpImport.json";
     
     if ( !fs.existsSync( jsonFilePath )) {
         console.log(`Datei "${jsonFilePath}" nicht gefunden..`)

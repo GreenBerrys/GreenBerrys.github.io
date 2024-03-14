@@ -21,7 +21,7 @@ useEffect(() => {
   return (
     <div>
       <div className='aboutDci'>
-        <h2> Rezeptor  (1.0)</h2>
+        <h2> Rezeptor  (1.3)</h2>
         <p className="dtext">
         Rezeptor soll die Grundfunktionen einer Web-Seite zum Austausch von Kochrezepten abbilden.
         Eine erste Vorversion entstand im Rahmen unseres Final-Projektes bei DCI.

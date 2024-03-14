@@ -4,10 +4,16 @@
     padding: 0 1rem;
     justify-content: center;
 }
+.authorCard{
+    border-radius: 10px; 
+    box-shadow: 1px 3px 7px 3px rgb(88, 68, 55);
+    margin: 0px 5px 15px 5px;
+}
 .authorsView .author img{
     height: 200px;
     width: 200px;
     object-fit:contain;
+    border-radius: 10px 10px 0px 0px;
 }
 .authorsView a,
 .authorsView a:visited{

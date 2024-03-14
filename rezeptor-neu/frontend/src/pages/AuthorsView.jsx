@@ -156,10 +156,12 @@ if( !busy.current ){
                     <div className="authorsView">
                         {   users.result.map((user, index) => {
                                 return (  
-                                            <Link to= { { pathname: '/recipes/authorid='+user._id } } className="author" key={index}>
-                                                    <img src={SERVER + 'user/picture/' + user._id + user.picTime } alt={"userpic"}/>
-                                                    <div>{user.name}</div>
-                                            </Link>
+                                            <div className="authorCard">
+                                                <Link to= { { pathname: '/recipes/authorid='+user._id } } className="author" key={index}>
+                                                        <img src={SERVER + 'user/picture/' + user._id + user.picTime } alt={"userpic"}/>
+                                                        <div>{user.name}</div>
+                                                </Link>
+                                            </div>
                                         );
                             })
                         }
