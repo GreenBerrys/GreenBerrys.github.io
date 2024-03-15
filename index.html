@@ -102,6 +102,13 @@
             z-index: -1;
             color: red;
         }
+
+        .isOnline{
+            color: green;
+        }
+        .isOffline{
+            color: red;
+        }
     </style>
 </head>
     <body>
@@ -114,8 +121,6 @@
                 <hr>
             </header>
     
-
-
             <!-- <h2 style="text-align:left; margin-left: 20px;">&Uuml;bungen / Versuche</h2> -->
             <h3 style="text-align:left; margin-left: 20px;">( Getested unter: Ubuntu 22.04 "Jammy Jallyfish", Debian 11 "Bullseye", Windows 10 )</h3>
             
@@ -198,9 +203,11 @@
 
             <br><br><br>
             <p  style="margin-left: 20px; font-size: 1.5rem; font-weight: bold;">
-                <a href='http://greenberrys.ddns.net'><img src="images/raspberry.svg" alt="raspberry" width="60px" style="float: left; margin-right: 10px;"> Test-Server (Pi 4)</a>
+                <a href='https://greenberrys.ddns.net'><img src="images/raspberry.svg" alt="raspberry" width="60px" style="float: left; margin-right: 10px;"> Test-Server (Pi 4)</a>
                 <span style="font-size: 1rem; font-weight: normal;"> - auf Anfrage</span>
                 <span style="font-size: 1rem; font-weight: normal;"><br> Raspbian 64-Bit (Debian 11 'bullseye'), nginx, Node.js&nbsp;18, MongoDB&nbsp;5</span>
+                <span style="font-size: 1rem; font-weight: normal;"><br> <a href='https://greenberrys.ddns.net/mp4streamer'>Mp4streamer-Demo</a> (<span id="mp4streamerStatus" class="isOffline">offline</span>)</span>
+                <span style="font-size: 1rem; font-weight: normal;"> &nbsp;&nbsp;&nbsp;<a href='https://greenberrys.ddns.net/rezeptor'>Rezeptor-Demo</a> (<span id="rezeptorStatus" class="isOffline">offline</span>)</span>
             </p>
             <p>
             <br><br><br>    
@@ -211,7 +218,14 @@
             <a href='http://localhost:3345/'> 3345</a>    
             <br><br><br>
             </p>    
-            <script>
+        <script>
+            //================================================================  
+
+            document.addEventListener('DOMContentLoaded', () => 
+                {
+                    testOnlineStatus();  // check online-status mp4streamer & rezeptor demo
+                });
+
             let slideIndex = [1,1,1];
             let slideId = ["mySlides1", "mySlides2", "mySlides3"]
             showSlides(1, 0);
@@ -234,11 +248,71 @@
                 }
                 x[slideIndex[no]-1].style.display = "block";
                 } 
-            </script>
 
-            <noscript>
-                <h2 id="noJs">Zur Anzeige der Bilder<br> wird Javascript ben&ouml;tigt..</h2>
-            </noscript>
+            /* ------------------------------------------------------------------------
+               Check Online-Status
+               ------------------------------------------------------------------------
+            */
+            // ========================================= URL-Test
+            let checkURL = ( url, callback ) => {
+
+            let xhr = new XMLHttpRequest();
+            xhr.open( 'GET', url, true );
+            xhr.responseType = 'json';
+            xhr.onload = () => {
+                                let status = xhr.status;
+                                
+                                if ( xhr.status == 200 ) 
+                                {
+                                    callback( null, xhr.response );
+                                } else {
+                                    callback( xhr.status );
+                                }
+            };
+            xhr.onerror = () => {
+                                callback( xhr.status );
+            };
+            xhr.send(); 
+            };
+
+            // ========================================== Inital Check
+            function testOnlineStatus()
+            {
+
+                const MP4STREAMERURL = "https://greenberrys.ddns.net/mp4streamer";
+                const REZEPTORURL = "https://greenberrys.ddns.net/rezeptor";
+
+                const MP4STREAMERSTATUS = document.querySelector('#mp4streamerStatus');
+                const REZEPTORSTATUS = document.querySelector('#rezeptorStatus');
+
+                // Test if Mp4streamer is online 
+                checkURL( MP4STREAMERURL, (err, data) => {
+
+                                        if (err != null) {
+                                            MP4STREAMERSTATUS.innerHTML = "offline";
+                                            MP4STREAMERSTATUS.className = "isOffline";
+                                        } else {
+                                            MP4STREAMERSTATUS.innerHTML = "online";
+                                            MP4STREAMERSTATUS.className = "isOnline";
+                                        }
+                });    
+                // Test if Rezeptor is online 
+                checkURL( REZEPTORURL, (err, data) => {
+
+                                        if (err != null) {
+                                            REZEPTORSTATUS.innerHTML = "offline";
+                                            REZEPTORSTATUS.className = "isOffline";
+                                        } else {
+                                            REZEPTORSTATUS.innerHTML = "online";
+                                            REZEPTORSTATUS.className = "isOnline";
+                                        }
+                });    
+            }
+        </script>
+
+        <noscript>
+            <h2 id="noJs">Zur Anzeige der Bilder<br> wird Javascript ben&ouml;tigt..</h2>
+        </noscript>
     </body>
     
 </html>
