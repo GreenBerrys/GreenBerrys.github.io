@@ -39,7 +39,7 @@ https://avidemux.sourceforge.net/ \
 https://xmedia-recode.de/ \
 https://handbrake.fr/ 
 
-[Einstellungen in Avidemux zum hochskalieren von SD-Filmen](https://github.com/GreenBerrys/GreenBerrys.github.io/tree/master/xAvidemuxCFG/avidemux.html)
+[Einstellungen in Avidemux zum hochskalieren von SD-Filmen](https://github.com/GreenBerrys/GreenBerrys.github.io/tree/master/xAvidemuxCFG/)
 
 
 ## Just for fun - als Datenträgerverzeichnis (Windows)
