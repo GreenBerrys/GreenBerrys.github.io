@@ -251,18 +251,18 @@ const pwEncrypt = async ( password ) => await bcrypt.hash( password, 5 );
 
     // ** create new users-collection
     //const userpic =  fs.readFileSync( './default/userDefault.png' );
-    const beatepic =  fs.readFileSync( './pictures/userpic/beate.png' );
-    const frankpic =  fs.readFileSync( './pictures/userpic/frank.png' );
-    const heikepic =  fs.readFileSync( './pictures/userpic/heike.png' );
-    const alicepic =  fs.readFileSync( './pictures/userpic/alice.png' );
-    const clairepic =  fs.readFileSync( './pictures/userpic/claire.png' );
-    const mariapic =  fs.readFileSync( './pictures/userpic/maria.png' );
-    const dianapic =  fs.readFileSync( './pictures/userpic/diana.png' );
-    const halimepic =  fs.readFileSync( './pictures/userpic/halime.png' );
-    const ginapic =  fs.readFileSync( './pictures/userpic/gina.png' );
-    const okanpic =  fs.readFileSync( './pictures/userpic/okan.png' );
-    const andipic =  fs.readFileSync( './pictures/userpic/andi.png' );
-    const rebekkapic =  fs.readFileSync( './pictures/userpic/rebekka.png' );
+    const beatepic =  fs.readFileSync( './pictures/userpic/beate.jpg' );
+    const frankpic =  fs.readFileSync( './pictures/userpic/frank.jpg' );
+    const heikepic =  fs.readFileSync( './pictures/userpic/heike.jpg' );
+    const alicepic =  fs.readFileSync( './pictures/userpic/alice.jpg' );
+    const clairepic =  fs.readFileSync( './pictures/userpic/claire.jpg' );
+    const mariapic =  fs.readFileSync( './pictures/userpic/maria.jpg' );
+    const dianapic =  fs.readFileSync( './pictures/userpic/diana.jpg' );
+    const halimepic =  fs.readFileSync( './pictures/userpic/halime.jpg' );
+    const ginapic =  fs.readFileSync( './pictures/userpic/gina.jpg' );
+    const okanpic =  fs.readFileSync( './pictures/userpic/okan.jpg' );
+    const andipic =  fs.readFileSync( './pictures/userpic/andi.jpg' );
+    const rebekkapic =  fs.readFileSync( './pictures/userpic/rebekka.jpg' );
 
     let password = "12345678";
     
@@ -275,29 +275,29 @@ const pwEncrypt = async ( password ) => await bcrypt.hash( password, 5 );
     const timestamp = '.' + Date.now();
 
     users.push( await (new User( { name: "Beate", description: "Ich koche alles kalt", email: "beate@mail.com", role: "user", password: password, verified: Date.now(),
-                                picTime: timestamp, picture: { contentType: "image/png", data: beatepic } } ) ).save() );
+                                picTime: timestamp, picture: { contentType: "image/jpeg", data: beatepic } } ) ).save() );
     users.push( await (new User( { name: "Frank", description: "Rabaarber Rabaarber", email: "frank@mail.com", role: "user", password: password, verified: Date.now(),
-                                picTime: timestamp, picture: { contentType: "image/png", data: frankpic } } )).save() );
+                                picTime: timestamp, picture: { contentType: "image/jpeg", data: frankpic } } )).save() );
     users.push( await (new User( { name: "Heike", description: "Ich koche alles kalt", email: "heike@mail.com", role: "user", password: password, verified: Date.now(),
-                                picTime: timestamp, picture: { contentType: "image/png", data: heikepic } } )).save() );
+                                picTime: timestamp, picture: { contentType: "image/jpeg", data: heikepic } } )).save() );
     users.push( await (new User( { name: "Alice", description: "Rabaarber", email: "alice.com", role: "user", password: password, verified: Date.now(),
-                                picTime: timestamp, picture: { contentType: "image/png", data: alicepic } } )).save() );
+                                picTime: timestamp, picture: { contentType: "image/jpeg", data: alicepic } } )).save() );
     users.push( await (new User( { name: "Claire", description: "Chefkoch", email: "claire@mail.com", role: "user", password: password, verified: Date.now(),
-                                picTime: timestamp, picture: { contentType: "image/png", data: clairepic } } ) ).save() );
+                                picTime: timestamp, picture: { contentType: "image/jpeg", data: clairepic } } ) ).save() );
     users.push( await (new User( { name: "Maria", description: "Huhu", email: "maria@mail.com", role: "user", password: password, verified: Date.now(),
-                                picTime: timestamp, picture: { contentType: "image/png", data: mariapic } } )).save() );
+                                picTime: timestamp, picture: { contentType: "image/jpeg", data: mariapic } } )).save() );
     users.push( await (new User( { name: "Diana", description: "", email: "diana@mail.com", role: "user", password: password, verified: Date.now(),
-                                picTime: timestamp, picture: { contentType: "image/png", data: dianapic } } )).save() );
+                                picTime: timestamp, picture: { contentType: "image/jpeg", data: dianapic } } )).save() );
     users.push( await (new User( { name: "Halime", description: "", email: "halime@mail.com", role: "user", password: password, verified: Date.now(),
-                                picTime: timestamp, picture: { contentType: "image/png", data: halimepic } } )).save() );
+                                picTime: timestamp, picture: { contentType: "image/jpeg", data: halimepic } } )).save() );
     users.push( await (new User( { name: "Gina", description: "", email: "gina@mail.com", role: "user", password: password, verified: Date.now(),
-                                picTime: timestamp, picture: { contentType: "image/png", data: ginapic } } ) ).save() );
+                                picTime: timestamp, picture: { contentType: "image/jpeg", data: ginapic } } ) ).save() );
     users.push( await (new User( { name: "Okan", description: "", email: "okan@mail.com", role: "user", password: password, verified: Date.now(),
-                                picTime: timestamp, picture: { contentType: "image/png", data: okanpic } } )).save() );
+                                picTime: timestamp, picture: { contentType: "image/jpeg", data: okanpic } } )).save() );
     users.push( await (new User( { name: "Andi", description: "", email: "andi@mail.com", role: "user", password: password, verified: Date.now(),
-                                picTime: timestamp, picture: { contentType: "image/png", data: andipic } } )).save() );
+                                picTime: timestamp, picture: { contentType: "image/jpeg", data: andipic } } )).save() );
     users.push( await (new User( { name: "Rebekka", description: "", email: "rebekka@mail.com", role: "user", password: password, verified: Date.now(),
-                                picTime: timestamp, picture: { contentType: "image/png", data: rebekkapic } } )).save() );
+                                picTime: timestamp, picture: { contentType: "image/jpeg", data: rebekkapic } } )).save() );
     // -----------------------------------------------------------------------------------------------------------------------
     // ** Comments
     const comments = ["Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate",

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Avidemux Einstellungen</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <style>
+
+
+        body{
+            background-color: lightgray;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            margin-top: 3rem;
+        }
+        header{
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: lightgray;
+            z-index: 2;
+        }
+        .head{
+            display: flex;
+            width: 100%;
+            height:  2rem;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .project{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+/* --------------------------------------------- */
+
+
+        * {box-sizing: border-box}
+        .mySlides1, .mySlides2, .mySlides3 {display: none}
+        img {vertical-align: middle;}
+    
+       
+        /* Slideshow container */
+        .slideshow-container {
+          position: relative;
+          margin: 10px;
+          flex: 2 2;
+        }
+        
+        .slide img{
+            width: 100%; 
+            box-shadow: 1px 3px 7px 3px black;   
+        }
+
+
+        /* Next & previous buttons */
+        .prev, .next {
+          cursor: pointer;
+          position: absolute;
+          top: 50%;
+          width: auto;
+          padding: 16px;
+          margin-top: -22px;
+          color: red;
+          font-weight: bolder;
+          font-size: 20px;
+          transition: 0.6s ease;
+          border-radius: 0 3px 3px 0;
+          user-select: none;
+          background-color: darkgray;
+        }
+        
+        /* Position the "next button" to the right */
+        .next {
+          right: 0;
+          border-radius: 3px 0 0 3px;
+          z-index: 1;
+        }
+        
+        /* On hover, add a grey background color */
+        .prev:hover, .next:hover {
+          background-color: black;
+        }
+
+        #noJs{
+            position: fixed;
+            top: 250px;
+            left: 10vw;
+            z-index: -1;
+            color: red;
+        }
+
+    </style>
+</head>
+    <body>
+
+            <header>
+                <div class="head">        
+                    <div><h2>&nbsp;Einstellungen in Avidemux zum hochskalieren von SD-Filmen:</h2></div>
+                </div>
+            </header>
+            
+            <div class="project">
+
+                <div class="slideshow-container">
+                    <div class="mySlides1 slide">
+                        <img src="step 1.jpg" alt="screenshot">
+                    </div>
+                    <div class="mySlides1 slide">
+                        <img src="step 2.jpg" alt="screenshot">
+                    </div>
+                    <div class="mySlides1 slide">
+                        <img src="step 3.jpg" alt="screenshot">
+                    </div>
+                    <div class="mySlides1 slide">
+                        <img src="step 4.jpg" alt="screenshot">
+                    </div>
+                    <div class="mySlides1 slide">
+                        <img src="step 5.jpg" alt="screenshot">
+                    </div>
+                    <div class="mySlides1 slide">
+                        <img src="step 6.jpg" alt="screenshot">
+                    </div>
+                    <div class="mySlides1 slide">
+                        <img src="step 7.jpg" alt="screenshot">
+                    </div>
+                <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
+                </div>
+            </div>
+            
+        <script>
+
+            let slideIndex = [1,1,1];
+            let slideId = ["mySlides1"]
+            showSlides(1, 0);
+            
+            function plusSlides(n, no) {
+              showSlides(slideIndex[no] += n, no);
+            }
+            
+            function showSlides(n, no) {
+                let i;
+                let x = document.getElementsByClassName(slideId[no]);
+
+                if (n > x.length) { slideIndex[no] = 1 }
+                if (n < 1) { slideIndex[no] = x.length }
+
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.display = "none";
+                }
+                x[slideIndex[no]-1].style.display = "block";
+                } 
+
+        </script>
+
+        <noscript>
+            <h2 id="noJs">Zur Anzeige der Bilder<br> wird Javascript ben&ouml;tigt..</h2>
+        </noscript>
+    </body>
+    
+</html>
