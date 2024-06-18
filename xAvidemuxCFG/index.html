@@ -139,25 +139,43 @@
             
         <script>
 
+
+	 document.onreadystatechange = function () {
+	        if (document.readyState === "loading") {
+	            console.log('===> Page is loading');
+        	}
+	        if (document.readyState === "interactive") {
+        	    console.log('===> DOM is ready');
+       	 	}
+	        if (document.readyState === "complete") {
+        	    console.log('===> Page is fully loaded');
+        	    showSlides(1, 0);
+        	}
+	};
+
+
+
             // ===============================> Slidehandling
 
             let slideIndex = [1,1,1];
             let slideId = ["mySlides1"];
 
-	    let glass=null, width, height, zoom, img
-
+	    let glass=null, width, height, zoom, img;
+//            let glass=null,		
 
             document.addEventListener("DOMContentLoaded", (event) => {
 
-                showSlides(1, 0);
+                //showSlides(1, 0);
                 
                 // ====> ?????
-	
+		console.log("DOMContentLoaded: ",document.readyState);
+/*
+		console.log("readystate=",document.readyState);
 		console.log("------------");
 		console.log("slideIndex=", slideIndex);
 		console.log("glass=", glass);
 		console.log("img=", img);
-
+*/
             });
 
             function plusSlides(n, no) {
