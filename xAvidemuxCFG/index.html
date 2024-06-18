@@ -204,6 +204,10 @@
 
                 /* Set background properties for the magnifier glass: */
                 
+                let test = new URL(img.src);
+                console.log("-->", test);
+                
+                
                 glass.style.backgroundImage = "url('" + img.src + "')";
                 glass.style.backgroundRepeat = "no-repeat";
                 glass.style.backgroundSize = (img.width * zoom) + "px " + (img.height * zoom) + "px";
