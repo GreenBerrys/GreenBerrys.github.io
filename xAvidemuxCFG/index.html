@@ -144,15 +144,19 @@
             let slideIndex = [1,1,1];
             let slideId = ["mySlides1"];
 
+	    let glass=null, width, height, zoom, img
+
+
             document.addEventListener("DOMContentLoaded", (event) => {
 
                 showSlides(1, 0);
                 
                 // ====> ?????
-                let x = document.getElementsByClassName("slide");
-                removeGlass( x[0].children[0]);
-                createGlass( x[0].children[0],2 );
-                
+	
+		console.log("------------");
+		console.log("slideIndex=", slideIndex);
+		console.log("glass=", glass);
+		console.log("img=", img);
 
             });
 
@@ -177,8 +181,6 @@
             } 
 
             // ===============================> magnifier glass handling
-
-            let glass=null, width, height, zoom, img
 
             function removeGlass( slide ) {
 
