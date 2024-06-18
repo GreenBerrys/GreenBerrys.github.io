@@ -7,6 +7,7 @@
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <style>
 
+        * {box-sizing: border-box}
 
         body{
             background-color: lightgray;
@@ -36,13 +37,9 @@
 
 /* --------------------------------------------- */
 
-
-        * {box-sizing: border-box}
-        .mySlides1, .mySlides2, .mySlides3 {display: none}
-        img {vertical-align: middle;}
+        .mySlides1 { display: none }
+        img { vertical-align: middle; }
     
-       
-        /* Slideshow container */
         .slideshow-container {
           position: relative;
           margin: 10px;
@@ -53,7 +50,6 @@
             width: 100%; 
             box-shadow: 1px 3px 7px 3px black;   
         }
-
 
         /* Next & previous buttons */
         .prev, .next {
@@ -92,6 +88,16 @@
             color: red;
         }
 
+       .img-magnifier-glass {
+            position: absolute;
+            border: 3px solid #000;
+            border-radius: 5%;
+            cursor: none;
+            /*Set the size of the magnifier glass:*/
+            width: 350px;
+            height: 250px;
+        }
+
     </style>
 </head>
     <body>
@@ -104,41 +110,50 @@
             
             <div class="project">
 
-                <div class="slideshow-container">
+                <div id="root" class="slideshow-container">
                     <div class="mySlides1 slide">
-                        <img src="step 1.jpg" alt="screenshot">
+                        <img id="step1" src="step 1.jpg" alt="screenshot">
                     </div>
                     <div class="mySlides1 slide">
-                        <img src="step 2.jpg" alt="screenshot">
+                        <img id="step2" src="step 2.jpg" alt="screenshot">
                     </div>
                     <div class="mySlides1 slide">
-                        <img src="step 3.jpg" alt="screenshot">
+                        <img id="step3" src="step 3.jpg" alt="screenshot">
                     </div>
                     <div class="mySlides1 slide">
-                        <img src="step 4.jpg" alt="screenshot">
+                        <img id="step4" src="step 4.jpg" alt="screenshot">
                     </div>
                     <div class="mySlides1 slide">
-                        <img src="step 5.jpg" alt="screenshot">
+                        <img id="step5" src="step 5.jpg" alt="screenshot">
                     </div>
                     <div class="mySlides1 slide">
-                        <img src="step 6.jpg" alt="screenshot">
+                        <img id="step6" src="step 6.jpg" alt="screenshot">
                     </div>
                     <div class="mySlides1 slide">
-                        <img src="step 7.jpg" alt="screenshot">
+                        <img id="step7" src="step 7.jpg" alt="screenshot">
                     </div>
                 <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
-                    <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
+                <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
                 </div>
             </div>
             
         <script>
 
+            // ===============================> Slidehandling
+
             let slideIndex = [1,1,1];
-            let slideId = ["mySlides1"]
-            showSlides(1, 0);
-            
+            let slideId = ["mySlides1"];
+
+            document.addEventListener("DOMContentLoaded", (event) => {
+
+                showSlides(1, 0);
+
+            });
+
             function plusSlides(n, no) {
-              showSlides(slideIndex[no] += n, no);
+                let x = document.getElementsByClassName(slideId[no]);
+                removeGlass(x[slideIndex[no]-1].children[0]);
+                showSlides(slideIndex[no] += n, no);
             }
             
             function showSlides(n, no) {
@@ -152,8 +167,99 @@
                     x[i].style.display = "none";
                 }
                 x[slideIndex[no]-1].style.display = "block";
-                } 
+                createGlass( x[slideIndex[no]-1].children[0],2 );
+            } 
 
+            // ===============================> magnifier glass handling
+
+            let glass=null, width, height, zoom, img
+
+            function removeGlass( slide ) {
+
+                if( glass !== null ) {
+                    glass.style.visibility = "hidden";
+                    glass.removeEventListener("mousemove", moveGlass);
+                    glass.removeEventListener("touchmove", moveGlass);
+                    glass.removeEventListener("mouseup", mouseClick);
+                    img.removeEventListener("mousemove", moveGlass);
+                    img.removeEventListener("touchmove", moveGlass);
+                    img.removeEventListener("mouseup", mouseClick);
+                    glass.remove();
+                    glass = null;
+                }
+            }
+
+            function createGlass( slide, zoomin ) {
+
+                img = slide;
+                zoom = zoomin;
+
+                /* Create magnifier glass: */
+                glass = document.createElement("DIV");
+                glass.setAttribute("class", "img-magnifier-glass");
+                glass.style.visibility = "hidden";
+
+                /* Insert magnifier glass: */
+                img.parentElement.insertBefore(glass, img);
+
+                /* Set background properties for the magnifier glass: */
+                glass.style.backgroundImage = "url('" + img.src + "')";
+                glass.style.backgroundRepeat = "no-repeat";
+                glass.style.backgroundSize = (img.width * zoom) + "px " + (img.height * zoom) + "px";
+                
+                bw = 3;  
+                width = glass.offsetWidth / 2;
+                height = glass.offsetHeight / 2;
+
+                /* Execute a function when someone moves the magnifier glass over the image: */
+                glass.addEventListener("mousemove", moveGlass );
+                img.addEventListener("mousemove", moveGlass );
+
+                /*and also for touch screens:*/
+                glass.addEventListener("touchmove", moveGlass );
+                img.addEventListener("touchmove", moveGlass );
+
+                glass.addEventListener("mouseup", mouseClick);
+                img.addEventListener("mouseup", mouseClick);
+            }
+            function mouseClick(e) {
+                glass.style.visibility === "hidden" ? glass.style.visibility = "visible" : glass.style.visibility = "hidden"; 
+            }
+            
+            function moveGlass(e) {
+                var pos, x, y;
+                /* Prevent any other actions that may occur when moving over the image */
+                e.preventDefault();
+                /* Get the cursor's x and y positions: */
+                pos = getCursorPos( e, img );
+                x = pos.x;
+                y = pos.y;
+                /* Prevent the magnifier glass from being positioned outside the image: */
+                if (x > img.width - (width / zoom)) {x = img.width - (width / zoom);}
+                if (x < width / zoom) {x = width / zoom;}
+                if (y > img.height - (height / zoom)) {y = img.height - (height / zoom);}
+                if (y < height / zoom) {y = height / zoom;}
+                /* Set the position of the magnifier glass: */
+                glass.style.left = (x - width ) + "px";
+                glass.style.top = (y - height ) + "px";
+                /* Display what the magnifier glass "sees": */
+                glass.style.backgroundPosition = "-" + ((x * zoom) - width + bw) + "px -" + ((y * zoom) - height + bw) + "px";
+            }
+
+            function getCursorPos( e, img ) {
+                var a, x = 0, y = 0;
+                e = e || window.event;
+                /* Get the x and y positions of the image: */
+                a = img.getBoundingClientRect();
+                /* Calculate the cursor's x and y coordinates, relative to the image: */
+                x = e.pageX - a.left;
+                y = e.pageY - a.top;
+                /* Consider any page scrolling: */
+                x = x - window.pageXOffset;
+                y = y - window.pageYOffset;
+                return {x : x, y : y};
+            }
+            
         </script>
 
         <noscript>
