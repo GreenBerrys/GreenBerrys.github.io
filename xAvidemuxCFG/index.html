@@ -179,10 +179,10 @@
                 if( glass !== null ) {
                     glass.style.visibility = "hidden";
                     glass.removeEventListener("mousemove", moveGlass);
-                    glass.removeEventListener("touchmove", moveGlass);
+                    //glass.removeEventListener("touchmove", moveGlass);
                     glass.removeEventListener("mouseup", mouseClick);
                     img.removeEventListener("mousemove", moveGlass);
-                    img.removeEventListener("touchmove", moveGlass);
+                    //img.removeEventListener("touchmove", moveGlass);
                     img.removeEventListener("mouseup", mouseClick);
                     glass.remove();
                     glass = null;
@@ -216,8 +216,8 @@
                 img.addEventListener("mousemove", moveGlass );
 
                 /*and also for touch screens:*/
-                glass.addEventListener("touchmove", moveGlass );
-                img.addEventListener("touchmove", moveGlass );
+                //glass.addEventListener("touchmove", moveGlass );
+                //img.addEventListener("touchmove", moveGlass );
 
                 glass.addEventListener("mouseup", mouseClick);
                 img.addEventListener("mouseup", mouseClick);
@@ -231,7 +231,7 @@
                 /* Prevent any other actions that may occur when moving over the image */
                 e.preventDefault();
                 /* Get the cursor's x and y positions: */
-                pos = getCursorPos( e, img );
+                pos = getCursorPos( e );
                 x = pos.x;
                 y = pos.y;
                 /* Prevent the magnifier glass from being positioned outside the image: */
@@ -246,7 +246,7 @@
                 glass.style.backgroundPosition = "-" + ((x * zoom) - width + bw) + "px -" + ((y * zoom) - height + bw) + "px";
             }
 
-            function getCursorPos( e, img ) {
+            function getCursorPos( e ) {
                 var a, x = 0, y = 0;
                 e = e || window.event;
                 /* Get the x and y positions of the image: */
