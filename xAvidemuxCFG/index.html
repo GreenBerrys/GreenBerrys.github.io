@@ -152,9 +152,11 @@
 
                 if (document.readyState === "complete") {
                     showSlides(1, 0);
+
+                    console.log("---> Readystatechange")
                     
                     /* reinit glass after windowresizing */
-                    window.addEventListener( 'resize', (e) => plusSlides( 0, 0 ), { passive: true } );
+                    window.addEventListener( 'resize', (e) => {plusSlides( 0, 0 ); console.log("---> Resize")}, { passive: true } );
                 }
             };
 
