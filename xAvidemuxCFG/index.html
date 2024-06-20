@@ -146,6 +146,7 @@
             const glassHeight = 250;
 
             // ----- intern
+            const bw=3;
             let glass=null, width, height, zoom, img;
 
             document.onreadystatechange = (e) => {
@@ -154,7 +155,7 @@
                     showSlides(1, 0);
 
                     /* reinit glass after windowresizing */
-                    window.addEventListener( 'resize', (e) => { plusSlides( 0, 0 );}, { passive: true } );
+                    window.addEventListener( 'resize', updateGlass, { passive: true } );
                 }
             };
 
@@ -180,6 +181,15 @@
             } 
 
             // ===============================> magnifier glass handling
+
+            function updateGlass( e ) {
+
+                glass.style.visibility === "hidden";
+                zoom = zoomSize + ( img.naturalWidth + img.naturalHeight ) / ( img.width + img.height );
+                glass.style.backgroundSize = (img.width * zoom) + "px " + (img.height * zoom) + "px";
+                width = glass.offsetWidth / 2;
+                height = glass.offsetHeight / 2;
+            }
 
             function removeGlass( slide ) {
 
@@ -214,7 +224,6 @@
                 glass.style.backgroundRepeat = "no-repeat";
                 glass.style.backgroundSize = (img.width * zoom) + "px " + (img.height * zoom) + "px";
                 
-                bw = 3;  
                 width = glass.offsetWidth / 2;
                 height = glass.offsetHeight / 2;
 
