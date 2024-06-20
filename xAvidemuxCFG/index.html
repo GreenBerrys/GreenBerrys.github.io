@@ -93,9 +93,6 @@
             border: 3px solid #000;
             border-radius: 5%;
             cursor: none;
-            /*Set the size of the magnifier glass:*/
-            width: 350px;
-            height: 250px;
         }
 
     </style>
@@ -139,30 +136,36 @@
             
         <script>
 
+            // ====> Slides
+            let slideIndex = [1,1,1];
+            let slideId = ["mySlides1"];
 
-            document.onreadystatechange = function init () {
+            // ====> magnifier glass
+            const zoomSize = 1;
+            const glassWidth = 350;
+            const glassHeight = 250;
+
+            // ----- intern
+            let glass=null, width, height, zoom, img;
+
+            document.onreadystatechange = (e) => {
 
                 if (document.readyState === "complete") {
                     showSlides(1, 0);
-                    document.removeEventListener("complete",init);
+                    
+                    /* reinit glass after windowresizing */
+                    window.addEventListener( 'resize', (e) => plusSlides( 0, 0 ), { passive: true } );
                 }
             };
 
-            // ====> Slides
-                let slideIndex = [1,1,1];
-                let slideId = ["mySlides1"];
-
-            // ====> magnifier glass
-            let glass=null, width, height, zoom, img;
-
             // ===============================> Slidehandling
-            function plusSlides(n, no) {
+            function plusSlides( n, no ) {
                 let x = document.getElementsByClassName(slideId[no]);
                 removeGlass(x[slideIndex[no]-1].children[0]);
                 showSlides(slideIndex[no] += n, no);
             }
             
-            function showSlides(n, no) {
+            function showSlides( n, no ) {
                 let i;
                 let x = document.getElementsByClassName(slideId[no]);
 
@@ -173,10 +176,11 @@
                     x[i].style.display = "none";
                 }
                 x[slideIndex[no]-1].style.display = "block";
-                createGlass( x[slideIndex[no]-1].children[0],2 );
+                createGlass( x[slideIndex[no]-1].children[0] );
             } 
 
             // ===============================> magnifier glass handling
+
             function removeGlass( slide ) {
 
                 if( glass !== null ) {
@@ -190,16 +194,18 @@
                 }
             }
 
-            function createGlass( slide, zoomin ) {
+            function createGlass( slide ) {
 
                 img = slide;
-                zoom = zoomin;
+                zoom = zoomSize + ( img.naturalWidth + img.naturalHeight ) / ( img.width + img.height );
 
                 /* Create magnifier glass: */
                 glass = document.createElement("DIV");
                 glass.setAttribute("class", "img-magnifier-glass");
+                glass.style.height = glassHeight + 'px';
+                glass.style.width =  glassWidth + 'px';
                 glass.style.visibility = "hidden";
-		
+
                 /* Insert magnifier glass: */
                 img.parentElement.insertBefore(glass, img);
 
@@ -212,19 +218,20 @@
                 width = glass.offsetWidth / 2;
                 height = glass.offsetHeight / 2;
 
-                /* Execute a function when someone moves the magnifier glass over the image or clicks on it*/
+                /* Execute a function when someone moves the magnifier glass over the image */
                 glass.addEventListener("mousemove", moveGlass );
                 img.addEventListener("mousemove", moveGlass );
 
                 /* turn glass on/off */
                 glass.addEventListener("mouseup", mouseClick);
                 img.addEventListener("mouseup", mouseClick);
+
             }
-            function mouseClick(e) {
+            function mouseClick( e ) {
                 glass.style.visibility === "hidden" ? glass.style.visibility = "visible" : glass.style.visibility = "hidden"; 
             }
             
-            function moveGlass(e) {
+            function moveGlass( e ) {
                 var pos, x, y;
                 /* Prevent any other actions that may occur when moving over the image */
                 e.preventDefault();
