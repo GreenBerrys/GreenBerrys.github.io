@@ -20,7 +20,7 @@
             left: 0;
             width: 100%;
             background-color: lightgray;
-            z-index: 2;
+            z-index: 5;
         }
         .head{
             display: flex;
@@ -29,7 +29,7 @@
             align-items: center;
             margin-top: 10px;
         }
-        .project{
+        .main{
             display: flex;
             align-items: center;
             justify-content: center;
@@ -37,49 +37,75 @@
 
 /* --------------------------------------------- */
 
-        .mySlides1 { display: none }
-        img { vertical-align: middle; }
-    
         .slideshow-container {
-          position: relative;
-          margin: 10px;
-          flex: 2 2;
+            position: relative;
+            margin: 10px;
+            flex: 2 2;
         }
         
         .slide img{
+            position: absolute;
+            top: 0;
             width: 100%; 
             box-shadow: 1px 3px 7px 3px black;   
+            visibility: hidden;
         }
 
         /* Next & previous buttons */
         .prev, .next {
-          cursor: pointer;
-          position: absolute;
-          top: 50%;
-          width: auto;
-          padding: 16px;
-          margin-top: -22px;
-          color: red;
-          font-weight: bolder;
-          font-size: 20px;
-          transition: 0.6s ease;
-          border-radius: 0 3px 3px 0;
-          user-select: none;
-          background-color: darkgray;
+            cursor: pointer;
+            position: absolute;
+            margin-top: 24%;
+            width: auto;
+            padding: 16px;
+            color: red;
+            font-weight: bolder;
+            font-size: 20px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: darkgray;
+            z-index: 3;
         }
         
         /* Position the "next button" to the right */
         .next {
-          right: 0;
-          border-radius: 3px 0 0 3px;
-          z-index: 1;
+            right: 0;
         }
         
         /* On hover, add a grey background color */
         .prev:hover, .next:hover {
-          background-color: black;
+            background-color: black;
         }
 
+        .slide { 
+            display: block;
+        }
+    
+        /* ================= Effects =========================== */
+
+        /* Fading animation */
+        .fadein {
+            animation:  fadein 1s forwards;
+        }
+
+        @keyframes fadein {
+            from {opacity: 0}
+            to {opacity: 1}
+        }
+        .fadeout {
+            animation-name: fadeout;
+            animation-duration: 1.5s;
+        }
+
+        @keyframes fadeout {
+            from {opacity: 1}
+            to {opacity: 0}
+        }
+
+
+        
+        /* ====================================================== */
         #noJs{
             position: fixed;
             top: 250px;
@@ -93,6 +119,7 @@
             border: 3px solid #000;
             border-radius: 5%;
             cursor: none;
+            z-index: 4;
         }
 
     </style>
@@ -105,40 +132,37 @@
                 </div>
             </header>
             
-            <div class="project">
-
-                <div id="root" class="slideshow-container">
-                    <div class="mySlides1 slide">
-                        <img src="step1.jpg" alt="screenshot">
-                    </div>
-                    <div class="mySlides1 slide">
-                        <img src="step2.jpg" alt="screenshot">
-                    </div>
-                    <div class="mySlides1 slide">
-                        <img src="step3.jpg" alt="screenshot">
-                    </div>
-                    <div class="mySlides1 slide">
-                        <img src="step4.jpg" alt="screenshot">
-                    </div>
-                    <div class="mySlides1 slide">
-                        <img src="step5.jpg" alt="screenshot">
-                    </div>
-                    <div class="mySlides1 slide">
-                        <img src="step6.jpg" alt="screenshot">
-                    </div>
-                    <div class="mySlides1 slide">
-                        <img src="step7.jpg" alt="screenshot">
-                    </div>
-                <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
-                <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
+            <div class="slideshow-container">
+                <div class="slide">
+                    <img src="step1.jpg" alt="screenshot">
                 </div>
+                <div class="slide">
+                    <img src="step2.jpg" alt="screenshot">
+                </div>
+                <div class="slide">
+                    <img src="step3.jpg" alt="screenshot">
+                </div>
+                <div class="slide">
+                    <img src="step4.jpg" alt="screenshot">
+                </div>
+                <div class="slide">
+                    <img src="step5.jpg" alt="screenshot">
+                </div>
+                <div class="slide">
+                    <img src="step6.jpg" alt="screenshot">
+                </div>
+                <div class="slide">
+                    <img src="step7.jpg" alt="screenshot">
+                </div>
+                <a class="prev" onclick="plusSlide( -1 )">&#10094;</a>
+                <a class="next" onclick="plusSlide( 1 )">&#10095;</a>
             </div>
             
         <script>
 
             // ====> Slides
-            let slideIndex = [1,1,1];
-            let slideId = ["mySlides1"];
+            let slides; 
+            let slideNo;
 
             // ====> magnifier glass
             const zoomSize = 1;
@@ -152,7 +176,11 @@
             document.onreadystatechange = (e) => {
 
                 if (document.readyState === "complete") {
-                    showSlides(1, 0);
+
+                    slides = document.getElementsByClassName('slide');
+                    slideNo = 0;
+
+                    showSlide( slideNo );
 
                     /* reinit glass after windowresizing */
                     window.addEventListener( 'resize', updateGlass, { passive: true } );
@@ -160,24 +188,37 @@
             };
 
             // ===============================> Slidehandling
-            function plusSlides( n, no ) {
-                let x = document.getElementsByClassName(slideId[no]);
-                removeGlass(x[slideIndex[no]-1].children[0]);
-                showSlides(slideIndex[no] += n, no);
+
+            function sleep (time) { return new Promise((resolve) => setTimeout(resolve, time)); }
+
+            function plusSlide( n ) {
+                showSlide( slideNo + n );
             }
-            
-            function showSlides( n, no ) {
-                let i;
-                let x = document.getElementsByClassName(slideId[no]);
 
-                if (n > x.length) { slideIndex[no] = 1 }
-                if (n < 1) { slideIndex[no] = x.length }
+            function showSlide( no ) {
+                
+                removeGlass();
 
-                for (i = 0; i < x.length; i++) {
-                    x[i].style.display = "none";
+                if ( no >= slides.length ) { no = 0 } 
+                if ( no < 0 ) { no = slides.length -1 } 
+                
+                const slideOldImg = slides[slideNo].getElementsByTagName('img')[0];
+                const slideNewImg = slides[no].getElementsByTagName('img')[0];
+
+                slideNewImg.style.zIndex = "1";
+                slideNewImg.style.visibility = "visible";
+
+                if (no !== slideNo){
+    
+                    slideOldImg.style.zIndex = "0";
+                    slideOldImg.className="fadeout";
+                    slideNewImg.className="fadein";
+
+                    sleep(1000).then( () => { slideOldImg.style.visibility = "hidden"; });
                 }
-                x[slideIndex[no]-1].style.display = "block";
-                createGlass( x[slideIndex[no]-1].children[0] );
+
+                slideNo = no;
+                createGlass( slideNewImg );
             } 
 
             // ===============================> magnifier glass handling
@@ -191,22 +232,22 @@
                 height = glass.offsetHeight / 2;
             }
 
-            function removeGlass( slide ) {
+            function removeGlass() {
 
                 if( glass !== null ) {
                     glass.style.visibility = "hidden";
                     glass.removeEventListener("mousemove", moveGlass);
-                    glass.removeEventListener("mouseup", mouseClick);
+                    glass.removeEventListener("click", mouseClick);
                     img.removeEventListener("mousemove", moveGlass);
-                    img.removeEventListener("mouseup", mouseClick);
+                    img.removeEventListener("click", mouseClick);
                     glass.remove();
                     glass = null;
                 }
             }
 
-            function createGlass( slide ) {
+            function createGlass( slideImage ) {
 
-                img = slide;
+                img = slideImage;
                 zoom = zoomSize + ( img.naturalWidth + img.naturalHeight ) / ( img.width + img.height );
 
                 /* Create magnifier glass: */
@@ -232,8 +273,8 @@
                 img.addEventListener("mousemove", moveGlass );
 
                 /* turn glass on/off */
-                glass.addEventListener("mouseup", mouseClick);
-                img.addEventListener("mouseup", mouseClick);
+                glass.addEventListener("click", mouseClick);
+                img.addEventListener("click", mouseClick);
 
             }
             function mouseClick( e ) {
@@ -241,7 +282,7 @@
             }
             
             function moveGlass( e ) {
-                var pos, x, y;
+                let pos, x, y;
                 /* Prevent any other actions that may occur when moving over the image */
                 e.preventDefault();
                 /* Get the cursor's x and y positions: */
@@ -261,7 +302,7 @@
             }
 
             function getCursorPos( e ) {
-                var a, x = 0, y = 0;
+                let a, x = 0, y = 0;
                 e = e || window.event;
                 /* Get the x and y positions of the image: */
                 a = img.getBoundingClientRect();
