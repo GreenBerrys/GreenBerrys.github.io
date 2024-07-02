@@ -21,30 +21,38 @@
             width: 100%;
             background-color: lightgray;
             z-index: 5;
-        }
-        .head{
-            display: flex;
-            width: 100%;
-            height:  2rem;
-            align-items: center;
-            margin-top: 10px;
+            height: 3.4rem;
+            margin-top: -10px;
+            overflow: hidden;
+            white-space: nowrap;
         }
 
 /* --------------------------------------------- */
 
+        .slideshow-container{
+            display: flexbox;
+            width: 98vw;
+            margin: auto;
+        }
+
+        .slide { 
+            display: flex;
+            justify-content: center; 
+        }
+
         .slide img{
             position: absolute;
-            top: 0;
-            width: 100%; 
+            width: 98vw;
             box-shadow: 1px 3px 7px 3px black;   
             visibility: hidden;
+            z-index: 0;
+            user-select: none;
         }
 
         /* Next & previous buttons */
         .prev, .next {
             cursor: pointer;
             position: absolute;
-            margin-top: 24%;
             width: auto;
             padding: 16px;
             color: red;
@@ -55,8 +63,18 @@
             user-select: none;
             background-color: darkgray;
             z-index: 3;
+            margin-top: 23%
         }
-        
+       
+        .prevNextContainer {
+            position: relative;
+        }
+
+        /* Position the "next button" to the right */
+        .prev {
+            left: 0;
+        }
+  
         /* Position the "next button" to the right */
         .next {
             right: 0;
@@ -67,32 +85,49 @@
             background-color: black;
         }
 
-        .slide { 
-            display: block;
-        }
-    
+   
         /* ================= Effects =========================== */
 
-        /* Fading animation */
-        .fadein {
-            animation:  fadein 1s forwards;
-        }
+        /* Fade */
+        .fadein { animation:  fadein 1s forwards; }
 
         @keyframes fadein {
             from {opacity: 0}
             to {opacity: 1}
         }
-        .fadeout {
-            animation: fadeout 1s forwards;
-        }
+        .fadeout { animation: fadeout 1s forwards; }
 
         @keyframes fadeout {
             from {opacity: 1}
             to {opacity: 0}
         }
 
+        /* shift */
+        .shiftRout { animation: shiftRout 1s forwards; }
 
-        
+        @keyframes shiftRout {
+            from {transform: translateX(0)}
+            to {transform: translateX(110%)}
+        }
+        .shiftRin { animation: shiftRin 1s forwards; }
+
+        @keyframes shiftRin {
+            from {transform: translateX(-110%)}
+            to {transform: translateX(0)}
+        }
+        .shiftLout { animation: shiftLout 1s forwards; }
+
+        @keyframes shiftLout {
+            from {transform: translateX(0)}
+            to {transform: translateX(-110%)}
+        }
+        .shiftLin { animation: shiftLin 1s forwards; }
+
+        @keyframes shiftLin {
+            from {transform: translateX(110%)}
+            to {transform: translateX(0)}
+        }
+
         /* ====================================================== */
         #noJs{
             position: fixed;
@@ -115,12 +150,10 @@
     <body>
 
             <header>
-                <div class="head">        
-                    <div><h2>&nbsp;Einstellungen in Avidemux zum hochskalieren von SD-Filmen:</h2></div>
-                </div>
+                    <h2>&nbsp;Einstellungen in Avidemux zum hochskalieren von SD-Filmen:</h2>
             </header>
-            
-            <div class="slideshow-container">
+
+            <div class="slideshow-container slideshow">
                 <div class="slide">
                     <img src="step1.jpg" alt="screenshot">
                 </div>
@@ -142,13 +175,16 @@
                 <div class="slide">
                     <img src="step7.jpg" alt="screenshot">
                 </div>
-                <a class="prev" onclick="plusSlide( -1 )">&#10094;</a>
-                <a class="next" onclick="plusSlide( 1 )">&#10095;</a>
-            </div>
-            
+                <div class="prevNextContainer">
+                    <a class="prev" onclick="plusSlide( event, -1 )">&#10094;</a>
+                    <a class="next" onclick="plusSlide( event, 1 )">&#10095;</a>
+                </div>
+            </div>    
+
         <script>
 
             // ====> Slides
+            const effect = "shift"    // "shift" or "fade"
             let slides; 
             let slideNo;
 
@@ -158,14 +194,16 @@
             const glassHeight = 250;
 
             // ----- intern
-            const bw=3;
+            const bw=-30;
             let glass=null, width, height, zoom, img;
 
             document.onreadystatechange = (e) => {
 
                 if (document.readyState === "complete") {
 
-                    slides = document.getElementsByClassName('slide');
+                    const slideshow = document.getElementsByClassName('slideshow')[0]
+
+                    slides = slideshow.getElementsByClassName('slide');
                     slideNo = 0;
 
                     showSlide( slideNo );
@@ -179,12 +217,16 @@
 
             function sleep (time) { return new Promise((resolve) => setTimeout(resolve, time)); }
 
-            function plusSlide( n ) {
+            function plusSlide( e, n ) {
+                e = e || window.event;
+                e.preventDefault();
                 showSlide( slideNo + n );
             }
 
             function showSlide( no ) {
                 
+                const dir = no > slideNo ? true : false;
+
                 removeGlass();
 
                 if ( no >= slides.length ) { no = 0 } 
@@ -198,13 +240,32 @@
 
                 if (no !== slideNo){
     
-                    slideOldImg.style.zIndex = "0";
-                    slideOldImg.className="fadeout";
-                    slideNewImg.className="fadein";
+                    switch(effect){
+                    
+                        case "fade":
+                            slideOldImg.className="fadeout";
+                            slideNewImg.className="fadein";
+                            sleep(1000).then( () => { slideOldImg.style.visibility = "hidden"; slideOldImg.style.zIndex = "0";});
+                            break;
 
-                    sleep(1000).then( () => { slideOldImg.style.visibility = "hidden"; });
+                        case "shift":
+                            if(dir){
+                                slideOldImg.className="shiftLout";
+                                slideNewImg.className="shiftLin";
+                            }    
+                            else {
+                                slideOldImg.className="shiftRout";
+                                slideNewImg.className="shiftRin";
+                            }
+                            sleep(1000).then( () => { slideOldImg.style.visibility = "hidden"; slideOldImg.style.zIndex = "0";});
+                            break; 
+
+                        default:
+                            slideOldImg.style.visibility = "hidden"; 
+                            slideOldImg.style.zIndex = "0";
+                            break;  
+                    }
                 }
-
                 slideNo = no;
                 createGlass( slideNewImg );
             } 
@@ -266,27 +327,46 @@
 
             }
             function mouseClick( e ) {
+                e.preventDefault();
                 glass.style.visibility === "hidden" ? glass.style.visibility = "visible" : glass.style.visibility = "hidden"; 
             }
             
             function moveGlass( e ) {
-                let pos, x, y;
+
+                let pos, x, y, imgPos = img.getBoundingClientRect();
+
                 /* Prevent any other actions that may occur when moving over the image */
                 e.preventDefault();
-                /* Get the cursor's x and y positions: */
+
+                /* Get the cursor's x and y positions and the Y-pageoffset if window was scrolled down: */
                 pos = getCursorPos( e );
                 x = pos.x;
                 y = pos.y;
+
                 /* Prevent the magnifier glass from being positioned outside the image: */
                 if (x > img.width - (width / zoom)) {x = img.width - (width / zoom);}
                 if (x < width / zoom) {x = width / zoom;}
                 if (y > img.height - (height / zoom)) {y = img.height - (height / zoom);}
                 if (y < height / zoom) {y = height / zoom;}
+
                 /* Set the position of the magnifier glass: */
-                glass.style.left = (x - width ) + "px";
-                glass.style.top = (y - height ) + "px";
+                let left = x - width;
+                if( x + width > img.width ) { 
+                    left = img.width - glassWidth; 
+                }
+                else if ( x - width < 0 ) { left = 0; };
+
+                let top = y - height;
+                if( y + height > img.height ) { 
+                    top = img.height - glassHeight; 
+                }
+                else if ( y - height < 0 ) { top = 0; }
+                
+                glass.style.left = ( window.pageXOffset + imgPos.left + left ) + "px";
+                glass.style.top = ( window.pageYOffset + imgPos.top + top ) + "px";
+
                 /* Display what the magnifier glass "sees": */
-                glass.style.backgroundPosition = "-" + ((x * zoom) - width + bw) + "px -" + ((y * zoom) - height + bw) + "px";
+                glass.style.backgroundPosition = "-" + ((x * zoom) - width ) + "px -" + ((y * zoom) - height ) + "px";
             }
 
             function getCursorPos( e ) {
