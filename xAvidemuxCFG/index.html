@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+
     <style>
 
-        * {box-sizing: border-box}
+        * { box-sizing: border-box; }
 
         body{
             background-color: lightgray;
@@ -27,26 +28,27 @@
             white-space: nowrap;
         }
 
-/* --------------------------------------------- */
+        /* --------------------------------------------- */
 
         .slideshow-container{
             display: flexbox;
             width: 98vw;
             margin: auto;
+            box-shadow: 1px 3px 7px 3px darkgrey;    
         }
 
         .slide { 
-            display: flex;
-            justify-content: center; 
+            position: absolute;
+            overflow: hidden;
         }
 
         .slide img{
             position: absolute;
             width: 98vw;
-            box-shadow: 1px 3px 7px 3px black;   
             visibility: hidden;
             z-index: 0;
             user-select: none;
+            box-shadow: 1px 3px 7px 3px black;   
         }
 
         /* Next & previous buttons */
@@ -70,7 +72,7 @@
             position: relative;
         }
 
-        /* Position the "next button" to the right */
+        /* Position the "prev button" to the left */
         .prev {
             left: 0;
         }
@@ -104,31 +106,68 @@
 
         /* shift */
         .shiftRout { animation: shiftRout 1s forwards; }
-
         @keyframes shiftRout {
             from {transform: translateX(0)}
-            to {transform: translateX(110%)}
+            to {transform: translateX(100%)}
         }
         .shiftRin { animation: shiftRin 1s forwards; }
-
         @keyframes shiftRin {
-            from {transform: translateX(-110%)}
+            from {transform: translateX(-100%)}
             to {transform: translateX(0)}
         }
         .shiftLout { animation: shiftLout 1s forwards; }
-
         @keyframes shiftLout {
             from {transform: translateX(0)}
-            to {transform: translateX(-110%)}
+            to {transform: translateX(-100%)}
         }
         .shiftLin { animation: shiftLin 1s forwards; }
-
         @keyframes shiftLin {
-            from {transform: translateX(110%)}
+            from {transform: translateX(100%)}
             to {transform: translateX(0)}
         }
 
+        /* flip */
+        .flip {
+            perspective: 1000px;
+            transform-origin: center center 0;
+            transform-style: preserve-3d;
+        }
+            
+        .slide img {
+            backface-visibility: hidden;
+
+        }
+        .flipRout { animation: flipRout 1s forwards; }
+        @keyframes flipRout {
+            from {transform: rotateY(0deg)}
+            to {transform: rotateY(-180deg)}
+        }
+        .flipRin { animation: flipRin 1s forwards; }
+        @keyframes flipRin {
+            from {transform: rotateY(180deg)}
+            to {transform: rotateY(0deg)}
+        }
+        .flipLout { animation: flipLout 1s forwards; }
+        @keyframes flipLout {
+            from {transform: rotateY(0deg)}
+            to {transform: rotateY(180deg)}
+        }
+        .flipLin { animation: flipLin 1s forwards; }
+        @keyframes flipLin {
+            from {transform: rotateY(-180deg)}
+            to {transform: rotateY(0deg)}
+        }
+
         /* ====================================================== */
+
+        .img-magnifier-glass {
+            position: absolute;
+            border: 3px solid #000;
+            border-radius: 5%;
+            cursor: none;
+            z-index: 4;
+        }
+
         #noJs{
             position: fixed;
             top: 250px;
@@ -137,18 +176,11 @@
             color: red;
         }
 
-       .img-magnifier-glass {
-            position: absolute;
-            border: 3px solid #000;
-            border-radius: 5%;
-            cursor: none;
-            z-index: 4;
-        }
-
     </style>
 </head>
-    <body>
 
+    <body>
+            <!-- ------------------------------------------------------------------------------------  -->
             <header>
                     <h2>&nbsp;Einstellungen in Avidemux zum hochskalieren von SD-Filmen:</h2>
             </header>
@@ -180,13 +212,18 @@
                     <a class="next" onclick="plusSlide( event, 1 )">&#10095;</a>
                 </div>
             </div>    
+            <!-- ------------------------------------------------------------------------------------  -->
 
         <script>
 
+            "use strict";
+
             // ====> Slides
-            const effect = "shift"    // "shift" or "fade"
+            const effects = [ "fade", "flip", "shift", "fade", "flip", "shift" ];
+
+            let effect = effects[ Math.round( Math.random() * 5 ) ];
             let slides; 
-            let slideNo;
+            let slideNo=0;
 
             // ====> magnifier glass
             const zoomSize = 1;
@@ -202,10 +239,9 @@
                 if (document.readyState === "complete") {
 
                     const slideshow = document.getElementsByClassName('slideshow')[0]
-
                     slides = slideshow.getElementsByClassName('slide');
-                    slideNo = 0;
 
+                    setImgContainers( slides );
                     showSlide( slideNo );
 
                     /* reinit glass after windowresizing */
@@ -215,7 +251,19 @@
 
             // ===============================> Slidehandling
 
-            function sleep (time) { return new Promise((resolve) => setTimeout(resolve, time)); }
+            const sleep = (time) => { return new Promise((resolve) => setTimeout(resolve, time)); }
+
+            function setImgContainers ( slides ) {
+
+                const slideImg = slides[0].getElementsByTagName('img')[0];
+                slides[0].parentNode.style.width = slideImg.width + 'px';
+                slides[0].parentNode.style.height = slideImg.height + 'px';
+
+                for (let i=0; i < slides.length; i++ ) {
+                    slides[i].style.width = slideImg.width + 'px';
+                    slides[i].style.height = slideImg.height + 'px';
+                }
+            }
 
             function plusSlide( e, n ) {
                 e = e || window.event;
@@ -238,10 +286,35 @@
                 slideNewImg.style.zIndex = "1";
                 slideNewImg.style.visibility = "visible";
 
-                if (no !== slideNo){
+                /* slideshow effects */
+                if ( no !== slideNo ){
     
                     switch(effect){
-                    
+
+                        case "flip":
+                            slideOldImg.parentNode.classList.toggle("flip");
+                            slideNewImg.parentNode.classList.toggle("flip");
+
+                            slideOldImg.parentNode.style.overflow="visible";
+                            slideNewImg.parentNode.style.overflow="visible";
+
+                            if(dir) {
+                                slideOldImg.className=("flipRout");
+                                slideNewImg.className=("flipRin");
+                            }
+                            else {
+                                slideOldImg.className=("flipLout");
+                                slideNewImg.className=("flipLin");
+                            }
+                            sleep(1000).then( () => { slideOldImg.style.visibility = "hidden"; 
+                                                      slideOldImg.style.zIndex = "0";
+                                                      slideOldImg.parentNode.classList.toggle("flip");
+                                                      slideNewImg.parentNode.classList.toggle("flip");
+                                                      slideOldImg.parentNode.style.overflow="hidden";
+                                                      slideNewImg.parentNode.style.overflow="hidden";
+                                                    } );
+                            break;
+                        
                         case "fade":
                             slideOldImg.className="fadeout";
                             slideNewImg.className="fadein";
@@ -275,6 +348,7 @@
             function updateGlass( e ) {
 
                 glass.style.visibility === "hidden";
+                setImgContainers( slides );
                 zoom = zoomSize + ( img.naturalWidth + img.naturalHeight ) / ( img.width + img.height );
                 glass.style.backgroundSize = (img.width * zoom) + "px " + (img.height * zoom) + "px";
                 width = glass.offsetWidth / 2;
@@ -333,7 +407,7 @@
             
             function moveGlass( e ) {
 
-                let pos, x, y, imgPos = img.getBoundingClientRect();
+                let pos, x, y;
 
                 /* Prevent any other actions that may occur when moving over the image */
                 e.preventDefault();
@@ -362,8 +436,8 @@
                 }
                 else if ( y - height < 0 ) { top = 0; }
                 
-                glass.style.left = ( window.pageXOffset + imgPos.left + left ) + "px";
-                glass.style.top = ( window.pageYOffset + imgPos.top + top ) + "px";
+                glass.style.left = ( left ) + "px";
+                glass.style.top = ( top ) + "px";
 
                 /* Display what the magnifier glass "sees": */
                 glass.style.backgroundPosition = "-" + ((x * zoom) - width ) + "px -" + ((y * zoom) - height ) + "px";
@@ -388,6 +462,7 @@
         <noscript>
             <h2 id="noJs">Zur Anzeige der Bilder<br> wird Javascript ben&ouml;tigt..</h2>
         </noscript>
+
     </body>
     
 </html>
