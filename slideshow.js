@@ -55,7 +55,7 @@
  *                              zoom:            Zoomfaktor: "1" = ca. doppelte Größe (hängt von der Bildgröße in der Datei ab).
  *                              width:           Breite analog CSS.
  *                              minWidth:        Mindestbreite als String analog CSS z.B "60vw" oder "200px".  
- *                              Height:          Höhe analog CSS.
+ *                              height:          Höhe analog CSS.
  *                              minHeight:       Mindesthöhe.  
  *                              border:          Rahmen analog CSS border.
  *                              borderRadius:    Eckenrundung analog zu css border-radius.
