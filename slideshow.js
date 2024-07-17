@@ -1,6 +1,6 @@
 /********************************************************************************************************* 
  * 
- *  slideshow.js  (p) 2024 by Frank Hermann
+ *  slideshow.js  (c) 2024 by Frank Hermann
  * 
  *  Universelle Klasse zum erzeugen von Slideshows.
  *  Erstellt eine Slideshow mit Vergrößerungsglass und drei Standardeffekten für die Seitenübergänge.
@@ -59,6 +59,7 @@
  *                              minHeight:       Mindesthöhe.  
  *                              border:          Rahmen analog CSS border.
  *                              borderRadius:    Eckenrundung analog zu css border-radius.
+ *
  * 
  *  Als letzte Parameter können zwei Callback-Funktion übergeben werden:
  * 
@@ -67,6 +68,7 @@
  *      z.B.  const eineShow = new slideshow( "mySlideshow", [ "bild1.jpg", "bild2.jpg", "bild3.jpg" ], {}, {}, {}, callbackFunc );
  * 
  *      ruft bei jedem Bildwechsel die callback-Function auf:  ( Bildnr ) => { console.log("Bild Nr.", Bildnr ); } 
+ *
  *
  *  Die zweite  Callback-Funktion wird bei jeder Größenänderung mit der Breite und Höhe in Pixeln des aktuellen Bildes aufgerufen.
  * 
