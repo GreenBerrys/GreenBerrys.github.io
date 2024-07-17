@@ -1,253 +1,568 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <title>Github index</title>
+    <title>Greenberrys</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <style>
 
+        * { box-sizing: border-box; }
+        a { text-decoration: none; }
 
         body{
-            background-color: #495056;
-            color: lightgray;
             font-family: Verdana, Geneva, Tahoma, sans-serif;
-            margin-top: 4.3rem;
+            margin-top: 4rem; 
+            color: black;
+            background-image: linear-gradient(150deg,lightslategrey, #f6f6f6); 
         }
         header{
             position: fixed; 
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #495056;
-            z-index: 2;
+            z-index: 10;
         }
         .head{
-            display: flex;
-            width: 100%;
-            height:  2rem;
+            display: flex; 
+            top: 0;
+            left: 0;
+            width: 98vw;
+            height:  4rem;
             align-items: center;
-            margin-top: 10px;
+            border-radius: 0px 25px 25px 0px;
+            background-color: darkgray;
+            white-space: nowrap;
         }
-        .project{
+        .head h1{
+            margin-left: 15px;
+            color: rgb(82, 115, 148);
+            font-weight: normal;
+            font-size: 2.5rem;
+        }
+        .border{
             display: flex;
+            background-color: darkgray;
+            align-items: center;
+            justify-content: center;
         }
-        a {
-            color: lightgray;
-            text-decoration: none;
-            font-size: larger;
-            font-weight: bold;
+        .border h2{
+            color: rgb(82, 115, 148);
+            font-weight: normal;
+            font-size: 1.8rem;
+            transform: rotate(-90deg);
+        }
+        .head, .foot{ min-width: 400px; }
+        #container { display: flex; }
+
+        #container .projects{
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            margin: 50px 10px 50px 20px;
+            justify-content: space-evenly;
+            column-gap: 10px;
+            row-gap: 20px; 
+        }
+        #container .project{ display: block }
+        #container .project .text{
+            width: 29vw; 
+            padding: 0 10px 0 10px;
+            font-size: 1.2rem;
+        }
+        #container .project .title{
+            margin-bottom: 5px;
+            font-size: 1.7rem;
+            font-weight: bolder;
+        }
+        #container .project button, #container .project button a{
+            font-size: 0.9rem;
+            color: rgb(63, 53, 53);
+            float: right;
         }
 
-        .text{
-            flex: 1 1;
-        }
+        .foot { 
+            width: 98vw;
+            border-radius: 0px 25px 25px 0px; 
+            font-size: 1rem; 
+            background-color: darkgray; 
+        }  
+        .foot a { color: black; font-size: large; font-weight: bold; }
 
-/* --------------------------------------------- */
-
-
-        * {box-sizing: border-box}
-        .mySlides1, .mySlides2, .mySlides3 {display: none}
-        img {vertical-align: middle;}
-    
-       
-        /* Slideshow container */
-        .slideshow-container {
-          max-width: 600px;
-          min-width: 295px;
-          position: relative;
-          margin: 20px;
-          flex: 2 2;
-        }
+        .foot .raspberry { display: flex; align-items: center; margin-right: 20px; }
+        .foot .raspberry img{ width: 60px; margin-right: 10px; }
+        .foot .raspberry div>a{ font-size: 1.5rem; white-space: nowrap;}
+        .foot .raspberry div a span{ font-size: 1rem; font-weight: normal; vertical-align: middle; }
+        .foot .raspberry span { white-space: nowrap; }
         
-        .slide img{
-            width: 100%; 
-            box-shadow: 1px 3px 7px 3px black;   
-        }
+        .foot .crsf>span{ font-weight: bold; font-size: large; } 
+        .foot .raspberry, .foot .crsf { padding-left: 20px; }
 
-
-        /* Next & previous buttons */
-        .prev, .next {
-          cursor: pointer;
-          position: absolute;
-          top: 50%;
-          width: auto;
-          padding: 16px;
-          margin-top: -22px;
-          color: rgb(218, 0, 0);
-          font-weight: bold;
-          font-size: 18px;
-          transition: 0.6s ease;
-          border-radius: 0 3px 3px 0;
-          user-select: none;
-        }
-        
-        /* Position the "next button" to the right */
-        .next {
-          right: 0;
-          border-radius: 3px 0 0 3px;
-          z-index: 1;
-        }
-        
-        /* On hover, add a grey background color */
-        .prev:hover, .next:hover {
-          background-color: #f1f1f1;
-          /* color: black; */
-        }
+        .isOnline{ color: green; }
+        .isOffline{ color: red; }
 
         #noJs{
-            position: fixed;
-            top: 250px;
-            left: 10vw;
-            z-index: -1;
+            position: fixed; 
+            top: 0; 
+            left: 0;
+            display: flex;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
             color: red;
+            background-image: linear-gradient( 150deg, lightslategrey, #f6f6f6 ); 
+            font-weight: bold;
+            font-size: 5vw;
         }
 
-        .isOnline{
-            color: green;
+        .blink { animation: blink 2s cubic-bezier(0, 0.2, 0.8, 1) infinite; }
+        @keyframes blink { 0% { opacity: 1; }  50% { opacity: 0.1; }  100% { opacity: 1; } }
+
+        /* -------------------------------------------------------- startanimation */
+        .jump1 {
+            transform-origin: 0% 100%; 
+            animation: jump .5s alternate linear; 
+            animation-iteration-count: 8;
         }
-        .isOffline{
+        .jump2 {
+            transform-origin: 0% 100%; 
+            animation: jump .5s alternate linear; 
+            animation-iteration-count: 10;
+        }
+        @keyframes jump {
+            0%   { transform: translate3d( 0, 0, 0 ) scale3d( .3, .3, .3 ); }
+            40%  { transform: translate3d( 0, -20%, 0 ) scale3d( .35, .55, .5 ); }
+            100% { transform: translate3d( 0, -50%, 0 ) scale3d( .55, .35, .5 ); }
+        }
+        .move1 {
+            transform-origin: 0% 50%; 
+            animation: move1 4s linear;  
+        }
+        @keyframes move1 {
+            0%   { transform: translate( -100%, -20% ); }
+            100% { transform: translate( 70%, 0 ); }
+        }
+        .move2 {
+            transform-origin: 0% 50%; 
+            animation: move2 5s linear;  
+        }
+        @keyframes move2 {
+            0%   { transform: translate( 100%, -30% ); }
+            100% { transform: translate( 0%, 0 ); }
+        }
+
+        /* -------------------------------------------------------- lightswitch */
+
+        .lightSwitch {    
+            display: block;
+            position: relative;
+            margin: 100px 20px 10px 10px;
+            float: right; 
+            padding: 8px 13px;
+            font-size: 18px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #555454;
+            border: none;
+            border-radius: 15px;
+            border: 3px outset  #d4d4d4;
+        }    
+        .light {
+            border: 3px inset #d4d4d4;
+            transform: translateY(4px); 
+            z-index: 11;
+        }
+        .lightSwitch:hover { background-color: #3a3a3a; }
+
+        #lightOff{
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            background-color: black;
+            z-index: 10;
+            display: none;
+        }
+        
+        /* -------------------------------------------------------- party */
+
+        .fadeIn { animation: fadein 3s linear }
+        @keyframes fadein { 0% { opacity: 0; }  50% { opacity: 0.3; }  100% { opacity: 1; } }
+
+        .fallIn { animation: fallin 1s linear forwards }
+        @keyframes fallin {
+            0%   { transform: translate( 0, -60vh ); }
+            30%  { transform: translate( 0, -30vh ); }
+            60%  { transform: translate( 0, -0 ); }
+            70%  { transform: translate( 0, -20% ); }
+            80%  { transform: translate( 0, -0 ); }
+            90%  { transform: translate( 0, -12% ); }
+            100% { transform: translate( 0, 0 ); opacity: .5; }
+
+        }
+
+        .dumb { animation: dumb 1.2s 1.5s linear infinite }
+        @keyframes dumb {
+            0%   { transform: scale( 1, 1 ); }
+            10%  { transform: scale( 2, 1 ); }
+            20%   { transform: scale( 1, 1 ); }
+            30%  { transform: scale( 1, 1 ); }
+            40%  { transform: scale( 1, 2 ); }
+            50%  { transform: scale( 1, 1 ); }
+            65%  { transform: scale( 1, 1 ); }
+            75% { transform: scale( 2, 2 ); }
+            85%  { transform: scale( 1, 1 ); }
+        }
+
+        #partyTxtDumb, #partyTxt {
+            position: fixed; 
             color: red;
+            font-size: 10vw;
+            width: 100%;
+            top: 30%;  
+            transform: translate( 0, 50% );
         }
+ 
+        #partyTxt{
+            text-align: center;
+        }
+ 
+        .minion0 { animation: minion0 4.16s 1.5s linear alternate infinite }
+        @keyframes minion0 {
+            0%   { transform: translate( 5vw, -5vh ); visibility: visible; }
+            100% { transform: translate( -50vw, -5vh ); }
+        }
+        .minion1 { animation: minion1 5s 1.5s linear alternate infinite }
+        @keyframes minion1 {
+            0%   { transform: translate( 5vw, 1vh ); visibility: visible; }
+            100% { transform: translate( -50vw, 15vh ); }
+        }
+        .minion2 { animation: minion2 6s 1.5s linear alternate infinite }
+        @keyframes minion2 {
+            0%   { transform: translate( -5vw, -5vh ); visibility: visible; }
+            100% { transform: translate( 15vw, -30vh ); }
+        }
+        .minion3 { animation: minion3 .5s 1.5s linear forwards }
+        @keyframes minion3 { 100% {visibility: visible; } }
+
+        #minion0, #minion1, #minion2, #minion3{
+            position: fixed; 
+            visibility: hidden; 
+            width: 15vw;
+        }
+
+        #minion0{ right: 5%; top: 60%; }
+        #minion1{ right: 5%; top: 5%; }
+        #minion2{ left: 5%; top: 65%; }
+        #minion3{ left: 5%; top: 5%; }
+
+        .flash{ animation: flash 1.5s linear infinite }
+        @keyframes flash {
+            0%   { background-color: black; }
+            5%   { background-color: darkred; }
+            15%  { background-color: black; }
+            30%  { background-color: black; }
+            35%  { background-color: darkgreen; }
+            45%  { background-color: black; }
+            60%  { background-color: black; }
+            65%  { background-color: darkblue; }
+            75%  { background-color: black; }
+        }
+
+    /* --------------------------------------------------------- */
+
+    </style>
+    <style id="_slideShow-CSS">
+
+        @media ( max-width: 1650px ) {
+
+            .head, .foot{
+                width: 96vw;
+            }
+            #mp4streamer .slideshow-slide img, 
+            #rezeptor .slideshow-slide img,
+            #todo .slideshow-slide img { 
+
+                width: 39vw;
+            }  
+            #container .project .text {
+                width: 39vw;
+            }
+            #mp4streamer .slideshow-slide .slideshow-glass,
+            #rezeptor .slideshow-slide .slideshow-glass,
+            #todo .slideshow-slide .slideshow-glass{
+
+                width: 18vw;
+                height: 18vw;
+            }  
+        }   
+
+        @media ( max-width: 900px ) {
+
+            .head, .foot{
+                width: 96vw;
+            }
+            #mp4streamer .slideshow-slide img, 
+            #rezeptor .slideshow-slide img,
+            #todo .slideshow-slide img {
+
+                width: 69vw;
+            }  
+            #container .projects{
+                margin: 50px 10px 50px 10px;
+            }
+            #container .project .text {
+                width: 69vw;
+            }
+            #mp4streamer .slideshow-slide .slideshow-glass,
+            #rezeptor .slideshow-slide .slideshow-glass,
+            #todo .slideshow-slide .slideshow-glass{
+
+                width: 32vw;
+                height: 32vw;
+            }  
+        }    
+        @media ( max-width: 700px ) {
+            
+            #container .border{
+
+                width: 10vw;
+            }
+            .head h1{
+                font-size: 2rem;
+            }
+        }
+
     </style>
 </head>
     <body>
 
             <header>
                 <div class="head">        
-                    <!-- <div><img src="logo.png" alt="Greenberrys" id="logo"></div> -->
                     <div><h1>&nbsp;Greenberrys Spielwiese</h1></div>
                 </div>
-                <hr>
             </header>
     
-            <!-- <h2 style="text-align:left; margin-left: 20px;">&Uuml;bungen / Versuche</h2> -->
-            <h3 style="text-align:left; margin-left: 20px;">( Getested unter: Ubuntu 22.04 "Jammy Jallyfish", Debian 11 "Bullseye", Windows 10 )</h3>
-            
-            <div class="project">
-
-                <div class="slideshow-container">
-                    <a href='https://github.com/GreenBerrys/GreenBerrys.github.io/tree/master/mp4streamer'>
-                        <div class="mySlides1 slide">
-                            <img src="images/mp4streamer-1.png" alt="screenshot">
-                        </div>
-                    
-                        <div class="mySlides1 slide">
-                            <img src="images/mp4streamer-2.png" alt="screenshot">
-                        </div>
-                    
-                        <div class="mySlides1 slide">
-                            <img src="images/mp4streamer-3.png" alt="screenshot">
-                        </div>
-                    </a>
-                    <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
-                    <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
-                </div>
-                <div class="text">
-                    <h2><a href='https://github.com/GreenBerrys/GreenBerrys.github.io/tree/master/mp4streamer' style="color: rgb(230, 224, 224);">mp4streamer</a></h2>
-                    <a href='https://github.com/GreenBerrys/GreenBerrys.github.io/tree/master/Archiv/mp4streamer'>als Archiv runterladen</a>
-                    <p>Sammeln &amp; streamen von MP4-Videos</p>
-                </div>
-
+            <div id="lightOff">
+                <div id="partyTxtDumb"><div id="partyTxt">party</div></div>
+                <img id="minion0" src="images/minion1.gif">
+                <img id="minion1" src="images/minion2.gif">
+                <img id="minion2" src="images/minion3.gif">
+                <img id="minion3" src="images/minion4.gif">
             </div>
-            
-            <div class="project">
-                <div class="slideshow-container">
-                    <a href='https://github.com/GreenBerrys/GreenBerrys.github.io/tree/master/rezeptor-neu'>
-                        <div class="mySlides2 slide">
-                            <img src="images/rezeptor-1.png" alt="screenshot">
+            <div id="container">
+                <div class="border"><h2>&Uuml;bungen&nbsp;</h2></div>    
+                <div class="projects">
+
+                    <div class="move1">
+                    <div class="project jump1 ">
+                        <div class="title">Mp4streamer</div>
+                        <a href='https://github.com/GreenBerrys/GreenBerrys.github.io/tree/master/mp4streamer' >
+                            <div id="mp4streamer"></div>
+                        </a>
+                        <button title="Programm & Testdaten als 7z-Archiv">
+                            <a href='https://github.com/GreenBerrys/GreenBerrys.github.io/tree/master/Archiv/mp4streamer'>ARCHIV</a>
+                        </button>
+                        <div class="text">
+                            <p><b>Sammeln &amp; streamen von MP4-Videos.</b><br>
+                            Sucht Verzeichnisse nach mp4-Dateien ab und erstellt eine durchsuchbare Bibliothek aller gefundenen Dateien. 
+                            Dabei werden vom Kodi-Mediacenter erzeugte Info-Dateien mit ausgewertet. Die Dateien können direkt ins Netz gestreamt werden.
+                            </p>
                         </div>
-                        
-                        <div class="mySlides2 slide">
-                            <img src="images/rezeptor-2.png" alt="screenshot">
+                    </div>
+                    </div>
+
+                    <div class="project">
+                        <div class="title">Rezeptor</div>
+                        <a href='https://github.com/GreenBerrys/GreenBerrys.github.io/tree/master/rezeptor-neu' >
+                            <div id="rezeptor"></div>
+                        </a>
+                        <button title="Programm als 7z-Archiv">
+                            <a href='https://github.com/GreenBerrys/GreenBerrys.github.io/tree/master/Archiv/rezeptor-neu'>ARCHIV</a>
+                        </button>
+                        <div class="text">
+                            <p><b>Austausch von Kochrezepten</b><br>
+                                Rezeptor soll die Grundfunktionen einer Web-Seite zum Austausch von Kochrezepten abbilden.
+                                Die Rezepte können erfasst, geändert, gelöscht, bewertet und kommentiert werden.
+                            </p>
                         </div>
-                        
-                        <div class="mySlides2 slide">
-                            <img src="images/rezeptor-3.png" alt="screenshot">
+                    </div>
+        
+                    <div class="move2">
+                    <div class="project jump2">
+                        <div class="title">Mini Todo-App</div>
+                        <a href='https://github.com/GreenBerrys/GreenBerrys.github.io/tree/master/todoApp/' >
+                            <div id="todo"></div>
+                        </a>
+                        <button title="Programm als 7z-Archiv">
+                            <a href='https://github.com/GreenBerrys/GreenBerrys.github.io/tree/master/Archiv/todoApp'>ARCHIV</a>
+                        </button>
+                        <div class="text">
+                            <p><b>Kleine Todo-App</b><br>
+                                Erste Gehversuche mit dem DOM.
+                            </p>
                         </div>
-                    </a>
-                    <a class="prev" onclick="plusSlides(-1, 1)">&#10094;</a>
-                    <a class="next" onclick="plusSlides(1, 1)">&#10095;</a>
-                </div>
-                <div class="text">
-                    <h2><a href='https://github.com/GreenBerrys/GreenBerrys.github.io/tree/master/rezeptor-neu' style="color: rgb(230, 224, 224);">Rezeptor</a></h2>
-                    <a href='https://github.com/GreenBerrys/GreenBerrys.github.io/tree/master/Archiv/rezeptor-neu'>als Archiv runterladen</a>
-                    <p>Webseite zum Austausch von Kochrezepten</p>
-                </div>
-            </div>
-            
-            <div class="project">
-                <div class="slideshow-container">
-                    <a href='https://github.com/GreenBerrys/GreenBerrys.github.io/tree/master/todoApp/'>
-                        <div class="mySlides3 slide">
-                            <img src="images/todo-1.png" alt="screenshot">
-                        </div>
-                        
-                        <div class="mySlides3 slide">
-                            <img src="images/todo-2.png" alt="screenshot">
-                        </div>
-                        
-                        <div class="mySlides3 slide">
-                            <img src="images/todo-3.png" alt="screenshot">
-                        </div>
-                    </a>
-                    <a class="prev" onclick="plusSlides(-1, 2)">&#10094;</a>
-                    <a class="next" onclick="plusSlides(1, 2)">&#10095;</a>
-                </div>
-                <div class="text">
-                    <h2><a href='https://github.com/GreenBerrys/GreenBerrys.github.io/tree/master/todoApp' style="color: rgb(230, 224, 224);">Todo-App</a></h2>
-                    <a href='https://github.com/GreenBerrys/GreenBerrys.github.io/tree/master/Archiv/todoApp'>als Archiv runterladen</a>
-                    <p>Mini Todo-App</p>
+                    </div>
+                    </div>
+
                 </div>
             </div>
 
-            <br><br><br>
-            <p  style="margin-left: 20px; font-size: 1.5rem; font-weight: bold;">
-                <a href='https://greenberrys.ddns.net'><img src="images/raspberry.svg" alt="raspberry" width="60px" style="float: left; margin-right: 10px;"> Test-Server (Pi 4)</a>
-                <span style="font-size: 1rem; font-weight: normal;"> - auf Anfrage</span>
-                <span style="font-size: 1rem; font-weight: normal;"><br> Raspbian 64-Bit (Debian 11 'bullseye'), nginx, Node.js&nbsp;18, MongoDB&nbsp;5</span>
-                <span style="font-size: 1rem; font-weight: normal;"><br> <a href='https://greenberrys.ddns.net/mp4streamer'>Mp4streamer-Demo</a> (<span id="mp4streamerStatus" class="isOffline">offline</span>)</span>
-                <span style="font-size: 1rem; font-weight: normal;"> &nbsp;&nbsp;&nbsp;<a href='https://greenberrys.ddns.net/rezeptor'>Rezeptor-Demo</a> (<span id="rezeptorStatus" class="isOffline">offline</span>)</span>
-            </p>
-            <p>
-            <br><br><br>    
-            <span style="margin-left: 20px; font-size: 1.5rem; font-weight: bold;">CSRF-Test:&nbsp;</span>
-            Local auf Portadr.
-            <a href='http://localhost:3000/'> 3000</a>,
-            <a href='http://localhost:3100/'> 3100</a>,    
-            <a href='http://localhost:3345/'> 3345</a>    
-            <br><br><br>
-            </p>    
+            <footer>    
+            <div class="foot">
+                <br><br><br>
+
+                <div class="lightSwitch" onclick="lightClick()">Licht</div>
+
+                <div  class="raspberry">
+                    <a href='https://greenberrys.ddns.net'><img src="images/raspberry.svg" alt="raspberry"></a>
+                    <div>    
+                        <a href='https://greenberrys.ddns.net'>Test-Server (Pi 4)<span> - auf Anfrage</span></a>
+                        <div>&lpar;Raspbian 64-Bit (Debian 11 'bullseye'), nginx, Node.js&nbsp;18, MongoDB&nbsp;5&rpar;</div>
+                        <span> <a href='https://greenberrys.ddns.net/mp4streamer'>Mp4streamer-Demo</a> &lpar;
+                            <span id="mp4streamerStatus" class="isOffline">offline</span> &rpar;&nbsp;&nbsp;&nbsp;
+                        </span>
+                        <span> <a href='https://greenberrys.ddns.net/rezeptor'>Rezeptor-Demo</a> &lpar;
+                            <span id="rezeptorStatus" class="isOffline">offline</span> &rpar;
+                        </span>
+                    </div>
+                </div>
+                <br><br><br>    
+                <p class="crsf">
+                        <span>CSRF-Test:&nbsp;</span>
+                        Local auf Portadr.
+                        <a href='http://localhost:3000/'> 3000</a>,
+                        <a href='http://localhost:3100/'> 3100</a>,    
+                        <a href='http://localhost:3345/'> 3345</a> 
+                </p>    
+                <br><br><br>
+            </div>    
+            </footer>
+
+        <!-- ----------------------------------------------------------------------- -->
+         
+        <script src="slideshow.js"></script>
         <script>
-            //================================================================  
 
-            document.addEventListener('DOMContentLoaded', () => 
-                {
-                    testOnlineStatus();  // check online-status mp4streamer & rezeptor demo
-                });
+            sleep = ( time ) => { return new Promise( ( resolve ) => setTimeout( resolve, time ) ); }
 
-            let slideIndex = [1,1,1];
-            let slideId = ["mySlides1", "mySlides2", "mySlides3"]
-            showSlides(1, 0);
-            showSlides(1, 1);
-            showSlides(1, 2);
-            
-            function plusSlides(n, no) {
-              showSlides(slideIndex[no] += n, no);
+            const lightswitch = document.getElementsByClassName( 'lightSwitch' )[ 0 ];
+            const lightoff = document.getElementById( "lightOff" );
+
+            const minions = [ document.getElementById( "minion0" ),
+                              document.getElementById( "minion1" ),
+                              document.getElementById( "minion2" ),
+                              document.getElementById( "minion3" ),
+                            ];
+
+            function flashLight( e ){
+
+                e.preventDefault(); 
+                lightoff.classList.toggle( "flash" );
+                return false;
             }
             
-            function showSlides(n, no) {
-                let i;
-                let x = document.getElementsByClassName(slideId[no]);
+            // 'Turn the lights on/off'
+            function lightClick(){
+              
+                lightswitch.classList.toggle( "light" );
 
-                if (n > x.length) { slideIndex[no] = 1 }
-                if (n < 1) { slideIndex[no] = x.length }
+                if ( lightswitch.classList.contains( 'light' ) ) {
 
-                for (i = 0; i < x.length; i++) {
-                    x[i].style.display = "none";
+
+                    lightOff.addEventListener( 'contextmenu', flashLight );
+
+
+                    sleep( 300 ).then( () => { 
+                        
+                            lightswitch.style.opacity = 0; 
+                            lightoff.style.display="block"; 
+
+                            document.getElementById( "partyTxt" ).className = "fallIn";
+                            document.getElementById( "partyTxtDumb" ).className = "dumb";
+
+                            for( let i = 0; i < minions.length; minions[ i ].className = `minion${i}`, i++ );
+                    } );
                 }
-                x[slideIndex[no]-1].style.display = "block";
-                } 
+                else {
+
+                    lightOff.removeEventListener( 'contextmenu', flashLight );
+
+                    lightoff.style.display="none";
+                    lightoff.className="";
+                    lightswitch.style.opacity = 1;
+
+                    document.getElementById( "partyTxt" ).className = "";
+                    document.getElementById( "partyTxtDumb" ).className = "";
+
+                    for( let i = 0; i < minions.length; minions[ i ].className = "", i++ );
+                }
+            }
+
+            const mp4streamerShow = new slideshow( "mp4streamer",
+                                                       ["images/mp4streamer1.jpg",
+                                                        "images/mp4streamer2.jpg",   
+                                                        "images/mp4streamer3.jpg",   
+                                                        "images/mp4streamer4.jpg",   
+                                                        "images/mp4streamer5.jpg",   
+                                                        "images/mp4streamer6.jpg",   
+                                                        "images/mp4streamer7.jpg"   
+                                                       ], 
+                                                       { effect: "flip", width: "29vw", margin: "0px", boxShadow: "node" },
+                                                       { backgroundColor: "rgba(173, 216, 230, 0.6)", hoverColor: "blue" },
+                                                       { width: "13vw", height: "13vw", minWidth: "180px", minHeight: "180px",
+                                                         borderRadius: "50%",activateOn: "rightClick" }
+                                                     );
+
+            const rezeptorShow = new slideshow( "rezeptor",
+                                                 ["images/rezeptor01.jpg",
+                                                  "images/rezeptor02.jpg",   
+                                                  "images/rezeptor03.jpg",   
+                                                  "images/rezeptor04.jpg",   
+                                                  "images/rezeptor05.jpg",   
+                                                  "images/rezeptor06.jpg",   
+                                                  "images/rezeptor07.jpg",   
+                                                  "images/rezeptor08.jpg",   
+                                                  "images/rezeptor09.jpg",   
+                                                  "images/rezeptor10.jpg",   
+                                                  "images/rezeptor11.jpg",   
+                                                  "images/rezeptor12.jpg"   
+                                                 ], 
+                                                 { effect: "flip", width: "29vw", margin: "0px", boxShadow: "none" },
+                                                 { backgroundColor: "rgba(173, 216, 230, 0.6)", hoverColor: "blue" },
+                                                 { width: "13vw", height: "13vw", minWidth: "180px", minHeight: "180px",
+                                                 borderRadius: "50%",activateOn: "rightClick" }
+                                               );
+                
+            const todoShow = new slideshow( "todo",
+                                        ["images/todo1.jpg",
+                                         "images/todo2.jpg",
+                                         "images/todo3.jpg"
+                                        ], 
+                                        { effect: "shift", width: "29vw", margin:"0px", boxShadow: "none" },
+                                        { backgroundColor: "rgba(173, 216, 230, 0.6)", hoverColor: "blue"  },
+                                        { width: "13vw", height: "13vw", minWidth: "180px", minHeight: "180px",
+                                        borderRadius: "50%",activateOn: "rightClick" }
+                                    );
+
+            document.addEventListener( 'readystatechange', () => {
+            
+                if ( document.readyState === "complete" ) {
+
+                    let light = document.getElementById("lightOff");
+                    light.style.height = document.body.offsetHeight + 65 +"px";
+
+                    testOnlineStatus();  // check online-status mp4streamer & rezeptor demo
+
+                    // set real page height  - don't known why the '65' is necessary!? 
+                    window.addEventListener( 'resize', () => { light.style.height = document.body.offsetHeight + 65 + "px"; } );
+                }
+            });
 
             /* ------------------------------------------------------------------------
                Check Online-Status
@@ -278,7 +593,6 @@
             // ========================================== Inital Check
             function testOnlineStatus()
             {
-
                 const MP4STREAMERURL = "https://greenberrys.ddns.net/mp4streamer";
                 const REZEPTORURL = "https://greenberrys.ddns.net/rezeptor";
 
@@ -286,9 +600,9 @@
                 const REZEPTORSTATUS = document.querySelector('#rezeptorStatus');
 
                 // Test if Mp4streamer is online 
-                checkURL( MP4STREAMERURL, (err, data) => {
+                checkURL( MP4STREAMERURL, ( err, data ) => {
 
-                                        if (err != null) {
+                                        if ( err != null ) {
                                             MP4STREAMERSTATUS.innerHTML = "offline";
                                             MP4STREAMERSTATUS.className = "isOffline";
                                         } else {
@@ -297,9 +611,9 @@
                                         }
                 });    
                 // Test if Rezeptor is online 
-                checkURL( REZEPTORURL, (err, data) => {
+                checkURL( REZEPTORURL, ( err, data ) => {
 
-                                        if (err != null) {
+                                        if ( err != null ) {
                                             REZEPTORSTATUS.innerHTML = "offline";
                                             REZEPTORSTATUS.className = "isOffline";
                                         } else {
@@ -311,8 +625,9 @@
         </script>
 
         <noscript>
-            <h2 id="noJs">Zur Anzeige der Bilder<br> wird Javascript ben&ouml;tigt..</h2>
+            <div id="noJs">
+                <span class="blink">Bitte Javascript aktivieren..</span>
+            </div>
         </noscript>
     </body>
-    
 </html>
