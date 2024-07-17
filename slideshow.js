@@ -8,7 +8,7 @@
  *  Falls beim initialisieren bereits ein Style-Abschnitt mit dieser ID existiert wird der enthaltene CSS-Code an das
  *  Ende rangehängt. Dadurch kann man die von slideshow erzeugten CSS-Regeln überschreiben. 
  * 
- *  EINBINDEN MIT:     '<script src="slideshow.js"> </script>'
+ *  EINBINDEN MIT:     '<script src="https://greenberrys.github.io/slideshow.js"></script>'
  * 
  *  ERZEUGEN EINER SLIDESHOW;
  *   
