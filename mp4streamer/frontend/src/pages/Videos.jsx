@@ -78,8 +78,8 @@ useEffect( () => {
 
                             // Back to start page when cookie has expired
                             setAuth( false ); 
-                            navigate( "/" );
                             sessionStorage.removeItem("User");
+                            navigate( "/" );
                         }
                         else{
                             
