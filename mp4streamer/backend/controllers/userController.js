@@ -32,8 +32,10 @@ const checkAttempts = ( req ) => {
 
     try{    
         
-        if( req.session.userid )
-            req.session.destroy();
+        if( req.session.userid ){
+            // req.session.destroy();
+            req.session = null;
+        }
 
         log.logger( "Logout", req );
         return res.status( 200 ).json( { error: false, result: [] } ); 

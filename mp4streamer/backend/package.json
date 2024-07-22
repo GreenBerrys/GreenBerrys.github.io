@@ -1,6 +1,6 @@
 {
   "name": "backend",
-  "version": "0.4.0",
+  "version": "0.4.5",
   "description": "mp4streamer backend",
   "keywords": [],
   "author": "Frank",
@@ -16,11 +16,11 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.1",
-    "express-session": "^1.17.3",
-    "xml2js": "^0.5.0"
+    "cookie-session": "",
+    "xml2js": "^0.5.0",
+    "@recent-cli/resolve-lnk": "^0.0.2"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1",
-    "@recent-cli/resolve-lnk": "^0.0.2"
+    "nodemon": "^3.0.1"
   }
 }

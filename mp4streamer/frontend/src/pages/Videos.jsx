@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { useParams } from "react-router-dom";
 import videoApi from "../lib/videoApi";
 import VideoCard from "../components/VideoCard";
@@ -6,6 +6,8 @@ import BusyIndicator from "../components/BusyIndicator.jsx";
 import PageNav from "../components/PageNav.jsx";
 import ModalWin from "../components/ModalWin.jsx";
 import attention from "../Images/attention.png";
+import Context from "../AppContext.js";
+import { useNavigate } from "react-router-dom";
 import "./Videos.css";
 
 const  back = { page: 0, scrollPos: 0, pos: 0, filter: "" };
@@ -28,6 +30,9 @@ const [ videos, setVideos ] = useState( {
 
 
 let { filter } = useParams( null );             // search parameter 
+
+const { setAuth } = useContext( Context );
+const navigate = useNavigate();
 
 const [ init, setInit ] = useState( false );    // Flag for component initialized
 const pageEnd = useRef( 0 );                    // reference to the pageend (Position)
@@ -68,10 +73,19 @@ useEffect( () => {
         busy.current = true;
         setVideos( {...videos }, { result: [] } );
         videoApi.find( back.filter, back.page, ( data ) => {
-                                                                            
-                        busy.current = false;
-                        setVideos( () => data ); 
 
+                        if (data.error && data.errMsg ===  "Access denied!" ){
+
+                            // Back to start page when cookie has expired
+                            setAuth( false ); 
+                            navigate( "/" );
+                            sessionStorage.removeItem("User");
+                        }
+                        else{
+                            
+                            busy.current = false;
+                            setVideos( () => data );
+                        }
         }); 
     }    
 // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -168,7 +182,7 @@ if( !busy.current ){
                     <img src={ attention } alt="achtung" style={ { width: 70, margin: "auto" } } />
                     <div>
                         <p>
-                            ( { videos.errMsg } )
+                                { videos.errMsg } 
                         </p>
                         <p><button onClick={ () => setVideos( { error:false, count: 0, result: [] } ) }>Ok</button></p>
                     </div>

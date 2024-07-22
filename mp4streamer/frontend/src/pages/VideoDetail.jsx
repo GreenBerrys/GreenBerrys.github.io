@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext} from "react";
 import { useParams, Link  } from "react-router-dom";
 import videoApi from "../lib/videoApi.js";
 import BusyIndicator from "../components/BusyIndicator.jsx";
@@ -6,6 +6,8 @@ import { SERVER } from "../config.js";
 import "./VideoDetail.css";
 import ModalWin from "../components/ModalWin.jsx";
 import attention from "../Images/attention.png";
+import Context from "../AppContext.js";
+import { useNavigate } from "react-router-dom";
 
 /********************************************************************************************
  * 
@@ -18,8 +20,11 @@ useEffect( () => {
 },[]);
 
 let { recno } = useParams( null );           // video recordnumber
-const busy = useRef( true );
 
+const { setAuth } = useContext( Context );
+const navigate = useNavigate();
+
+const busy = useRef( true );
 const [ video, setVideo] = useState( {
     
                             error: false,
@@ -42,9 +47,18 @@ useEffect(() => {
         busy.current = true;
         setVideo( {...video }, { result: [] } );
         videoApi.getOne( recno, ( data ) => {
-                                                                            
+
+                    if (data.error && data.errMsg ===  "Access denied!" ){
+
+                        // Back to start page when cookie has expired
+                        setAuth( false ); 
+                        navigate( "/" );
+                        sessionStorage.removeItem("User");
+                    }
+                    else{
                         busy.current = false;
                         setVideo( () => data );
+                    }
         }); 
     }    
     return () => {
@@ -84,13 +98,15 @@ const titleURLtrans = ( txt ) => {
 if( !busy.current ){
     return (
         <div id="videoDetail">
- 
-            <div id="background" >
-                    <img src={ `${SERVER}video/fanart/${video.result[0].recno}` } alt="..."/> 
-            </div>
-    
+  
             <div >
                 { !video.error ?
+
+                <>
+                    <div id="background" >
+                        <img src={ `${SERVER}video/fanart/${video.result[0].recno}` } alt="..."/> 
+                    </div>
+
                     <div id="videoDetailContainer">
                         <div id="title">
                         { cut( video.result[0].title ) }
@@ -103,7 +119,7 @@ if( !busy.current ){
                             <table>
                                 <tbody>
                                     <tr>
-                                        <th><b>Regisseur:</b></th>        
+                                        <th><b>Regie:</b></th>        
                                         <td>{ video.result[0].director }</td>
                                     </tr>
                                     <tr>
@@ -131,16 +147,19 @@ if( !busy.current ){
                             </Link>
                             }
                     </div>
+                </>
+
                 : 
                     <ModalWin>
                         <img src={ attention } alt="achtung" style={ { width: 70, margin: "auto" } } />
                         <div>
                             <p style={{color: 'red'}}>
-                                ( { video.errMsg }
+                                { video.errMsg }
                             </p>
-                            <p><button onClick={() => setVideo( { error:false, count: 0, result: [] } ) }>Ok</button></p>
+                            <p><button onClick={ () => setVideo( { error:false, count: 0, result: [] } ) }>Ok</button></p>
                         </div>
-                    </ModalWin>        
+                    </ModalWin>    
+                       
                 }    
             </div>    
         </div>

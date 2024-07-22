@@ -1,12 +1,15 @@
 {
     "name": "frontend",
-    "version": "0.4.1",
+    "version": "0.4.5",
     "description": "mp4streamer frontend",
+    "homepage": "/",
     "keywords": [],
     "author": "Frank",
     "license": "MIT",
     "type": "module",
     "dependencies": {
+      "@babel/plugin-transform-private-property-in-object": "^7.24.7",
+      "@babel/plugin-proposal-private-property-in-object": "7.21.11",
       "@testing-library/jest-dom": "^5.16.5",
       "@testing-library/react": "^13.4.0",
       "@testing-library/user-event": "^13.5.0",
@@ -16,7 +19,6 @@
       "react-scripts": "5.0.1"
     },
     "devDependencies": {
-        "@babel/plugin-proposal-private-property-in-object" : "7.21.11"
     },
     "scripts": {
       "start": "react-scripts start",

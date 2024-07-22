@@ -203,6 +203,8 @@ let Filesize;
 
 async function getStream( req, res ) {
 
+    const CHUNKSIZE =  200 * 1000000;         // 200MB chunks
+
     try {
             if( Recno !== req.params.recno || EpiNo !== req.params.epino ){
 
@@ -234,7 +236,7 @@ async function getStream( req, res ) {
                 
                 const end = parts[1] ? parseInt( parts[1], 10 ) : Filesize - 1;
 
-                const chunksize = ( end-start ) +1 < 500000000 ? ( end - start ) +1 : 500000000; // 500MB chunks
+                const chunksize = ( end-start ) +1 < CHUNKSIZE ? ( end - start ) +1 : CHUNKSIZE; 
                 
                 const file = fs.createReadStream( Path, { start, end } );
                 const header = {
@@ -244,6 +246,9 @@ async function getStream( req, res ) {
                                 'Content-Type': 'video/mp4',
                             };
         
+                // write something in the session cookie so that the cookie will be sent.
+                req.session.Magic = Math.floor(Date.now() / 0x60e3 );
+
                 res.writeHead( 206, header );
                 file.pipe( res );
 
@@ -253,6 +258,7 @@ async function getStream( req, res ) {
                                 'Content-Length': Filesize,
                                 'Content-Type': 'video/mp4',
                             };
+
                 res.writeHead( 200, head );
                 fs.createReadStream( Path ).pipe( res );
             }

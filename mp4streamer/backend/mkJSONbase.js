@@ -50,23 +50,9 @@ const transGen = ( genArray ) => {
               .replaceAll(' &amp; ', ',');
 
 }
-// --------------------------------------------------------------------------------
-const help = ( msg = '' ) => {
-
-    console.log( `${msg !== '' ? `\n${msg}\n` : ''}` + 
-                '\nmkJSONbase - "Datenbank" movies.json aus MP4-Bestand im Unterverzeichnis "Database" erzeugen' +
-                '\n             (von Kodi erzeugten NFO-Dateien werden dabei mit ausgewertet)\n' +
-                '\nSyntax: "node mkJSONbase [<Quellverzeichnis>]"    (default Quellverzeichnis ist "./public")\n' + 
-                '\nz.B.: "node mkTestData"' +
-                '\n      "node mkTestData ./public"\n' 
-    );
-    process.exit(0);
-}
 // =====================================================================================================
 
-if( ARGS.length === 3 && ( ARGS[2].startsWith('-h') || ARGS[2].startsWith('/h') || ARGS[2].startsWith('--h') ) ){
-    help(""); 
- }
+/*
 if( !fs.existsSync( MP4ROOT ) )
     help(`Quellverzeichnis "${MP4ROOT}" nicht gefunden!`);
 
@@ -77,7 +63,7 @@ if( ok !== 'j'){
 console.log("Vorgang abgebrochen..");
 process.exit(0);
 }
-
+*/
 let movies=[];
 
 console.log(`\nLese "${MP4ROOT}"..`); 
@@ -110,7 +96,6 @@ process.exit(0);
 async function scanTree( path, movies ){
 
     const msg = `scanning ${ path.length > 45 ? '...' + path.substring( path.length - 42 ) : path }`
-    //console.log(path.substring( path.length - 40 ),msg.length,45 - msg.length)
     process.stdout.write( ' '.repeat( 55 - msg.length ) + msg + '\r' );
 
     try{
@@ -148,8 +133,6 @@ async function scanTree( path, movies ){
 async function getMovies(dir, movies) {
 
     try{
-        // console.log("Scanning path:",dir)
-
         const fileList = fs.readdirSync(dir);
 
         const movieFiles = fileList.filter(mfile => mfile.toLowerCase().endsWith('.mp4'));

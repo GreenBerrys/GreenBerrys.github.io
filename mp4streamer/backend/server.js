@@ -3,7 +3,7 @@ import { execSync } from "node:child_process";
 import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
-import session from "express-session";
+import cookieSession from "cookie-session";
 import database from "./Database/database.js";
 import log from "./utils/logger.js"
 
@@ -18,22 +18,16 @@ const SERVER = process.env.s_SERVER;
 
 const server = express();
 server.use( cors() );
-server.set( 'trust proxy', true );
+server.set( 'trust proxy', 1 );
 server.use( express.json() );
 server.use( express.urlencoded( { extended: true } ) ); 
 
-server.use( session( {
+server.use( cookieSession( {
     name: `${process.env.s_COOKIE}`,
     secret: `${process.env.s_SECRET}`,
-    resave: false,
-    saveUninitialized: true,
-    rolling: false, 
-    cookie: { 
-        maxAge: 60000 * 60 * 5,    // 5 hours
-        httpOnly: true, 
-        sameSite: 'strict',
-        //secure: true
-    },
+    maxAge: 1 * 60 * 60000,                //1 hour
+    sameSite: 'strict',
+    httpOnly: true
 }));
 
 server.listen( PORT, () => console.log( `${SERVER} is listening on port ${PORT}` ) );

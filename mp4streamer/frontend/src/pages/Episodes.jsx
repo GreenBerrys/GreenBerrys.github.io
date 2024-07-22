@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { useParams, Link  } from "react-router-dom";
 import videoApi from "../lib/videoApi.js";
 import BusyIndicator from "../components/BusyIndicator.jsx";
@@ -6,6 +6,9 @@ import { SERVER } from "../config.js";
 import "./Episodes.css";
 import ModalWin from "../components/ModalWin.jsx";
 import attention from "../Images/attention.png";
+import Context from "../AppContext.js";
+import { useNavigate } from "react-router-dom";
+
 
 /********************************************************************************************
  * 
@@ -19,9 +22,12 @@ useEffect( () => {
     setInit( () => true );
 },[]);
 
-let { recno, title } = useParams( null, null );           
-const busy = useRef( true );
+let { recno, title } = useParams( null, null );     
 
+const { setAuth } = useContext( Context );
+const navigate = useNavigate();
+
+const busy = useRef( true );
 const [init, setInit] = useState(false);    // Flag for component initialized
 
 const [ episodes, setEpisodes] = useState( {
@@ -46,9 +52,18 @@ useEffect(() => {
         setEpisodes( {...episodes }, { result: [] } );
         back.recNo = recno;
         videoApi.getEpisodes( recno, ( data ) => {
-                                                                            
-                        busy.current = false;
-                        setEpisodes( () => data );
+
+                        if (data.error && data.errMsg ===  "Access denied!" ){
+
+                            // Back to start page when cookie has expired
+                            setAuth( false ); 
+                            navigate( "/" );
+                            sessionStorage.removeItem("User");
+                        }
+                        else{
+                            busy.current = false;
+                            setEpisodes( () => data );
+                        }
         }); 
     }    
     return () => {
@@ -81,15 +96,18 @@ const trans = ( txt ) => {
 }
 
 if( !busy.current ){
+
     return (
         <div id="episodes">
  
-            <div id="background" >
-                    <img src={`${SERVER}video/fanart/${recno}` } alt="..."/> 
-            </div>
-    
-            <div >
+            <div>
                 { !episodes.error ?
+
+                <>
+                    <div id="background" >
+                            <img src={`${SERVER}video/fanart/${recno}` } alt="..."/> 
+                    </div>
+
                     <div id="episodesContainer">
                         <div id="title">
                         { cut( title ) }
@@ -120,16 +138,19 @@ if( !busy.current ){
                             <button className="play">Episode {epiNo+1} ansehen</button>
                         </Link>
                     </div>
+                </>
+
                 : 
                     <ModalWin>
                         <img src={ attention } alt="achtung" style={ { width: 70, margin: "auto" } } />
                         <div>
                             <p>
-                                ( { episodes.errMsg }
+                                { episodes.errMsg }
                             </p>
-                            <p><button onClick={() => setEpisodes( { error:false, count: 0, result: [] } ) }>Ok</button></p>
+                            <p><button onClick={ () => setEpisodes( { error:false, count: 0, result: [] } ) }>Ok</button></p>
                         </div>
-                    </ModalWin>        
+                    </ModalWin>   
+                    
                 }    
             </div>    
         </div>
