@@ -11,7 +11,12 @@
         a { text-decoration: none; }
 
         body{
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+                        sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+
             margin-top: 4rem; 
             color: black;
             background-image: linear-gradient(150deg,lightslategrey, #f6f6f6); 
@@ -81,7 +86,7 @@
             color: rgb(63, 53, 53);
             float: right;
         }
-
+        /* ------------------------------------------------ Footer */
         .foot { 
             width: 98vw;
             border-radius: 0px 25px 25px 0px; 
@@ -95,12 +100,60 @@
         .foot .raspberry div>a{ font-size: 1.5rem; white-space: nowrap;}
         .foot .raspberry div a span{ font-size: 1rem; font-weight: normal; vertical-align: middle; }
         .foot .raspberry span { white-space: nowrap; }
-        
-        .foot .crsf>span{ font-weight: bold; font-size: large; } 
-        .foot .raspberry, .foot .crsf { padding-left: 20px; }
 
-        .isOnline{ color: green; }
-        .isOffline{ color: red; }
+        .pi4{ display: flex; align-items: center; justify-content: start; vertical-align: middle; }
+        .pi4 #pi4Symb a img { width: 60px; margin: 0px 10px 0px 5px; }
+       
+        .pi4 #pi4Links { flex: 5 5; }
+        .pi4 #pi4Links a { font-size: 1.5rem; }
+        .pi4 #pi4Links a span { font-weight: normal; }
+        .pi4 #pi4Links span { white-space: nowrap; }
+        .pi4 #pi4Links span a { font-size: 1rem; white-space: nowrap; }
+
+        .pi4 #pi4Light{ flex: 2.5 2.5; }
+        .pi4 #pi4Light { display: flex; height: 100px; justify-content: end; }
+        .pi4 #pi4Light div {    
+            position: absolute;
+            margin: 10px 10px 10px 10px;
+            padding: 8px 13px;
+            font-size: 18px;
+            cursor: pointer;
+            text-align: center;
+            color: #fff;
+            background-color: #555454;
+            border-radius: 15px;
+            border: 3px outset #d4d4d4;
+        } 
+
+        .pi4 #pi4Light img {
+            position: absolute;
+            margin: 25px -5px 5px 5px;
+            width: 170px;
+            height: 70px;
+            opacity: 0.6;
+        }
+        
+        .pi4 #pi4Light div:hover { 
+            background-color: #3a3a3a; 
+            animation: wobble 1s alternate infinite; 
+        }
+        @keyframes wobble {
+                0%   { transform: translate( 0,   0px ); }
+                10%  { transform: translate( 0, -15px ); }
+                20%  { transform: translate( 0,   0px ); }
+                30%  { transform: translate( 0, -10px ); }
+                40%  { transform: translate( 0,   0px ); }
+                50%  { transform: translate( 0,  -5px ); }
+                60%  { transform: translate( 0,   0px ); }
+                70%  { transform: translate( 0,  -2px ); }
+                90%  { transform: rotate(20deg) scale( 90% ); }
+                100% { transform: rotate( 0deg )  scale( 100% ); }
+            }
+
+        .pi4 #pi4Light .light { border: 3px inset #d4d4d4; transform: translateY(3px); z-index: 11; }
+
+        .pi4 #pi4Links .isOnline{ color: green; }
+        .pi4 #pi4Links .isOffline{ color: red; }
 
         #noJs{
             position: fixed; 
@@ -156,30 +209,6 @@
 
         /* -------------------------------------------------------- lightswitch */
 
-        .lightSwitch {    
-            display: block;
-            position: relative;
-            margin: 40px 20px 10px 10px;
-            float: right; 
-            padding: 8px 13px;
-            font-size: 18px;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-            outline: none;
-            color: #fff;
-            background-color: #555454;
-            border: none;
-            border-radius: 15px;
-            border: 3px outset  #d4d4d4;
-        }    
-        .light {
-            border: 3px inset #d4d4d4;
-            transform: translateY(4px); 
-            z-index: 11;
-        }
-        .lightSwitch:hover { background-color: #3a3a3a; }
-
         #lightOff{
             display: block;
             position: absolute;
@@ -205,7 +234,6 @@
             80%  { transform: translate( 0, -0 ); }
             90%  { transform: translate( 0, -12% ); }
             100% { transform: translate( 0, 0 ); opacity: .5; }
-
         }
 
         .dumb { animation: dumb 1.2s 1.5s linear infinite }
@@ -277,6 +305,20 @@
         }
 
     /* --------------------------------------------------------- */
+        #rezeptor:hover { animation: wobble2 1s linear  }
+        #todo:hover { animation: wobble2 1s linear  }
+        #mp4streamer:hover { animation: wobble2 1s linear  }
+
+        @keyframes wobble2 {
+                 0%  { transform: translate( 0,   0px ) }
+                10%  { transform: translate( 0, -15px ) }
+                20%  { transform: translate( 0,   0px ) }
+                30%  { transform: translate( 0, -10px ) }
+                40%  { transform: translate( 0,   0px ) }
+                50%  { transform: translate( 0,  -5px ) }
+                60%  { transform: translate( 0,   0px ) }
+        }
+    /* --------------------------------------------------------- */    
 
     </style>
     <style id="_slideShow-CSS">
@@ -418,23 +460,27 @@
             <footer>    
             <div class="foot">
                 <br><br><br>
-
-                <div class="lightSwitch" onclick="lightClick()">Licht</div>
-
-                <div  class="raspberry">
-                    <a href='https://greenberrys.ddns.net'><img src="images/raspberry.svg" alt="raspberry"></a>
-                    <div>    
-                        <a href='https://greenberrys.ddns.net'>Test-Server (Pi 4)<span> - auf Anfrage</span></a>
+                <div class="pi4">
+                    <div id="pi4Symb">
+                        <a href='https://greenberrys.ddns.net'><img src="images/raspberry.svg" alt="raspberry"></a>
+                    </div>
+                    <div id="pi4Links">
+                        <a href='https://greenberrys.ddns.net'>Test-Server (Pi 4)</a> &nbsp;-&nbsp;auf&nbsp;Anfrage
                         <div>&lpar;Raspbian 64-Bit (Debian 11 'bullseye'), nginx, Node.js&nbsp;20, MongoDB&nbsp;5&rpar;</div>
-                        <span> <a href='https://greenberrys.ddns.net/mp4streamer'>Mp4streamer-Demo</a> &lpar;
-                            <span id="mp4streamerStatus" class="isOffline">offline</span> &rpar;&nbsp;&nbsp;&nbsp;
+                        <span> <a href='https://greenberrys.ddns.net/mp4streamer'>Mp4streamer-Demo</a>
+                            &lpar;<span id="mp4streamerStatus" class="isOffline">offline</span>&rpar; &nbsp; &nbsp;
+                            
                         </span>
-                        <span> <a href='https://greenberrys.ddns.net/rezeptor'>Rezeptor-Demo</a> &lpar;
-                            <span id="rezeptorStatus" class="isOffline">offline</span> &rpar;
+                        <span> <a href='https://greenberrys.ddns.net/rezeptor'>Rezeptor-Demo</a>
+                            &lpar;<span id="rezeptorStatus" class="isOffline">offline</span>&rpar;
                         </span>
                     </div>
+                    <div id="pi4Light">
+                        <img src="images/pfeil.gif"></img>
+                        <div class="lightSwitch" onclick="lightClick()">Licht</div>
+                    </div>
                 </div>
-                <br>
+
 <!--                 
                 <br><br>    
                 <p class="crsf">
@@ -449,7 +495,7 @@
                 <br><br>
             </div>    
             </footer>
-
+            <br>
         <!-- ----------------------------------------------------------------------- -->
          
         <script src="slideshow.js"></script>
