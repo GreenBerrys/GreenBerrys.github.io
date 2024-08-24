@@ -83,7 +83,7 @@ const cut = (txt) => {
                     txt.substring( 0, txt.indexOf( ' - ' ) ).trim() }
                </div>
                <div className="titleText">{ 
-                    txt.substring( txt.indexOf( ' - ' )+2 ).replaceAll( '-' , '\n' ).trim() }
+                    txt.substring( txt.indexOf( ' - ' )+2 ).replace( ' - ' , '\n' ).trim() }
                </div>
                </>)
     }

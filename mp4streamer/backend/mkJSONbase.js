@@ -182,7 +182,8 @@ async function getMovies(dir, movies) {
                         if( data && data.movie ){
                             movie.title = data.movie.title ? String( data.movie.title ) : movName;
                             movie.subtitle = data.movie.subtitle ? String( data.movie.subtitle ) : "";
-                            movie.director = data.movie.director ? String( data.movie.director ) : "";
+                            //movie.director = data.movie.director ? String( data.movie.director ) : "";
+                            movie.director = data.movie.director ? data.movie.director.join(', ') : "";
                             movie.country = data.movie.country ? data.movie.country.join(', ') : "";
                             movie.year = data.movie.year ? String( data.movie.year ) : "";
                             movie.genre = data.movie.genre ? transGen( data.movie.genre ) : "";
@@ -225,7 +226,8 @@ async function getMovies(dir, movies) {
 
                         movie.title = data.tvshow.title ? String( data.tvshow.title ) : "";
                         movie.subtitle = data.tvshow.subtitle ? String( data.tvshow.subtitle ) : "";
-                        movie.director = data.tvshow.director ? String( data.tvshow.director ) : "";
+                        //movie.director = data.tvshow.director ? String( data.tvshow.director ) : "";
+                        movie.director = data.tvshow.director ? data.tvshow.director.join(', ') : "";
                         movie.country = data.tvshow.country ? data.tvshow.country.join(', ') : "";
                         movie.year = data.tvshow.year ? String( data.tvshow.year ) : "";
                         movie.genre = data.tvshow.genre ? transGen( data.tvshow.genre ) : "";
