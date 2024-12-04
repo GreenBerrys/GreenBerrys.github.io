@@ -6,6 +6,98 @@
  import { SERVER } from "../config.js";
 
 /*********************************************************************
+ *  getDirectors() - get directors
+ **********************************************************************/
+function getDirectors( setter ){
+
+    //console.log("user FETCH directors",SERVER + 'video/directors/');
+
+    return fetch( SERVER + 'video/directors/', {
+        method: 'GET', 
+        mode:"cors",
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+    })
+    .then(response => response.json())
+    .then(directors => {
+        setter( directors );
+    })
+    .catch((error) => {
+        console.error('Error:', error.message);
+    });
+ }
+/*********************************************************************
+ *  getActors() - get actors
+ **********************************************************************/
+function getActors( setter ){
+
+    //console.log("user FETCH actors",SERVER + 'video/actors/');
+
+    return fetch( SERVER + 'video/actors/', {
+        method: 'GET', 
+        mode:"cors",
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+    })
+    .then(response => response.json())
+    .then(actors => {
+        setter( actors );
+    })
+    .catch((error) => {
+        console.error('Error:', error.message);
+    });
+ }
+/*********************************************************************
+ *  getTags() - get video tags
+ **********************************************************************/
+function getTags( setter ){
+
+    //console.log("user FETCH tags",SERVER + 'video/tags/');
+
+    return fetch( SERVER + 'video/tags/', {
+        method: 'GET', 
+        mode:"cors",
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+    })
+    .then(response => response.json())
+    .then(tags => {
+        setter( tags );
+    })
+    .catch((error) => {
+        console.error('Error:', error.message);
+    });
+ }
+/*********************************************************************
+ *  getGenres() - get video genres
+ **********************************************************************/
+function getGenres( setter ){
+
+    //console.log("user FETCH genres",SERVER + 'video/genres/');
+
+    return fetch( SERVER + 'video/genres/', {
+        method: 'GET', 
+        mode:"cors",
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+    })
+    .then(response => response.json())
+    .then(genres => {
+        setter( genres );
+    })
+    .catch((error) => {
+        console.error('Error:', error.message);
+    });
+ }
+/*********************************************************************
  *  getEpisodes() - get video Episodes
  **********************************************************************/
 function getEpisodes( recno, setter ){
@@ -78,6 +170,10 @@ function getOne( recno, setter ){
 const videoApi = {
     find,
     getOne,
-    getEpisodes
+    getEpisodes,
+    getGenres,
+    getTags,
+    getActors,
+    getDirectors
 }
 export default videoApi; 

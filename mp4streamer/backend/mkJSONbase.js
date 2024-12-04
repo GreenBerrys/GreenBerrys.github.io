@@ -46,8 +46,8 @@ const transGen = ( genArray ) => {
               .replaceAll('Crime', 'Krimi')
               .replaceAll('Politics', 'Politik')
               .replaceAll('Adventure', 'Abenteuer')
-              .replaceAll('Comedy', 'Komödie, Comedy')
-              .replaceAll(' &amp; ', ',');
+              .replaceAll('Documentary', 'Dokumentation')
+              .replaceAll(' &amp;', ',');
 
 }
 // =====================================================================================================
@@ -65,6 +65,11 @@ process.exit(0);
 }
 */
 let movies=[];
+
+const tags = new Set();
+const genres = new Set();
+const directors = new Set();
+const actors = new Set();
 
 console.log(`\nLese "${MP4ROOT}"..`); 
 
@@ -87,6 +92,53 @@ for(let i = 0; i < movies.length; i++)
     movies[i].recno = i;
 
 writeJSON("./Database/movies.json", movies);
+
+writeJSON("./Database/genres.json", [ ...genres ].sort(
+    
+    (a,b) => {
+
+        const str1 = a.toUpperCase().replaceAll("Ö","OE").replaceAll("Ü","UE").replaceAll("Ä","AE").replaceAll("À","A");
+        const str2 = b.toUpperCase().replaceAll("Ö","OE").replaceAll("Ü","UE").replaceAll("Ä","AE").replaceAll("À","A");
+
+        if( str1 < str2 ) return -1;
+        if( str1 > str2 ) return 1;
+        return 0;  
+    })
+);
+
+writeJSON("./Database/tags.json", [ ...tags ].sort(
+    
+    (a,b) => {
+
+        const str1 = a.toUpperCase().replaceAll("Ö","OE").replaceAll("Ü","UE").replaceAll("Ä","AE").replaceAll("À","A");
+        const str2 = b.toUpperCase().replaceAll("Ö","OE").replaceAll("Ü","UE").replaceAll("Ä","AE").replaceAll("À","A");
+
+        if( str1 < str2 ) return -1;
+        if( str1 > str2 ) return 1;
+        return 0;  
+    })
+);
+
+writeJSON("./Database/directors.json", [ ...directors ].sort(
+    
+    (a,b) => {
+
+        if( a < b ) return -1;
+        if( a > b ) return 1;
+        return 0;  
+    })
+);
+
+writeJSON("./Database/actors.json", [ ...actors ].sort(
+    
+    (a,b) => {
+
+        if( a < b ) return -1;
+        if( a > b ) return 1;
+        return 0;  
+    })
+);
+
 console.log('Fertig - Datei "./Database/movies.json" erzeugt                                                     \n'); 
 process.exit(0);
 
@@ -127,6 +179,21 @@ async function scanTree( path, movies ){
     }
 }
 
+/****************************************************************************
+ * change name parts
+ */
+function chngName( parts ) {
+    
+    const xinname =  String(parts).replaceAll("&apos;","'").replaceAll("&quot;","'").replaceAll("&amp;","");
+    const name = xinname.trim().split(" ");
+
+    if( name.length >  1 ){
+        return name[ name.length-1 ] + " " + name.slice( 0, name.length -1).join(" "); 
+    }
+    else{
+        return name[0];
+    }
+}
 /****************************************************************************
  * scan directory
  */
@@ -169,6 +236,7 @@ async function getMovies(dir, movies) {
                     movie.director = "";
                     movie.country = "";
                     movie.genre = "";
+                    movie.tag = "";
                     movie.plot = "";
                     movie.actors = [];
 
@@ -182,18 +250,38 @@ async function getMovies(dir, movies) {
                         if( data && data.movie ){
                             movie.title = data.movie.title ? String( data.movie.title ) : movName;
                             movie.subtitle = data.movie.subtitle ? String( data.movie.subtitle ) : "";
-                            //movie.director = data.movie.director ? String( data.movie.director ) : "";
                             movie.director = data.movie.director ? data.movie.director.join(', ') : "";
                             movie.country = data.movie.country ? data.movie.country.join(', ') : "";
                             movie.year = data.movie.year ? String( data.movie.year ) : "";
                             movie.genre = data.movie.genre ? transGen( data.movie.genre ) : "";
+                            movie.tag = data.movie.tag ? data.movie.tag.join(', ') : "";
                             movie.plot = data.movie.plot ? String( data.movie.plot ) : "";
 
-                            if( data.movie.actor )
-                                for( const actor of data.movie.actor ){
-                                    movie.actors.push( {name: actor.name, role:actor.role} );
+                            if( movie.genre.length ){
+                                genres.add( ...movie.genre.split(", ") );
+                            }
+                                
+                            if( movie.tag.length ){
+                                tags.add( ...movie.tag.split(", ") );
+                            } 
+                                   
+                            if( movie.director.length ){
+
+                                for( const director of movie.director.split(", ") ){
+                                    if(director.length)
+                                       directors.add( chngName( director ) );
                                 } 
-                               
+                            } 
+
+                            if( data.movie.actor ){
+                                for( const actor of data.movie.actor ){
+                                    
+                                    movie.actors.push( {name: String(actor.name).replaceAll("&apos;","'").replaceAll("&quot;","'").replaceAll("&amp;",""), 
+                                                        role:actor.role} );
+                                    if( actor.name.length )
+                                        actors.add( chngName( actor.name ) );
+                                } 
+                            }   
                         }
                         else{
                             console.log("Movie ERROR ---->",dir," : ",movName);
@@ -226,21 +314,41 @@ async function getMovies(dir, movies) {
 
                         movie.title = data.tvshow.title ? String( data.tvshow.title ) : "";
                         movie.subtitle = data.tvshow.subtitle ? String( data.tvshow.subtitle ) : "";
-                        //movie.director = data.tvshow.director ? String( data.tvshow.director ) : "";
                         movie.director = data.tvshow.director ? data.tvshow.director.join(', ') : "";
                         movie.country = data.tvshow.country ? data.tvshow.country.join(', ') : "";
                         movie.year = data.tvshow.year ? String( data.tvshow.year ) : "";
                         movie.genre = data.tvshow.genre ? transGen( data.tvshow.genre ) : "";
+                        movie.tag = data.tvshow.tag ? data.tvshow.tag.join(', ') : "";
                         movie.seasons = data.tvshow.season ? parseInt( data.tvshow.season ) : 0;
                         movie.episodes = data.tvshow.episode ? parseInt( data.tvshow.episode ) : 0;
                         movie.plot = data.tvshow.plot ? String( data.tvshow.plot ) : "";
                         movie.actors = [];
 
-                        if( data.tvshow.actor ){
-                            for( const actor of data.tvshow.actor )
-                                movie.actors.push( {name: actor.name, role:actor.role} );
-                        }
 
+                        if( movie.genre.length ){
+                            genres.add( ...movie.genre.split(", ") );
+                        }
+                            
+                        if( movie.tag.length ){
+                            tags.add( ...movie.tag.split(", ") );
+                        } 
+
+                        if( movie.director.length ){
+
+                            for( const director of movie.director.split(", ") ){
+                                if(director.length)
+                                   directors.add( chngName( director ) );
+                            } 
+                        } 
+
+                        if( data.tvshow.actor ){
+                            for( const actor of data.tvshow.actor ){
+                                movie.actors.push( {name: actor.name, role:actor.role} );
+                                if( actor.name.length )
+                                    actors.add( chngName( actor.name ) );
+
+                            }    
+                        }
                     }
 
                     movie.poster = fs.existsSync( dir + 'poster.jpg' ) ? 'poster.jpg' : "";

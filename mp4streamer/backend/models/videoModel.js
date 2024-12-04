@@ -3,7 +3,39 @@
  */
 import database from "../Database/database.js";
 
-const FIELDS = [ "title", "subtitle", "director", "country", "year", "genre", "plot" ]; 
+const FIELDS = [ "title", "subtitle", "director", "country", "year", "genre", "tag", "plot" ]; 
+/********************************************************************************* 
+ * getDirectors() 
+ * 
+ */
+async function getDirectors() { 
+
+    return await database.getDirectors();
+}
+/********************************************************************************* 
+ * getActors() 
+ * 
+ */
+async function getActors() { 
+
+    return await database.getActors();
+}
+/********************************************************************************* 
+ * getGenres() 
+ * 
+ */
+async function getGenres() { 
+
+    return await database.getGenres();
+}
+/********************************************************************************* 
+ * getTags() 
+ * 
+ */
+async function getTags() { 
+
+    return await database.getTags();
+}
 /********************************************************************************* 
  * getOne() 
  * 
@@ -98,5 +130,9 @@ export default {
     getStream,
     getEpisodes,
     getEpisodeThumb,
-    getEpiStream
+    getEpiStream,
+    getGenres,
+    getTags,
+    getDirectors,
+    getActors
 };

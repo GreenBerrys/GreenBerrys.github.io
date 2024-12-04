@@ -10,8 +10,6 @@ import log from "./utils/logger.js"
 import userRouter from "./routers/userRouter.js";
 import videoRouter from "./routers/videoRouter.js";
 
-database.init();
-
 dotenv.config( { path: "./server.env" } );
 const PORT = process.env.s_PORT;
 const SERVER = process.env.s_SERVER;
@@ -25,7 +23,7 @@ server.use( express.urlencoded( { extended: true } ) );
 server.use( cookieSession( {
     name: `${process.env.s_COOKIE}`,
     secret: `${process.env.s_SECRET}`,
-    maxAge: 1 * 60 * 60000,                //1 hour
+    maxAge: 1 * 60 * 60000,     //1 hour
     sameSite: 'strict',
     httpOnly: true
 }));

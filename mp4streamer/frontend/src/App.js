@@ -17,6 +17,10 @@ import Menu from "./components/NavMenu.jsx";
 import Footer from "./components/Footer.jsx";
 
 import { AUTOLOGIN } from './config.js';
+import Genres from './pages/Genres.jsx';
+import Tags from './pages/Tags.jsx';
+import Actors from './pages/Actors.jsx';
+import Directors from './pages/Directors.jsx';
 
 
 
@@ -52,6 +56,10 @@ function App() {
 
                         <Route path="/" element={<Protected/>}>
 
+                            <Route path = "/videos/actors" element = { <Actors/> } />
+                            <Route path = "/videos/directors" element = { <Directors/> } />
+                            <Route path = "/videos/genres" element = { <Genres/> } />
+                            <Route path = "/videos/tags" element = { <Tags/> } />
                             <Route path = "/video/:recno"  element = { <Video/> } />   
                             <Route path = "/episodes/:recno/:title"  element = { <Episodes/> } />   
                             <Route path = "/videos/:filter" element = { <Videos/> } />

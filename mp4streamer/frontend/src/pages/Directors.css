@@ -1,0 +1,21 @@
+.directorpage{
+    text-align: left;
+    margin: 1rem;
+}
+.directors{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 5px;
+    justify-content: left;
+}
+.directors a, .directors a:visited{
+    width: 20rem;
+    line-height: 2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 5px;
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: beige;
+}

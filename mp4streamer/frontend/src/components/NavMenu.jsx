@@ -66,6 +66,7 @@ function NavMenu() {
                         <option value="genre" readOnly>Genre</option>
                         <option value="year" readOnly>Jahr</option>
                         <option value="country" readOnly>Land</option>
+                        <option value="tag" readOnly>Tag</option>
                 </select>
 
                 <button>🔎</button>
@@ -76,7 +77,28 @@ function NavMenu() {
 
             <ul className="navbar_links">
                 { 
-                    !AUTOLOGIN &&
+                <>
+
+                    {auth &&
+                        <>
+                            <li className="slideamination">
+                                <NavLink to="/videos/genres"  onClick={ showLinksOff }>Genres</NavLink>
+                            </li>
+                            <li className="slideamination">
+                                <NavLink to="/videos/tags"  onClick={ showLinksOff }>Tags</NavLink>
+                            </li>
+                            <li className="slideamination">
+                                <NavLink to="/videos/directors"  onClick={ showLinksOff }>Regie</NavLink>
+                            </li>
+                            <li className="slideamination">
+                                <NavLink to="/videos/actors"  onClick={ showLinksOff }>Darsteller</NavLink>
+                            </li>
+                            <li className="slideamination">
+                                <div>&nbsp;&nbsp;&nbsp;</div>
+                            </li>
+                        </>
+                    }
+                    {!AUTOLOGIN &&
                     <>
                         {!auth ?
                             <>
@@ -92,8 +114,11 @@ function NavMenu() {
                             </>
                         }
                     </>
+                    }
+                </>        
                 }
             </ul>
+                
             {/***** HAMBURGER **********/}
             <button className="navbar_burger" onClick={ handleShowLinks }>
                 <span></span>

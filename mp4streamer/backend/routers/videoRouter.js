@@ -23,6 +23,26 @@ router.get( "/ethumb/:recno/:epino", m.isLoggedIn, video.getEpisodeThumb);
 router.get( "/episodes/*", m.isLoggedIn, video.getEpisodes);
 
 /********************************************************************************* 
+ * get directors
+ */ 
+router.get( "/directors/", m.isLoggedIn, video.getDirectors);
+
+/********************************************************************************* 
+ * get actors
+ */ 
+router.get( "/actors/", m.isLoggedIn, video.getActors);
+
+/********************************************************************************* 
+ * get genres
+ */ 
+router.get( "/genres/", m.isLoggedIn, video.getGenres);
+
+/********************************************************************************* 
+ * get tags
+ */ 
+router.get( "/tags/", m.isLoggedIn, video.getTags);
+
+/********************************************************************************* 
  * stream video
  */ 
 router.get( "/stream/:recno/:epino", m.isLoggedIn, video.getStream);

@@ -119,20 +119,82 @@ if( !busy.current ){
                             <table>
                                 <tbody>
                                     <tr>
-                                        <th><b>Regie:</b></th>        
-                                        <td>{ video.result[0].director }</td>
+                                        <th><b>
+                                        {   
+                                            <Link to={ { pathname: `/videos/directors` } }>Regie:</Link>
+                                        }
+                                        </b></th>        
+                                        <td>
+                                        {   
+                                            video.result[0].director.split(", ").map( ( director, index ) => {
+                                                return (
+                                                    <Link key = { index } to={ { pathname: `/videos/director=*${director}` } }>
+                                                        { index > 0 ? ", " : "" }{ director }   
+                                                    </Link>
+                                                )
+                                            })
+                                        }
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th><b>Land:</b></th>
-                                        <td>{ video.result[0].country }</td>        
+                                        <td>
+                                        {   
+                                            video.result[0].country.split(", ").map( ( country, index ) => {
+                                                return (
+                                                    <Link key = { index } to={ { pathname: `/videos/country=*${country}` } }>
+                                                        { index > 0 ? ", " : "" }{ country }   
+                                                    </Link>
+                                                )
+                                            })
+                                        }
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th><b>Jahr:</b></th>        
-                                        <td>{ video.result[0].year }</td>
+                                        <td>
+                                        {   
+                                                    <Link to={ { pathname: `/videos/year=${video.result[0].year}` } }>
+                                                        { video.result[0].year }   
+                                                    </Link>
+                                        }
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <th><b>Genre:</b></th>        
-                                        <td>{ video.result[0].genre }</td>
+                                        <th><b>
+                                        {   
+                                            <Link to={ { pathname: `/videos/genres` } }>Genre:</Link>
+                                        }
+                                        </b></th>        
+                                        <td>
+                                        {   
+                                            video.result[0].genre.split(", ").map( ( genre, index ) => {
+                                                return (
+                                                    <Link key = { index } to={ { pathname: `/videos/genre=*${genre}` } }>
+                                                        { index > 0 ? ", " : "" }{ genre }   
+                                                    </Link>
+                                                )
+                                            })
+                                        }
+                                        </td>
+                                    </tr>
+                                    <tr>                                        
+                                        <th><b>
+                                        {   
+                                            <Link to={ { pathname: `/videos/tags` } }>Tag:</Link>
+                                        }
+                                        </b></th>        
+                                        <td>
+                                        {   
+                                            video.result[0].tag.split(", ").map( ( tag, index ) => {
+                                                return (
+                                                    <Link key = { index } to={ { pathname: `/videos/tag=*${tag}` } }>
+                                                        { index > 0 ? ", " : "" }{ tag }   
+                                                    </Link>
+                                                )
+                                            })
+                                        }
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>

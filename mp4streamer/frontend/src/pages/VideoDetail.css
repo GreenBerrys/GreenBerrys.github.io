@@ -114,6 +114,11 @@
 #videoDetail #data tr{
     vertical-align: top;
 }
+#videoDetail #data tr a, 
+#videoDetail #data tr a:visited {
+    color: beige;
+    text-decoration: none;
+}
 #videoDetail #player{
     grid-area: player;
 }

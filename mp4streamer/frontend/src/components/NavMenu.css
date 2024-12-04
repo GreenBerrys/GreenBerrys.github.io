@@ -7,7 +7,7 @@
     width: 100%;
     padding: 1rem;
     background-color: #495056; 
-    color: lightgray;;
+    color: beige;
     height: 2.3rem;
     z-index: 2;
     box-shadow: 0 0 16px 0 rgb(0 0 0 / 20%);
@@ -29,7 +29,7 @@
     width: 20%;
     border: 1px solid darkgrey;
     background: #495056;
-    color: lightgrey; 
+    color: beige; 
     border-right: none; 
     border-radius: 10px 0 0 10px;
     min-width: 130px;
@@ -39,7 +39,7 @@
     flex: 1 2;
     border: 1px solid darkgrey;
     background: #495056;
-    color: lightgrey;
+    color: beige;
     max-width: 100px;
     cursor: pointer;
 }
@@ -54,7 +54,7 @@
 .navbar_links {
     display: flex;
     flex-grow: 4;
-    font-size: 20px;
+    font-size: 18px;
     padding-right: 4rem;
     justify-content: right;
 }
@@ -63,17 +63,28 @@
     padding: 0 0.8rem;
 }
 .navbar_links li a {
-    color: darkgrey;
+    color: beige;
     text-decoration: none;
     white-space: nowrap;
 }
+.navbar_links li:hover {
+    color: beige;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: #3c4247;
+}
+.navbar_links li a:active {
+    text-decoration: underline;
+}
+
 .navbar_burger{
     margin-right: 2.5rem; 
     display: none;
 }
  
 /* ------------------------------------ */
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) { */
+    @media screen and (max-width: 850px) {
 
     .navbar_links {
         flex-direction: column;

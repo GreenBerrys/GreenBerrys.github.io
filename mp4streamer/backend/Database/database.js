@@ -1,7 +1,24 @@
 import fs  from 'fs';
 
-const DATAPATH='Database/movies.json'
-let database = null;
+const DATAPATH='Database/movies.json';
+const GENREPATH='Database/genres.json';
+const TAGPATH='Database/tags.json';
+const ACTORPATH='Database/actors.json';
+const DIRECTORPATH='Database/directors.json';
+
+/********************************************************************************* 
+ * initJsonBase() -  Init JSON-Tabels 
+ */
+const initJsonBase = ( path ) =>  { if( fs.existsSync( path ) ) 
+                                        return JSON.parse( fs.readFileSync( path, { encoding:'utf8', flag:'r' } ) );
+                                    else{
+                                        console.log(`"${ path }" not found..`); 
+                                        process.exit(-1);  }
+                                    }  
+                                      
+const database = initJsonBase( DATAPATH );
+const genrebase = initJsonBase( GENREPATH );
+const tagbase = initJsonBase( TAGPATH );
 
 /********************************************************************************* 
  * count() - 
@@ -50,6 +67,7 @@ async function  getOne( recno ) {
             year:      database[recno].year, 
             country:   database[recno].country, 
             genre:     database[recno].genre, 
+            tag:       database[recno].tag, 
             poster:    database[recno].poster, 
             fanart:    database[recno].fanart, 
             plot:      database[recno].plot
@@ -147,19 +165,25 @@ const strComp = ( field, str ) => {
         return field.toLowerCase().startsWith( str.toLowerCase() );
 }
 /********************************************************************************* 
- * init() - 
+ * getGenres() - 
  */
-const init = () => {
-    
-    if( fs.existsSync( DATAPATH ) ){
+const getGenres = () => { return genrebase }
 
-        database = JSON.parse( fs.readFileSync( DATAPATH, { encoding:'utf8', flag:'r' } ) );
-    }
-    else{
-        console.log(`"${ DATAPATH }" not found..`);                
-        process.exit(-1);
-    }
-}
+/********************************************************************************* 
+ * getTags() - 
+ */
+const getTags = () => { return tagbase }
+
+/********************************************************************************* 
+ * getDirectors() - 
+ */
+const getDirectors = () => { return JSON.parse( fs.readFileSync( DIRECTORPATH, { encoding:'utf8', flag:'r' } ) ) };  
+    
+/********************************************************************************* 
+ * getActors() - 
+ */
+const getActors = () => { return JSON.parse( fs.readFileSync( ACTORPATH, { encoding:'utf8', flag:'r' } ) ) };  
+
 /********************************************************************************* 
  * getPoster() - 
  */
@@ -232,7 +256,6 @@ const getEpiStream = ( recno, epiNo, videoroot ) => {
 }
 
 export default{
-    init,
     find,
     count,
     getOne,
@@ -241,5 +264,9 @@ export default{
     getStream,
     getEpisodes,
     getEpisodeThumb,
-    getEpiStream
+    getEpiStream,
+    getGenres,
+    getTags,
+    getActors,
+    getDirectors
 }

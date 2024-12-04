@@ -63,6 +63,7 @@ async function getEpisodes( req, res ) {
 /********************************************************************************* 
  * find videos
  */
+let lastField = null;
 let lastSearch = null;
 let lastPage = 0;
 let lastCount = 0;
@@ -76,9 +77,10 @@ async function find( req, res ) {
     try{
 
         if( search.length ){
-            if( search[0][1] !== lastSearch ){
+            if( search[0][1] !== lastSearch || search[0][0] !== lastField ){
 
                 lastSearch = search[0][1];
+                lastField = search[0][0];
                 lastCount = await video.count( req.body );
                 lastPage = ( ( lastCount - ( lastCount % PAGELEN) ) / PAGELEN + ( ( lastCount % PAGELEN ) > 0 ) ) -1;
             }
@@ -92,11 +94,80 @@ async function find( req, res ) {
         if( page > lastPage )
             page = lastPage;
         else if( page < 0 ){
-            page = 0;
+                page = 0;
         }
+        
         const videos = await video.find( req.body, page, req.body.pageLen || PAGELEN ); 
 
         res.status( 200 ).json( { error: false, count: lastCount, page: page, lastPage: lastPage, result: videos } );   
+        return;
+    } 
+    catch ( error ) { 
+
+        console.log( error.message );
+        res.status( 400 ).json( { error: true, errMsg: error.message, result: [] } ); 
+        return;
+    }
+}
+/********************************************************************************* 
+ * get directors
+ */
+async function getDirectors( req, res ) {
+
+    try {
+
+        res.status( 200 ).json( { error: false, result: await video.getDirectors() } );
+        return;
+    } 
+    catch ( error ) { 
+
+        console.log( error.message );
+        res.status( 400 ).json( { error: true, errMsg: error.message, result: [] } ); 
+        return;
+    }
+}
+/********************************************************************************* 
+ * get actors
+ */
+async function getActors( req, res ) {
+
+    try {
+
+        res.status( 200 ).json( { error: false, result: await video.getActors() } );
+        return;
+    } 
+    catch ( error ) { 
+
+        console.log( error.message );
+        res.status( 400 ).json( { error: true, errMsg: error.message, result: [] } ); 
+        return;
+    }
+}
+/********************************************************************************* 
+ * get genres
+ */
+async function getGenres( req, res ) {
+
+    try {
+
+        res.status( 200 ).json( { error: false, result: await video.getGenres() } );
+        return;
+    } 
+    catch ( error ) { 
+
+        console.log( error.message );
+        res.status( 400 ).json( { error: true, errMsg: error.message, result: [] } ); 
+        return;
+    }
+}
+/********************************************************************************* 
+ * get tags
+ */
+async function getTags( req, res ) {
+
+    try {
+
+        res.status( 200 ).json( { error: false, result: await video.getTags() } );
         return;
     } 
     catch ( error ) { 
@@ -280,5 +351,9 @@ export default {
     getFanart,
     getStream,
     getEpisodes,
-    getEpisodeThumb
+    getEpisodeThumb,
+    getGenres,
+    getTags,
+    getDirectors,
+    getActors
 }
