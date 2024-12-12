@@ -12,7 +12,7 @@ const charWidth = ( txt ) => {
     return context.measureText( txt ).width;
   }
   
-const CHRWIDTH = Math.ceil( charWidth( "8" ) );
+const CHRWIDTH = Math.ceil( charWidth( "8" ) ) +1;
 
 /********************************************************************************************
  * 
