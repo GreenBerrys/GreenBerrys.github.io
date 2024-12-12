@@ -121,17 +121,23 @@ if( movies.length > 1){
 for(let i = 0; i < movies.length; i++)
     movies[i].recno = i;
 
-writeJSON("./Database/movies.json", movies);
-
 //----------------------------------------------------------------
-// write sorted index-tables
+// write tables
 
+const indexCount = ( indexTab ) => indexTab.reduce( ( entries, section ) => entries + section.items.length, 0 );
+const numForm = ( num ) => " ".repeat( 8 - String( num ).length ) + num;
+
+writeJSON("./Database/movies.json", movies);
+console.log(`\n\n${ numForm( movies.length ) } Filme/Serien gefunden. Datei "Database/movies.json erstellt`);
 writeJSON( "./Database/genres.json", tableSort( genres ) );
+console.log(`${ numForm( indexCount( genres) ) } Genre gefunden. Datei "Database/genres.json erstellt`);
 writeJSON( "./Database/tags.json", tableSort( tags ) );
+console.log(`${ numForm( indexCount( tags ) ) } Tags gefunden. Datei "Database/tags.json erstellt`);
 writeJSON( "./Database/directors.json", tableSort( directors ) );
+console.log(`${ numForm( indexCount( directors ) ) } Regisseure/innen gefunden. Datei "Database/directors.json erstellt`);
 writeJSON( "./Database/actors.json", tableSort( actors ) );
+console.log(`${ numForm( indexCount( actors ) ) } Darsteller/innen gefunden. Datei "Database/actors.json erstellt\n`);
 
-console.log('Fertig - Datei "./Database/movies.json" erzeugt                                                     \n'); 
 process.exit(0);
 
 /****************************************************************************
