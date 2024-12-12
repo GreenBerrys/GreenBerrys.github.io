@@ -7,17 +7,18 @@ import attention from "../Images/attention.png";
 import Context from "../AppContext.js";
 import { useNavigate } from "react-router-dom";
 import CharMenu from "../components/CharMenu.jsx";
-import "./Tags.css";
+import "./Index.css";
 import "./CharTag.css";
 
-const  back = { scrollPos: 0, pos: 0, filter: "" };
+const  back = { lastTab : "", scrollPos: 0, pos: 0, filter: "" };
+//console.log("Tags init scrollpos=",back.scrollPos);
 
-const scrollHandler = () => back.pos = window.pageYOffset;
+const scrollHandler = () => back.pos = window.scrollY;     //pageYOffset;
 
 /********************************************************************************************
  * 
  */
-function Tags() {
+function Index( { indextab, path, isname, title, searchadd = "" } ) {
 
 const [ tags, setTags ] = useState( {
     
@@ -29,11 +30,8 @@ const { setAuth } = useContext( Context );
 const navigate = useNavigate();
 
 const [ init, setInit ] = useState( false );    // Flag for component initialized
-const pageEnd = useRef( 0 );                    // reference to the pageend (Position)
 const busy = useRef( true );
-const firstChar = useRef( "" );                 // First character in tag
 const sections = useRef([]);                    // Linktable to character sections
-const charMenuIsInit = useRef(false);           // Fixup for sections fill after href call  
 
 
 // set flag for initialized
@@ -53,17 +51,22 @@ useEffect( () => {
         if( init ){
             window.removeEventListener( 'scroll', scrollHandler );
             back.scrollPos = back.pos;
+            back.lastTab = indextab;
         }
     };
+// eslint-disable-next-line react-hooks/exhaustive-deps
 },[ init ]);
 
-// Get genres 
+// Get tags 
 useEffect( () => {
 
     if( init ){  
+
         busy.current = true;
         setTags( {...tags }, { result: [] } );
-        videoApi.getTags( ( data ) => {
+
+
+        videoApi.getIndexTab( indextab, ( data ) => {
 
                         if (data.error && data.errMsg ===  "Access denied!" ){
 
@@ -73,67 +76,74 @@ useEffect( () => {
                             navigate( "/" );
                         }
                         else{
-                            
                             busy.current = false;
                             setTags( () => data );
+                            sections.current = data.result.map( ( entry, index) => { return( { char: entry.section, link: `SECT_${ index }` } ) } );
                         }
         }); 
+        
     }    
 // eslint-disable-next-line react-hooks/exhaustive-deps
-},[ init ]);
+},[ init, indextab ]);
 
 useEffect(() => {
 
     if( init ){  
+        if(indextab !== back.lastTab)
+            back.scrollPos = 0;
         window.scrollTo( { top: back.scrollPos, behavior: 'auto' } );
     }
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
 },[ tags.result ]);       
+
+/****************************************************************************
+ * change name parts
+ */
+function chngName( parts ) {
     
-const setChrMenuInit = (isInit) => charMenuIsInit.current = isInit;
+    const name = parts.split(" ");
 
-// create list item
-const entry = ( name, index ) => {
-
-    if( name[0].toUpperCase() !== firstChar.current ){
-       firstChar.current = name[0].toUpperCase();
-
-        if( !charMenuIsInit.current )
-            sections.current.push( { char: firstChar.current, link: `SECT_${index}` } );
-
-        return(
-           <>
-            <div id={`SECT_${index}`}><br></br></div>
-            <div key={ index } className="chartag">{firstChar.current}</div>
-            <Link key = { index } to={ { pathname: `/videos/tag=*${name}` } }>{ name }</Link> 
-           </> 
-        );
+    if( name.length >  1 ){
+        return name.slice( 1, name.length ).join(" ") + " " + name[ 0 ]; 
     }
     else{
-        return (
-            <Link key = { index } to={ { pathname: `/videos/tag=*${name}` } }>{ name }</Link> 
-        );
+        return name[0];
     }
 }
 
+
 if( !busy.current ){
     return (
-        <div className="tagpage">
+        <div className = "indexpage">
             { !tags.error ?
-                <div>
+                <>
+                    <CharMenu secTab = { sections.current } ></CharMenu> 
+                    <h1><br></br>{title}</h1>
+                    
+                    {   tags.result.map( ( entry, index) => {
 
-                        <CharMenu secTab={sections.current} setFlag={setChrMenuInit}></CharMenu>
-                        <h1><br></br>Tags:</h1>
+                            return (
 
-                <div className="tags">
-                    {   tags.result.map( ( tag, index ) => {
-                            return( entry( tag, index) )
+                                <div key={ index } className="indexitems">
+
+                                    <div id = { `SECT_${ index }` }><br></br></div>
+                                    <div className = "chartag">{ entry.section }</div>
+
+                                    {   entry.items.map( ( item, index ) => {
+
+                                            if(isname) 
+                                                return( <Link key = { index } to = { { pathname: `${ path }=*${ chngName( item ) }${ searchadd }` } }>{ item }</Link> )
+                                            else
+                                                return( <Link key = { index } to = { { pathname: `${ path }=*${ item }` } }>{ item }</Link> );
+                                        })
+                                    }
+
+                                </div>
+                            )
                         })
                     }
-                </div>
-                <span ref={ pageEnd }></span>
-                </div>
+                </>
             : 
                 <ModalWin>
                     <img src={ attention } alt="achtung" style={ { width: 70, margin: "auto" } } />
@@ -152,4 +162,4 @@ if( !busy.current ){
     return( <BusyIndicator/>);
  }   
 }
-export default Tags;
+export default Index;

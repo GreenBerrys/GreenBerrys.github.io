@@ -17,10 +17,7 @@ import Menu from "./components/NavMenu.jsx";
 import Footer from "./components/Footer.jsx";
 
 import { AUTOLOGIN } from './config.js';
-import Genres from './pages/Genres.jsx';
-import Tags from './pages/Tags.jsx';
-import Actors from './pages/Actors.jsx';
-import Directors from './pages/Directors.jsx';
+import Index from './pages/Index.jsx';
 
 
 
@@ -56,10 +53,28 @@ function App() {
 
                         <Route path="/" element={<Protected/>}>
 
-                            <Route path = "/videos/actors" element = { <Actors/> } />
-                            <Route path = "/videos/directors" element = { <Directors/> } />
-                            <Route path = "/videos/genres" element = { <Genres/> } />
-                            <Route path = "/videos/tags" element = { <Tags/> } />
+                            <Route path = "/videos/actors" element = {  <Index indextab = { "actors" } 
+                                                                               path = { "/videos/plot" } 
+                                                                               isname = { true } 
+                                                                               title = { "Darsteller:" }  
+                                                                               searchadd = { ':' }  
+                                                                        /> } />
+                            <Route path = "/videos/directors" element = { <Index indextab = { "directors" } 
+                                                                                 path = { "/videos/director" } 
+                                                                                 isname = { true } 
+                                                                                 title = { "Regie:" }  
+                                                                         /> } />
+                            <Route path = "/videos/genres" element = { <Index indextab = { "genres" } 
+                                                                              path = { "/videos/genre" } 
+                                                                              isname = { false } 
+                                                                              title = { "Genre:" }
+                                                                         /> } />
+                            <Route path = "/videos/tags" element = { <Index indextab = { "tags" } 
+                                                                            path = { "/videos/tag" } 
+                                                                            isname = { false } 
+                                                                            title = { "Tags:" }
+                                                                        /> } />
+                                                                        
                             <Route path = "/video/:recno"  element = { <Video/> } />   
                             <Route path = "/episodes/:recno/:title"  element = { <Episodes/> } />   
                             <Route path = "/videos/:filter" element = { <Videos/> } />

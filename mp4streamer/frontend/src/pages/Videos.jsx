@@ -10,9 +10,9 @@ import Context from "../AppContext.js";
 import { useNavigate } from "react-router-dom";
 import "./Videos.css";
 
-const  back = { page: 0, scrollPos: 0, pos: 0, filter: "" };
+const  vback = { page: 0, scrollPos: 0, pos: 0, filter: "" };
 
-const scrollHandler = () => back.pos = window.pageYOffset;
+const scrollHandler = () => vback.pos = window.scrollY;         //pageYOffset;
 
 /********************************************************************************************
  * 
@@ -55,7 +55,7 @@ useEffect( () => {
     return () => {
         if( init ){
             window.removeEventListener( 'scroll', scrollHandler );
-            back.scrollPos = back.pos;
+            vback.scrollPos = vback.pos;
         }
     };
 },[ init ]);
@@ -65,14 +65,14 @@ useEffect( () => {
 
     if( init ){  
 
-        if( back.filter !== filter ){
-            back.filter = filter || "title=";
-            back.page = 0;
-            back.scrollPos = 1;
+        if( vback.filter !== filter ){
+            vback.filter = filter || "title=";
+            vback.page = 0;
+            vback.scrollPos = 1;
         }
         busy.current = true;
         setVideos( {...videos }, { result: [] } );
-        videoApi.find( back.filter, back.page, ( data ) => {
+        videoApi.find( vback.filter, vback.page, ( data ) => {
 
                         if (data.error && data.errMsg ===  "Access denied!" ){
 
@@ -99,7 +99,7 @@ useEffect(() => {
 
         switch( scrollTo.current ){
             case 0:                 // scroll to last position
-                window.scrollTo( { top: back.scrollPos, behavior: 'auto' } );
+                window.scrollTo( { top: vback.scrollPos, behavior: 'auto' } );
                 break;
             case 1:                 // scroll to top
                 window.scrollTo( { top: 0, behavior: 'auto' } );
@@ -119,10 +119,10 @@ useEffect(() => {
 const pageDown = () => { 
     
     scrollTo.current = 1;
-    back.page = videos.page +1;
+    vback.page = videos.page +1;
     busy.current = true;
     setVideos( { ...videos }, { result: [] } );
-    videoApi.find( filter, back.page , ( data ) => {
+    videoApi.find( filter, vback.page , ( data ) => {
 
                                 busy.current = false;
                                 setVideos( data ); 
@@ -132,10 +132,10 @@ const pageDown = () => {
 const pageUp = () => {
 
     scrollTo.current = 2;
-    back.page = videos.page -1;
+    vback.page = videos.page -1;
     busy.current = true;
     setVideos( { ...videos }, { result: [] } );
-    videoApi.find( filter, back.page , ( data ) => {
+    videoApi.find( filter, vback.page , ( data ) => {
         
                                 busy.current = false;
                                 setVideos( data );  
@@ -145,10 +145,10 @@ const pageUp = () => {
 const setPage = ( pageNo = 0 ) => {
 
     scrollTo.current = 1;
-    back.page = pageNo;
+    vback.page = pageNo;
     busy.current = true;
     setVideos( { ...videos }, { result: [] } );
-    videoApi.find( filter, back.page , ( data ) => {
+    videoApi.find( filter, vback.page , ( data ) => {
 
                                 busy.current = false;
                                 setVideos( data ); 

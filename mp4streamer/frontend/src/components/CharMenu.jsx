@@ -1,38 +1,34 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./CharMenu.css";
-import { Link } from "react-router-dom";
 
 /********************************************************************************************
  * 
  */
-function CharMenu( {  secTab, setFlag } ) {
+function CharMenu( {  secTab } ) {
 
 const [ init, setInit ] = useState( false );    // Flag for component initialized
-const sections = useRef([]);                    // Linktable to character sections
-
 
 // set flag for initialized
 useEffect( () => {
     
     if( !init) {
-        sections.current = secTab;
-        setFlag( true );
+        setInit( () => true );
     }        
     
-    setInit( () => true );
-},[]);
+
+// eslint-disable-next-line react-hooks/exhaustive-deps
+},[ secTab ]);
 
 return (
-    <div className="charmenu" >
-        {/* <div className="head"></div> */}
-        {   sections.current.map( ( sect , index ) => {
+    
+        <div className="charmenu" >
+            {   
+                secTab.map( ( sect , index ) => {
 
-                return( <a key = { index } href={`#${sect.link}`}  >{ sect.char }</a> );
-
-
-            })
-      }
-    </div>
+                    return( <a key = { index } href={`#${sect.link}`}  >{ sect.char }</a> );
+                })
+        }
+        </div>
 );
 }
 export default CharMenu;

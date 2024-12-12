@@ -21,6 +21,25 @@ const genrebase = initJsonBase( GENREPATH );
 const tagbase = initJsonBase( TAGPATH );
 
 /********************************************************************************* 
+ * Stringcompare
+ */
+const strComp = ( field, str ) => {
+
+    if( str === '' || str === '*' )
+        return true;
+
+    if( str[0] === '<' )
+        return field.toLowerCase() < str.substring(1).toLowerCase();
+
+    if( str[0] === '>' )
+        return field.toLowerCase() > str.substring(1).toLowerCase();
+
+    if( str[0] === '*')
+        return field.toLowerCase().includes( str.substring(1).toLowerCase() );
+    else
+        return field.toLowerCase().startsWith( str.toLowerCase() );
+}
+/********************************************************************************* 
  * count() - 
  */
 async function count( search ) {
@@ -144,25 +163,6 @@ const getPage = ( field, str, page, pageLen ) => {
         }
     }
     return result;
-}
-/********************************************************************************* 
- * Stringcompare
- */
-const strComp = ( field, str ) => {
-
-    if( str === '' || str === '*' )
-        return true;
-
-    if( str[0] === '<' )
-        return field.toLowerCase() < str.substring(1).toLowerCase();
-
-    if( str[0] === '>' )
-        return field.toLowerCase() > str.substring(1).toLowerCase();
-
-    if( str[0] === '*')
-        return field.toLowerCase().includes( str.substring(1).toLowerCase() );
-    else
-        return field.toLowerCase().startsWith( str.toLowerCase() );
 }
 /********************************************************************************* 
  * getGenres() - 

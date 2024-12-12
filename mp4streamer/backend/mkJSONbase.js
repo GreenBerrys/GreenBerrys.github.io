@@ -1,3 +1,4 @@
+"use strict";
 /*******************************************************************************************************
  * mkJSONbase.js - JSON-Datei aus MP4-Bestand als "Datenbank" erzeugen
  */
@@ -22,6 +23,35 @@ const input = ( prompt ) => {
     return new Promise( ( resolve, reject ) => {
         rl.question( prompt, ( input ) => resolve( input ) );
     } );
+}
+// --------------------------------------------------------------------------------
+const tableSort = ( table ) => {
+
+    for( const section of table){
+
+        section.items = section.items.sort(
+    
+            (a,b) => {
+    
+                const str1 = a.toUpperCase().replaceAll("Ö","OE").replaceAll("Ü","UE").replaceAll("Ä","AE").replaceAll("À","A");
+                const str2 = b.toUpperCase().replaceAll("Ö","OE").replaceAll("Ü","UE").replaceAll("Ä","AE").replaceAll("À","A");
+        
+                if( str1 < str2 ) return -1;
+                if( str1 > str2 ) return 1;
+                return 0;  
+            });
+    }    
+    return table.sort(
+    
+        (a,b) => {
+    
+            const str1 = a.section.toUpperCase().replaceAll("Ö","OE").replaceAll("Ü","UE").replaceAll("Ä","AE").replaceAll("À","A");
+            const str2 = b.section.toUpperCase().replaceAll("Ö","OE").replaceAll("Ü","UE").replaceAll("Ä","AE").replaceAll("À","A");
+    
+            if( str1 < str2 ) return -1;
+            if( str1 > str2 ) return 1;
+            return 0;  
+        });
 }
 // --------------------------------------------------------------------------------
 const transGen = ( genArray ) => {
@@ -66,10 +96,10 @@ process.exit(0);
 */
 let movies=[];
 
-const tags = new Set();
-const genres = new Set();
-const directors = new Set();
-const actors = new Set();
+const tags = [];
+const genres = [];
+const directors = [];
+const actors = [];
 
 console.log(`\nLese "${MP4ROOT}"..`); 
 
@@ -93,51 +123,13 @@ for(let i = 0; i < movies.length; i++)
 
 writeJSON("./Database/movies.json", movies);
 
-writeJSON("./Database/genres.json", [ ...genres ].sort(
-    
-    (a,b) => {
+//----------------------------------------------------------------
+// write sorted index-tables
 
-        const str1 = a.toUpperCase().replaceAll("Ö","OE").replaceAll("Ü","UE").replaceAll("Ä","AE").replaceAll("À","A");
-        const str2 = b.toUpperCase().replaceAll("Ö","OE").replaceAll("Ü","UE").replaceAll("Ä","AE").replaceAll("À","A");
-
-        if( str1 < str2 ) return -1;
-        if( str1 > str2 ) return 1;
-        return 0;  
-    })
-);
-
-writeJSON("./Database/tags.json", [ ...tags ].sort(
-    
-    (a,b) => {
-
-        const str1 = a.toUpperCase().replaceAll("Ö","OE").replaceAll("Ü","UE").replaceAll("Ä","AE").replaceAll("À","A");
-        const str2 = b.toUpperCase().replaceAll("Ö","OE").replaceAll("Ü","UE").replaceAll("Ä","AE").replaceAll("À","A");
-
-        if( str1 < str2 ) return -1;
-        if( str1 > str2 ) return 1;
-        return 0;  
-    })
-);
-
-writeJSON("./Database/directors.json", [ ...directors ].sort(
-    
-    (a,b) => {
-
-        if( a < b ) return -1;
-        if( a > b ) return 1;
-        return 0;  
-    })
-);
-
-writeJSON("./Database/actors.json", [ ...actors ].sort(
-    
-    (a,b) => {
-
-        if( a < b ) return -1;
-        if( a > b ) return 1;
-        return 0;  
-    })
-);
+writeJSON( "./Database/genres.json", tableSort( genres ) );
+writeJSON( "./Database/tags.json", tableSort( tags ) );
+writeJSON( "./Database/directors.json", tableSort( directors ) );
+writeJSON( "./Database/actors.json", tableSort( actors ) );
 
 console.log('Fertig - Datei "./Database/movies.json" erzeugt                                                     \n'); 
 process.exit(0);
@@ -192,6 +184,26 @@ function chngName( parts ) {
     }
     else{
         return name[0];
+    }
+}
+/****************************************************************************
+ * Push Table-Item
+ */
+ function pushItem( table, item ){
+
+    if( item.length ){
+
+        let sect = item[ 0 ].toUpperCase();
+        let isx = table.findIndex( ( element ) => element.section === sect )
+
+        if( isx === -1 ){
+            table.push( { section: sect, items: [] } );
+            isx = table.length -1; 
+        }
+        let itx = table[ isx ].items.findIndex( ( element ) => element === item );
+        
+        if( itx === -1)
+            table[ isx ].items.push( item );
     }
 }
 /****************************************************************************
@@ -257,37 +269,46 @@ async function getMovies(dir, movies) {
                             movie.tag = data.movie.tag ? data.movie.tag.join(', ') : "";
                             movie.plot = data.movie.plot ? String( data.movie.plot ) : "";
 
+                            // create genre-table                                
                             if( movie.genre.length ){
-                                genres.add( ...movie.genre.split(", ") );
+
+                                movie.genre = movie.genre.replaceAll( "&apos;", "'" );
+                                const tmptags = movie.genre.split( ", " );
+
+                                for( const genre of tmptags )
+                                    pushItem( genres, genre );
                             }
-                                
+                            // create tag-table                                
                             if( movie.tag.length ){
-                                tags.add( ...movie.tag.split(", ") );
-                            } 
-                                   
+
+                                movie.tag = movie.tag.replaceAll( "&apos;", "'" );
+                                const tmptags = movie.tag.split( ", " );
+
+                                for( const tag of tmptags )
+                                    pushItem( tags, tag );
+                            }
+                            // create director-table                                
                             if( movie.director.length ){
 
-                                for( const director of movie.director.split(", ") ){
-                                    if(director.length)
-                                       directors.add( chngName( director ) );
-                                } 
-                            } 
+                                movie.director = movie.director.replaceAll( "&apos;", "'" );
+                                const tmptags = movie.director.split( ", " );
 
-                            if( data.movie.actor ){
+                                for( const director of tmptags )
+                                    pushItem( directors, chngName( director ) );
+                            }
+
+                            // create actor-table                                
+                            if( data.movie.actor )
                                 for( const actor of data.movie.actor ){
-                                    
-                                    movie.actors.push( {name: String(actor.name).replaceAll("&apos;","'").replaceAll("&quot;","'").replaceAll("&amp;",""), 
-                                                        role:actor.role} );
-                                    if( actor.name.length )
-                                        actors.add( chngName( actor.name ) );
+                                    movie.actors.push( { name: actor.name, role:actor.role } );
+                                    pushItem( actors, chngName( String(...actor.name).replaceAll( "&apos;", "'" ) ) );
                                 } 
-                            }   
                         }
                         else{
                             console.log("Movie ERROR ---->",dir," : ",movName);
                         }
                     }
-                    
+                    // append actor-table in movie plot
                     if( movie.actors.length ){
                       movie.plot = movie.plot + "&#x0D;&#x0D;DARSTELLER:";
 
@@ -299,10 +320,11 @@ async function getMovies(dir, movies) {
                         });
 
                       for( const actor of movie.actors)
-                        movie.plot = movie.plot + "&#x0D;  " + actor.name + ": &quot;" + actor.role + "&quot;";
+                        movie.plot = movie.plot + "&#x0D;  " + String(...actor.name).replaceAll( "&apos;", "'" ) + ": &quot;" + actor.role + "&quot;";
                     } 
                      
                     movie.serie = false;
+                    movie.actors=[];
                     movies.push( { ...movie } );
                 }
             }
@@ -324,29 +346,38 @@ async function getMovies(dir, movies) {
                         movie.plot = data.tvshow.plot ? String( data.tvshow.plot ) : "";
                         movie.actors = [];
 
-
+                        // create genre-table                                
                         if( movie.genre.length ){
-                            genres.add( ...movie.genre.split(", ") );
-                        }
-                            
-                        if( movie.tag.length ){
-                            tags.add( ...movie.tag.split(", ") );
-                        } 
 
+                            movie.genre = movie.genre.replaceAll( "&apos;", "'" );
+                            const tmptags = movie.genre.split( ", " );
+
+                            for( const genre of tmptags )
+                                pushItem( genres, genre );
+                        }
+                        // create tag-table                                
+                        if( movie.tag.length ){
+
+                            movie.tag = movie.tag.replaceAll( "&apos;", "'" );
+                            const tmptags = movie.tag.split( ", " );
+
+                            for( const tag of tmptags )
+                                pushItem( tags, tag );
+                        }
+                        // create director-table                                
                         if( movie.director.length ){
 
-                            for( const director of movie.director.split(", ") ){
-                                if(director.length)
-                                   directors.add( chngName( director ) );
-                            } 
-                        } 
+                            movie.director = movie.director.replaceAll( "&apos;", "'" );
+                            const tmptags = movie.director.split( ", " );
 
+                            for( const director of tmptags )
+                                pushItem( directors, chngName( director ) );
+                        }
+                        // create actor-table                                
                         if( data.tvshow.actor ){
                             for( const actor of data.tvshow.actor ){
-                                movie.actors.push( {name: actor.name, role:actor.role} );
-                                if( actor.name.length )
-                                    actors.add( chngName( actor.name ) );
-
+                                movie.actors.push( { name: actor.name, role: actor.role } );
+                                pushItem( actors, chngName( String(...actor.name).replaceAll( "&apos;", "'" ) ) );
                             }    
                         }
                     }
@@ -392,11 +423,24 @@ async function getMovies(dir, movies) {
                                 tmp.season = data.episodedetails.season ? parseInt( data.episodedetails.season ) : 0;
                                 tmp.episode = data.episodedetails.episode ? parseInt( data.episodedetails.episode ) : 0;
                                 tmp.plot = data.episodedetails.plot ? String( data.episodedetails.plot ) : "";
+
+                                // get actors from episode details
+
+                                if( data.episodedetails.actor ){
+
+                                    for( const actor of data.episodedetails.actor ){
+
+                                        if( movie.actors.findIndex( ( element ) => String(...element.name) === String(...actor.name) ) === -1){
+
+                                            movie.actors.push( { name: actor.name, role: actor.role } );
+                                            pushItem( actors, chngName( String(...actor.name).replaceAll( "&apos;", "'" ) ) );
+                                        }
+                                    }    
+                                }
                             }
                             else{
                                 console.log("Serie ERROR ---->",dir," : ",movName,"\n");
                             }
-    
                         }
                         movie.episoden.push( tmp );
                     }
@@ -419,10 +463,11 @@ async function getMovies(dir, movies) {
                         });
 
                         for( const actor of movie.actors)
-                          movie.plot = movie.plot + "&#x0D;  " + actor.name + ": &quot;" + actor.role + "&quot;";
+                          movie.plot = movie.plot + "&#x0D;  " + String(...actor.name).replaceAll( "&apos;", "'" ) + ": &quot;" + actor.role + "&quot;";
                       } 
   
                     movie.serie = true;
+                    movie.actors=[];
                     movies.push( { ...movie } );
             }
         }

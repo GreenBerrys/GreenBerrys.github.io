@@ -6,6 +6,30 @@
  import { SERVER } from "../config.js";
 
 /*********************************************************************
+ *  getIndexTab() - get Index table
+ **********************************************************************/
+function getIndexTab( tab, setter ){
+
+
+    console.log( tab, setter)
+    
+    switch(tab){
+        case "tags":
+              getTags( setter );
+              break;
+        case "genres":
+              getGenres( setter );
+              break;
+        case "directors":
+              getDirectors( setter );
+              break;
+        case "actors":
+              getActors( setter );
+              break;
+        default:
+    }             
+}
+/*********************************************************************
  *  getDirectors() - get directors
  **********************************************************************/
 function getDirectors( setter ){
@@ -174,6 +198,7 @@ const videoApi = {
     getGenres,
     getTags,
     getActors,
-    getDirectors
+    getDirectors,
+    getIndexTab
 }
 export default videoApi; 
