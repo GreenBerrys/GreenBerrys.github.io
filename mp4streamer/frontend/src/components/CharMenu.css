@@ -21,14 +21,13 @@
     padding: 0;
     margin: 0;
 }
-.charmenu a,
-.charmenu a:visited{
+.charmenu span{
     width: 45px;
     text-align: center;
     cursor: pointer;
     text-decoration: none;
     color: blue;
 }
-.charmenu a:hover{
+.charmenu span:hover{
     background-color: rgba(73, 71, 71, 0.74);
 }

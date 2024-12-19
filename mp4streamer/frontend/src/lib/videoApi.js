@@ -11,7 +11,7 @@
 function getIndexTab( tab, setter ){
 
 
-    console.log( tab, setter)
+    //console.log( tab, setter)
     
     switch(tab){
         case "tags":

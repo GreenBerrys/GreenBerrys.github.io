@@ -503,7 +503,7 @@ async function readXML( path ){
 
     try{
 
-        let xml =  String( fs.readFileSync( path ) ).replace( /[&]/g, '&#38;' ).replace( /[–]/g, ' - ' );
+        let xml =  String( fs.readFileSync( path ) ).replace( /[&]/g, '&#38;' ).replaceAll( '&#8211;', ' - ' );
 
         return await xml2js.parseStringPromise( xml ).then( (result) => { return result } );
     }

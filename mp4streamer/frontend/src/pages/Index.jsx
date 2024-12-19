@@ -78,7 +78,7 @@ useEffect( () => {
                         else{
                             busy.current = false;
                             setTags( () => data );
-                            sections.current = data.result.map( ( entry, index) => { return( { char: entry.section, link: `SECT_${ index }` } ) } );
+                            sections.current = data.result.map( ( entry, index) => { return( { char: entry.section, link: `_${ index }` } ) } );
                         }
         }); 
         
@@ -127,7 +127,7 @@ if( !busy.current ){
 
                                 <div key={ index } className="indexitems">
 
-                                    <div id = { `SECT_${ index }` }><br></br></div>
+                                    <div id = { `_${ index }` }><br></br></div>
                                     <div className = "chartag">{ entry.section }</div>
 
                                     {   entry.items.map( ( item, index ) => {

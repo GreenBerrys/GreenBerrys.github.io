@@ -19,13 +19,20 @@ useEffect( () => {
 // eslint-disable-next-line react-hooks/exhaustive-deps
 },[ secTab ]);
 
+// jump (scroll) to char-section
+const jumpTo = ( e, link ) => {
+
+    e.preventDefault();
+    window.scrollTo( { top: window.scrollY + document.getElementById( link ).getBoundingClientRect().top, behavior: 'auto' } );
+}
+
 return (
     
         <div className="charmenu" >
             {   
                 secTab.map( ( sect , index ) => {
 
-                    return( <a key = { index } href={`#${sect.link}`}  >{ sect.char }</a> );
+                    return( <span key = { index } onClick={ (e) => jumpTo( e, sect.link) } >{ sect.char }</span> );
                 })
         }
         </div>
