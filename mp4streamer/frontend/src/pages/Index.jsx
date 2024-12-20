@@ -45,6 +45,10 @@ useEffect( () => {
     // install Handler for recording windows position
     if( init ){
         window.addEventListener( 'scroll', scrollHandler, { passive: true } );
+        
+        if( back.lastTab !== indextab || !back.lastTab.length ){
+            back.lastTab = indextab;
+        }
     }
     // remove Handler and save windowsposition
     return () => {
@@ -64,7 +68,6 @@ useEffect( () => {
 
         busy.current = true;
         setTags( {...tags }, { result: [] } );
-
 
         videoApi.getIndexTab( indextab, ( data ) => {
 
@@ -89,8 +92,11 @@ useEffect( () => {
 useEffect(() => {
 
     if( init ){  
-        if(indextab !== back.lastTab)
+
+        if(indextab !== back.lastTab){
             back.scrollPos = 0;
+            back.lastTab = indextab;
+        }
         window.scrollTo( { top: back.scrollPos, behavior: 'auto' } );
     }
 
