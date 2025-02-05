@@ -1,7 +1,6 @@
 /********************************************************************************* 
  *  Browser Back-/forward button handling 
  */
-let loaded = 0;
 
 let idx = 0;             // history index
 let browserJmp = false;  // flag for Browser back/forward
@@ -10,7 +9,7 @@ let yPos = 0;            // windows y-scrollposition
 let rkey = "";           // history hash-key  
 
 let stkPnt = 0;          // pointer in yPosition
-const yPosition = [];    // stack for restoring y-scrollposition
+const yPosition = [];    // stack with hashs and y-scrollpositions
 
 let tmpPos = 0;          // temp-var to keep y-pos        
 
@@ -21,8 +20,6 @@ let pushWin = 0;         // counter for pushWinPos()-calls
 
 window.addEventListener( 'load', (event) => {
  
-    if( loaded++ ) return;  
-
     window.addEventListener( 'scroll', (event) => yPos = window.scrollY );
 
     window.addEventListener( 'popstate', (event) => { browserJmp = true;

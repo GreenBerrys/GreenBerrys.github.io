@@ -2,8 +2,8 @@
 Die Idee ist Verzeichnisse rekursiv abzusuchen und alle gefundenen MP4-Videos in einer JSON-Datei ('movies.json') einzutragen. Dabei werden von [Kodi](https://kodi.tv/) (über die [Export-Funktion](https://kodi.wiki/view/Import-export_library/Video)) erzeugte NFO-Dateien mit eingelesen. Die erzeugte JSON-Datei kann danach wie eine Datenbank durchsucht und die gefundenen Videos per streaming angesehen werden. 
 
 ## Benötigte Software
-**NodeJS 18** => https://github.com/nodesource/distributions \
-Binaries (ohne Installation) => https://nodejs.org/download/release/latest-v18.x \
+**NodeJS 18** >= https://github.com/nodesource/distributions \
+Binaries (ohne Installation) => https://nodejs.org/download/release/latest-v20.x \
 (Für Windows nur nodevars.bat ausführen - siehe README.md)
 
 ## Installation & Start
@@ -35,9 +35,9 @@ Username & password stehen in der 'server.env' im backend-Verzeichnis (Vorgabe: 
 |  frontend/src | config.js | Frontendkonfiguration
 
 ### Nützliche Tools zum schneiden & konvertieren
-https://avidemux.sourceforge.net/ \
-https://xmedia-recode.de/ \
-https://handbrake.fr/ 
+ [avidemux Video Editor](https://avidemux.sourceforge.net) ([aktuelle Version](https://www.fosshub.com/Avidemux.html) bzw. [Nigthly builds](http://www.avidemux.org/nightly)) \
+ [XMedia Recode Video Converter](https://xmedia-recode.de) \
+ [HandBrake Video Transcoder](https://handbrake.fr) \
 
 [Einstellungen in Avidemux zum hochskalieren von SD-Filmen](https://greenberrys.github.io/xAvidemuxCFG)
 
@@ -63,7 +63,7 @@ s_AUTOSTART=true
 - Unterverzeichnis "**backend**" dorthin kopieren.
 - Unterverzeichnis "**frontend**" im Verzeichnis "mp4streamer" erstellen.
 - Unterverzeichnis "**frontend\build**" dorthin kopieren.
-- Die datei "**node.exe**" [(Windows-binary)](https://nodejs.org/download/release/latest-v18.x ) ins Verzeichnis "**mp4streamer**" kopieren.
+- Die datei "**node.exe**" [(Windows-binary)](https://nodejs.org/download/release/latest-v20.x ) ins Verzeichnis "**mp4streamer**" kopieren.
 - die beiden Batch-Dateien "**mp4streamer.bat**" und "**mkJSONbase.bat**"
   ins Hauptverzeichnis das Datenträgers kopieren.
 
