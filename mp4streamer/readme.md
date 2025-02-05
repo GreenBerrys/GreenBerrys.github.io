@@ -2,7 +2,7 @@
 Die Idee ist Verzeichnisse rekursiv abzusuchen und alle gefundenen MP4-Videos in einer JSON-Datei ('movies.json') einzutragen. Dabei werden von [Kodi](https://kodi.tv/) (über die [Export-Funktion](https://kodi.wiki/view/Import-export_library/Video)) erzeugte NFO-Dateien mit eingelesen. Die erzeugte JSON-Datei kann danach wie eine Datenbank durchsucht und die gefundenen Videos per streaming angesehen werden. 
 
 ## Benötigte Software
-**NodeJS >=18** https://github.com/nodesource/distributions \
+**NodeJS >= 18** https://github.com/nodesource/distributions \
 Binaries (ohne Installation) => https://nodejs.org/download/release/latest-v20.x \
 (Für Windows zum starten nur nodevars.bat ausführen - siehe README.md)
 
