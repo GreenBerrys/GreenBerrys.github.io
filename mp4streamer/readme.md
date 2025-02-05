@@ -35,14 +35,14 @@ Username & password stehen in der 'server.env' im backend-Verzeichnis (Vorgabe: 
 |  frontend/src | config.js | Frontendkonfiguration
 
 ### Nützliche Tools zum schneiden & konvertieren
- [**avidemux** Video Editor](https://avidemux.sourceforge.net) ([aktuelle Version](https://www.fosshub.com/Avidemux.html) bzw. [Nigthly builds](http://www.avidemux.org/nightly)) \
+ [**avidemux** Video Editor](https://avidemux.sourceforge.net) ([aktuelle Version](https://www.fosshub.com/Avidemux.html) bzw. [nigthly Builds](http://www.avidemux.org/nightly)) \
  [**XMedia Recode** Video Converter](https://xmedia-recode.de) \
  [**HandBrake** Video Transcoder](https://handbrake.fr) 
 
 [Einstellungen in Avidemux zum hochskalieren von SD-Filmen](https://greenberrys.github.io/xAvidemuxCFG)
 
 
-## Just for fun - als Datenträgerverzeichnis (Windows)
+## Just for fun - als Datenträgerverzeichnis (nur Windows)
 
 #### Einstellungen in der config.js (frontend\src):
 ```
