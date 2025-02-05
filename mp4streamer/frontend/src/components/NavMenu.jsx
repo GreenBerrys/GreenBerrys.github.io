@@ -1,7 +1,7 @@
 import "./NavMenu.css";
 import React, { useState, useContext } from "react";
 import logo from "../Images/logo.png";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import Context from "../AppContext.js";
 import { AUTOLOGIN } from "../config.js";
 
@@ -82,16 +82,16 @@ function NavMenu() {
                     {auth &&
                         <>
                             <li className="slideamination">
-                                <NavLink to="/videos/genres"  onClick={ showLinksOff }>Genres</NavLink>
+                                <NavLink to="/index/genres"  onClick={ showLinksOff }>Genres</NavLink>
                             </li>
                             <li className="slideamination">
-                                <NavLink to="/videos/tags"  onClick={ showLinksOff }>Tags</NavLink>
+                                <NavLink to="/index/tags"  onClick={ showLinksOff }>Tags</NavLink>
                             </li>
                             <li className="slideamination">
-                                <NavLink to="/videos/directors"  onClick={ showLinksOff }>Regie</NavLink>
+                                <NavLink to="/index/directors"  onClick={ showLinksOff }>Regie</NavLink>
                             </li>
                             <li className="slideamination">
-                                <NavLink to="/videos/actors"  onClick={ showLinksOff }>Darsteller</NavLink>
+                                <NavLink to="/index/actors"  onClick={ showLinksOff }>Darsteller</NavLink>
                             </li>
                             <li className="slideamination">
                                 <div>&nbsp;&nbsp;&nbsp;</div>

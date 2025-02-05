@@ -8,11 +8,8 @@ import ModalWin from "../components/ModalWin.jsx";
 import attention from "../Images/attention.png";
 import Context from "../AppContext.js";
 import { useNavigate } from "react-router-dom";
+import { pushWinPos, restoreWinPos } from "../utils/RestoreScrollPosX.js"
 import "./Videos.css";
-
-const  vback = { page: 0, scrollPos: 0, pos: 0, filter: "" };
-
-const scrollHandler = () => vback.pos = window.scrollY;         //pageYOffset;
 
 /********************************************************************************************
  * 
@@ -29,14 +26,14 @@ const [ videos, setVideos ] = useState( {
 } );
 
 
-let { filter } = useParams( null );             // search parameter 
+const { filter } = useParams( "title=*" );      // search parameter 
+let { page } = useParams( 0 );
 
 const { setAuth } = useContext( Context );
 const navigate = useNavigate();
 
 const [ init, setInit ] = useState( false );    // Flag for component initialized
 const pageEnd = useRef( 0 );                    // reference to the pageend (Position)
-const scrollTo = useRef( 0 );                   // windowsposition to scroll
 const busy = useRef( true );
 
 // set flag for initialized
@@ -49,13 +46,15 @@ useEffect( () => {
 
     // install Handler for recording windows position
     if( init ){
-        window.addEventListener( 'scroll', scrollHandler, { passive: true } );
+        //console.log("VIDEOS enter");
     }
     // remove Handler and save windowsposition
     return () => {
+
         if( init ){
-            window.removeEventListener( 'scroll', scrollHandler );
-            vback.scrollPos = vback.pos;
+             //console.log("VIDEOS leave");
+             // keep window y-scrollposition - before loading new content! 
+                pushWinPos();  
         }
     };
 },[ init ]);
@@ -65,14 +64,14 @@ useEffect( () => {
 
     if( init ){  
 
-        if( vback.filter !== filter ){
-            vback.filter = filter || "title=";
-            vback.page = 0;
-            vback.scrollPos = 1;
-        }
+        // keep window y-scrollposition - before loading new content! 
+        pushWinPos();  
+
+        //console.log(`VIDEOS '${filter} PAGE ${page || 0}' <===================`);
+
         busy.current = true;
         setVideos( {...videos }, { result: [] } );
-        videoApi.find( vback.filter, vback.page, ( data ) => {
+        videoApi.find( filter, page, ( data ) => {
 
                         if (data.error && data.errMsg ===  "Access denied!" ){
 
@@ -89,70 +88,35 @@ useEffect( () => {
         }); 
     }    
 // eslint-disable-next-line react-hooks/exhaustive-deps
-},[ filter, init ]);
+},[ filter, page, init ]);
 
-// Scroll to pageend after pageUp to previous page 
-// or last position after browser go to previous pos
 useEffect(() => {
 
     if( init ){  
 
-        switch( scrollTo.current ){
-            case 0:                 // scroll to last position
-                window.scrollTo( { top: vback.scrollPos, behavior: 'auto' } );
-                break;
-            case 1:                 // scroll to top
-                window.scrollTo( { top: 0, behavior: 'auto' } );
-                break;
-            case 2:                 // scroll to bottom
-                window.scrollTo( { top: pageEnd.current.offsetTop , behavior: 'auto' } );
-                break;
-            default:
-                break;
-        }
+        // save new or restore old window y-scrollposition
+        // if browser back-/forward button clicked 
+        restoreWinPos(); 
     }
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
-},[ videos.page, filter ]);       
+},[ videos.result  ]);       
+
 
 // *** goto next page
 const pageDown = () => { 
     
-    scrollTo.current = 1;
-    vback.page = videos.page +1;
-    busy.current = true;
-    setVideos( { ...videos }, { result: [] } );
-    videoApi.find( filter, vback.page , ( data ) => {
-
-                                busy.current = false;
-                                setVideos( data ); 
-    } );
+    navigate( `/videos/${filter}/${videos.page +1}` ); 
 }
 // *** goto previous page
 const pageUp = () => {
 
-    scrollTo.current = 2;
-    vback.page = videos.page -1;
-    busy.current = true;
-    setVideos( { ...videos }, { result: [] } );
-    videoApi.find( filter, vback.page , ( data ) => {
-        
-                                busy.current = false;
-                                setVideos( data );  
-    });
+    navigate( `/videos/${filter}/${videos.page -1}` ); 
 }
 // *** read videopage
 const setPage = ( pageNo = 0 ) => {
 
-    scrollTo.current = 1;
-    vback.page = pageNo;
-    busy.current = true;
-    setVideos( { ...videos }, { result: [] } );
-    videoApi.find( filter, vback.page , ( data ) => {
-
-                                busy.current = false;
-                                setVideos( data ); 
-    } );
+    navigate( `/videos/${filter}/${pageNo}` );  
 }
 
 if( !busy.current ){

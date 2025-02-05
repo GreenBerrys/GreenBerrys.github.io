@@ -8,6 +8,8 @@ import ModalWin from "../components/ModalWin.jsx";
 import attention from "../Images/attention.png";
 import Context from "../AppContext.js";
 import { useNavigate } from "react-router-dom";
+import { pushWinPos, restoreWinPos } from "../utils/RestoreScrollPosX.js"
+
 
 
 /********************************************************************************************
@@ -16,11 +18,6 @@ import { useNavigate } from "react-router-dom";
 const  back = { episodeNo: 0, recNo: -1 };
 
 function SerieDetail() {
-
-// set flag for initialized
-useEffect( () => {
-    setInit( () => true );
-},[]);
 
 let { recno, title } = useParams( null, null );     
 
@@ -36,17 +33,18 @@ const [ episodes, setEpisodes] = useState( {
                             result: []
 } );
 const [ epiNo, setEpiNo] = useState( back.recNo === recno ? back.episodeNo : 0 );
-    
+
 // set flag for initialized
 useEffect( () => {
-  
     setInit( () => true );
-
 },[]);
 
 useEffect(() => {
     if(init){
-        window.scrollTo( { top: 0, behavior: 'auto' } );
+
+        //console.log("EPISODES enter")
+        // keep window y-scrollposition - before loading new content! 
+        pushWinPos();  
 
         busy.current = true;
         setEpisodes( {...episodes }, { result: [] } );
@@ -65,11 +63,27 @@ useEffect(() => {
                             setEpisodes( () => data );
                         }
         }); 
-    }    
+    } 
     return () => {
+        if( init ){
+            //console.log("EPISODES leave")
+            // keep window y-scrollposition - before loading new content! 
+            pushWinPos();  
+        }
     };
+   
 // eslint-disable-next-line react-hooks/exhaustive-deps
 },[ init ]);
+
+// save new or restore old window y-scrollposition
+// if browser back-/forward button clicked 
+useEffect(() => {
+
+    if( init ) 
+        restoreWinPos(); 
+
+// eslint-disable-next-line react-hooks/exhaustive-deps
+},[ episodes.result  ]);       
 
 // ==================================================================
 const cut = (txt) => {

@@ -55,28 +55,25 @@
     display: flex;
     flex-grow: 4;
     font-size: 18px;
-    padding-right: 4rem;
+    /* padding: 5px 15px; */
     justify-content: right;
 }
 .navbar_links li {
     list-style-type: none;
-    padding: 0 0.8rem;
+    padding: 0 0.8rem; 
 }
+ 
 .navbar_links li a {
     color: beige;
     text-decoration: none;
     white-space: nowrap;
+    padding: 5px 15px; 
 }
-.navbar_links li:hover {
-    color: beige;
-    text-decoration: none;
-    white-space: nowrap;
+.navbar_links li a.active {
+    padding: 10px 15px; 
     background-color: #3c4247;
+    border-radius: 10px;
 }
-.navbar_links li a:active {
-    text-decoration: underline;
-}
-
 .navbar_burger{
     margin-right: 2.5rem; 
     display: none;

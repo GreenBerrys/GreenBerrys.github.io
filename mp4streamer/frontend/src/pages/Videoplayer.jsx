@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { SERVER } from "../config.js";
+import { pushWinPos, restoreWinPos } from "../utils/RestoreScrollPosX.js"
 import './Home.css';
 
 
@@ -19,13 +20,27 @@ function Videoplayer() {
 
     useEffect(() => {                   // scroll window to top at start  
         if( init ){
-            window.scrollTo( { top: 0, behavior: 'auto' } );   
+
+            //console.log("VIDEOPLAYER enter")
+            // keep window y-scrollposition
+            pushWinPos();  
         }    
+        return () => {
+                if( init ){
+                //console.log("VIDEOPLAYER leave")
+                // keep window y-scrollposition - before loading new content! 
+                pushWinPos();  
+            }
+        };
+        
     },[init]);
 
     const noContext = ( event ) =>{     // surpress context-menu    
 
         event.preventDefault();
+        // save new or restore old window y-scrollposition
+        restoreWinPos(); 
+
         return false;
     }
 

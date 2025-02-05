@@ -10,33 +10,9 @@
  **********************************************************************/
 function getIndexTab( tab, setter ){
 
+    //console.log("user FETCH index",SERVER + 'video/' + tab + '/');
 
-    //console.log( tab, setter)
-    
-    switch(tab){
-        case "tags":
-              getTags( setter );
-              break;
-        case "genres":
-              getGenres( setter );
-              break;
-        case "directors":
-              getDirectors( setter );
-              break;
-        case "actors":
-              getActors( setter );
-              break;
-        default:
-    }             
-}
-/*********************************************************************
- *  getDirectors() - get directors
- **********************************************************************/
-function getDirectors( setter ){
-
-    //console.log("user FETCH directors",SERVER + 'video/directors/');
-
-    return fetch( SERVER + 'video/directors/', {
+    return fetch( SERVER + 'video/' + tab + '/', {
         method: 'GET', 
         mode:"cors",
         headers: {
@@ -44,78 +20,9 @@ function getDirectors( setter ){
             'Accept': 'application/json'
         },
     })
-    .then(response => response.json())
-    .then(directors => {
-        setter( directors );
-    })
-    .catch((error) => {
-        console.error('Error:', error.message);
-    });
- }
-/*********************************************************************
- *  getActors() - get actors
- **********************************************************************/
-function getActors( setter ){
-
-    //console.log("user FETCH actors",SERVER + 'video/actors/');
-
-    return fetch( SERVER + 'video/actors/', {
-        method: 'GET', 
-        mode:"cors",
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-    })
-    .then(response => response.json())
-    .then(actors => {
-        setter( actors );
-    })
-    .catch((error) => {
-        console.error('Error:', error.message);
-    });
- }
-/*********************************************************************
- *  getTags() - get video tags
- **********************************************************************/
-function getTags( setter ){
-
-    //console.log("user FETCH tags",SERVER + 'video/tags/');
-
-    return fetch( SERVER + 'video/tags/', {
-        method: 'GET', 
-        mode:"cors",
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-    })
-    .then(response => response.json())
-    .then(tags => {
-        setter( tags );
-    })
-    .catch((error) => {
-        console.error('Error:', error.message);
-    });
- }
-/*********************************************************************
- *  getGenres() - get video genres
- **********************************************************************/
-function getGenres( setter ){
-
-    //console.log("user FETCH genres",SERVER + 'video/genres/');
-
-    return fetch( SERVER + 'video/genres/', {
-        method: 'GET', 
-        mode:"cors",
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-    })
-    .then(response => response.json())
-    .then(genres => {
-        setter( genres );
+    .then(response => response.json() )
+    .then( index => {
+        setter( index );
     })
     .catch((error) => {
         console.error('Error:', error.message);
@@ -195,10 +102,6 @@ const videoApi = {
     find,
     getOne,
     getEpisodes,
-    getGenres,
-    getTags,
-    getActors,
-    getDirectors,
     getIndexTab
 }
 export default videoApi; 

@@ -124,6 +124,11 @@ for(let i = 0; i < movies.length; i++)
 //----------------------------------------------------------------
 // write tables
 
+if( !movies.length ){
+  console.log( '\n\nKeine Filme im Verzeichnis public gefunden!\nBitte zuerst das Verzeichnis mit den Filmen dorthin verlinken/verknüpfen..\n');
+  process.exit(-1);  
+}
+
 const indexCount = ( indexTab ) => indexTab.reduce( ( entries, section ) => entries + section.items.length, 0 );
 const numForm = ( num ) => " ".repeat( 8 - String( num ).length ) + num;
 

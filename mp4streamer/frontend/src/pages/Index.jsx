@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-import { Link  } from "react-router-dom";
+import { Link, useParams  } from "react-router-dom";
 import videoApi from "../lib/videoApi.js";
 import BusyIndicator from "../components/BusyIndicator.jsx";
 import ModalWin from "../components/ModalWin.jsx";
@@ -7,24 +7,28 @@ import attention from "../Images/attention.png";
 import Context from "../AppContext.js";
 import { useNavigate } from "react-router-dom";
 import CharMenu from "../components/CharMenu.jsx";
+import { pushWinPos, restoreWinPos } from "../utils/RestoreScrollPosX.js"
 import "./Index.css";
 import "./CharTag.css";
 
-const  back = { lastTab : "", scrollPos: 0, pos: 0, filter: "" };
-//console.log("Tags init scrollpos=",back.scrollPos);
-
-const scrollHandler = () => back.pos = window.scrollY;     //pageYOffset;
+// Tableparameter
+const TAB = [];
+TAB["genres"]    = { path: "/videos/genre", isname: false, title: "Genres:", searchadd: '' };
+TAB["tags"  ]    = { path: "/videos/tag", isname: false, title: "Tags:", searchadd: '' };
+TAB["directors"] = { path: "/videos/director", isname: true, title: "Regie:", searchadd: '' };
+TAB["actors" ]   = { path: "/videos/plot", isname: true, title: "Darsteller:", searchadd: ':' };
 
 /********************************************************************************************
  * 
  */
-function Index( { indextab, path, isname, title, searchadd = "" } ) {
+function Index() {
 
-const [ tags, setTags ] = useState( {
+const [ index, setIndex ] = useState( {
     
         error: false,
         result: []
 } );
+const { itable } = useParams( null );
 
 const { setAuth } = useContext( Context );
 const navigate = useNavigate();
@@ -33,43 +37,44 @@ const [ init, setInit ] = useState( false );    // Flag for component initialize
 const busy = useRef( true );
 const sections = useRef([]);                    // Linktable to character sections
 
-
 // set flag for initialized
 useEffect( () => {
     setInit( () => true );
 },[]);
 
-// Save last Window Y-Position
 useEffect( () => {
 
-    // install Handler for recording windows position
+    // init
     if( init ){
-        window.addEventListener( 'scroll', scrollHandler, { passive: true } );
-        
-        if( back.lastTab !== indextab || !back.lastTab.length ){
-            back.lastTab = indextab;
-        }
+
+        //console.log("INDEX enter")
+
     }
-    // remove Handler and save windowsposition
+    // cleanup
     return () => {
         if( init ){
-            window.removeEventListener( 'scroll', scrollHandler );
-            back.scrollPos = back.pos;
-            back.lastTab = indextab;
+            //console.log("INDEX leave")
+            // keep window y-scrollposition - before loading new content! 
+            pushWinPos();  
         }
     };
 // eslint-disable-next-line react-hooks/exhaustive-deps
 },[ init ]);
 
-// Get tags 
+// Get index 
 useEffect( () => {
 
     if( init ){  
 
-        busy.current = true;
-        setTags( {...tags }, { result: [] } );
+        // keep window y-scrollposition - before loading new content! 
 
-        videoApi.getIndexTab( indextab, ( data ) => {
+        //console.log(`INDEX '${itable}' <===================`);
+        pushWinPos();  
+
+        busy.current = true;
+        setIndex( {...index }, { result: [] } );
+
+        videoApi.getIndexTab( itable, ( data ) => {
 
                         if (data.error && data.errMsg ===  "Access denied!" ){
 
@@ -80,28 +85,24 @@ useEffect( () => {
                         }
                         else{
                             busy.current = false;
-                            setTags( () => data );
+                            setIndex( () => data );
                             sections.current = data.result.map( ( entry, index) => { return( { char: entry.section, link: `_${ index }` } ) } );
                         }
         }); 
         
     }    
 // eslint-disable-next-line react-hooks/exhaustive-deps
-},[ init, indextab ]);
+},[ init, itable ]);
 
+// save new or restore old window y-scrollposition
+// if browser back-/forward button clicked 
 useEffect(() => {
 
-    if( init ){  
-
-        if(indextab !== back.lastTab){
-            back.scrollPos = 0;
-            back.lastTab = indextab;
-        }
-        window.scrollTo( { top: back.scrollPos, behavior: 'auto' } );
-    }
+    if( init ) 
+        restoreWinPos(); 
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
-},[ tags.result ]);       
+},[ index.result  ]);       
 
 /****************************************************************************
  * change name parts
@@ -122,12 +123,12 @@ function chngName( parts ) {
 if( !busy.current ){
     return (
         <div className = "indexpage">
-            { !tags.error ?
+            { !index.error ?
                 <>
                     <CharMenu secTab = { sections.current } ></CharMenu> 
-                    <h1><br></br>{title}</h1>
+                    <h1><br></br>{TAB[ itable ].title}</h1>
                     
-                    {   tags.result.map( ( entry, index) => {
+                    {   index.result.map( ( entry, index) => {
 
                             return (
 
@@ -138,10 +139,10 @@ if( !busy.current ){
 
                                     {   entry.items.map( ( item, index ) => {
 
-                                            if(isname) 
-                                                return( <Link key = { index } to = { { pathname: `${ path }=*${ chngName( item ) }${ searchadd }` } }>{ item }</Link> )
+                                            if(TAB[ itable ].isname) 
+                                                return( <Link key = { index } to = { { pathname: `${ TAB[ itable ].path }=*${ chngName( item ) }${ TAB[ itable ].searchadd }` } }>{ item }</Link> )
                                             else
-                                                return( <Link key = { index } to = { { pathname: `${ path }=*${ item }` } }>{ item }</Link> );
+                                                return( <Link key = { index } to = { { pathname: `${ TAB[ itable ].path }=*${ item }` } }>{ item }</Link> );
                                         })
                                     }
 
@@ -155,9 +156,9 @@ if( !busy.current ){
                     <img src={ attention } alt="achtung" style={ { width: 70, margin: "auto" } } />
                     <div>
                         <p>
-                                { tags.errMsg } 
+                                { index.errMsg } 
                         </p>
-                        <p><button onClick={ () => setTags( { error:false, result: [] } ) }>Ok</button></p>
+                        <p><button onClick={ () => setIndex( { error:false, result: [] } ) }>Ok</button></p>
                     </div>
                 </ModalWin>        
             }    

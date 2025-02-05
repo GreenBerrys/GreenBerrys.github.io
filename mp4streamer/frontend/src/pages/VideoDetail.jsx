@@ -8,16 +8,13 @@ import ModalWin from "../components/ModalWin.jsx";
 import attention from "../Images/attention.png";
 import Context from "../AppContext.js";
 import { useNavigate } from "react-router-dom";
+import { pushWinPos, restoreWinPos } from "../utils/RestoreScrollPosX.js"
+
 
 /********************************************************************************************
  * 
  */
 function VideoDetail() {
-
-// set flag for initialized
-useEffect( () => {
-    setInit( () => true );
-},[]);
 
 let { recno } = useParams( null );           // video recordnumber
 
@@ -35,14 +32,15 @@ const [ init, setInit ] = useState( false );// Flag for component initialized
 
 // set flag for initialized
 useEffect( () => {
-   
     setInit( () => true );
-
 },[]);
 
 useEffect(() => {
     if( init ){
-        window.scrollTo( { top: 0, behavior: 'auto' } );
+
+        //console.log("VIDEODETAIL enter")
+        // keep window y-scrollposition - before loading new content! 
+        pushWinPos();  
 
         busy.current = true;
         setVideo( {...video }, { result: [] } );
@@ -62,9 +60,26 @@ useEffect(() => {
         }); 
     }    
     return () => {
+        if( init ){
+            //console.log("VIDEODETAIL leave")
+            // keep window y-scrollposition - before loading new content! 
+            pushWinPos();  
+        }
+        
     };
 // eslint-disable-next-line react-hooks/exhaustive-deps
 },[ init ]);
+
+// save new or restore old window y-scrollposition
+// if browser back-/forward button clicked 
+useEffect(() => {
+
+    if( init ) 
+        // save new or restore old window y-scrollposition
+        restoreWinPos(); 
+
+// eslint-disable-next-line react-hooks/exhaustive-deps
+},[ video.result  ]);       
 
 // ==================================================================
 const cut = ( txt ) => {
@@ -121,7 +136,7 @@ if( !busy.current ){
                                     <tr>
                                         <th><b>
                                         {   
-                                            <Link to={ { pathname: `/videos/directors` } }>Regie:</Link>
+                                            <Link to={ { pathname: `/index/directors` } }>Regie:</Link>
                                         }
                                         </b></th>        
                                         <td>
@@ -163,7 +178,7 @@ if( !busy.current ){
                                     <tr>
                                         <th><b>
                                         {   
-                                            <Link to={ { pathname: `/videos/genres` } }>Genre:</Link>
+                                            <Link to={ { pathname: `/index/genres` } }>Genre:</Link>
                                         }
                                         </b></th>        
                                         <td>
@@ -181,7 +196,7 @@ if( !busy.current ){
                                     <tr>                                        
                                         <th><b>
                                         {   
-                                            <Link to={ { pathname: `/videos/tags` } }>Tag:</Link>
+                                            <Link to={ { pathname: `/index/tags` } }>Tag:</Link>
                                         }
                                         </b></th>        
                                         <td>

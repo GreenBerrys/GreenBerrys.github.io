@@ -1,19 +1,57 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider,  } from "react-router-dom";
 import './index.css';
-import App from './App.js';
+
 import { SERVER } from "./config.js";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import App from './App.js';
+import Protected from './components/Protected.jsx';
+import Home from "./pages/Home.jsx";
+import Videos from "./pages/Videos.jsx";
+import Video from "./pages/VideoDetail.jsx";
+import Episodes from "./pages/Episodes.jsx";
+import Login from "./pages/Login.jsx";
+import Logout from "./pages/Logout.jsx";
+import Player from "./pages/Videoplayer.jsx";
+import Index from './pages/Index.jsx';
+
 
 // get base-directory for the Browserrouter if the app on server is handled by subdirectory
 const serverDir =  SERVER.split('/').length > 4 ? SERVER.substring( SERVER.substring( 0, SERVER.length -1 ).lastIndexOf( '/' ), SERVER.length -1 ) : '/';
 
-root.render(
-    <BrowserRouter basename={ serverDir }>
-        <App />
-    </BrowserRouter>
+const router = createBrowserRouter(
 
+    createRoutesFromElements(
+
+        <Route path="/" element = { <App/> } > 
+
+            <Route index element = { <Home/> } /> 
+            <Route path=  "/home" element = { <Home/> } /> 
+            <Route path = "/login" element = { <Login/> } />
+
+            <Route path="/" element={<Protected/>}>
+
+                <Route path = "/index/:itable" element = {  <Index/> }/>
+                <Route path = "/video/:recno"  element = { <Video/> } />   
+                <Route path = "/episodes/:recno/:title"  element = { <Episodes/> } />   
+                <Route path = "/videos/:filter/:page" element = { <Videos/> } /> 
+                <Route path = "/videos/:filter" element = { <Videos/> } />
+                <Route path = "/logout" element = { <Logout/> } />
+                <Route path = "/player/:recno/:epiNo" element = { <Player/> } />
+                <Route path = "/player/:recno" element = { <Player/> } />
+
+            </Route>
+        </Route>
+    ),{ basename: serverDir, future: { v7_relativeSplatPath: true } }
+);
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+
+    <React.StrictMode>
+        <RouterProvider router={router}  future={ { v7_startTransition: false } }>
+            <App />
+        </RouterProvider>
+    </React.StrictMode>
 );
 

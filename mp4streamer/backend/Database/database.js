@@ -12,7 +12,7 @@ const DIRECTORPATH='Database/directors.json';
 const initJsonBase = ( path ) =>  { if( fs.existsSync( path ) ) 
                                         return JSON.parse( fs.readFileSync( path, { encoding:'utf8', flag:'r' } ) );
                                     else{
-                                        console.log(`"${ path }" not found..`); 
+                                        console.log(`\nDatei "${ path }" nicht gefunden!\nBitte zuerst mkJSONbase ausführen..\n\n   node mkJSONbase\n`);
                                         process.exit(-1);  }
                                     }  
                                       
