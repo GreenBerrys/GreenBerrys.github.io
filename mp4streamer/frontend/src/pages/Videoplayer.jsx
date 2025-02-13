@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import { SERVER } from "../config.js";
-import { pushWinPos, restoreWinPos } from "../utils/RestoreScrollPosX.js"
+import RestoreWinScrollPos from "../components/RestoreWinScrollPos.jsx"
 import './Home.css';
 
 
@@ -9,10 +9,11 @@ import './Home.css';
 
 function Videoplayer() {
 
-    const [ init, setInit ] = useState( false );// Flag for component initialized
+    //const [ init, setInit ] = useState( false );// Flag for component initialized
 
     let { recno, epiNo } = useParams( null, null );           // video No, episode no
-
+    
+    /*
     // set flag for initialized
     useEffect( () => {
         setInit( () => true );
@@ -21,25 +22,23 @@ function Videoplayer() {
     useEffect(() => {                   // scroll window to top at start  
         if( init ){
 
-            //console.log("VIDEOPLAYER enter")
-            // keep window y-scrollposition
-            pushWinPos();  
+            console.log("VIDEOPLAYER enter")
         }    
         return () => {
                 if( init ){
-                //console.log("VIDEOPLAYER leave")
-                // keep window y-scrollposition - before loading new content! 
-                pushWinPos();  
+                console.log("VIDEOPLAYER leave")
             }
         };
         
     },[init]);
+    */
+    // ==================================================================
 
     const noContext = ( event ) =>{     // surpress context-menu    
 
         event.preventDefault();
         // save new or restore old window y-scrollposition
-        restoreWinPos(); 
+        //restoreWinPos(); 
 
         return false;
     }
@@ -56,6 +55,7 @@ function Videoplayer() {
                     <source src={ path } type="video/mp4"/>
                     Dein Browser unterstützt keine HTML5-Videos
                 </video>
+                <RestoreWinScrollPos/>
             </div>
         );
     }

@@ -21,9 +21,9 @@ useEffect( () => {
 
 useEffect( () => {
     if( init ){
-        if( auth )
-            navigate("/videos/*");  
-
+        if( auth ){
+            navigate("/videos/*",{ replace: true });  
+        }
         window.scrollTo( { top: 0, behavior: 'auto' } );
     }    
 // eslint-disable-next-line react-hooks/exhaustive-deps

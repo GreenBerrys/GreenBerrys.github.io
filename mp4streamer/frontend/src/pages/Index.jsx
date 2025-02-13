@@ -7,7 +7,7 @@ import attention from "../Images/attention.png";
 import Context from "../AppContext.js";
 import { useNavigate } from "react-router-dom";
 import CharMenu from "../components/CharMenu.jsx";
-import { pushWinPos, restoreWinPos } from "../utils/RestoreScrollPosX.js"
+import RestoreWinScrollPos from "../components/RestoreWinScrollPos.jsx"
 import "./Index.css";
 import "./CharTag.css";
 
@@ -42,34 +42,12 @@ useEffect( () => {
     setInit( () => true );
 },[]);
 
-useEffect( () => {
-
-    // init
-    if( init ){
-
-        //console.log("INDEX enter")
-
-    }
-    // cleanup
-    return () => {
-        if( init ){
-            //console.log("INDEX leave")
-            // keep window y-scrollposition - before loading new content! 
-            pushWinPos();  
-        }
-    };
-// eslint-disable-next-line react-hooks/exhaustive-deps
-},[ init ]);
-
 // Get index 
 useEffect( () => {
 
     if( init ){  
 
-        // keep window y-scrollposition - before loading new content! 
-
-        //console.log(`INDEX '${itable}' <===================`);
-        pushWinPos();  
+        //console.log("INDEX enter")
 
         busy.current = true;
         setIndex( {...index }, { result: [] } );
@@ -90,23 +68,20 @@ useEffect( () => {
                         }
         }); 
         
-    }    
+    } 
+    /*
+    return () => {
+        if( init ){
+            console.log("INDEX leave")
+        }
+    };
+    */
 // eslint-disable-next-line react-hooks/exhaustive-deps
 },[ init, itable ]);
 
-// save new or restore old window y-scrollposition
-// if browser back-/forward button clicked 
-useEffect(() => {
+// ==================================================================
 
-    if( init ) 
-        restoreWinPos(); 
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
-},[ index.result  ]);       
-
-/****************************************************************************
- * change name parts
- */
+// change name parts
 function chngName( parts ) {
     
     const name = parts.split(" ");
@@ -150,6 +125,7 @@ if( !busy.current ){
                             )
                         })
                     }
+                    <RestoreWinScrollPos/>
                 </>
             : 
                 <ModalWin>

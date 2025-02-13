@@ -8,7 +8,7 @@ import ModalWin from "../components/ModalWin.jsx";
 import attention from "../Images/attention.png";
 import Context from "../AppContext.js";
 import { useNavigate } from "react-router-dom";
-import { pushWinPos, restoreWinPos } from "../utils/RestoreScrollPosX.js"
+import RestoreWinScrollPos from "../components/RestoreWinScrollPos.jsx"
 
 
 
@@ -43,8 +43,6 @@ useEffect(() => {
     if(init){
 
         //console.log("EPISODES enter")
-        // keep window y-scrollposition - before loading new content! 
-        pushWinPos();  
 
         busy.current = true;
         setEpisodes( {...episodes }, { result: [] } );
@@ -64,28 +62,18 @@ useEffect(() => {
                         }
         }); 
     } 
+    /*
     return () => {
         if( init ){
-            //console.log("EPISODES leave")
-            // keep window y-scrollposition - before loading new content! 
-            pushWinPos();  
+            console.log("EPISODES leave")
         }
     };
-   
+    */
 // eslint-disable-next-line react-hooks/exhaustive-deps
 },[ init ]);
 
-// save new or restore old window y-scrollposition
-// if browser back-/forward button clicked 
-useEffect(() => {
-
-    if( init ) 
-        restoreWinPos(); 
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
-},[ episodes.result  ]);       
-
 // ==================================================================
+
 const cut = (txt) => {
 
     txt = txt.replaceAll( "&apos;", "'" ).replaceAll( "&amp;", "&" );
@@ -152,6 +140,7 @@ if( !busy.current ){
                             <button className="play">Episode {epiNo+1} ansehen</button>
                         </Link>
                     </div>
+                    <RestoreWinScrollPos/>
                 </>
 
                 : 

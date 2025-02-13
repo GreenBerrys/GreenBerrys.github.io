@@ -8,7 +8,7 @@ import ModalWin from "../components/ModalWin.jsx";
 import attention from "../Images/attention.png";
 import Context from "../AppContext.js";
 import { useNavigate } from "react-router-dom";
-import { pushWinPos, restoreWinPos } from "../utils/RestoreScrollPosX.js"
+import RestoreWinScrollPos from "../components/RestoreWinScrollPos.jsx"
 import "./Videos.css";
 
 /********************************************************************************************
@@ -41,33 +41,12 @@ useEffect( () => {
     setInit( () => true );
 },[]);
 
-// Save last Window Y-Position
-useEffect( () => {
-
-    // install Handler for recording windows position
-    if( init ){
-        //console.log("VIDEOS enter");
-    }
-    // remove Handler and save windowsposition
-    return () => {
-
-        if( init ){
-             //console.log("VIDEOS leave");
-             // keep window y-scrollposition - before loading new content! 
-                pushWinPos();  
-        }
-    };
-},[ init ]);
-
 // Get videos 
 useEffect( () => {
 
     if( init ){  
 
-        // keep window y-scrollposition - before loading new content! 
-        pushWinPos();  
-
-        //console.log(`VIDEOS '${filter} PAGE ${page || 0}' <===================`);
+        //console.log("VIDEOS enter");
 
         busy.current = true;
         setVideos( {...videos }, { result: [] } );
@@ -86,22 +65,19 @@ useEffect( () => {
                             setVideos( () => data );
                         }
         }); 
-    }    
+    }   
+    /* 
+    return () => {
+
+        if( init ){
+            console.log("VIDEOS leave");
+        }
+    };
+    */
 // eslint-disable-next-line react-hooks/exhaustive-deps
 },[ filter, page, init ]);
 
-useEffect(() => {
-
-    if( init ){  
-
-        // save new or restore old window y-scrollposition
-        // if browser back-/forward button clicked 
-        restoreWinPos(); 
-    }
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
-},[ videos.result  ]);       
-
+// ==================================================================
 
 // *** goto next page
 const pageDown = () => { 
@@ -140,6 +116,7 @@ if( !busy.current ){
                              setPage = { setPage } pageUp = { pageUp } pageDown = { pageDown }
                     />
                 <span ref={ pageEnd }></span>
+                <RestoreWinScrollPos/>
                 </div>
             : 
                 <ModalWin>

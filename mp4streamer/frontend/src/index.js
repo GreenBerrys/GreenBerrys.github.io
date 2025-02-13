@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider,  } from "react-router-dom";
+import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from "react-router-dom";
 import './index.css';
 
 import { SERVER } from "./config.js";
@@ -24,24 +24,27 @@ const router = createBrowserRouter(
 
     createRoutesFromElements(
 
-        <Route path="/" element = { <App/> } > 
+        <Route element = { <App/> } > 
 
-            <Route index element = { <Home/> } /> 
-            <Route path=  "/home" element = { <Home/> } /> 
+            <Route path ="/" index element = { <Home/> } /> 
+            <Route path = "/home" element = { <Home/> } /> 
             <Route path = "/login" element = { <Login/> } />
 
             <Route path="/" element={<Protected/>}>
 
-                <Route path = "/index/:itable" element = {  <Index/> }/>
-                <Route path = "/video/:recno"  element = { <Video/> } />   
-                <Route path = "/episodes/:recno/:title"  element = { <Episodes/> } />   
-                <Route path = "/videos/:filter/:page" element = { <Videos/> } /> 
-                <Route path = "/videos/:filter" element = { <Videos/> } />
-                <Route path = "/logout" element = { <Logout/> } />
-                <Route path = "/player/:recno/:epiNo" element = { <Player/> } />
-                <Route path = "/player/:recno" element = { <Player/> } />
+                <Route path = "index/:itable" element = {  <Index/> }/>
+                <Route path = "video/:recno"  element = { <Video/> } />   
+                <Route path = "episodes/:recno/:title"  element = { <Episodes/> } />   
+                <Route path = "videos/:filter/:page" element = { <Videos/> } /> 
+                <Route path = "videos/:filter" element = { <Videos/> } />
+                <Route path = "logout" element = { <Logout/> } />
+                <Route path = "player/:recno/:epiNo" element = { <Player/> } />
+                <Route path = "player/:recno" element = { <Player/> } />
 
             </Route>
+
+            <Route path="*" element={<Home/>}/>
+
         </Route>
     ),{ basename: serverDir, future: { v7_relativeSplatPath: true } }
 );

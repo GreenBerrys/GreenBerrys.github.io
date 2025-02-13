@@ -14,7 +14,7 @@ import bimage from '../Images/BackgroundPicture.jpg'
  */
 function Login() {
 
-const { setAuth } = useContext( Context );
+const { auth, setAuth } = useContext( Context );
 const [init, setInit] = useState(false);
 const pw = useRef(); 
 const navigate = useNavigate();
@@ -35,6 +35,9 @@ useEffect( () => {
 
 useEffect(() => {
     if(init)
+        if( auth )
+            navigate("/videos/*");  
+
         window.scrollTo( { top: 0, behavior: 'auto' } );
     return () => {
         user.password = "";
@@ -73,7 +76,7 @@ const submitHandler = ( event ) => {
             setUser({ ...user, error: false, state: 9, ...data.result });
             sessionStorage.setItem('User', JSON.stringify(data.result));
             setAuth( true );
-            navigate("/videos/*");  
+            navigate("/videos/*",{ replace: true });   
         }
     })
 

@@ -8,7 +8,7 @@ import ModalWin from "../components/ModalWin.jsx";
 import attention from "../Images/attention.png";
 import Context from "../AppContext.js";
 import { useNavigate } from "react-router-dom";
-import { pushWinPos, restoreWinPos } from "../utils/RestoreScrollPosX.js"
+import RestoreWinScrollPos from "../components/RestoreWinScrollPos.jsx"
 
 
 /********************************************************************************************
@@ -39,8 +39,6 @@ useEffect(() => {
     if( init ){
 
         //console.log("VIDEODETAIL enter")
-        // keep window y-scrollposition - before loading new content! 
-        pushWinPos();  
 
         busy.current = true;
         setVideo( {...video }, { result: [] } );
@@ -59,29 +57,18 @@ useEffect(() => {
                     }
         }); 
     }    
+    /*
     return () => {
         if( init ){
-            //console.log("VIDEODETAIL leave")
-            // keep window y-scrollposition - before loading new content! 
-            pushWinPos();  
+            console.log("VIDEODETAIL leave")
         }
-        
     };
+    */
 // eslint-disable-next-line react-hooks/exhaustive-deps
 },[ init ]);
 
-// save new or restore old window y-scrollposition
-// if browser back-/forward button clicked 
-useEffect(() => {
-
-    if( init ) 
-        // save new or restore old window y-scrollposition
-        restoreWinPos(); 
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
-},[ video.result  ]);       
-
 // ==================================================================
+
 const cut = ( txt ) => {
 
     txt = txt.replaceAll( "&apos;", "'" ).replaceAll( "&amp;", "&" );
@@ -224,6 +211,7 @@ if( !busy.current ){
                             </Link>
                             }
                     </div>
+                    <RestoreWinScrollPos/>
                 </>
 
                 : 
