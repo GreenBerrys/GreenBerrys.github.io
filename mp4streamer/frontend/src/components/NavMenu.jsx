@@ -6,9 +6,16 @@ import Context from "../AppContext.js";
 import { AUTOLOGIN } from "../config.js";
 
 let searchSetter = null;
+let oSearchFor = "";
+let oSearchIn = "";
 
 // called by the Videos componente to update the display
-export const showFilter = ( searchFOR, searchIN ) => searchSetter( { searchFor: searchFOR, searchIn: searchIN } );
+export const showFilter = ( searchFOR, searchIN ) => { 
+    
+    searchSetter( { searchFor: searchFOR, searchIn: searchIN } );
+    oSearchFor = searchFOR;
+    oSearchIn = searchIN;
+}
 
 // ===================================================================
 export default function NavMenu() {
@@ -32,12 +39,20 @@ export default function NavMenu() {
 
     const changeHandler = ( event ) => setSearch( { ...search, [event.target.name]: event.target.value } ); 
     const submitHandler = (event) => {
-  
+
         event.preventDefault();
-        search.searchFor = search.searchFor.trim();
-        let searchString = search.searchIn + '=';
-        search.searchFor.length > 0 ? searchString += search.searchFor : searchString += '*';
-        navigate("/videos/" + searchString);  
+
+        if( search.searchFor !== oSearchFor || search.searchIn !== oSearchIn ){
+
+            oSearchFor = search.searchFor;
+            oSearchIn = search.searchIn;
+            
+            search.searchFor = search.searchFor.trim();
+            let searchString = search.searchIn + '=';
+            search.searchFor.length > 0 ? searchString += search.searchFor : searchString += '*';
+
+            navigate("/videos/" + searchString);
+        }
     }
 
     return (

@@ -89,7 +89,7 @@ useEffect( () => {
             showFilter( search[ 1 ], search[ 0 ] );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-},[ filter ]);
+},[ init, filter ]);
 
 
 // ==================================================================
