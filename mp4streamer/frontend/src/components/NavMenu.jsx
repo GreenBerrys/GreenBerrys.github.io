@@ -44,9 +44,6 @@ export default function NavMenu() {
 
         if( search.searchFor !== oSearchFor || search.searchIn !== oSearchIn ){
 
-            oSearchFor = search.searchFor;
-            oSearchIn = search.searchIn;
-            
             search.searchFor = search.searchFor.trim();
             let searchString = search.searchIn + '=';
             search.searchFor.length > 0 ? searchString += search.searchFor : searchString += '*';
@@ -86,8 +83,7 @@ export default function NavMenu() {
                         <option value="country" readOnly>Land</option>
                         <option value="tag" readOnly>Tag</option>
                 </select>
-
-                <button>🔎</button>
+                <button>&#128270;</button>
             </form>
 
             {/***** MENU **********/}
