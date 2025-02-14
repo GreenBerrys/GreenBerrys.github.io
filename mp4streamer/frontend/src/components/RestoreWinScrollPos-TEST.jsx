@@ -127,7 +127,6 @@ const restoreWinPos = () =>  {
                 rkey = window.history.state.key
                 yPosition[ stkPnt ] = [ rkey, 0, window.location.pathname ];
                 yPos = 0; 
-                //window.history.forward();                 
             }
         }
     }

@@ -9,6 +9,7 @@ import attention from "../Images/attention.png";
 import Context from "../AppContext.js";
 import { useNavigate } from "react-router-dom";
 import RestoreWinScrollPos from "../components/RestoreWinScrollPos.jsx"
+import { showFilter } from "../components/NavMenu.jsx";
 import "./Videos.css";
 
 /********************************************************************************************
@@ -76,6 +77,20 @@ useEffect( () => {
     */
 // eslint-disable-next-line react-hooks/exhaustive-deps
 },[ filter, page, init ]);
+
+// update the search display in the NavMenu-componente 
+useEffect( () => {
+    
+    if( init ){
+        const search = filter.split( '=' );
+        if( search.length === 1)
+            showFilter( '', 'title' );
+        else
+            showFilter( search[ 1 ], search[ 0 ] );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+},[ filter ]);
+
 
 // ==================================================================
 

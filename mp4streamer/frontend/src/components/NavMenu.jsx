@@ -1,33 +1,36 @@
 import "./NavMenu.css";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import logo from "../Images/logo.png";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Context from "../AppContext.js";
 import { AUTOLOGIN } from "../config.js";
 
-function NavMenu() {
+let searchSetter = null;
+
+// called by the Videos componente to update the display
+export const showFilter = ( searchFOR, searchIN ) => searchSetter( { searchFor: searchFOR, searchIn: searchIN } );
+
+// ===================================================================
+export default function NavMenu() {
+
+    const navigate = useNavigate();
 
     const { auth } = useContext( Context );
     const [ showLinks, setShowLinks ] = useState(false);
+
     const [ search, setSearch ] = useState ({ 
 
-            searchFor: "",
-            searchIn: "title"
+        searchFor: "",
+        searchIn: "title"
+    });
 
-        }
-    );
-    const navigate = useNavigate();
-  
-    const handleShowLinks = () => {
-      setShowLinks( showLinks => !showLinks );
-    };
-  
-    const showLinksOff = () => {
-        setShowLinks( false );
-    };
-
-    const changeHandler = ( event ) => setSearch( { ...search, [event.target.name]: event.target.value } );
+    // export setter for showFilter
+    useEffect( () => { searchSetter = setSearch; },[]);
     
+    const handleShowLinks = () => setShowLinks( showLinks => !showLinks ); 
+    const showLinksOff = () => setShowLinks( false ); 
+
+    const changeHandler = ( event ) => setSearch( { ...search, [event.target.name]: event.target.value } ); 
     const submitHandler = (event) => {
   
         event.preventDefault();
@@ -125,6 +128,5 @@ function NavMenu() {
           </button>
         </nav>
     );
-  }
+}
   
-export default NavMenu;
