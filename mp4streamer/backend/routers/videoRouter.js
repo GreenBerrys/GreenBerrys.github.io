@@ -43,6 +43,11 @@ router.get( "/genres/", m.isLoggedIn, video.getGenres);
 router.get( "/tags/", m.isLoggedIn, video.getTags);
 
 /********************************************************************************* 
+ * get news
+ */ 
+router.get( "/news/", m.isLoggedIn, video.getNews);
+
+/********************************************************************************* 
  * stream video
  */ 
 router.get( "/stream/:recno/:epino", m.isLoggedIn, video.getStream);

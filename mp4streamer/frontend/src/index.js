@@ -15,6 +15,7 @@ import Login from "./pages/Login.jsx";
 import Logout from "./pages/Logout.jsx";
 import Player from "./pages/Videoplayer.jsx";
 import Index from './pages/Index.jsx';
+import News from './pages/News.jsx';
 
 
 // get base-directory for the Browserrouter if the app on server is handled by subdirectory
@@ -40,6 +41,7 @@ const router = createBrowserRouter(
                 <Route path = "logout" element = { <Logout/> } />
                 <Route path = "player/:recno/:epiNo" element = { <Player/> } />
                 <Route path = "player/:recno" element = { <Player/> } />
+                <Route path = "news" element = {  <News/> }/>
 
             </Route>
 

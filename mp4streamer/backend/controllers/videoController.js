@@ -21,6 +21,23 @@ const VIDEOROOT = HOMEPATH + 'public' + DLM;
 const PAGELEN = parseInt(process.env.s_PAGESIZE);
 
 /********************************************************************************* 
+ * get newest videos
+ * 
+ */
+async function getNews( req, res ){
+
+
+    try{
+        res.status( 200 ).json( { error: false, result: await video.getNews() } );
+    }
+    catch ( error ) { 
+
+        console.log( error.message );
+        res.status( 400 ).json( { error: true, errMsg: error.message, result: [] } ); 
+        return;
+    }
+}
+/********************************************************************************* 
  * get one video
  * 
  */
@@ -73,6 +90,11 @@ async function find( req, res ) {
     req.url.includes('?') ? req.body =  queryString.parse(req.url.substring(req.url.indexOf('?')+1)) : req.body={};
 
     const search=Object.entries( req.body );
+
+    if( search.length ){
+        search[0][1] = search[0][1].replaceAll(".EQU.","==").replaceAll(".NOT.","!=").replaceAll(".AND.","&&").replaceAll(".OR.","||");
+        req.body[search[0][0]] = search[0][1];
+    }
 
     try{
 
@@ -355,5 +377,6 @@ export default {
     getGenres,
     getTags,
     getDirectors,
-    getActors
+    getActors,
+    getNews
 }

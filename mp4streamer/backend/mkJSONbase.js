@@ -122,12 +122,43 @@ for(let i = 0; i < movies.length; i++)
     movies[i].recno = i;
 
 //----------------------------------------------------------------
-// write tables
+// 
 
 if( !movies.length ){
   console.log( '\n\nKeine Filme im Verzeichnis public gefunden!\nBitte zuerst das Verzeichnis mit den Filmen dorthin verlinken/verknüpfen..\n');
   process.exit(-1);  
 }
+//----------------------------------------------------------------
+// get newest movies
+const newsTab =[];
+
+for( let i = 0, pageSize = process.env.s_PAGESIZE; i < movies.length; i++){
+
+    if( newsTab.length < pageSize )
+       newsTab.push( { ctime: movies[i].ctime, recno: movies[i].recno, title: movies[i].title } );
+    else{
+       for( let m = 0; m < newsTab.length; m++){
+
+            if( (new Date( newsTab[m].ctime )).getTime() < (new Date( movies[i].ctime )).getTime() ){
+                newsTab[m] = { ctime: movies[i].ctime, recno: movies[i].recno, title: movies[i].title };
+                break;
+            }    
+       } 
+    } 
+}
+newsTab.sort((a,b) => {
+
+    const at = new Date( a.ctime );
+    const bt = new Date( b.ctime );
+
+    if( at.getTime() < bt.getTime() ) return 1;
+    if( at.getTime() > bt.getTime() ) return -1;
+    return 0;  
+});
+writeJSON("./Database/news.json", newsTab);
+
+//----------------------------------------------------------------
+// write tables
 
 const indexCount = ( indexTab ) => indexTab.reduce( ( entries, section ) => entries + section.items.length, 0 );
 const numForm = ( num ) => " ".repeat( 8 - String( num ).length ) + num;
@@ -242,6 +273,13 @@ async function getMovies(dir, movies) {
 
         if( movieFiles.length ){
 
+            // get directory creation date & time
+            const dstat = fs.statSync( dir );
+            movie.ctime = dstat.ctime;
+            //movie.ctimeMs = dstat.ctimeMs
+            //movie.mtime = dstat.mtime;
+            //movie.mtimeMs = dstat.mtimeMs
+
             // check for single movies
             if( !fs.existsSync( dir + 'tvshow.nfo' ) ){
 
@@ -322,14 +360,14 @@ async function getMovies(dir, movies) {
                     // append actor-table in movie plot
                     if( movie.actors.length ){
                       movie.plot = movie.plot + "&#x0D;&#x0D;DARSTELLER:";
-
+                      /*  
                       if( movie.actors.length > 1 )
                             movie.actors.sort( (a,b) => { 
                                 if( a.name < b.name ) return -1;
                                 if( a.name > b.name ) return 1;
                                 return 0;  
                         });
-
+                      */  
                       for( const actor of movie.actors)
                         movie.plot = movie.plot + "&#x0D;  " + String(...actor.name).replaceAll( "&apos;", "'" ) + ": &quot;" + actor.role + "&quot;";
                     } 
@@ -465,14 +503,14 @@ async function getMovies(dir, movies) {
 
                     if( movie.actors.length ){
                         movie.plot = movie.plot + "&#x0D;&#x0D;DARSTELLER:";
-
+                        /*
                         if( movie.actors.length > 1 )
                             movie.actors.sort( (a,b) => { 
                                 if( a.name < b.name ) return -1;
                                 if( a.name > b.name ) return 1;
                                 return 0;  
                         });
-
+                        */
                         for( const actor of movie.actors)
                           movie.plot = movie.plot + "&#x0D;  " + String(...actor.name).replaceAll( "&apos;", "'" ) + ": &quot;" + actor.role + "&quot;";
                       } 

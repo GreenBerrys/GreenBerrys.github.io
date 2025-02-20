@@ -97,11 +97,36 @@ function getOne( recno, setter ){
         console.error('Error:', error.message);
     });
  }
+ /*********************************************************************
+ *  getNews() - get newest video
+ **********************************************************************/
+function getNews( setter ){
+
+    //console.log("user FETCH getNews",SERVER + 'video/news;
+
+    return fetch( SERVER + 'video/news', {
+        method: 'GET', 
+        mode:"cors",
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+    })
+    .then(response => response.json())
+    .then(news => {
+        setter( news );
+    })
+    .catch((error) => {
+        console.error('Error:', error.message);
+    });
+ }
+
 
 const videoApi = {
     find,
     getOne,
     getEpisodes,
-    getIndexTab
+    getIndexTab,
+    getNews
 }
 export default videoApi; 

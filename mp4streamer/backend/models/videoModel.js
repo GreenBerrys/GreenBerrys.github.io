@@ -121,6 +121,13 @@ async function getEpiStream( recno, epiNo, videoroot ){
 
     return await database.getEpiStream( recno, epiNo, videoroot );
 }
+/********************************************************************************* 
+ * getNews() - 
+ */
+async function getNews(){
+
+    return await database.getNews();
+}
 export default {
     find,
     count,
@@ -134,5 +141,6 @@ export default {
     getGenres,
     getTags,
     getDirectors,
-    getActors
+    getActors,
+    getNews
 };
