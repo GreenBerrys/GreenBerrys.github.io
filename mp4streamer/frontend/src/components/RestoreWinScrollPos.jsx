@@ -31,9 +31,6 @@ window.addEventListener( 'load', ( event ) => {
     stkPnt = 0;
 
     modulInit = true;
-
-    //stkPrint(`\n=======================\n--INIT  state ( ${ JSON.stringify( window.history.state ) } )\n====================\n`);
-
 });
 // ===============================================================================
 // React componente
@@ -66,8 +63,6 @@ export default function RestoreWinScrollPos(){
 // save key & scrollposition
 const pushWinPos = () => { 
 
-    //stkPrint(`=======> PUSHWINPOS() enter `);
-
     yPosition[ stkPnt ][ 1 ] = yPos;
 
     if( idx < window.history.state.idx ){
@@ -81,7 +76,6 @@ const pushWinPos = () => {
     }
     bdx = window.history.state.idx;
 
-    //stkPrint(`--PUSHWINPOS() leave `);
 }  
 // ---------------------------------------------------------------------
 // restore windows y-position 
@@ -92,20 +86,14 @@ const restoreWinPos = () =>  {
 
     let rstkPnt = stkPnt;
 
-    //stkPrint(`=======> RESTOREWINPOS() enter`);    
-
     if( browserJmp ){
 
         if( idx >= window.history.state.idx ){      
-
-            //console.log("BACKWARD");
 
             // search backward
             for(; rstkPnt >= 0 && yPosition[ rstkPnt ][ 0 ] !== rkey; rstkPnt-- ); 
         }
         else{
-            //console.log("FORWARD") 
-
             // search forward
             for(; rstkPnt < yPosition.length && yPosition[ rstkPnt ][ 0 ] !== rkey;  rstkPnt++ ); 
         }
@@ -121,8 +109,6 @@ const restoreWinPos = () =>  {
         else{
             if( rstkPnt === -1 ){
 
-                //console.log(`-- NOT FOUND: stkPnt=${stkPnt}  yPosition[${stkPnt}]=${yPosition[stkPnt]}`)
-
                 stkPnt = 0;
                 rkey = window.history.state.key
                 yPosition[ stkPnt ] = [ rkey, 0 ];
@@ -136,18 +122,4 @@ const restoreWinPos = () =>  {
 
     idx = window.history.state.idx;
     browserJmp = false;
-
-    //stkPrint(`--RESTOREWINPOS() leave`);
 }
-// ------------------------------------- only for testing --------------------------------------------------
-const stkPrint = (title="") => {
-
-    const fmt = (str) => " ".repeat( 6 - String(str).length ) + str;  
-
-console.log( `--> state: ${JSON.stringify( window.history.state )}` );    
-console.log( title + `\nstkPnt=${stkPnt} rkey="${rkey}" yPosition[${stkPnt}]=[${yPosition[stkPnt][0]},${yPosition[stkPnt][1]}]\n` )
-yPosition.forEach( (el,i) => { console.log( (i === stkPnt ? "-> " : "   ") + i + `: [ ${el[0]}, ${fmt(el[1])} ]`) } );
-
-}
-
-

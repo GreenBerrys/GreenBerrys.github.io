@@ -1,6 +1,6 @@
 {
   "name": "backend",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "mp4streamer backend",
   "keywords": ["node","javascript","react","streaming","mp4streamer"],
   "author": "Frank",

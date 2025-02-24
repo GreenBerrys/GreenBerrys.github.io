@@ -38,3 +38,29 @@
     box-shadow: 1px 3px 7px 3px black;
 
 }
+/* ---------------------------------------------------- */
+.star {
+    position: absolute; 
+    top: 60px;
+    left: 42px;
+    transform: rotate(30deg);
+    width: 200px;  
+    aspect-ratio: 1;
+    background: rgba(255, 166, 0, 0.699);
+    clip-path: polygon(50% 0,
+      calc(50%*(1 + sin(.4turn))) calc(50%*(1 - cos(.4turn))),
+      calc(50%*(1 - sin(.2turn))) calc(50%*(1 - cos(.2turn))),
+      calc(50%*(1 + sin(.2turn))) calc(50%*(1 - cos(.2turn))),
+      calc(50%*(1 - sin(.4turn))) calc(50%*(1 - cos(.4turn))) 
+     ); 
+  }
+  .star:after {
+    position: absolute;
+    top: 87px;
+    left: 75px;
+    color: red;
+    transform: rotate(-65deg);
+    font-size: 25px;
+    font-weight: bold;
+    content: 'Neu';
+  }

@@ -80,11 +80,13 @@ if( !busy.current ){
                 <div>
                     <h1> Die neuesten Videos:</h1>
                     {news.count === 0 &&
-                        <h2><br></br><br></br>Keine neuen Videos gefunden..</h2>
+                        <h2><br></br><br></br>Keine Videos gefunden..</h2>
                     }    
                     <div className="cardView">
-                        {   news.result.map( ( video, index ) => {
-                                return ( <VideoCard key = { index } video = { news.result[index] } /> );
+                        {   
+                            news.result.map( ( video, index ) => {
+                                
+                                return ( <VideoCard key = { index } video = { video } star = { ( video.mtimeMs - video.btimeMs ) < 1728000000 } /> );
                             })
                         }
                     </div>

@@ -22,7 +22,9 @@ const cut = ( txt ) => {
     return <p className="oneTitle text">{txt}</p>
 }
 
-function VideoCard( { video } ) {
+function VideoCard( { video, star = false } ) {
+
+//    console.log("star",star)
 
 return (
 
@@ -31,7 +33,9 @@ return (
         <Link to={ { pathname: `/video/${video.recno} ` } }>
             <img src={ SERVER + `video/poster/${video.recno}` } alt="..."/>
             {cut( video.title )}
+            { star && <div className="star"></div> } 
         </Link>
+        
     </div>
 
   );

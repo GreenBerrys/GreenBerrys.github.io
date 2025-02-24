@@ -105,57 +105,27 @@ console.log(`\nLese "${MP4ROOT}"..`);
 
 movies = await scanTree( MP4ROOT, movies );
 
-if( movies.length > 1){
+console.log("\n");
+//----------------------------------------------------------------
+// 
+if( !movies.length ){
+    console.log( '   Keine Filme im Verzeichnis public gefunden!\n   Bitte zuerst das Verzeichnis mit den Filmen dorthin verlinken/verknüpfen..\n');
+    process.exit(-1);  
+  }
+// ==========================================================
+// Sort alphab.
+movies.sort((a,b) => {
 
-    movies.sort((a,b) => {
+    const str1 = a.title.toUpperCase().replaceAll("Ö","OE").replaceAll("Ü","UE").replaceAll("Ä","AE").replaceAll("À","A");
+    const str2 = b.title.toUpperCase().replaceAll("Ö","OE").replaceAll("Ü","UE").replaceAll("Ä","AE").replaceAll("À","A");
 
-        const str1 = a.title.toUpperCase().replaceAll("Ö","OE").replaceAll("Ü","UE").replaceAll("Ä","AE").replaceAll("À","A");
-        const str2 = b.title.toUpperCase().replaceAll("Ö","OE").replaceAll("Ü","UE").replaceAll("Ä","AE").replaceAll("À","A");
-
-        if( str1 < str2 ) return -1;
-        if( str1 > str2 ) return 1;
-        return 0;  
-    });
-}
+    if( str1 < str2 ) return -1;
+    if( str1 > str2 ) return 1;
+    return 0;  
+});
 
 for(let i = 0; i < movies.length; i++)
     movies[i].recno = i;
-
-//----------------------------------------------------------------
-// 
-
-if( !movies.length ){
-  console.log( '\n\nKeine Filme im Verzeichnis public gefunden!\nBitte zuerst das Verzeichnis mit den Filmen dorthin verlinken/verknüpfen..\n');
-  process.exit(-1);  
-}
-//----------------------------------------------------------------
-// get newest movies
-const newsTab =[];
-
-for( let i = 0, pageSize = process.env.s_PAGESIZE; i < movies.length; i++){
-
-    if( newsTab.length < pageSize )
-       newsTab.push( { ctime: movies[i].ctime, recno: movies[i].recno, title: movies[i].title } );
-    else{
-       for( let m = 0; m < newsTab.length; m++){
-
-            if( (new Date( newsTab[m].ctime )).getTime() < (new Date( movies[i].ctime )).getTime() ){
-                newsTab[m] = { ctime: movies[i].ctime, recno: movies[i].recno, title: movies[i].title };
-                break;
-            }    
-       } 
-    } 
-}
-newsTab.sort((a,b) => {
-
-    const at = new Date( a.ctime );
-    const bt = new Date( b.ctime );
-
-    if( at.getTime() < bt.getTime() ) return 1;
-    if( at.getTime() > bt.getTime() ) return -1;
-    return 0;  
-});
-writeJSON("./Database/news.json", newsTab);
 
 //----------------------------------------------------------------
 // write tables
@@ -163,16 +133,32 @@ writeJSON("./Database/news.json", newsTab);
 const indexCount = ( indexTab ) => indexTab.reduce( ( entries, section ) => entries + section.items.length, 0 );
 const numForm = ( num ) => " ".repeat( 8 - String( num ).length ) + num;
 
-writeJSON("./Database/movies.json", movies);
-console.log(`\n\n${ numForm( movies.length ) } Filme/Serien gefunden. Datei "Database/movies.json erstellt`);
-writeJSON( "./Database/genres.json", tableSort( genres ) );
+await writeJSON("./Database/movies.json", movies);
+console.log(`${ numForm( movies.length ) } Filme/Serien gefunden. Datei "Database/movies.json erstellt`);
+await writeJSON( "./Database/genres.json", tableSort( genres ) );
 console.log(`${ numForm( indexCount( genres) ) } Genre gefunden. Datei "Database/genres.json erstellt`);
-writeJSON( "./Database/tags.json", tableSort( tags ) );
+await writeJSON( "./Database/tags.json", tableSort( tags ) );
 console.log(`${ numForm( indexCount( tags ) ) } Tags gefunden. Datei "Database/tags.json erstellt`);
-writeJSON( "./Database/directors.json", tableSort( directors ) );
+await writeJSON( "./Database/directors.json", tableSort( directors ) );
 console.log(`${ numForm( indexCount( directors ) ) } Regisseure/innen gefunden. Datei "Database/directors.json erstellt`);
-writeJSON( "./Database/actors.json", tableSort( actors ) );
+await writeJSON( "./Database/actors.json", tableSort( actors ) );
 console.log(`${ numForm( indexCount( actors ) ) } Darsteller/innen gefunden. Datei "Database/actors.json erstellt\n`);
+
+// ==========================================================
+// Create News-Table
+const newsTab =[];
+
+const dateVal = ( dnum ) => ( new Date( dnum.getFullYear(), dnum.getMonth(), dnum.getDate(), dnum.getHours(), dnum.getMinutes() ) ).getTime();
+
+movies.sort((a,b) => b.mtimeMs - a.mtimeMs );
+for( let i = 0, pageSize = process.env.s_PAGESIZE; i < movies.length && newsTab.length < pageSize; i++){
+
+    newsTab.push( { btimeMs: dateVal ( new Date( movies[ i ].btimeMs ) ), 
+                    mtimeMs: dateVal( new Date( movies[ i ].mtimeMs ) ), 
+                    recno: movies[ i ].recno, 
+                    title: movies[ i ].title } );
+}
+await writeJSON("./Database/news.json", newsTab);
 
 process.exit(0);
 
@@ -273,14 +259,13 @@ async function getMovies(dir, movies) {
 
         if( movieFiles.length ){
 
-            // get directory creation date & time
+            // set video timestamp -------------------------------------
+                
             const dstat = fs.statSync( dir );
-            movie.ctime = dstat.ctime;
-            //movie.ctimeMs = dstat.ctimeMs
-            //movie.mtime = dstat.mtime;
-            //movie.mtimeMs = dstat.mtimeMs
+            movie.btimeMs = dstat.birthtimeMs;
+            movie.mtimeMs = dstat.mtimeMs;
 
-            // check for single movies
+            // check for single movies ---------------------------------------
             if( !fs.existsSync( dir + 'tvshow.nfo' ) ){
 
                 for( const mp4File of movieFiles ){

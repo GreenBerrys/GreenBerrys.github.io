@@ -8,7 +8,7 @@ const sample2a = () => showFilter( 'titel==der', 'title', false );
 const sample2b = () => showFilter( 'titel==*der', 'title', false );
 const sample3a = () => showFilter( 'titel!=der', 'title', false );
 const sample3b = () => showFilter( 'titel!=*der', 'title', false );
-const sample4  = () => showFilter( 'regie==*wim && title==*berlin', 'title', false );
+const sample4  = () => showFilter( 'regie==*wim && title==*paris', 'title', false );
 const sample5  = () => showFilter( 'regie==*wim && title==*berlin || title==*paris', 'title', false );
 const sample6  = () => showFilter( 'jahr==>1979 && jahr==<1985', 'title', false );
 
