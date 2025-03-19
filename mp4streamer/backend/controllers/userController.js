@@ -26,9 +26,15 @@ const checkAttempts = ( req ) => {
     return false;
 }
 /********************************************************************************* 
+ * edit() - user edit status
+ */
+const edit = ( req, res ) => {
+    return res.status( 200 ).json( { error: false, result: [{ edit: req.session.edit }] } );
+}
+/********************************************************************************* 
  * logout() - user logout 
  */
- async function logout( req, res ) {
+async function logout( req, res )  {
 
     try{    
         
@@ -48,7 +54,7 @@ const checkAttempts = ( req ) => {
 /********************************************************************************* 
  * login() - user login 
  */
- async function login( req, res ) {
+async function login( req, res ) {
 
     // ** Check if already logged in
     if( req.session.userid ){
@@ -60,8 +66,10 @@ const checkAttempts = ( req ) => {
         return res.status( 403 ).json( { error: true, errMsg: "Zu viele Login-Versuche! \n Deine IP wurde vorübergehend gesperrt.", result: [] } ); 
     }
     try{
+        
         // ** Check username
-        if ( req.body.user !== `${process.env.s_USER}` ){
+        const userNo = `${process.env.s_USER}`.split(',').findIndex( (user) => req.body.user === user.trim() );
+        if( userNo === -1 ){
 
             // ** Check if more then 3 attempts
             if ( checkAttempts( req ) ) {
@@ -71,7 +79,8 @@ const checkAttempts = ( req ) => {
             return res.status( 403 ).json( { error: true, errMsg: "Username oder Password ungültig!", result: [] } ); 
         }
         // ** check password
-        if ( req.body.password !== `${process.env.s_PASS}` ){
+        
+        if( `${process.env.s_PASS}`.split(',')[ userNo ].trim() !== req.body.password ){
 
             // ** Check if more then 3 attempts
             if ( checkAttempts( req ) ) {
@@ -82,8 +91,13 @@ const checkAttempts = ( req ) => {
         }
         // ** OK - login..
         req.session.userid = req.body.user;
-        log.logger( "Login", req );
-        return res.status(200).json( { error: false, result: [] } );
+        const edit = `${process.env.s_EDIT}`.split(',')[ userNo ].trim();
+        
+        req.session.edit = edit.toLocaleLowerCase() === 'true' ? true : false;
+        const user = `${process.env.s_USER}`.split(',')[ userNo ].trim();
+        log.logger( `Login User "${user}" Edit=${edit}`, req );
+
+        return res.status(200).json( { error: false, result: [ { edit: req.session.edit } ] } );
     }
     catch( error ){
         res.status( 400 ).json( { error: true, errMsg: error.message, result: [] } ); 
@@ -93,5 +107,6 @@ const checkAttempts = ( req ) => {
  export default {
 
     login,
-    logout
+    logout,
+    edit
 }

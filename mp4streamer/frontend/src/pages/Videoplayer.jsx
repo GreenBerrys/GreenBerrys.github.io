@@ -9,37 +9,13 @@ import './Home.css';
 
 function Videoplayer() {
 
-    //const [ init, setInit ] = useState( false );// Flag for component initialized
-
     let { recno, epiNo } = useParams( null, null );           // video No, episode no
     
-    /*
-    // set flag for initialized
-    useEffect( () => {
-        setInit( () => true );
-    },[]);
-
-    useEffect(() => {                   // scroll window to top at start  
-        if( init ){
-
-            console.log("VIDEOPLAYER enter")
-        }    
-        return () => {
-                if( init ){
-                console.log("VIDEOPLAYER leave")
-            }
-        };
-        
-    },[init]);
-    */
     // ==================================================================
 
     const noContext = ( event ) =>{     // surpress context-menu    
 
         event.preventDefault();
-        // save new or restore old window y-scrollposition
-        //restoreWinPos(); 
-
         return false;
     }
 
@@ -62,7 +38,6 @@ function Videoplayer() {
     catch( err ){
 
         console.log( err.message )
-
     }    
 }
 export default Videoplayer;

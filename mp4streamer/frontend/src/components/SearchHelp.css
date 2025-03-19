@@ -23,10 +23,17 @@
     vertical-align: top;
 }
 #shelpWin table td code{
-font-size: 0.9rem;
-cursor: pointer;
+    font-size: 0.9rem;
+    cursor: pointer;
 }
 #shelpWin table tr .noBorder{
     border-spacing: 0px;
+}
+.closeButton{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 30px;
+    cursor: pointer;
 }
 

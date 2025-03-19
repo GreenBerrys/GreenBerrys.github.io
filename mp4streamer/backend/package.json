@@ -1,8 +1,14 @@
 {
   "name": "backend",
-  "version": "0.6.4",
+  "version": "0.7.0",
   "description": "mp4streamer backend",
-  "keywords": ["node","javascript","react","streaming","mp4streamer"],
+  "keywords": [
+    "node",
+    "javascript",
+    "react",
+    "streaming",
+    "mp4streamer"
+  ],
   "author": "Frank",
   "license": "MIT",
   "main": "server.js",
@@ -13,12 +19,13 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "@recent-cli/resolve-lnk": "^0.0.2",
+    "cookie-session": "^2.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.21.2",
-    "cookie-session": "^2.1.0",
-    "xml2js": "^0.6.2",
-    "@recent-cli/resolve-lnk": "^0.0.2"
+    "express-fileupload": "^1.5.1",
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"

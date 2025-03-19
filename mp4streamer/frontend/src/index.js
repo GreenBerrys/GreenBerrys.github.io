@@ -16,7 +16,7 @@ import Logout from "./pages/Logout.jsx";
 import Player from "./pages/Videoplayer.jsx";
 import Index from './pages/Index.jsx';
 import News from './pages/News.jsx';
-
+import Editor from './pages/Editor.jsx';
 
 // get base-directory for the Browserrouter if the app on server is handled by subdirectory
 const serverDir =  SERVER.split('/').length > 4 ? SERVER.substring( SERVER.substring( 0, SERVER.length -1 ).lastIndexOf( '/' ), SERVER.length -1 ) : '/';
@@ -42,6 +42,7 @@ const router = createBrowserRouter(
                 <Route path = "player/:recno/:epiNo" element = { <Player/> } />
                 <Route path = "player/:recno" element = { <Player/> } />
                 <Route path = "news" element = {  <News/> }/>
+                <Route path = "editor/:recno" element = {  <Editor/> }/>
 
             </Route>
 

@@ -8,19 +8,25 @@ const ARGS = process.argv;
 const DLM = ARGS[1][1] !== ':' ? '/' : '\\';
 const BUILDDIR = ARGS[1][1] !== ':' ? '/' + ARGS[1].substring( 1, ARGS[1].lastIndexOf( `${DLM}backend` ) ) + `${DLM}frontend${DLM}build` :
                                            ARGS[1].substring( 2, ARGS[1].lastIndexOf( `${DLM}backend` ) )  + `${DLM}frontend${DLM}build`;
-
-
 /********************************************************************************* 
- * get pictures
+ * get/write pictures
  */ 
-router.get( "/poster/*", m.isLoggedIn, video.getPoster );
-router.get( "/fanart/*", m.isLoggedIn, video.getFanart);
+router.get( "/poster/:recno", video.getPoster );
+router.post( "/poster/:recno", m.isLoggedIn, video.setPoster );
+router.get( "/fanart/:recno", m.isLoggedIn, video.getFanart);
+router.post( "/fanart/:recno", m.isLoggedIn, video.setFanart);
 router.get( "/ethumb/:recno/:epino", m.isLoggedIn, video.getEpisodeThumb);
 
 /********************************************************************************* 
  * get episodes
  */ 
-router.get( "/episodes/*", m.isLoggedIn, video.getEpisodes);
+router.get( "/episodes/:recno", m.isLoggedIn, video.getEpisodes);
+
+/********************************************************************************* 
+ * get/write lock
+ */ 
+router.get ( "/lock/:recno", m.isLoggedIn, video.getLock );
+router.post ( "/lock/:recno", m.isLoggedIn, video.setLock );
 
 /********************************************************************************* 
  * get directors
@@ -45,7 +51,7 @@ router.get( "/tags/", m.isLoggedIn, video.getTags);
 /********************************************************************************* 
  * get news
  */ 
-router.get( "/news/", m.isLoggedIn, video.getNews);
+router.get( "/news/", video.getNews);
 
 /********************************************************************************* 
  * stream video
@@ -60,14 +66,20 @@ router.get( "/find/", m.isLoggedIn, video.find );
 router.get( "/find/*", m.isLoggedIn, video.find ); 
 
 /********************************************************************************* 
+ * put movie
+ */ 
+router.post( "/detail/:recno", m.isLoggedIn, video.putOne);
+
+/********************************************************************************* 
  * get movie
  */ 
-router.get ( "/", m.isLoggedIn, video.getOne);
+router.get( "/detail/:recno", video.getOne);
 
 router.get( "/*", (req, res) =>{
 
     res.sendFile( 'index.html', {root: BUILDDIR } )
     return;
 } );
+
 
 export default router;

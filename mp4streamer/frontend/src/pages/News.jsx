@@ -2,8 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import videoApi from "../lib/videoApi";
 import VideoCard from "../components/VideoCard";
 import BusyIndicator from "../components/BusyIndicator.jsx";
-import ModalWin from "../components/ModalWin.jsx";
-import attention from "../Images/attention.png";
+import Message from "../components/Message.jsx";
 import Context from "../AppContext.js";
 import { useNavigate } from "react-router-dom";
 import RestoreWinScrollPos from "../components/RestoreWinScrollPos.jsx"
@@ -78,7 +77,7 @@ if( !busy.current ){
         <div>
             { !news.error ?
                 <div>
-                    <h1> Die neuesten Videos:</h1>
+                    <h1> Neueste Videos:</h1>
                     {news.count === 0 &&
                         <h2><br></br><br></br>Keine Videos gefunden..</h2>
                     }    
@@ -90,18 +89,10 @@ if( !busy.current ){
                             })
                         }
                     </div>
-                <RestoreWinScrollPos/>
+                    <RestoreWinScrollPos/>
                 </div>
             : 
-                <ModalWin>
-                    <img src={ attention } alt="achtung" style={ { width: 70, margin: "auto" } } />
-                    <div>
-                        <p>
-                                { news.errMsg } 
-                        </p>
-                        <p><button onClick={ () => setNews( { error:false, count: 0, result: [] } ) }>Ok</button></p>
-                    </div>
-                </ModalWin>        
+                 <Message txt={ news.errMsg } func={ ()=>setNews( { error:false, count: 0, result: [] } ) }/> 
             }    
         </div>    
     );

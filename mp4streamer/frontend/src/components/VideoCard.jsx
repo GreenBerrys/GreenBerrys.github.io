@@ -24,14 +24,11 @@ const cut = ( txt ) => {
 
 function VideoCard( { video, star = false } ) {
 
-//    console.log("star",star)
-
 return (
 
     <div className="card">
-       
         <Link to={ { pathname: `/video/${video.recno} ` } }>
-            <img src={ SERVER + `video/poster/${video.recno}` } alt="..."/>
+            <img src={ SERVER + `video/poster/${video.recno}.${video.posterStamp}` } alt="..."/>
             {cut( video.title )}
             { star && <div className="star"></div> } 
         </Link>

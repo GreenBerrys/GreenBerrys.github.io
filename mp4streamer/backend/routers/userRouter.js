@@ -13,12 +13,16 @@ router.post( "/login", user.login );
  */ 
 router.post( "/logout", user.logout );
 /********************************************************************************* 
+ * login
+ */ 
+router.post( "/edit", user.edit );
+/********************************************************************************* 
  * unknown path
  */
- router.use( "*", notFound );
- // -------------------------------------------------------------------------------
- async function notFound( req, res ){
-     return res.status( 404 ).send('Seite nicht gefunden');
- }
+router.use( "*", notFound );
+// -------------------------------------------------------------------------------
+async function notFound( req, res ){
+    return res.status( 404 ).send('Seite nicht gefunden');
+}
  
  export default router;

@@ -1,14 +1,15 @@
-import React, { useState, useEffect, useRef, useContext} from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { useParams, Link  } from "react-router-dom";
 import videoApi from "../lib/videoApi.js";
 import BusyIndicator from "../components/BusyIndicator.jsx";
 import { SERVER } from "../config.js";
 import "./VideoDetail.css";
-import ModalWin from "../components/ModalWin.jsx";
-import attention from "../Images/attention.png";
 import Context from "../AppContext.js";
 import { useNavigate } from "react-router-dom";
 import RestoreWinScrollPos from "../components/RestoreWinScrollPos.jsx"
+import Message from "../components/Message.jsx";
+import editFree from "../Images/edit.png"
+import editLock from "../Images/editLock.png"
 
 
 /********************************************************************************************
@@ -18,17 +19,28 @@ function VideoDetail() {
 
 let { recno } = useParams( null );           // video recordnumber
 
-const { setAuth } = useContext( Context );
+const { setAuth, edit } = useContext( Context );
+
 const navigate = useNavigate();
 
 const busy = useRef( true );
 const [ video, setVideo] = useState( {
     
                             error: false,
-                            result: []
+                            result: [{lock:false, title:"", plot:"", year: 0, genre:"" , tag:"" }]
 } );
 
-const [ init, setInit ] = useState( false );// Flag for component initialized
+const [ init, setInit ] = useState( false );            // Flag for component initialized
+const [ lockMsg, setLockMsg ] = useState( false );      // Flag for show 'record locked'-Message  
+const [ lockChng, setLockChng ] = useState( false );    // Lock state 
+
+const lockPolling = useRef (null);                      // Timer ID for polling loop
+
+// ===============================================================================================
+const [ tmpMsg, setTmpMsg ] = useState( false );    // <------------------------- XXXXXXX
+// ===============================================================================================
+
+
 
 // set flag for initialized
 useEffect( () => {
@@ -36,12 +48,11 @@ useEffect( () => {
 },[]);
 
 useEffect(() => {
+
     if( init ){
 
-        //console.log("VIDEODETAIL enter")
-
         busy.current = true;
-        setVideo( {...video }, { result: [] } );
+
         videoApi.getOne( recno, ( data ) => {
 
                     if (data.error && data.errMsg ===  "Access denied!" ){
@@ -52,26 +63,50 @@ useEffect(() => {
                         navigate( "/" );
                     }
                     else{
+
                         busy.current = false;
-                        setVideo( () => data );
+                        setVideo( ( prevVideo ) => data );
+
+                        // set polling loop if record is locked
+                        
+                        if( data.result[0].lock ){
+
+                           lockPolling.current = setInterval( () => {
+
+                                // check for lock-status
+                                videoApi.getLockASync( recno ).then( isLocked => { 
+
+                                        if( !isLocked ) { 
+
+                                                // stop polling loop
+                                                clearInterval( lockPolling.current ); 
+                                                lockPolling.current = null;
+
+                                                // actualize screen
+                                                setLockChng( () => !lockChng );
+                                        } 
+                                    });
+                           }, 2500 );
+                        }
+                        
                     }
         }); 
     }    
-    /*
     return () => {
         if( init ){
-            console.log("VIDEODETAIL leave")
+            if( lockPolling.current ){
+                clearInterval( lockPolling.current );
+            }    
+            //console.log("VIDEODETAIL leave")
         }
     };
-    */
+    
 // eslint-disable-next-line react-hooks/exhaustive-deps
-},[ init ]);
+},[ init, lockMsg, lockChng ]);
 
 // ==================================================================
-
+// Format videotitle
 const cut = ( txt ) => {
-
-    txt = txt.replaceAll( "&apos;", "'" ).replaceAll( "&amp;", "&" );
 
     if( txt.includes( ' - ' ) ){
 
@@ -87,23 +122,41 @@ const cut = ( txt ) => {
 
     return <p className="oneTitle text">{txt}</p>
 }
-const trans = ( txt ) => {
-
-    return txt.replaceAll( '&quot;', '"' ).replaceAll( "&#x0A;", "\n" ).replaceAll( '&apos;', "'" ).replaceAll( "&#x0D;", "\n" );
-}
+// replace special characters  
 const titleURLtrans = ( txt ) => {
 
     return txt.replaceAll( '/', '%2F' ).replaceAll( ':', '%3A' ).replaceAll( '"', '%22' )
               .replaceAll( '&', '%26' ).replaceAll( '+', '%2B' ).replaceAll( '?', '%3F' );
 }
+// call editor
+const callEditor = ( event )  => {
 
+    event.preventDefault();
+
+// -------------------------------------------------------------------
+    if( video.result[0].serie ){
+        setTmpMsg( () => true );
+        return;
+    }
+// -------------------------------------------------------------------
+
+    videoApi.getLockASync( recno ).then( ( isLocked => !isLocked ? navigate( "/editor/" + recno ) : setLockMsg( () => true ) ) );
+
+}
+
+// ==================================================================
 if( !busy.current ){
     return (
         <div id="videoDetail">
-  
+
+            {/* ---------------------------------------------------------------------------------------------- */}
+            { tmpMsg && <Message txt={ "Für Serien noch nicht realisiert"} func={ ()=>setTmpMsg( () => false) }/> }
+            {/* ----------------------------------------------------------------------------------------------- */}
+
+            { lockMsg && <Message txt={ "Video wird gerade bearbeitet!" } func={ ()=>setLockMsg(() => false) }/> }
+
             <div >
                 { !video.error ?
-
                 <>
                     <div id="background" >
                         <img src={ `${SERVER}video/fanart/${video.result[0].recno}` } alt="..."/> 
@@ -111,11 +164,12 @@ if( !busy.current ){
 
                     <div id="videoDetailContainer">
                         <div id="title">
-                        { cut( video.result[0].title ) }
+                            { cut( video.result[0].title ) }
+                            { edit && <img id="editSymb" src={ !video.result[0].lock ? editFree : editLock } alt="edit" onClick={ (e) => callEditor(e) }/> }
                         </div>
-                        <img id="poster" src={ `${SERVER}video/poster/${video.result[0].recno}` } alt="..."/> 
+                        <img id="poster" src={ `${SERVER}video/poster/${video.result[0].recno}.${video.result[0].posterStamp}` } alt="..."/> 
                         <div id="plot">
-                            { trans( video.result[0].plot ) }
+                            { video.result[0].plot }
                         </div>
                         <div id="data">
                             <table>
@@ -209,24 +263,14 @@ if( !busy.current ){
                             <Link  id="player" to={ { pathname: `/episodes/${video.result[0].recno}/${ titleURLtrans(video.result[0].title ) }` } }>
                                 <button className="play">Episoden</button>
                             </Link>
-                            }
+                        }
                     </div>
                     <RestoreWinScrollPos/>
                 </>
-
                 : 
-                    <ModalWin>
-                        <img src={ attention } alt="achtung" style={ { width: 70, margin: "auto" } } />
-                        <div>
-                            <p style={{color: 'red'}}>
-                                { video.errMsg }
-                            </p>
-                            <p><button onClick={ () => setVideo( { error:false, count: 0, result: [] } ) }>Ok</button></p>
-                        </div>
-                    </ModalWin>    
-                       
-                }    
-            </div>    
+                 <Message txt={ video.errMsg } func={ ()=>setVideo( { error:false, count: 0, result: [] } ) }/> 
+                }   
+            </div>   
         </div>
     );
     }

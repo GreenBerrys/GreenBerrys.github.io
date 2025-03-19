@@ -4,8 +4,7 @@ import videoApi from "../lib/videoApi";
 import VideoCard from "../components/VideoCard";
 import BusyIndicator from "../components/BusyIndicator.jsx";
 import PageNav from "../components/PageNav.jsx";
-import ModalWin from "../components/ModalWin.jsx";
-import attention from "../Images/attention.png";
+import Message from "../components/Message.jsx";
 import Context from "../AppContext.js";
 import { useNavigate } from "react-router-dom";
 import RestoreWinScrollPos from "../components/RestoreWinScrollPos.jsx"
@@ -134,15 +133,7 @@ if( !busy.current ){
                 <RestoreWinScrollPos/>
                 </div>
             : 
-                <ModalWin>
-                    <img src={ attention } alt="achtung" style={ { width: 70, margin: "auto" } } />
-                    <div>
-                        <p>
-                                { videos.errMsg } 
-                        </p>
-                        <p><button onClick={ () => setVideos( { error:false, count: 0, result: [] } ) }>Ok</button></p>
-                    </div>
-                </ModalWin>        
+                 <Message txt={ videos.errMsg } func={ ()=>setVideos( { error:false, count: 0, result: [] } ) }/> 
             }    
         </div>    
     );

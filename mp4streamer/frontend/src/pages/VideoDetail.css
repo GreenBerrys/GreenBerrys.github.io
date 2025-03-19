@@ -29,6 +29,7 @@
     }
     #videoDetail #poster{
         justify-self: center;
+
     }
 }
 @media  (min-width: 851px) {
@@ -93,6 +94,9 @@
     grid-area: poster;
     max-width: 450px;
     max-height: 65vh;
+    object-fit: cover;
+    align-self: center;
+    justify-self: center;
 }
 #videoDetail #plot{
     grid-area: plot;
@@ -135,3 +139,10 @@
 #videoDetail #player button{
     cursor: pointer;
 }  
+#videoDetailContainer #editSymb {
+    position: absolute;
+    top: 80px; 
+    right: 20px;
+    height: 30px;
+    cursor: pointer;
+}

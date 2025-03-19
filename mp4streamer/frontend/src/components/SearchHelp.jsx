@@ -1,7 +1,7 @@
 import { showFilter } from "./NavMenu.jsx";
 import "./SearchHelp.css";
 
-export default function SearchHelp(){
+export default function SearchHelp( { setSearchHelp } ){
 
 const sample1  = () => showFilter( '*berlin', 'title', false );
 const sample2a = () => showFilter( 'titel==der', 'title', false );
@@ -16,7 +16,7 @@ const sample6  = () => showFilter( 'jahr==>1979 && jahr==<1985', 'title', false 
 
 return(
     <div id="shelpWin"><h3>Suchhilfe: <br></br></h3>
-
+    <div className="closeButton" onClick={ () => setSearchHelp( false ) }>&#x22A0;</div>
 
     <table>
         <tbody>

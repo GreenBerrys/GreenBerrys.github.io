@@ -4,13 +4,10 @@ import videoApi from "../lib/videoApi.js";
 import BusyIndicator from "../components/BusyIndicator.jsx";
 import { SERVER } from "../config.js";
 import "./Episodes.css";
-import ModalWin from "../components/ModalWin.jsx";
-import attention from "../Images/attention.png";
+import Message from "../components/Message.jsx";
 import Context from "../AppContext.js";
 import { useNavigate } from "react-router-dom";
 import RestoreWinScrollPos from "../components/RestoreWinScrollPos.jsx"
-
-
 
 /********************************************************************************************
  * 
@@ -76,8 +73,6 @@ useEffect(() => {
 
 const cut = (txt) => {
 
-    txt = txt.replaceAll( "&apos;", "'" ).replaceAll( "&amp;", "&" );
-
     if( txt.includes( ' - ' ) ){
 
         return (<>
@@ -91,10 +86,6 @@ const cut = (txt) => {
     }
 
     return <p className="oneTitle text">{txt}</p>
-}
-const trans = ( txt ) => {
-
-    return txt.replaceAll( '&quot;', '"' ).replaceAll( "&#x0A;", "" ).replaceAll( '&apos;', "'" ).replaceAll( "&#x0D;", "\n" );
 }
 
 if( !busy.current ){
@@ -116,7 +107,7 @@ if( !busy.current ){
                         </div>
                         <img id="thumb" src={`${SERVER}video/ethumb/${recno}/${epiNo}` } alt="..."/> 
                         <div id="plot">
-                            { trans( episodes.result[epiNo].plot ) }
+                            { episodes.result[epiNo].plot }
                         </div>
                         <div id="epis">
                             <table>
@@ -127,7 +118,7 @@ if( !busy.current ){
                                                     <th  onClick={ () => { setEpiNo(index); back.episodeNo=index } }>{index+1})</th>
                                                     <td  onClick={ () => { setEpiNo(index); back.episodeNo=index } } 
                                                         className={epiNo === index ? 'active': ""}>
-                                                        {trans(episode.title)}
+                                                        { episode.title }
                                                     </td>
                                                 </tr>     
                                             );
@@ -144,16 +135,7 @@ if( !busy.current ){
                 </>
 
                 : 
-                    <ModalWin>
-                        <img src={ attention } alt="achtung" style={ { width: 70, margin: "auto" } } />
-                        <div>
-                            <p>
-                                { episodes.errMsg }
-                            </p>
-                            <p><button onClick={ () => setEpisodes( { error:false, count: 0, result: [] } ) }>Ok</button></p>
-                        </div>
-                    </ModalWin>   
-                    
+                    <Message txt={ episodes.errMsg } func={ ()=>setEpisodes( { error:false, count: 0, result: [] } ) }/> 
                 }    
             </div>    
         </div>

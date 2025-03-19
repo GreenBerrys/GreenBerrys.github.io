@@ -10,6 +10,7 @@
 }
 
 .indexitems a, .indexitems a:visited{
+    position: relative;
     width: 20rem;
     white-space: nowrap;
     overflow: hidden;
@@ -19,4 +20,28 @@
     font-size: 1.5rem;
     text-decoration: none;
     color: beige;
+    overflow: visible;
+}
+.indexitems a:hover{
+    /* font-style: italic; */
+    font-weight: bolder;
+}
+
+.indexitems .thumb{
+    display: block;
+    position: absolute; 
+    left: +80px; 
+    top: +40px;   
+    width: 200px;    
+    height: 300px;     
+    border: 5px solid #ddd;
+    border-radius: 4px;
+    background-size: cover;
+    display: none;
+    box-shadow: 12px 12px 31px 3px black;
+}
+
+.indexitems a:hover .thumb{
+    display: block;
+    z-index: 1;
 }

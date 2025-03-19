@@ -2,9 +2,9 @@ import "./NavMenu.css";
 import React, { useState, useContext, useEffect } from "react";
 import logo from "../Images/logo.png";
 import { NavLink, useNavigate } from "react-router-dom";
-import Context from "../AppContext.js";
 import { AUTOLOGIN } from "../config.js";
 import SearchHelp from "./SearchHelp.jsx"
+import Context from "../AppContext.js";
 
 let searchSetter = null;
 let oSearchFor = "";
@@ -36,7 +36,7 @@ export default function NavMenu() {
         searchFor: "",
         searchIn: "title"
     });
-
+    
     // export setter for showFilter
     useEffect( () => { searchSetter = setSearch; },[]);
     
@@ -93,10 +93,10 @@ export default function NavMenu() {
                 </select>
                 <button>&#128270;</button>
             </form>
-            <div id="shelpButton" onClick={ ( shelp ) => setSearchHelp( !searchHelp )} title="Suchhilfe an/aus">
+            <div id="shelpButton" onClick={ () => setSearchHelp( !searchHelp )} title="Suchhilfe an/aus">
                 &nbsp;?&nbsp;&nbsp;
             </div>
-            { searchHelp && <SearchHelp/> }    
+            { searchHelp && <SearchHelp setSearchHelp = { setSearchHelp }/> }    
 
             {/***** MENU **********/}
             <ul className="navbar_links">

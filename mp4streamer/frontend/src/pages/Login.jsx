@@ -2,8 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import userApi from "../lib/userApi.js";
 import "./Login.css";
 import Busy from "../components/BusyIndicator.jsx";
-import ModalWin from "../components/ModalWin.jsx";
-import attention from "../Images/attention.png";
+import Message from "../components/Message.jsx";
 import Context from "../AppContext.js";
 import { useNavigate } from "react-router-dom";
 import bimage from '../Images/BackgroundPicture.jpg'
@@ -14,7 +13,8 @@ import bimage from '../Images/BackgroundPicture.jpg'
  */
 function Login() {
 
-const { auth, setAuth } = useContext( Context );
+const { auth, setAuth, setEdit } = useContext( Context );
+
 const [init, setInit] = useState(false);
 const pw = useRef(); 
 const navigate = useNavigate();
@@ -22,10 +22,9 @@ const navigate = useNavigate();
 const [user, setUser] = useState({
 
         state: 0,
-        user: "",
-        password: "",
         error: false,
-        errMsg: ""
+        errMsg: "",
+        edit: false
 });
 
 // set flag for initialized
@@ -71,11 +70,13 @@ const submitHandler = ( event ) => {
                     error: true,
                     errMsg: data.errMsg
             });
+            sessionStorage.removeItem("User");
         }
         else{
-            setUser({ ...user, error: false, state: 9, ...data.result });
-            sessionStorage.setItem('User', JSON.stringify(data.result));
-            setAuth( true );
+            setUser( { state:9, error:false, errMsg:"", edit: data.result[0].edit } )
+            sessionStorage.setItem('User', JSON.stringify( { auth: true, edit: data.result[0].edit } ) );
+            setAuth( () => true );
+            setEdit( () => data.result[0].edit );
             navigate("/videos/*",{ replace: true });   
         }
     })
@@ -111,17 +112,7 @@ switch( user.state ){
                         </form>
                 </div>
                 
-                { user.error &&  
-                    <ModalWin>
-                        <img src={attention} alt="achtung" style={{width: 70, margin: "auto" }}/>
-                        <div>
-                            <p style={ { whiteSpace: 'pre-wrap' } }>
-                                {user.errMsg}<br></br>
-                            </p>
-                            <p><button onClick={() => setUser( { ...user, error: false} ) }>Ok</button></p>
-                        </div>
-                    </ModalWin>
-                }    
+                { user.error && <Message txt={ user.errMsg } func={ ()=>setUser( { ...user, error: false} ) }/> }    
             </div>
         );
     case 1:                 // -----------------------------------> Show busy indicator

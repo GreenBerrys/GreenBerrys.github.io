@@ -1,30 +1,34 @@
 import React, { useState } from 'react';
 import { Outlet } from "react-router-dom";
 import './App.css';
-import Context from './AppContext.js';
 
 import Menu from "./components/NavMenu.jsx";
 import Footer from "./components/Footer.jsx";
 
 import { AUTOLOGIN } from './config.js';
+import Context from './AppContext.js';
 
 function App() {
 
-    const [ auth, setAuth ] = useState( () => {
+const user = JSON.parse(sessionStorage.getItem("User"));
 
-        const user = sessionStorage.getItem("User");
+const [ auth, setAuth ] = useState( () => {
 
-        if( user || AUTOLOGIN ){
-            return true;
-        }
-        else{
-            return false;
-        }    
-    }); 
+    return ( user || AUTOLOGIN );
+}); 
+const [ edit, setEdit ] = useState( () => {
 
-    return (
+    if( AUTOLOGIN )
+        return true;
+    else if( user ){
+        return user.edit;
+    }
+    return false;
+}); 
 
-        <Context.Provider value={{ auth, setAuth }}>
+return (
+
+        <Context.Provider value={ { auth, setAuth, edit, setEdit } }>
 
             <div className="App">
 
@@ -35,13 +39,12 @@ function App() {
                 <div className='content'>
                     <Outlet/>
                 </div>
-
+  
                 <footer>
                     <Footer/>
                 </footer>              
 
             </div>
-
         </Context.Provider>
     );
 

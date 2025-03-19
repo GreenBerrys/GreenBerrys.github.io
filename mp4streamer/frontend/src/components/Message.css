@@ -1,0 +1,21 @@
+ 
+.messagePicture{
+    width: 140px;
+    margin: auto;
+}
+.messageBody{
+    color: red;
+    background-color:#495056;  
+}
+.messageBodyText{
+    color: red;
+    font-size: 2rem;
+}
+.MessageOkButton{
+    color: black;
+    cursor: pointer;
+    width: 100px;
+    height: 30px;
+    font-size: 1rem;
+    border-radius: 5px;
+}

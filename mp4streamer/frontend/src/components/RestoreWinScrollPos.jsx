@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 /********************************************************************************* 
  *  Browser Back-/forward button handling 
  */
@@ -10,7 +10,7 @@ let yPos = 0;            // windows y-scrollposition
 let rkey = "not init";   // history hash-key  
 
 let stkPnt = 0;          // pointer in yPosition
-const yPosition = [];    // stack with hashs and y-scrollpositions
+let yPosition = [];      // stack with hashs and y-scrollpositions
 
 let bdx = 0;             // copy from window.state.idx for start/stop y-scrollposition recording
 // ---------------------------------------------------------------------
@@ -23,12 +23,37 @@ window.addEventListener( 'load', ( event ) => {
     window.addEventListener( 'scroll', ( event ) => { if( bdx === window.history.state.idx) yPos = window.scrollY; } );
     window.addEventListener( 'popstate', ( event ) => browserJmp = true );
 
-    // initialize variables
+    // save stack for browser reload
+    window.addEventListener( 'beforeunload', ( event )  => {
+     
+        yPosition[ stkPnt ][ 1 ] = yPos;
+        sessionStorage.setItem( "RestoreWinScrollPos", JSON.stringify( { 'stkPnt': stkPnt, 'yPosition': yPosition } ) ) 
+    });
+
+//----------- initialize variables
+
     idx = window.history.state.idx;    
     bdx = window.history.state.idx;
     rkey = window.history.state.key;
-    yPosition.push( [ rkey, 0 ] );
-    stkPnt = 0;
+
+    // check for browser reload
+    if( !sessionStorage.getItem( "RestoreWinScrollPos" ) ){
+
+        // initialize new start
+        yPosition.push( [ rkey, 0 ] );
+        stkPnt = 0;
+    }
+    else{
+
+        // restore from session storage
+        const sStore = JSON.parse( sessionStorage.getItem( "RestoreWinScrollPos" ) );
+
+        stkPnt = sStore.stkPnt;
+        yPosition = sStore.yPosition;
+        yPos = yPosition[ stkPnt ][ 1 ];
+
+        browserJmp = true;
+    }
 
     modulInit = true;
 });
@@ -40,13 +65,13 @@ export default function RestoreWinScrollPos(){
     const [init, setInit] = useState(false);    // Flag for component initialized
 
     // set flag for initialized
-    useEffect( () => {
+    useLayoutEffect( () => {
         setInit( () => true );
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
 
         if( init && modulInit ) restoreWinPos(); 
         

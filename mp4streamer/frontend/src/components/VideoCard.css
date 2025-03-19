@@ -34,7 +34,6 @@
     object-fit: cover;
     max-width: 17rem;
     height: 18rem;
-    box-shadow: 1px 3px 7px 3px #7b6e60;
     box-shadow: 1px 3px 7px 3px black;
 
 }
@@ -54,7 +53,7 @@
       calc(50%*(1 - sin(.4turn))) calc(50%*(1 - cos(.4turn))) 
      ); 
   }
-  .star:after {
+  .star::after {
     position: absolute;
     top: 87px;
     left: 75px;
