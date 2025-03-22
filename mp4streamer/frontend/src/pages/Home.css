@@ -54,6 +54,6 @@
 }
 
 @keyframes scroll {
-     from { transform: rotateX(21deg) translate3d(0, 300px,0)}
-       to { transform: rotateX(21deg) translate3d(0,-14800px,0)}
+     from { transform: rotateX(21deg) translate3d(0, 50vh,0)}
+       to { transform: rotateX(21deg) translate3d(0,-2000vh,0)}
 }

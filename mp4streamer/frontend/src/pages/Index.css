@@ -1,6 +1,7 @@
 .indexpage{
     text-align: left;
     margin: 1rem;
+    overscroll-behavior: none;
 }
 .indexitems{
     display: flex;

@@ -13,6 +13,7 @@
     font-size: 2.5rem;
     padding: 5px;
     border-radius: 5px;
+    overscroll-behavior: contain;
 }
 .charmenu span{
     width: 45px;

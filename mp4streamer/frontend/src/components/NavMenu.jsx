@@ -93,9 +93,11 @@ export default function NavMenu() {
                 </select>
                 <button>&#128270;</button>
             </form>
+            { auth &&
             <div id="shelpButton" onClick={ () => setSearchHelp( !searchHelp )} title="Suchhilfe an/aus">
                 &nbsp;?&nbsp;&nbsp;
             </div>
+            }
             { searchHelp && <SearchHelp setSearchHelp = { setSearchHelp }/> }    
 
             {/***** MENU **********/}
