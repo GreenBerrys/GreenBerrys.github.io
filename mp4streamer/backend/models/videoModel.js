@@ -62,6 +62,13 @@ const getOne = ( recno ) => { return database.getOne( recno ); }
 const getEpisodes = ( recno ) => { return database.getEpisodes( recno ); }
 
 /********************************************************************************* 
+ * setEpisode() 
+ */
+const setEpisode = async ( recno, epino, videoRoot, key, title, plot ) => { 
+    
+    return await database.setEpisode( recno, epino, videoRoot, key, title, plot ); 
+}
+/********************************************************************************* 
  * getEpisodeThumb() 
  */
 const getEpisodeThumb = ( recno, epino, videoroot, defaultPic ) => {
@@ -69,6 +76,13 @@ const getEpisodeThumb = ( recno, epino, videoroot, defaultPic ) => {
     return database.getEpisodeThumb( recno, epino, videoroot, defaultPic );
 }
 
+/********************************************************************************* 
+ * setEpisodeThumb() 
+ */
+const setEpisodeThumb = async ( recno, epiNo, videoRoot, key, thumb, tStamp ) => { 
+    
+    return await database.setEpisodeThumb( recno, epiNo, videoRoot, key, thumb, tStamp ); 
+}
 /********************************************************************************* 
  * getNews() - 
  */
@@ -142,7 +156,9 @@ export default {
     setFanart,
     getStream,
     getEpisodes,
+    setEpisode,
     getEpisodeThumb,
+    setEpisodeThumb,
     getEpiStream,
     getGenres,
     getTags,

@@ -55,6 +55,63 @@ function putOne( recno, vdata, vkey, setter  ){
     });
 }
 /*********************************************************************
+ *  setEpisodeASync() - upload episode data
+ *********************************************************************/
+async function setEpisodeASync( recno, epiNo, vkey, etitle, eplot ){
+
+    //console.log(`VideoApi setEpisodeASync()`);
+
+    try{
+        const response = await fetch( 
+            
+                SERVER + 'video/episode/' + recno + '/' + epiNo, {
+                method: 'POST', 
+                mode:"cors",
+                headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+                },
+                body: JSON.stringify( { key: vkey, title: etitle, plot: eplot } )
+        });
+        return await response.json();
+    }
+    catch( error ){
+        //console.error('setEpisodeASync() Error:', error.message);
+        return( { error: true, errMsg: error, result: [] } );
+    }
+}
+/*********************************************************************
+ *  setEpiThumbASync() - upload episode thumb
+ *********************************************************************/
+async function setEpiThumbASync( recno, epiNo, thumb, vkey ){
+
+    //console.log(`VideoApi setEpiThumbASync()`);
+
+    const formData = new FormData();
+    const timeStamp = Date.now();
+
+    formData.append( 'thumbStamp', timeStamp );
+    formData.append( 'key', vkey );
+    formData.append( 'thumb', thumb );
+
+    try{
+        const response = await fetch( 
+            
+                    SERVER + 'video/ethumb/' + recno + '/' + epiNo + '.' + timeStamp , {
+                    method: 'POST', 
+                    mode:"cors",
+                    headers: {
+                    'Accept': 'application/json'
+                    },
+                    body: formData
+        });
+        return await response.json();                        
+    }
+    catch( error ){
+        return( { error: true, errMsg: error, result: [] } );
+    }
+}
+/*********************************************************************
  *  setPoster() - upload Poster
  *********************************************************************/
 async function setPosterASync( recno, poster, vkey ){
@@ -398,6 +455,8 @@ const videoApi = {
     setPoster,
     setPosterASync,
     setFanart,
-    setFanartASync
+    setFanartASync,
+    setEpiThumbASync,
+    setEpisodeASync
 }
 export default videoApi; 

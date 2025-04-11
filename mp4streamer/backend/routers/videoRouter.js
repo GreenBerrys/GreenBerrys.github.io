@@ -16,11 +16,13 @@ router.post( "/poster/:recno", m.isLoggedIn, video.setPoster );
 router.get( "/fanart/:recno", m.isLoggedIn, video.getFanart);
 router.post( "/fanart/:recno", m.isLoggedIn, video.setFanart);
 router.get( "/ethumb/:recno/:epino", m.isLoggedIn, video.getEpisodeThumb);
+router.post( "/ethumb/:recno/:epino", m.isLoggedIn, video.setEpisodeThumb);
 
 /********************************************************************************* 
- * get episodes
+ * get/write episodes
  */ 
 router.get( "/episodes/:recno", m.isLoggedIn, video.getEpisodes);
+router.post( "/episode/:recno/:epino", m.isLoggedIn, video.setEpisode);
 
 /********************************************************************************* 
  * get/write lock

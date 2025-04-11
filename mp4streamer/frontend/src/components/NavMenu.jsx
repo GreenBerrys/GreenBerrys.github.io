@@ -9,6 +9,7 @@ import Context from "../AppContext.js";
 let searchSetter = null;
 let oSearchFor = "";
 let oSearchIn = "";
+let menuSetter = null;
 
 // called by the Videos componente to update the display
 export const showFilter = ( searchFOR, searchIN = 'title', keep = true ) => { 
@@ -20,7 +21,9 @@ export const showFilter = ( searchFOR, searchIN = 'title', keep = true ) => {
         oSearchFor = searchFOR;
         oSearchIn = searchIN;
     }
-}
+};
+
+export const showMenu = ( onOff = true ) =>  menuSetter( onOff );
 
 // ===================================================================
 export default function NavMenu() {
@@ -29,7 +32,8 @@ export default function NavMenu() {
 
     const { auth } = useContext( Context );
     const [ showLinks, setShowLinks ] = useState( false );
-    const [ searchHelp, setSearchHelp ] = useState ( false ); 
+    const [ searchHelp, setSearchHelp ] = useState( false ); 
+    const [ menuOn, setMenuOn ] = useState( true );
 
     const [ search, setSearch ] = useState ({ 
 
@@ -37,8 +41,8 @@ export default function NavMenu() {
         searchIn: "title"
     });
     
-    // export setter for showFilter
-    useEffect( () => { searchSetter = setSearch; },[]);
+    // export setter for showFilter & menu on/off 
+    useEffect( () => { searchSetter = setSearch; menuSetter = setMenuOn },[]);
     
     const handleShowLinks = () => setShowLinks( showLinks => !showLinks ); 
     const showLinksOff = () => setShowLinks( false ); 
@@ -102,7 +106,7 @@ export default function NavMenu() {
 
             {/***** MENU **********/}
             <ul className="navbar_links">
-                { 
+                { menuOn &&
                 <>
 
                     {auth &&
@@ -129,7 +133,7 @@ export default function NavMenu() {
                     }
                     {!AUTOLOGIN &&
                     <>
-                        {!auth ?
+                        {!auth  ?
                             <>
                                 <li className="slideamination">
                                     <NavLink to="/login"  onClick={ showLinksOff }>Anmelden</NavLink>

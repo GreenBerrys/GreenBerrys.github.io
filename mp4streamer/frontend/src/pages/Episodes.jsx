@@ -14,7 +14,7 @@ import RestoreWinScrollPos from "../components/RestoreWinScrollPos.jsx"
  */
 const  back = { episodeNo: 0, recNo: -1 };
 
-function SerieDetail() {
+function Episodes() {
 
 let { recno, title } = useParams( null, null );     
 
@@ -98,14 +98,14 @@ if( !busy.current ){
 
                 <>
                     <div id="background" >
-                            <img src={`${SERVER}video/fanart/${recno}` } alt="..."/> 
+                            <img src={`${SERVER}video/fanart/${recno}.${episodes.result[epiNo].fanartStamp}` } alt="..."/> 
                     </div>
 
                     <div id="episodesContainer">
                         <div id="title">
                         { cut( title ) }
                         </div>
-                        <img id="thumb" src={`${SERVER}video/ethumb/${recno}/${epiNo}` } alt="..."/> 
+                        <img id="thumb" src={`${SERVER}video/ethumb/${recno}/${epiNo}.${episodes.result[epiNo].thumbStamp}` } alt="..."/> 
                         <div id="plot">
                             { episodes.result[epiNo].plot }
                         </div>
@@ -146,5 +146,5 @@ if( !busy.current ){
  }   
 }
 
-export default SerieDetail;
+export default Episodes;
 

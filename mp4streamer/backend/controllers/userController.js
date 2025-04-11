@@ -39,7 +39,7 @@ async function logout( req, res )  {
     try{    
         
         if( req.session.userid ){
-            // req.session.destroy();
+            req.session.destroy();
             req.session = null;
         }
 
@@ -58,7 +58,7 @@ async function login( req, res ) {
 
     // ** Check if already logged in
     if( req.session.userid ){
-        return res.status( 200 ).json( { error: false, result: [] } ); 
+        return res.status( 403 ).json( { error: true, errMsg: "Bitte zuerst abmelden!", result: [] } ); 
     }
 
     // ** Check if user is in jail

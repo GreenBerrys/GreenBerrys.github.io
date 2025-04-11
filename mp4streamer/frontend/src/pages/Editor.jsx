@@ -4,6 +4,10 @@ import videoApi from "../lib/videoApi.js";
 import BusyIndicator from "../components/BusyIndicator.jsx";
 import Message from "../components/Message.jsx";
 import Context from "../AppContext.js";
+import { showMenu } from "../components/NavMenu.jsx";
+import VideoEdit from "../components/VideoEdit.jsx";
+import EpisodeEdit from "../components/EpisodeEdit.jsx";
+import RestoreWinScrollPos from "../components/RestoreWinScrollPos.jsx"
 import "./Editor.css";
 import { SERVER } from "../config.js";
 
@@ -22,30 +26,51 @@ const { setAuth } = useContext( Context );      // Loginstate
 
 const [ lockMsg, setLockMsg ] = useState( false ); // Versuch gelockten Videorecord zu beareiten
 
-let [ dataChanged, setDataChanged ] = useState( false ); // Flag for Videodata changed
+// --------------------------------------
+let [ dataChanged, setDataChanged ] = useState( false );         // Flag for Videodata changed
+let [ epiDataChanged, setEpiDataChanged ] = useState ( false );
+let [ thumbChanged, setThumbChanged ] = useState( false ); 
+// --------------------------------------
+const [ epiEdit, setEpiEdit ] = useState( false );
 
-const fanartFileRef = useRef( null );       // reference filechooser fanart      
-const posterFileRef = useRef( null );       // reference filechooser poster      
-const picErrRef = useRef( null );           // reference PosterErrorpicture  
-const fanartErrRef = useRef( null );           // reference FanartErrorpicture  
-
-const [ vdata, setVdata ] = useState( {         // Videodata
+const [ vdata, setVdata ] = useState( {     // Videodata
     
-                            error: false,
-                            result: []
+            error: false,
+            result: []
 });
+
+const [ edata, setEdata ] = useState( {     // Episodes data
+
+            error: false,
+            result: []
+});
+
+const epiDataChng = useRef([ {     // Episodes data changed flag
+    
+    changed: false,                             
+}]);
+
+const thumb = useRef([ {     // Episodes thumbs
+    
+    new: false,                             // Flag for thumb changed
+    url: ``,                                // thumb URL for IMG-tag
+    file: null,                             // File object
+    err: false
+}]);
 
 const [ poster, setPoster ] = useState( {       // Posterdata
     
     new: false,                                 // Flag for Poster changed
     url: ``,                                    // Poster URL for IMG-tag
-    file: null                                  // File object
+    file: null,                                 // File object
+    err: false
 });
 const [ fanart, setFanart ] = useState( {       // Fanartdata
     
     new: false,                                 // Flag for Fanart changed
     url: ``,                                    // Fanart URL for IMG-tag
-    file: null                                  // File object
+    file: null,                                 // File object
+    err: false
 });
 
 const key = useRef("");         // lock key
@@ -69,6 +94,7 @@ useEffect(() => {
 
     if( init ){
 
+        showMenu( false );
         busy.current = true;
 
         // lock videorecord
@@ -88,14 +114,24 @@ useEffect(() => {
                         navigate( "/" );
                     }
                     else{
-                        busy.current = false;
                         setVdata( () => data );
                         setPoster( {...poster, new: false, url: `${SERVER}video/poster/${recno}.${data.result[0].posterStamp}`, file: null})
-                        setFanart( {...fanart, new: false, url: `${SERVER}video/fanart/${recno}.${data.result[0].posterStamp}`, file: null})
+                        setFanart( {...fanart, new: false, url: `${SERVER}video/fanart/${recno}.${data.result[0].fanartStamp}`, file: null})
                         setDataChanged( () => false ); 
 
-                        //    console.log("----------- data.result:\n",data.result,"\n----------\n")
+                        if( data.result[0].serie ){
 
+                            videoApi.getEpisodes( recno, ( data ) => {
+
+                                    for( let i = 0; i < data.result.length; i++ ){
+                                        thumb.current[i]= { new: false, url: `${SERVER}video/ethumb/${recno}/${i}.${data.result[i].thumbStamp}`, file: null};
+                                        epiDataChng.current[i]= { changed: false };
+                                    } 
+                                    setEdata( () => data );
+                            }); 
+                        }
+                        busy.current = false;
+                        //console.log("----------- data.result:\n",data.result,"\n----------\n")
                     }
             })
         )
@@ -107,9 +143,10 @@ useEffect(() => {
     } 
     return () => {
                    if( init ){ 
+                       showMenu( true );
 
-                        // unlock video record
-                        unLock();
+                       // unlock video record
+                       unLock();
                       // ----------------------------------------------------------------------------------------
                       //document.removeEventListener( 'visibilitychange', unLock );
                       //window.removeEventListener( 'unload', unLock );
@@ -119,22 +156,6 @@ useEffect(() => {
                 };
 // eslint-disable-next-line react-hooks/exhaustive-deps
 },[ init ]);
-
-/******************************************************************************************************
- *  text decode
- */
-const cut = ( txt ) => {
-
-    txt = txt.replaceAll( "&apos;", "'" ).replaceAll( "&amp;", "&" );
-
-    return txt;
-}
-/******************************************************************************************************
- *  inputhandling
- */
-const changeHandler = ( event ) => {  vdata.result[ 0 ] = { ...vdata.result[ 0 ], [ event.target.name ]: event.target.value };  
-                                      setDataChanged( () => true );  
-                                   };
 
 /******************************************************************************************************
  *  save data
@@ -167,12 +188,11 @@ const saveData = () => {
             const data = await videoApi.setPosterASync( recno, poster.file, key.current ) 
             
             if ( !data.error ){
-                picErrRef.current.style.visibility = "hidden";
-                setPoster( prevPoster => ({ ...prevPoster, new: false }) );
+                setPoster( prevPoster => ({ ...prevPoster, new: false, err: false }) );
                 poster.new = false;
             }
             else{
-                picErrRef.current.style.visibility = "visible";
+                setPoster( prevPoster => ({ ...prevPoster, err: true }) );
                 setVdata( { ...vdata, error: data.error, errMsg: data.errMsg } );
             }
             return data.error;
@@ -186,155 +206,130 @@ const saveData = () => {
             const data = await videoApi.setFanartASync( recno, fanart.file, key.current ) 
             
             if ( !data.error ){
-                fanartErrRef.current.style.visibility = "hidden";
-                setFanart( { ...fanart, new: false } );
+                setFanart( { ...fanart, new: false, err: false } );
                 fanart.new = false;
             }
             else{
-                fanartErrRef.current.style.visibility = "visible";
+                setFanart( { ...fanart, err: true } );
                 setVdata( { ...vdata, error: data.error, errMsg: data.errMsg } );
             }
             return data.error;
         }
         return false;
     }
-    
-    writeData().then( err => writePoster() ).then( err => writeFanart() ).then( err =>
+    const writeEpiThumbs = async () => {
 
-        {   if( !dataChanged && !poster.new && !fanart.new ){
+        if( ()=> thumbChanged ){
+
+            for( let i=0; i < thumb.current.length; i++ ){
+            
+                if( thumb.current[i].new ){
+                    
+                    const data = await videoApi.setEpiThumbASync( recno, i, thumb.current[i].file, key.current ) 
+                    
+                    if ( !data.error ){
+                        thumb.current[i] =  { ...thumb.current[i], new: false, err: false } ;
+                    }
+                    else{
+                        thumb.current[i] =  { ...thumb.current[i], err: true } ;
+                        setVdata( { ...vdata, error: data.error, errMsg: data.errMsg } );
+                    }
+                    return data.error;
+                }
+            }
+        }
+        return false;
+    }
+    const writeEpiData = async () => {
+
+        if( ()=> epiDataChanged ){
+
+            for( let i=0; i < epiDataChng.current.length; i++ ){
+            
+                if( epiDataChng.current[i].changed ){
+                    
+                    const data = await videoApi.setEpisodeASync( recno, i, key.current, edata.result[ i ].title, edata.result[ i ].plot ) 
+                    
+                    if ( !data.error ){
+                        epiDataChng.current[i].changed = false;
+                    }
+                    else{
+                        setVdata( { ...vdata, error: data.error, errMsg: data.errMsg } );
+                    }
+                    return data.error;
+                }
+            }
+            return false;
+        }
+    }
+
+    writeData().then( err => writeEpiData() ).then( err => writePoster() ).then( err => writeFanart() ).then( err => writeEpiThumbs() ).then( err =>
+
+        {   
+            if( epiDataChanged ){       // check for non-written episode datas
+                let epiNo = 0;
+                for( ; epiNo < epiDataChng.current.length && !epiDataChng.current[ epiNo ].changed ; epiNo++ );
+                if( epiNo === epiDataChng.current.length ){
+                    setEpiDataChanged( () => false);
+                    epiDataChanged = false;
+                }
+            }
+            if( thumbChanged ){         // check for non-written episode thumbs
+                let thumbNo = 0;
+                for( ; thumbNo < thumb.current.length && !thumb.current[ thumbNo ].new ; thumbNo++ );
+                if( thumbNo === thumb.current.length ){
+                    setThumbChanged( () => false);
+                    thumbChanged = false;
+                }
+            }
+            // leave editor if anything written
+            if( !dataChanged && !poster.new && !fanart.new && !thumbChanged && !epiDataChanged ){
                 navigate( -1 );
             }
         }
     );
 }
-/******************************************************************************************************
- *  new Poster 
- */
-const posterChange = () => { 
-    
-    if( posterFileRef.current.files.length ){
-
-        picErrRef.current.style.visibility = "hidden" 
-        setPoster( { new: true, url: URL.createObjectURL( posterFileRef.current.files[0] ), file: posterFileRef.current.files[0] } );
-    }
-}
-/******************************************************************************************************
- *  new Fanart 
- */
-const fanartChange = () => { 
-    
-    if( fanartFileRef.current.files.length ){
-
-        //picErrRef.current.style.visibility = "hidden" 
-        setFanart( { new: true, url: URL.createObjectURL( fanartFileRef.current.files[0] ), file: fanartFileRef.current.files[0] } );
-    }
-}
 
 // =================================================================
 if( !busy.current ){
     return (
-        <div className="editor" onBeforeUnload >
+        <div className="editor">
 
-            { lockMsg && <Message txt={ "Video wird gerade bearbeitet!" } func={ ()=> navigate(-1) }/> }  
-            
-            <div id="videoEdit">
-            
-                <div id="background">
-                    <img src={ fanart.url } alt="..." onClick={ () => fanartFileRef.current.click()  }/> 
-                    <span id="fanartError" onClick={ () => fanartFileRef.current.click() } ref={ fanartErrRef }></span>
-                </div>
-
-                <div id="editMenu">
-                    <div id="editTXT">Edit</div>
-                    <div id="navBUTTONS">
-                        { ( dataChanged || poster.new || fanart.new ) && 
-                                <span id="saveButton" onClick={ () => saveData() }  alt="speichern">Speichern&nbsp;&&nbsp;beenden</span> }
-                        <span id="abortButton" onClick={ () => navigate( -1 ) }>
-                            Abbrechen
-                        </span>        
-                    </div>
-                </div>
-
-                <div id="videoEditContainer">
-                    <div id="title">
-                        <input type="text" name="title" defaultValue={ cut( vdata.result[0].title ) } 
-                                    onChange={ changeHandler } placeholder="Filmtitel" 
-                                    className="titleInput"
-                                    autoFocus
-                        />
-                    </div>
-
-                    <input type="file" accept="image/jpeg" style={{display: 'none'}} onChange={ posterChange } ref={ posterFileRef }/>
-                    <input type="file" accept="image/jpeg" style={{display: 'none'}} onChange={ fanartChange } ref={ fanartFileRef }/>
-                    <img id="poster" src={ poster.url } alt="Poster" onClick={ ()=>posterFileRef.current.click() } /> 
-                    <span id="picError" onClick={ () => posterFileRef.current.click() } ref={ picErrRef }></span>
-                    
-                    <div id="plot">
-                        <textarea name="plot" defaultValue={ vdata.result[0].plot } 
-                                onChange={changeHandler} placeholder="Handlung"
-                                className="plotInput"
-                        />
-                    </div>
-                    <div id="data">
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <th><b>
-                                        Regie:
-                                    </b></th>        
-                                    <td>
-                                        <input type="text" name="director" defaultValue={ vdata.result[0].director } 
-                                                onChange={ changeHandler } placeholder="Regisseur/in, Regisseur/in, ..." 
-                                                className="directorInput"
-                                        />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th><b>Land:</b></th>
-                                    <td>
-                                        <input type="text" name="country" defaultValue={ vdata.result[0].country } 
-                                                onChange={ changeHandler } placeholder="Land, Land, ..." 
-                                                className="countryInput"
-                                        />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th><b>Jahr:</b></th>        
-                                    <td>
-                                        <input type="text" name="year" defaultValue={ vdata.result[0].year } 
-                                                onChange={ changeHandler } placeholder="Jahr" 
-                                                className="yearInput"
-                                        />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th><b>
-                                        Genre:
-                                    </b></th>        
-                                    <td>
-                                        <textarea type="text" name="genre" defaultValue={ vdata.result[0].genre } 
-                                                onChange={ changeHandler } placeholder="Genre, Genre, ..." 
-                                                className="genreInput" rows={3}
-                                        />
-                                    </td>
-                                </tr>
-                                <tr>                                        
-                                    <th><b>
-                                        Tag:
-                                    </b></th>        
-                                    <td>
-                                        <textarea type="text" name="tag" defaultValue={ vdata.result[0].tag } 
-                                                onChange={ changeHandler } placeholder="Tag, Tag, Tag, ..." 
-                                                className="tagInput" rows={6}
-                                        />
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+            <div id="editMenu">
+                <div id="editTXT">Edit</div>
+                <div id="navBUTTONS">
+                    { ( dataChanged || poster.new || fanart.new || epiDataChanged || thumbChanged ) && 
+                            <span id="saveButton" onClick={ () => saveData() }  alt="speichern">Speichern &&nbsp;beenden</span> }
+                    <span id="abortButton" onClick={ () => navigate( -1 ) }>
+                        Abbrechen
+                    </span>        
                 </div>
             </div>
-           { vdata.error &&
+            { lockMsg && <Message txt={ "Video wird gerade bearbeitet!" } func={ ()=> navigate(-1) }/> }  
+
+                { !epiEdit ? 
+            
+                    <VideoEdit  vdata={vdata} 
+                                poster={poster} 
+                                setPoster={setPoster}
+                                fanart={fanart}
+                                setFanart={setFanart}
+                                setDataChanged={setDataChanged}
+                                setEpiEdit={setEpiEdit}
+                    />
+                :
+                    <EpisodeEdit title={vdata.result[0].title}
+                                 fanart={fanart}
+                                 edata={edata} 
+                                 epiDataChng={epiDataChng.current}
+                                 setEpiDataChanged={setEpiDataChanged}
+                                 setEpiEdit={setEpiEdit}
+                                 thumb={thumb.current}
+                                 setThumbChanged={setThumbChanged}
+                    />
+                }
+            <RestoreWinScrollPos/>
+            { vdata.error &&
                 <Message txt={ vdata.errMsg } func={ ()=>setVdata( { ...vdata, error: false } ) }/> 
            }    
         </div>    

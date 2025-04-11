@@ -1,0 +1,187 @@
+@media  (max-width: 850px) {
+
+    #episodeEdit #episodesContainer{
+        display: grid; 
+        grid: "title  title  title"  auto
+              "thumb  thumb  thumb"  1fr
+              "plot   plot   plot"   auto
+              "epis   epis   epis"   auto
+              "etoggl etoggl etoggl" 1fr
+              / 1fr   3fr  2fr; 
+        gap: 1rem 1rem;
+        margin: 0px 30px 20px 30px;
+    }
+    #episodeEdit #etoggl{
+        align-self: self-start;
+    }
+    #episodeEdit #thumb{
+        justify-self: center;
+    }
+}
+@media  (min-width: 851px) {
+
+    #episodeEdit #episodesContainer{
+        display: grid; 
+        grid: "title  title  thumb"  auto
+              "epis   epis   plot"   1fr
+              "epis   epis   plot"   1fr
+              "epis   epis   etoggl" auto
+              / 1fr   1fr  2fr; 
+        gap: 1rem 1rem;
+        margin: 0px 30px 20px 30px;
+    }
+    #episodeEdit #etoggl{
+        align-self: center; 
+    }
+    #episodeEdit #thumb{
+        justify-self: center;
+    }
+
+}
+#episodeEdit{
+    overscroll-behavior: none;
+}
+#episodeEdit #background{
+    position: fixed;
+    top: 30px;
+    left: 0;
+}
+#videoEdit #background{
+    cursor: pointer;
+}
+#episodeEdit #background img{
+    width: 100vw;
+    height: 100vh;
+    opacity: 25%;
+    object-fit: cover;
+}
+#episodeEdit #title{
+    grid-area: title;
+    padding-top: 10px;
+    font-weight: bold;
+    font-size: 3rem;
+    color: beige;
+}
+#episodeEdit #title .title{
+    padding-top: 10px;
+    font-weight: bold;
+    font-size: 3rem;
+    color: beige;
+}
+#episodeEdit #title .titleText{
+    display: block;
+    text-align: center; 
+    white-space: pre-wrap;
+    font-size: 1.5rem;
+}
+#episodeEdit #title .oneTitle{
+    padding-top: 10px;
+    font-weight: bold;
+    font-size: 3rem;
+    color: beige;
+}
+
+#episodeEdit #thumb{
+    grid-area: thumb;
+    width: 450px;
+    height: 253px;
+    object-fit: cover;
+    z-index: 1;
+    cursor: pointer;
+}
+
+#episodeEdit #eplot{
+    grid-area: plot;
+    white-space: pre-wrap;
+    text-align: left;
+    font-size: 1.4rem;
+    padding: 10px;
+    background-color: #495056;
+    max-height: 45vh;
+    min-height: 20vh;
+    z-index: 1;
+}
+#episodeEdit #eplot textarea{
+    background-color: #495056;
+    color: lightgrey;
+    font-size: 1.2rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    resize: none;
+    font-weight: normal;
+    width: 100%;
+    height: 100%;
+    overscroll-behavior: contain;
+}
+#episodeEdit #epis tr td input{
+    background-color: #495056;
+    color: lightgrey;
+    font-size: 1rem;
+    width: 95%;
+}
+#episodeEdit #epis tr td{
+    width: 95%;
+}
+
+#episodeEdit #epis {
+    grid-area: epis;
+    text-align: left;
+    font-size: 1.3rem;
+    padding: 10px;
+    line-height: 2rem;
+    background-color:  #495056;
+    max-height: 55vh;
+    overflow: hidden;
+    overflow-y: auto;
+    z-index: 1;
+    overscroll-behavior: contain;
+}
+#episodeEdit #epis .active{
+    background-color: rgb(57, 97, 99);
+}
+#episodeEdit #epis th{
+    text-align: right;
+    padding-right: 10px;
+    width: 50px;
+    font-weight: normal;
+}
+#episodeEdit #epis tr{
+    vertical-align: top;
+}
+#episodeEdit #epis:hover{
+    cursor: pointer;
+}
+
+#episodeEdit #etoggl{
+    grid-area: etoggl;
+    z-index: 1;
+}
+#episodeEdit #etoggl button{
+    min-width: 200px;
+    width: 90%;
+    height: 55px;
+    font-size: 2rem;
+    background-color: black;
+    border-color: orange;
+    color: rgb(160, 156, 156);
+
+}  
+#episodeEdit #etoggl button{
+    cursor: pointer;
+}  
+/* --------------------------------------- */
+#episodeEdit #picError{
+    grid-area: thumb; 
+    z-index: 2;
+    justify-self:center; 
+    align-self: center;
+    opacity: 70%;
+    height: 80%;
+    aspect-ratio: 1;
+    box-shadow: 0 0 0 35px inset #B90504;
+    border-image: conic-gradient(#B90504 0 0) 50%/calc(50% - 15px);
+    clip-path: circle(); 
+    rotate: 45deg;
+    cursor: pointer;
+    visibility: hidden;
+ }

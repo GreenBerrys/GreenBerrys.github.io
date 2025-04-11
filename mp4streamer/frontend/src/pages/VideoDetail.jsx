@@ -36,12 +36,6 @@ const [ lockChng, setLockChng ] = useState( false );    // Lock state
 
 const lockPolling = useRef (null);                      // Timer ID for polling loop
 
-// ===============================================================================================
-const [ tmpMsg, setTmpMsg ] = useState( false );    // <------------------------- XXXXXXX
-// ===============================================================================================
-
-
-
 // set flag for initialized
 useEffect( () => {
     setInit( () => true );
@@ -133,13 +127,6 @@ const callEditor = ( event )  => {
 
     event.preventDefault();
 
-// -------------------------------------------------------------------
-    if( video.result[0].serie ){
-        setTmpMsg( () => true );
-        return;
-    }
-// -------------------------------------------------------------------
-
     videoApi.getLockASync( recno ).then( ( isLocked => !isLocked ? navigate( "/editor/" + recno ) : setLockMsg( () => true ) ) );
 
 }
@@ -149,17 +136,13 @@ if( !busy.current ){
     return (
         <div id="videoDetail">
 
-            {/* ---------------------------------------------------------------------------------------------- */}
-            { tmpMsg && <Message txt={ "Für Serien noch nicht realisiert"} func={ ()=>setTmpMsg( () => false) }/> }
-            {/* ----------------------------------------------------------------------------------------------- */}
-
             { lockMsg && <Message txt={ "Video wird gerade bearbeitet!" } func={ ()=>setLockMsg(() => false) }/> }
 
             <div >
                 { !video.error ?
                 <>
                     <div id="background" >
-                        <img src={ `${SERVER}video/fanart/${video.result[0].recno}` } alt="..."/> 
+                        <img src={ `${SERVER}video/fanart/${video.result[0].recno}.${video.result[0].fanartStamp}` } alt="..."/> 
                     </div>
 
                     <div id="videoDetailContainer">

@@ -225,7 +225,10 @@ if( !busy.current ){
                                                 }
                                             }
                                             else{
-                                                return( <Link key = { index } to = { { pathname: `${ TAB[ itable ].path }=*${ item }` } }>{ item }</Link> );
+                                                 if( item.length <= 25 )
+                                                    return( <Link key = { index } to = { { pathname: `${ TAB[ itable ].path }=*${ item }` } }>{ item }</Link> )
+                                                 else
+                                                    return( <Link key = { index } to = { { pathname: `${ TAB[ itable ].path }=*${ item }` } } title={item}>{ item.substring( 0, 25) + ".." }</Link> );
                                             }    
                                         })
                                     }

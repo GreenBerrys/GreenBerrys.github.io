@@ -102,8 +102,8 @@
     }
     .navbar_links li {
         display: block;
-        padding: 1.5rem;
-        font-size: 5vw;
+        padding: 1.2rem;
+        font-size: 4.5vw;
     }
     .navbar_links li a {
         color: darkgrey;

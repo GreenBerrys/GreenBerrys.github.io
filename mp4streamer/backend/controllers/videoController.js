@@ -169,7 +169,35 @@ function getEpisodes( req, res ) {
 
         return;
     }
-    catch ( error ) { console.log( setError( res, "Server getEpisode()", error.message ) ); return; }
+    catch ( error ) { console.log( setError( res, "Server getEpisodes()", error.message ) ); return; }
+}
+/********************************************************************************* 
+ * setEpisode() - set episode from video (series)
+ */
+async function setEpisode( req, res ) {
+
+    try{
+
+        if( !req.params ){
+            return res.status( 400 ).json( { error: true, errMsg: "Server missing recno/episode no" } ); 
+        }
+        if( !req.body.key ) {
+            return res.status( 400 ).json( { error: true, errMsg: "Server missing key" } ); 
+        }    
+        if( !req.body.title || !req.body.plot ) {
+            return res.status( 400 ).json( { error: true, errMsg: "Server missing title or plot" } ); 
+        }    
+        let tStamp = req.body.thumbStamp || Date.now();
+
+        let result = await video.setEpisode( parseInt( req.params[ 'recno' ] ), 
+                                         parseInt( req.params[ 'epino' ] ),
+                                         VIDEOROOT, 
+                                         req.body.key,
+                                         req.body.title,
+                                         req.body.plot);
+        return res.status( 200 ).json( result ); 
+    }
+    catch ( error ) { console.log( setError( res, "Server setEpisode()", error.message ) ); return; }
 }
 /********************************************************************************* 
  * getEpisodeThumb() - get video serie episode thumb
@@ -194,6 +222,34 @@ function getEpisodeThumb( req, res ) {
         return;
     } 
     catch ( error ) { console.log( setError( res, "Server getEpisodeThumb()", error.message ) ); return; }
+}
+/********************************************************************************* 
+ * setEpisodeThumb() - set video serie episode thumb
+ */
+async function setEpisodeThumb( req, res ) {
+
+    let result = [];
+
+    try{
+
+        if( !req.params ){
+            return res.status( 400 ).json( { error: true, errMsg: "Server missing recno/episode no", result: [] } ); 
+        }
+        if( !req.body.key ) {
+            return res.status( 400 ).json( { error: true, errMsg: "Server missing key", result: [] } ); 
+        }    
+        if( !req.files || !req.files.thumb ) {
+            return res.status( 400 ).json( { error: true, errMsg: "Server missing thumb", result: [] } ); 
+        }    
+
+        let tStamp = req.body.thumbStamp || Date.now();
+
+        result = await video.setEpisodeThumb( parseInt( req.params[ 'recno' ] ), 
+                                              parseInt( req.params[ 'epino' ] ), 
+                                              VIDEOROOT, req.body.key, req.files.thumb, tStamp );
+        return res.status( 200 ).json( result ); 
+    }
+    catch ( error ) { console.log( setError( res, "Server setEpisodeThumb()", error.message ) ); return; }
 }
 /********************************************************************************* 
  * getNews() - get newest videos
@@ -276,10 +332,7 @@ function getPoster( req, res ) {
     try {
         if( req.params ){
 
-            const recNo = req.params[ 'recno' ].includes( '.' ) ? req.params[ 'recno' ].substring( 0, req.params[ 'recno' ].lastIndexOf( '.') ) : 
-                                                                  req.params[ 'recno' ];
-
-            const pic = video.getPoster( parseInt( recNo ), VIDEOROOT, HOMEPATH + 'default.jpg' );
+            const pic = video.getPoster( parseInt( req.params[ 'recno' ] ), VIDEOROOT, HOMEPATH + 'default.jpg' );
 	
             if( pic[0] === '\\' && ARGS[1][1] === ':' )
                 res.status( 200 ).sendFile( DRV + pic );
@@ -431,7 +484,9 @@ export default {
     setFanart,
     getStream,
     getEpisodes,
+    setEpisode,
     getEpisodeThumb,
+    setEpisodeThumb,
     getGenres,
     getTags,
     getDirectors,

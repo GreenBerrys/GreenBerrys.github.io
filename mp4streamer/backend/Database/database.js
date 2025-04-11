@@ -270,7 +270,7 @@ const bakupOldFile = async ( path, oFile,  ) => {
         do{
             no++;
             noStr = '(' + ( "0".repeat( 4 - String( no ).length ) + no ) + ')';
-            pfile = path + '/' + name + noStr + ext;
+            pfile = path + '/' + name + "-EDIT" + noStr + ext;
         }
         while( fs.existsSync( pfile ))
         
@@ -333,127 +333,291 @@ const searchActor = ( actor ) => {
     return null;  // Section not found -->
 }
 /********************************************************************************* 
- * saveSingleVideoData() - 
+ * splitActors() - 
  */
-const saveSingleVideoData = async ( videoRoot, recno ) => {
+const splitActors = ( txtPart, orderTab ) => {
 
-try{    
+let actor = [];
+let actorName = "";
+let actorRole = "";
+let actorThumb = "";
 
-    const PATH = database[recno].path[0] !== '\\' && database[recno].path[1] !== ':' ?
-                 videoRoot + database[recno].path : database[recno].path;
-
-    const nfoFile = database[ recno ].file.substring( 0, database[ recno ].file.lastIndexOf( '.' ) ) + '.nfo';
-
-    
-    let xmlJSON = {};
-
-    if( fs.existsSync( PATH + '/' + nfoFile ) ){
-
-    // -------------- Get XML-File as JSON 
-    const xmlIN =  String( fs.readFileSync( PATH + '/' + nfoFile ) )
-                             .replaceAll( "& ", "&amp; " ).replaceAll( '&#8211;', ' - ' );
-
-    xmlJSON = await xml2js.parseStringPromise( xmlIN, { explicitArray: false } ).then( (result) => { return result } );
-    
-    // -------------- Bakup NFO-File
-    await bakupOldFile( PATH, nfoFile );
+const orderNo = ( actor, role ) => { 
+        
+    const no = orderTab.indexOf( ( item ) => item[ 0 ] === actor && item[ 1 ] === role ); 
+    if( no < 0 ){
+      orderTab.push( [ actor, role ] );
+      return orderTab.length -1;  
     }
-    else{
-        xmlJSON.movie = {};
-    }
+    return no;
+};
 
-    // -------------- save title 
-    xmlJSON.movie.title = database[recno].title.trim(); 
-    // -------------- save directors 
-    xmlJSON.movie.director = database[recno].director.split(',').map( ( item ) => { return item.trim() } );
-    // -------------- save year 
-    xmlJSON.movie.year =  database[recno].year.trim();
-    // -------------- save countries 
-    xmlJSON.movie.country = database[recno].country.split(',').map( ( item ) => { return item.trim() } );
-    // -------------- save genres
-    xmlJSON.movie.genre = database[recno].genre.split(',').map( ( item ) => { return item.trim() } );
-    // -------------- save tags
-    xmlJSON.movie.tag = database[recno].tag.split(',').map( ( item ) => { return item.trim() } );
-    // -------------- save plot
-    const plotSplit = ( database[recno].plot.split("\nDARSTELLER:\n") );
-    xmlJSON.movie.plot = plotSplit[0].trim();
+if( txtPart.length ){
+    
+    const actorSplit = txtPart.split('\n');
 
-    // -------------- save actors
-    let actor = [];
-    let actorName = "";
-    let actorRole = "";
-    let actorOrder = 0;
-    let actorThumb = "";
+    for( let actorLine of actorSplit ){
 
-    if( plotSplit.length > 1 ){
+        if( actorLine.length ){
+        
+            actorLine = actorLine.trim(); 
 
-        // get part with actors
-        const actorSplit = ( plotSplit[1].trim() ).split('\n');     
+            if ( actorLine.length && actorLine.includes(':') ){
 
-        // get lines with actors & roles
-        for( let actorLine of actorSplit ){
+                // split actor and role
+                let actorPart = actorLine.split(':');                   
 
-            if( actorLine.length ){
-            
-                actorLine = actorLine.trim(); 
+                if( actorPart[0].length && actorPart.length > 1 ){
 
-                if ( actorLine.length && actorLine.includes(':') ){
+                    // get actorname
+                    actorName = actorPart[0].trim();
 
-                    // split actor and role
-                    let actorPart = actorLine.split(':');                   
+                    if( actorName.length ){
+                        
+                        // get actor role 
+                        actorRole = actorPart[1].trim();
 
-                    if( actorPart[0].length && actorPart.length > 1 ){
+                        if( actorRole.length > 1){
+                             
+                            // remove double quotes set by mkJSONbase
+                            if( actorRole.startsWith('"') )
+                                actorRole = actorRole.substring( 1 );
 
-                        // get actorname
-                        actorName = actorPart[0].trim();
-
-                        if( actorName.length ){
-                            
-                            // get actor role 
-                            actorRole = actorPart[1].trim();
-
-                            if( actorRole.length > 1){
-                                 
-                                // remove double quotes set by mkJSONbase
-                                if( actorRole.startsWith('"') )
-                                    actorRole = actorRole.substring( 1 );
-
-                                if( actorRole.endsWith('"') )
-                                    actorRole = actorRole.substring( 0, actorRole.length -1 );
-                            }
-                            if( !actorRole.length )
-                                actorRole = "";     
-
-                            // get actor photo from indextab 
-                            const actorRec = searchActor( actorName );
-                            if( actorRec !== null )
-                                actorThumb = actorbase[ actorRec.sectNo ].items[ actorRec.itemNo ][1];
-                            else 
-                                actorThumb = "";
-
-                            actor.push( { name: actorName, role: actorRole, order: actorOrder++, thumb: actorThumb } )
+                            if( actorRole.endsWith('"') )
+                                actorRole = actorRole.substring( 0, actorRole.length -1 );
                         }
+                        if( !actorRole.length )
+                            actorRole = "";     
+
+                        // get actor photo from indextab 
+                        const actorRec = searchActor( actorName );
+                        if( actorRec !== null )
+                            actorThumb = actorbase[ actorRec.sectNo ].items[ actorRec.itemNo ][1];
+                        else 
+                            actorThumb = "";
+
+                        actor.push( { name: actorName, role: actorRole, order: orderNo( actorName, actorRole ), thumb: actorThumb } )
                     }
                 }
             }
         }
     }
-    if( actor.length )
-        xmlJSON.movie.actor = actor;
-
-    // -------------- Build XML-File 
-    const options ={ 'explicitArray': false, 'rootName': 'movie', 'explicitRoot': true };
-    const xmlOUT = ( new xml2js.Builder( options ) ).buildObject( xmlJSON.movie );
-
-    // -------------- Write XML-File 
-    fs.writeFileSync( PATH + '/' + nfoFile, xmlOUT, { flag: "wx"} ); 
-
-    return { error: false };
 }
-catch( error ){
-
-    return { error: true, errMsg: `Server: ${error.message }`}
+return actor;
 }
+/********************************************************************************* 
+ * saveSingleVideoData() - 
+ */
+const saveSingleVideoData = async ( videoRoot, recno ) => {
+
+    const orderTab = [];
+    let actors=[];
+    
+    try{    
+    
+        const PATH = database[recno].path[0] !== '\\' && database[recno].path[1] !== ':' ?
+                     videoRoot + database[recno].path : database[recno].path;
+    
+        const nfoFile = database[ recno ].file.substring( 0, database[ recno ].file.lastIndexOf( '.' ) ) + '.nfo';
+    
+        
+        let xmlJSON = {};
+    
+        if( fs.existsSync( PATH + '/' + nfoFile ) ){
+    
+            // -------------- Get XML-File as JSON 
+            const xmlIN =  String( fs.readFileSync( PATH + '/' + nfoFile ) )
+                                    .replaceAll( "& ", "&amp; " ).replaceAll( '&#8211;', ' - ' );
+        
+            xmlJSON = await xml2js.parseStringPromise( xmlIN, { explicitArray: false } ).then( (result) => { return result } );
+            
+            // -------------- Bakup NFO-File
+            await bakupOldFile( PATH, nfoFile );
+        }
+        else{
+            xmlJSON.movie = {};
+        }
+    
+        // -------------- save title 
+        xmlJSON.movie.title = database[recno].title.trim(); 
+        // -------------- save directors 
+        xmlJSON.movie.director = database[recno].director.split(',').map( ( item ) => { return item.trim() } );
+        // -------------- save year 
+        xmlJSON.movie.year =  database[recno].year.trim();
+        // -------------- save countries 
+        xmlJSON.movie.country = database[recno].country.split(',').map( ( item ) => { return item.trim() } );
+        // -------------- save genres
+        xmlJSON.movie.genre = database[recno].genre.split(',').map( ( item ) => { return item.trim() } );
+        // -------------- save tags
+        xmlJSON.movie.tag = database[recno].tag.split(',').map( ( item ) => { return item.trim() } );
+        // -------------- save plot
+        const plotSplit = ( database[recno].plot.split("\nDARSTELLER:\n") );
+        xmlJSON.movie.plot = plotSplit[0].trim();
+    
+        // -------------- save actors
+        if( plotSplit.length > 1 ){
+    
+            // get actors
+            actors = splitActors( plotSplit[1].trim(), orderTab );     
+        }
+        if( actors.length ){
+            xmlJSON.movie.actor = actors;
+        }
+        else{
+            delete xmlJSON.movie.actor;
+        }    
+
+
+        // -------------- Build XML-File 
+        const options ={ 'explicitArray': false, 'rootName': 'movie', 'explicitRoot': true };
+        const xmlOUT = ( new xml2js.Builder( options ) ).buildObject( xmlJSON.movie );
+    
+        // -------------- Write XML-File 
+        fs.writeFileSync( PATH + '/' + nfoFile, xmlOUT, { flag: "wx"} ); 
+    
+        return { error: false };
+    }
+    catch( error ){
+    
+        return { error: true, errMsg: `Server: ${error.message }`}
+    }
+}
+/********************************************************************************* 
+ * saveSerieVideoData() - 
+ */
+const saveSerieVideoData = async ( videoRoot, recno ) => {
+
+    const orderTab = [];
+    let actorPart = [];
+    let actors = [];
+    let xmlIN = "";
+
+    try{    
+    
+        const PATH = database[recno].path[0] !== '\\' && database[recno].path[1] !== ':' ?
+                     videoRoot + database[recno].path : database[recno].path;
+    
+        const nfoFile = 'tvshow.nfo';
+    
+        let xmlJSON = {};
+
+        if( fs.existsSync( PATH + '/' + nfoFile ) ){
+    
+            // -------------- Get XML-File as JSON 
+            xmlIN =  String( fs.readFileSync( PATH + '/' + nfoFile ) )
+                                .replaceAll( "& ", "&amp; " ).replaceAll( '&#8211;', ' - ' );
+        
+            xmlJSON = await xml2js.parseStringPromise( xmlIN, { explicitArray: false } ).then( (result) => { return result } );
+            
+            // -------------- Bakup NFO-File
+            await bakupOldFile( PATH, nfoFile );
+        }
+        else{
+            xmlJSON.tvshow = {};
+        }
+    
+        // -------------- save title 
+        xmlJSON.tvshow.title = database[recno].title.trim(); 
+        // -------------- save directors 
+        xmlJSON.tvshow.director = database[recno].director.split(',').map( ( item ) => { return item.trim() } );
+        // -------------- save year 
+        xmlJSON.tvshow.year =  database[recno].year.trim();
+        // -------------- save countries 
+        xmlJSON.tvshow.country = database[recno].country.split(',').map( ( item ) => { return item.trim() } );
+        // -------------- save genres
+        xmlJSON.tvshow.genre = database[recno].genre.split(',').map( ( item ) => { return item.trim() } );
+        // -------------- save tags
+        xmlJSON.tvshow.tag = database[recno].tag.split(',').map( ( item ) => { return item.trim() } );
+        
+        // -------------- save plot
+        const plotSplit = ( database[recno].plot.split("\nDARSTELLER:\n") );
+        xmlJSON.tvshow.plot = plotSplit[0].trim();
+    
+        // -------------- save actors
+    
+        if( plotSplit.length > 1 ){
+
+            // ---------------------> get actors for tvshow.nfo
+
+            actorPart = plotSplit[1].split("\n\nEpisode ");
+
+            // get part with actors
+            // -------------- save actors
+            if( actorPart.length ){
+    
+                // get actors
+                actors = splitActors( actorPart[0].trim(), orderTab ); 
+            }
+            if( actors.length ){
+                xmlJSON.tvshow.actor = actors;
+            }    
+            else{
+                delete xmlJSON.tvshow.actor;
+            }    
+        }    
+    
+        // -------------- Build XML-File 
+        let options ={ 'explicitArray': false, 'rootName': 'tvshow', 'explicitRoot': true };
+        let xmlOUT = ( new xml2js.Builder( options ) ).buildObject( xmlJSON.tvshow );
+    
+        // -------------- Write XML-File (tvshow.nfo) 
+        fs.writeFileSync( PATH + '/' + nfoFile, xmlOUT, { flag: "wx"} ); 
+
+        // ============================== save episode actors
+
+        options ={ 'explicitArray': false, 'rootName': 'episodedetails', 'explicitRoot': true };
+        let epiNo = 0;
+        let epiFile = "";
+        xmlJSON = {};
+
+        if( actorPart.length > 1 ){ 
+
+            for( let i = 1; i < actorPart.length; i++){
+
+                epiNo = parseInt( actorPart[i] );
+
+                if( epiNo > 0 && epiNo <= database[recno].episoden.length ){
+
+                    xmlJSON.movie = {};
+                    epiNo--;
+                    actors = splitActors( actorPart[i].substring( actorPart[i].indexOf('\n') ), orderTab );
+
+                    epiFile = database[ recno ].episoden[ epiNo ].file.
+                                substring( 0, database[ recno ].episoden[ epiNo ].file.lastIndexOf( '.' ) ) + ".nfo";
+
+                    if( fs.existsSync( PATH + '/' + epiFile ) ){
+            
+                        // -------------- Get XML-File as JSON 
+                        xmlIN =  String( fs.readFileSync( PATH + '/' + epiFile ) )
+                                            .replaceAll( "& ", "&amp; " ).replaceAll( '&#8211;', ' - ' );
+                    
+                        xmlJSON = await xml2js.parseStringPromise( xmlIN, { explicitArray: false } ).then( (result) => { return result } );
+                        
+                        // -------------- Bakup NFO-File
+                        await bakupOldFile( PATH, epiFile );
+
+                        if( actors.length ){  
+                            xmlJSON.episodedetails.actor = actors;
+                        }
+                        else{
+                            delete xmlJSON.episodedetails.actor;
+                        }    
+
+                        // -------------- Build XML-File 
+                        const xmlOUT = ( new xml2js.Builder( options ) ).buildObject( xmlJSON.episodedetails );
+                    
+                        // -------------- Write XML-File 
+                        fs.writeFileSync( PATH + '/' + epiFile, xmlOUT, { flag: "wx"} ); 
+                    }
+                }
+            }
+        }
+        return { error: false };
+    }
+    catch( error ){
+    
+        return { error: true, errMsg: `Server: ${error.message }`}
+    }
 }
 /********************************************************************************* 
  * putOne() - 
@@ -475,6 +639,8 @@ const putOne = async ( videoRoot, key, data ) => {
 
         if( !database[data.recno].serie )
             return await saveSingleVideoData( videoRoot, data.recno );
+        else
+            return await saveSerieVideoData( videoRoot, data.recno );
     }
 
     return { error: true, errMsg: "Server: Wrong recno or Key" };     
@@ -520,17 +686,74 @@ const getEpisodes = ( recno ) => {
             for( let episode of database[recno].episoden )
 
             result.push( {
-                title:     episode.title, 
-                subtitle:  episode.subtitle,
-                director:  episode.director,
-                season:    episode.season,
-                episode:   episode.episode, 
-                plot:      episode.plot 
+                title:       episode.title, 
+                subtitle:    episode.subtitle,
+                director:    episode.director,
+                season:      episode.season,
+                episode:     episode.episode, 
+                plot:        episode.plot,
+                thumbStamp:  episode.thumbStamp,
+                fanartStamp: database[recno].fanartStamp  // only for Episodes-Modul in Frontend
                 }
             );    
         }    
     } 
     return result;     
+}
+/********************************************************************************* 
+ * setEpisodes() - 
+ */
+const setEpisode = async ( recno, epino, videoRoot, key, title, plot ) => {
+
+try{
+    let xmlIN = "";
+    let xmlJSON = {};
+
+    if( recno >= 0 && recno < database.length && database[ recno ].lock && database[ recno ].lockKey === key ){
+        
+        if( !database[ recno ].serie || epino < 0 || epino >= database[ recno ].episoden.length )
+            return { error: true, errMsg: "Server: no serie or wrong episode number" };     
+
+        const PATH = database[ recno ].path[ 0 ] !== '\\' && database[ recno ].path[ 1 ] !== ':' ?
+                                                             videoRoot + database[ recno ].path : database[ recno ].path;
+        
+        const NAME = database[ recno ].episoden[ epino ].file.substring( 0, database[ recno ].episoden[ epino ].file.lastIndexOf( '.' ) ) + ".nfo";
+
+        if( fs.existsSync( PATH + '/' + NAME ) ){
+    
+            // -------------- Get XML-File as JSON 
+            xmlIN =  String( fs.readFileSync( PATH + '/' + NAME ) )
+                                .replaceAll( "& ", "&amp; " ).replaceAll( '&#8211;', ' - ' );
+        
+            xmlJSON = await xml2js.parseStringPromise( xmlIN, { explicitArray: false } ).then( (result) => { return result } );
+            
+            // -------------- Bakup NFO-File
+            await bakupOldFile( PATH, NAME );
+        }
+        else{
+            xmlJSON.episodedetails = {};
+        }
+        database[ recno ].episoden[ epino ].title = title;
+        database[ recno ].episoden[ epino ].showtitle = database[ recno ].title;
+        database[ recno ].episoden[ epino ].plot = plot;
+
+        xmlJSON.episodedetails.title = title;
+        xmlJSON.episodedetails.showtitle = database[ recno ].title;
+        xmlJSON.episodedetails.plot = plot;
+
+        // -------------- Build XML-File 
+        let options ={ 'explicitArray': false, 'rootName': 'episodedetails', 'explicitRoot': true };
+        let xmlOUT = ( new xml2js.Builder( options ) ).buildObject( xmlJSON.episodedetails );
+    
+        // -------------- Write XML-File (tvshow.nfo) 
+        fs.writeFileSync( PATH + '/' + NAME, xmlOUT, { flag: "wx"} ); 
+        
+        return { error: false };
+    }
+}
+catch( error ){
+    return { error: true, errMsg: `Server: ${error.message }`}
+}
 }
 /********************************************************************************* 
  * getEpisodeThumb
@@ -550,6 +773,40 @@ const getEpisodeThumb = ( recno, epino, videoroot, defaultPic ) => {
         return path;
     else
         return defaultPic;
+}
+/********************************************************************************* 
+ * setEpisodeThumb
+ */
+const setEpisodeThumb = async ( recno, epino, videoRoot, key, thumb, tStamp ) => {
+
+    try{
+    //console.log(`database setPoster(${recno}) key=${key}  dblock=${database[ recno ].lock} dbkey=${database[ recno ].lockKey}`)
+
+    if( recno >= 0 && recno < database.length && database[ recno ].lock && database[ recno ].lockKey === key ){
+        
+        if( !database[ recno ].serie || epino < 0 || epino >= database[ recno ].episoden.length )
+            return { error: true, errMsg: "Server: no serie or wrong episode number" };     
+
+        const PATH = database[ recno ].path[ 0 ] !== '\\' && database[ recno ].path[ 1 ] !== ':' ?
+                                                             videoRoot + database[ recno ].path : database[ recno ].path;
+        
+        const NAME = database[ recno ].episoden[ epino ].file.substring( 0, database[ recno ].episoden[ epino ].file.lastIndexOf( '.' ) ) + "-thumb.jpg";
+
+        database[ recno ].episoden[ epino ].thumb = NAME;
+        database[ recno ].episoden[ epino ].thumbStamp = tStamp;
+
+        await bakupOldFile( PATH, NAME );
+        await thumb.mv( PATH + '/' + NAME );    
+        
+        return { error: false };
+    }
+    return { error: true, errMsg: "Server: Wrong recno or Key" };     
+}
+catch( error ){
+
+    return { error: true, errMsg: `Server: ${error.message }`}
+
+}
 }
 /********************************************************************************* 
  * getNews() - 
@@ -585,11 +842,16 @@ const setPoster = async ( recno, videoRoot, key, poster, tStamp ) => {
             const PATH = database[recno].path[0] !== '\\' && database[recno].path[1] !== ':' ?
                         videoRoot + database[recno].path : database[recno].path;
 
-            if( !database[ recno ].poster.length ){
+            if( !database[ recno ].poster.length || ( database[ recno ].poster === database[ recno ].thumb ) ){
 
-                database[ recno ].poster = 
+                if( !database[ recno ].serie ){
+                    database[ recno ].poster = 
                         database[ recno ].file.substring( 0, database[ recno ].file.lastIndexOf( '.' ) ) +
-                        "-poster.jpg"
+                        "-poster.jpg";
+                }
+                else {
+                    database[ recno ].poster = "poster.jpg";
+                }        
             }
             await bakupOldFile( PATH, database[ recno ].poster );
             await poster.mv( PATH + '/' + database[ recno ].poster );    
@@ -639,9 +901,14 @@ const setFanart = async ( recno, videoRoot, key, fanart, tStamp ) => {
 
             if( !database[ recno ].fanart.length ){
 
-                database[ recno ].fanart = 
-                    database[ recno ].file.substring( 0, database[ recno ].file.lastIndexOf( '.' ) ) +
-                    "-fanart.jpg"
+                if( !database[ recno ].serie ){
+                    database[ recno ].fanart = 
+                        database[ recno ].file.substring( 0, database[ recno ].file.lastIndexOf( '.' ) ) +
+                        "-fanart.jpg";
+                }
+                else {
+                    database[ recno ].fanart = "fanart.jpg";
+                }
             }
     
             await bakupOldFile( PATH, database[ recno ].fanart );
@@ -694,7 +961,7 @@ const getStream = ( recno, videoroot ) => {
         return null;
 }
 /********************************************************************************* 
- * getStream() - 
+ * getEpiStream() - 
  */
 const getEpiStream = ( recno, epiNo, videoroot ) => {
    
@@ -723,7 +990,9 @@ export default{
     setFanart,
     getStream,
     getEpisodes,
+    setEpisode,
     getEpisodeThumb,
+    setEpisodeThumb,
     getEpiStream,
     getGenres,
     getTags,

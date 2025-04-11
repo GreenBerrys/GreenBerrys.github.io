@@ -1,3 +1,7 @@
+#videoDetail {
+    overscroll-behavior: none;
+}
+
 #videoDetail #background{
     position: fixed;
     top: 30px;
@@ -89,11 +93,10 @@
     font-weight: bold;
     font-size: 3rem;
 }
-
 #videoDetail #poster{
     grid-area: poster;
-    max-width: 450px;
-    max-height: 65vh;
+    max-width: 380px; 
+    height: 65vh;
     object-fit: cover;
     align-self: center;
     justify-self: center;
@@ -107,6 +110,7 @@
     overflow-y: auto;
     background-color: #495056;
     max-height: 60vh;
+    overscroll-behavior: contain;
 }
 #videoDetail #data{
     grid-area: data;
@@ -114,6 +118,7 @@
     font-size: 1rem;
     padding: 10px;
     background-color:  #495056;
+    overscroll-behavior: contain;
 }
 #videoDetail #data tr{
     vertical-align: top;

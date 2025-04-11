@@ -8,10 +8,12 @@ import dotenv from "dotenv";
 import readline from 'readline';
 import Lnk from "@recent-cli/resolve-lnk";
 import { entityTrans } from "./utils/transCode.js";
-// import { title } from 'process';
+import { TRANSTABLE } from "./utils/transTable.js";
+import { COUNTRYTABLE } from "./utils/countryTable.js";
 
 dotenv.config( { path: "./server.env" } );
 
+const Kamala = `${process.env.s_TRANSLATION}`.toLowerCase() === 'true' ? false : true;
 const SAVEDRVLETTER = `${process.env.s_SAVEDRVLETTER}`.toLowerCase() === 'true' ? true : false;
  
 const rl = readline.createInterface( { input: process.stdin, output: process.stdout } );
@@ -70,54 +72,106 @@ const tableSort = ( table, actors=null ) => {
             return 0;
         });
 }
+/********************************************************************************* 
+ * translateCountry() - translate Country
+ */
+const translateCountry = ( txt ) => {
+
+    const search = txt.trim().toLowerCase();
+    let start = 0;
+    let end = COUNTRYTABLE.length - 1;
+    let mid = 0;
+    
+    if( !Kamala ){
+        // search 
+        while ( start <= end ) {
+
+            mid = Math.floor( ( start + end ) / 2 );
+            if( COUNTRYTABLE[ mid ][ 0 ] === search ) {
+
+                return  COUNTRYTABLE[ mid ][ 1 ];  // found -->
+            }
+            search < COUNTRYTABLE[ mid ][ 0 ] ? end = mid -1 : start = mid +1;
+        }
+        return txt.trim();  // not found -->
+    }
+    else
+        return txt.trim();  // -->
+}
+/********************************************************************************* 
+ * translate() - translate Tag / Genre
+ */
+const translate = ( txt ) => {
+
+    const search = txt.trim().toLowerCase().replaceAll( /\u2013/g,'-');
+    let start = 0;
+    let end = TRANSTABLE.length - 1;
+    let mid = 0;
+    
+    if( !Kamala ){
+        // search 
+        while ( start <= end ) {
+
+            mid = Math.floor( ( start + end ) / 2 );
+            if( TRANSTABLE[ mid ][ 0 ] === search ) {
+
+                return  TRANSTABLE[ mid ][ 1 ];  // found -->
+            }
+            search < TRANSTABLE[ mid ][ 0 ] ? end = mid -1 : start = mid +1;
+        }
+        return txt.trim();  // not found -->
+    }
+    else
+        return txt.trim();  // -->
+}
+
+// --------------------------------------------------------------------------------
+const transCountry = ( countryArray ) => {
+
+    let str = "";
+
+    for ( const el of countryArray ){ 
+
+            const elz = translateCountry( el );
+            !str.length ? str = elz : str += ', ' + elz;
+    }    
+    return str;
+}
 // --------------------------------------------------------------------------------
 const transGen = ( genArray ) => {
 
     let str = "";
 
     for ( const el of genArray ){ 
-        str = str + el.trim() + ", ";
-    }    
-    str = str.substring( 0, str.length-2 );
 
-    return ( str.replaceAll('Fantasy', 'Fantasie')
-                .replaceAll('Documentary', 'Dokumentation')
-                .replaceAll('Mini-Series', 'Mini-Serie')
-                .replaceAll('Sci-Fi', 'Science Fiction')
-                .replaceAll('War', 'Krieg')
-                .replaceAll('Dokumentarfilm', 'Dokumentation')
-                .replaceAll('Music', 'Musik')
-                .replaceAll('History', 'Geschichte')
-                .replaceAll('Historie', 'Geschichte')
-                .replaceAll('Romance', 'Liebesfilm')
-                .replaceAll('Crime', 'Krimi')
-                .replaceAll('Politics', 'Politik')
-                .replaceAll('Adventure', 'Abenteuer')
-                .replaceAll('Documentary', 'Dokumentation')
-                .replaceAll('Documentation', 'Dokumentation')
-                .replaceAll(' &amp;', ',')
-    );
+        if( el.includes('&') ){
+
+            const eltmp = el.split('&');
+            for ( const elx of eltmp ){
+
+                const elz = translate( elx );
+                if( !str.includes( elz) )
+                    !str.length ? str = elz : str += ', ' +  elz;
+            }
+        }
+        else{
+            const elz = translate( el );
+            if( !str.includes( elz) )
+                !str.length ? str = elz : str += ', ' + elz;
+        }    
+    }    
+    return str;
 }
 // =====================================================================================================
 
-/*
-if( !fs.existsSync( MP4ROOT ) )
-    help(`Quellverzeichnis "${MP4ROOT}" nicht gefunden!`);
-
-const ok = await input(`\nVerzeichnis "${MP4ROOT}" wird eingelesen.\n` +
-    '\nAktion ausführen (j/n) ? ' 
-   );
-if( ok !== 'j'){
-console.log("Vorgang abgebrochen..");
-process.exit(0);
-}
-*/
 let movies=[];
 
 const tags = [];
 const genres = [];
 const directors = [];
 const actors = [];
+
+const countries = [];
 
 console.log(`\nLese "${MP4ROOT}"..`); 
 
@@ -234,6 +288,20 @@ function chngName( parts ) {
     }
 }
 /****************************************************************************
+ * PushCountry
+ */
+function pushCountries( items ){
+
+    if( items.length ){
+
+        for( const item of items.split(',')){
+            const country = item.trim().toUpperCase();
+            if( countries.findIndex( ( element ) => element.toUpperCase() === country ) === -1 )
+                countries.push( item.trim() );
+        }
+    }
+}
+/****************************************************************************
  * Push Table-Item
  */
  function pushItem( table, item, thumb=null ){
@@ -292,7 +360,7 @@ async function getMovies(dir, movies) {
             movie.lock = false;
             movie.lockKey = "";
 
-            // Poster & fanart timestamp ( because the silly Firefox cache strategy !!.. 
+            // Poster & fanart timestamp ( because browsers cache strategy - like Firefox ) 
 
             movie.posterStamp = Date.now();
             movie.fanartStamp = Date.now();
@@ -335,10 +403,10 @@ async function getMovies(dir, movies) {
                             movie.title = data.movie.title ? entityTrans( String( data.movie.title ) ) : movName;
                             movie.subtitle = data.movie.subtitle ? String( data.movie.subtitle ) : "";
                             movie.director = data.movie.director ? entityTrans( data.movie.director.join(', ') ) : "";
-                            movie.country = data.movie.country ? entityTrans( data.movie.country.join(', ') ) : "";
+                            movie.country = data.movie.country ? transCountry( data.movie.country ) : "";
                             movie.year = data.movie.year ? String( data.movie.year ) : "";
                             movie.genre = data.movie.genre ? entityTrans( transGen( data.movie.genre ) ) : "";
-                            movie.tag = data.movie.tag ? entityTrans( data.movie.tag.join(', ') ) : "";
+                            movie.tag = data.movie.tag ? entityTrans( transGen( data.movie.tag ) ) : "";
                             movie.plot = data.movie.plot ? entityTrans( String( data.movie.plot ) ) : "";
 
                             // create genre-table                                
@@ -392,7 +460,7 @@ async function getMovies(dir, movies) {
                     movies.push( { ...movie } );
                 }
             }
-            // scan serie
+            // scan serie =======================================================================================
             else{
                     let data = await readXML( dir + 'tvshow.nfo' );
 
@@ -401,10 +469,10 @@ async function getMovies(dir, movies) {
                         movie.title = data.tvshow.title ? entityTrans( String( data.tvshow.title ) ) : "";
                         movie.subtitle = data.tvshow.subtitle ? String( data.tvshow.subtitle ) : "";
                         movie.director = data.tvshow.director ? entityTrans( data.tvshow.director.join(', ') ) : "";
-                        movie.country = data.tvshow.country ? entityTrans( data.tvshow.country.join(', ') ) : "";
+                        movie.country = data.tvshow.country ? transCountry( data.tvshow.country ) : "";
                         movie.year = data.tvshow.year ? String( data.tvshow.year ) : "";
                         movie.genre = data.tvshow.genre ? entityTrans( transGen( data.tvshow.genre ) ) : "";
-                        movie.tag = data.tvshow.tag ? entityTrans( data.tvshow.tag.join(', ') ) : "";
+                        movie.tag = data.tvshow.tag ? entityTrans( transGen( data.tvshow.tag ) ) : "";
                         movie.seasons = data.tvshow.season ? parseInt( data.tvshow.season ) : 0;
                         movie.episodes = data.tvshow.episode ? parseInt( data.tvshow.episode ) : 0;
                         movie.plot = data.tvshow.plot ? entityTrans( entityTrans( String( data.tvshow.plot ) ) ): "";
@@ -418,7 +486,7 @@ async function getMovies(dir, movies) {
                             for( const genre of tmptags )
                                 pushItem( genres, genre );
                         }
-                        // create tag-table                                
+                        // create tag-table
                         if( movie.tag.length ){
 
                             const tmptags = movie.tag.split( ", " );
@@ -461,7 +529,11 @@ async function getMovies(dir, movies) {
                         tmp.title = movName;
                         tmp.thumb =  fs.existsSync( dir + movName + '-thumb.jpg' ) ? movName + '-thumb.jpg' : "";
 
-                        // --------- 
+                        // Thumbnail timestamp ( because browsers cache strategy - like Firefox ) 
+                        tmp.thumbStamp = Date.now();
+
+
+                        /* // --------- 
                         if( tmp.thumb === "" && fs.existsSync( dir + movName + '-poster.jpg' ) )
                             tmp.thumb = movName + '-poster.jpg';
                         
@@ -471,6 +543,7 @@ async function getMovies(dir, movies) {
                         if( movie.fanart === "" && fs.existsSync( dir + movName + '-fanart.jpg' ) )
                             movie.fanart = movName + '-fanart.jpg';
                         // ---------
+                        */
 
                         if( fs.existsSync( dir + movName + '.nfo' ) ){
 
@@ -484,6 +557,7 @@ async function getMovies(dir, movies) {
                                 tmp.season = data.episodedetails.season ? parseInt( data.episodedetails.season ) : 0;
                                 tmp.episode = data.episodedetails.episode ? parseInt( data.episodedetails.episode ) : 0;
                                 tmp.plot = data.episodedetails.plot ? entityTrans( String( data.episodedetails.plot ) ) : "";
+
 
                                 // get actors from episode details
                                 if( data.episodedetails.actor ){
@@ -502,6 +576,34 @@ async function getMovies(dir, movies) {
                                         pushItem( actors, chngName( name ), actor.thumb ? actor.thumb[0] : "" );
                                     }    
                                 }
+                                // ==========================================================================
+                                // get tags from episode
+                                if( data.episodedetails.tag ){
+
+                                    for( const tagItem of data.episodedetails.tag ){
+                                        for( const tag of tagItem.split(',') ){
+                                            const tmpTag = translate( tag );
+                                            movie.tag.length ? movie.tag += ', ' + tmpTag : movie.tag = tmpTag; 
+                                            pushItem( tags, tmpTag );
+                                        }
+                                    }
+                                }
+                                
+                                // get directors from episode details    
+                                if( data.episodedetails.director ){
+
+                                    for( const director of data.episodedetails.director ){
+
+                                        if( !movie.director.includes( director )  ){
+                                            if( movie.director.length )
+                                                movie.director += ', ';    
+                                            movie.director += director;
+                                            pushItem( directors, chngName( director ) );
+                                        }
+                                    }    
+                                }
+                                
+                                // ==========================================================================
                             }
                             else{
                                 console.log("Serie ERROR ---->",dir," : ",movName,"\n");
@@ -515,12 +617,15 @@ async function getMovies(dir, movies) {
                     }
                     if( movie.actors.length ){
 
-                        movie.plot = movie.plot + "\n\nDARSTELLER:";
+                        movie.plot = movie.plot + "\n\nDARSTELLER:\n";
 
                         
                         // get actors vom 'tvshow.nfo' (episode = 0)
                         for( const actor of movie.actors){
 
+                            if( actor.episode === 0 )
+                                movie.plot = movie.plot + '\n  ' + actor.name + ': \"' + actor.role + '\"';
+                            /*
                             if( actor.episode === 0 ){
 
                                 let isInEpisode = false;
@@ -536,6 +641,7 @@ async function getMovies(dir, movies) {
                                 if( !isInEpisode )
                                     movie.plot = movie.plot + '\n  ' + actor.name + ': \"' + actor.role + '\"';
                             }
+                            */    
                         }
                         
                         let epino = 0;
@@ -544,7 +650,7 @@ async function getMovies(dir, movies) {
                         for( const actor of movie.actors){
 
                             if( epino !== actor.episode && actor.episode > 0 ){
-                                movie.plot = movie.plot + `\n\nEpisode ${actor.episode}: ${actor.title}\n`;
+                                movie.plot = movie.plot + `\n\nEpisode ${actor.episode} ${actor.title}\n`;
                                 epino = actor.episode;
                             }
                             if( actor.episode > 0)
@@ -583,12 +689,42 @@ async function readXML( path ){
 
     try{
 
-        let xml =  String( fs.readFileSync( path ) ).replaceAll( "& ", "&amp; " ).replaceAll( '&#8211;', ' - ' );
-        //let xml =  String( fs.readFileSync( path ) ).replace( /[&]/g, '&#38;' ).replaceAll( '&#8211;', ' - ' );
+        let xml =  String( fs.readFileSync( path ) ).replaceAll( "& ", "&amp; " ).replaceAll( '&#8211;', '-' ).replaceAll('&#8212;','-');
 
         return await xml2js.parseStringPromise( xml ).then( (result) => { return result } );
     }
     catch( err ){
-        console.log( "/n----------------------------\nerror: ", err.message );
+        console.log( `\n----------------\nFILE: "${path}"\n${err.message}\n----------------\n` );
     }
 }
+/****************************************************************************
+ * 
+ */
+/*
+function convert(){
+
+const tmptbl=[];
+
+for( let i=0; i<TRANSTABLE.length; i++){
+
+    tmptbl.push([ TRANSTABLE[i][0].toLowerCase(), TRANSTABLE[i][1] ] );
+}
+
+const tbl2 = tmptbl.sort((a,b) => {
+
+    if( a[0] < b[0] ) return -1;
+    if( a[0] > b[0] ) return 1;
+    return 0;  
+});
+
+let txtdata = "export const TRANSTABLE=\n[";
+
+for( let i=0; i<tbl2.length; i++){
+
+    txtdata+= `["${tbl2[i][0]}","${tbl2[i][1]}"],\n`;
+}
+txtdata+=']';
+
+writeFileSync("./convert.js",txtdata);
+}
+*/

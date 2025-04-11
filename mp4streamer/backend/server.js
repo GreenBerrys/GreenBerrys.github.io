@@ -45,9 +45,9 @@ if( !AUTOLOGIN ){
 }
 //==================================
 
-server.use(fileUpload( { limits: { fileSize: 1024 * 500 },   // max. filesize 500K
+server.use(fileUpload( { limits: { fileSize: 1024 * 1024 },   // max. filesize 1MB
     abortOnLimit: true, 
-    responseOnLimit: JSON.stringify( { error: true, errMsg: `Bilddatei ist zu groß.. (max. 500Kb)`, result: [] } )
+    responseOnLimit: JSON.stringify( { error: true, errMsg: `Bilddatei ist zu groß.. (max. 1MB)`, result: [] } )
 }));
 //==================================
 
@@ -67,19 +67,6 @@ server.use( "/", ( req, res, next ) => {
     next();
   });
 */
-/*
-server.get( "/video/*", ( req, res, next ) => {
-    console.log('----------------------------- SERVER');
-    //console.log(req.originalUrl);
-    //console.log('---- params\n',req.params);
-    //console.log('---- headers\n', req.headers);
-    //console.log('---- body\n', JSON.stringify(req.body));
-    //console.log('---- files\n', JSON.stringify(req.files));
-    console.log("---------------------------- \n");
-    next();
-  });
-*/  
-  
 // ------------------------------------------------------------------------------------------------
 
 server.use( "/user", userRouter );  

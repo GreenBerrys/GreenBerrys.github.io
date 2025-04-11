@@ -10,6 +10,7 @@
 .messageBodyText{
     color: red;
     font-size: 2rem;
+    overflow-wrap: break-word;
 }
 .MessageOkButton{
     color: black;

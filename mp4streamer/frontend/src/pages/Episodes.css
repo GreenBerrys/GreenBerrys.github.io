@@ -51,6 +51,9 @@
     }
 
 }
+#episodes{
+    overscroll-behavior: none;
+}
 #episodes #title{
     grid-area: title;
 }
@@ -72,11 +75,11 @@
     font-size: 3rem;
     color: beige;
 }
-
 #episodes #thumb{
     grid-area: thumb;
-    max-width: 450px;
-    max-height: 65vh;
+    width: 450px;
+    height: 253px;
+    object-fit: cover;
 }
 #episodes #plot{
     grid-area: plot;
@@ -98,6 +101,7 @@
     max-height: 55vh;
     overflow: hidden;
     overflow-y: auto;
+    overscroll-behavior: contain;
 }
 #episodes #epis .active{
     background-color: rgb(57, 97, 99);
