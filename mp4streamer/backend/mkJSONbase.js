@@ -532,19 +532,6 @@ async function getMovies(dir, movies) {
                         // Thumbnail timestamp ( because browsers cache strategy - like Firefox ) 
                         tmp.thumbStamp = Date.now();
 
-
-                        /* // --------- 
-                        if( tmp.thumb === "" && fs.existsSync( dir + movName + '-poster.jpg' ) )
-                            tmp.thumb = movName + '-poster.jpg';
-                        
-                        if( movie.poster === "" && fs.existsSync( dir + movName + '-poster.jpg' ) )
-                            movie.poster = movName + '-poster.jpg';
-
-                        if( movie.fanart === "" && fs.existsSync( dir + movName + '-fanart.jpg' ) )
-                            movie.fanart = movName + '-fanart.jpg';
-                        // ---------
-                        */
-
                         if( fs.existsSync( dir + movName + '.nfo' ) ){
 
                             const data = await readXML( dir + movName + '.nfo');
@@ -625,23 +612,6 @@ async function getMovies(dir, movies) {
 
                             if( actor.episode === 0 )
                                 movie.plot = movie.plot + '\n  ' + actor.name + ': \"' + actor.role + '\"';
-                            /*
-                            if( actor.episode === 0 ){
-
-                                let isInEpisode = false;
-                                
-                                // check for duplicates in episoden.nfo's
-                                for( const test of movie.actors ){
-
-                                    if( test.episode !== 0 && actor.name === test.name ){
-                                        isInEpisode = true;
-                                        break;
-                                    }
-                                }
-                                if( !isInEpisode )
-                                    movie.plot = movie.plot + '\n  ' + actor.name + ': \"' + actor.role + '\"';
-                            }
-                            */    
                         }
                         
                         let epino = 0;
